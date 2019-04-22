@@ -30,7 +30,7 @@
 	{% for object in object_list %}
   <div class="col-sm-6 col-xs-6 col-md-4 col-lg-4">
     <div class="thumbnail">
-      {% if athlete_list %}
+      {% if object.picture %}
           <a href="{% url 'video:video-list' object.pk %}"><img src="{{object.picture}}"></a>
       {% else %}
           <a href="{% url 'video:video-list' object.pk %}"><img src="{% static 'img/image_not_found.jpg' %}"></a>

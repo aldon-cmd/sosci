@@ -143,3 +143,5 @@ STATICFILES_FINDERS = (
 VIMEO_ACCESS_TOKEN = '39b43eb6883cc7e0bae61b1e6dc59dd4'
 
 VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'
+
+VIMEO_GET_ALL_THUMBNAILS_URL = 'https://api.vimeo.com/videos/{0}/pictures'
