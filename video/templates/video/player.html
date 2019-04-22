@@ -1,0 +1,9 @@
+{% extends "layout/base.html" %}
+
+
+{% block content %}
+  <iframe src="https://player.vimeo.com/video/{{object.video_id}}" width="{{object.width}}" height="{{object.height}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+
+{% endblock content %}

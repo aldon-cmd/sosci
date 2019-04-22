@@ -1,0 +1,435 @@
+{
+  "uri": "/videos/328830965",
+  "name": "Untitled",
+  "description": null,
+  "type": "video",
+  "link": "https://vimeo.com/328830965",
+  "duration": 0,
+  "width": 400,
+  "language": null,
+  "height": 300,
+  "embed": {
+    "buttons": {
+      "like": true,
+      "watchlater": true,
+      "share": true,
+      "embed": true,
+      "hd": false,
+      "fullscreen": true,
+      "scaling": true
+    },
+    "logos": {
+      "vimeo": true,
+      "custom": {
+        "active": false,
+        "link": null,
+        "sticky": false
+      }
+    },
+    "title": {
+      "name": "user",
+      "owner": "user",
+      "portrait": "user"
+    },
+    "playbar": true,
+    "volume": true,
+    "speed": false,
+    "color": "00adef",
+    "uri": null,
+    "html": "<iframe src=\"https://player.vimeo.com/video/328830965?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=145068\" width=\"400\" height=\"300\" frameborder=\"0\" title=\"Untitled\" allow=\"autoplay; fullscreen\" allowfullscreen></iframe>",
+    "badges": {
+      "hdr": false,
+      "live": {
+        "streaming": false,
+        "archived": false
+      },
+      "staff_pick": {
+        "normal": false,
+        "best_of_the_month": false,
+        "best_of_the_year": false,
+        "premiere": false
+      },
+      "vod": false,
+      "weekend_challenge": false
+    }
+  },
+  "created_time": "2019-04-06T14:22:28+00:00",
+  "modified_time": "2019-04-06T14:22:28+00:00",
+  "release_time": "2019-04-06T14:22:28+00:00",
+  "content_rating": [
+    "unrated"
+  ],
+  "license": null,
+  "privacy": {
+    "view": "anybody",
+    "embed": "public",
+    "download": true,
+    "add": true,
+    "comments": "anybody"
+  },
+  "pictures": {
+    "uri": null,
+    "active": false,
+    "type": "default",
+    "sizes": [
+      {
+        "width": 100,
+        "height": 75,
+        "link": "https://i.vimeocdn.com/video/default_100x75?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2Fdefault_100x75&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 200,
+        "height": 150,
+        "link": "https://i.vimeocdn.com/video/default_200x150?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2Fdefault_200x150&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 295,
+        "height": 166,
+        "link": "https://i.vimeocdn.com/video/default_295x166?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2Fdefault_295x166&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      }
+    ],
+    "resource_key": "7a491d0e8cad256a8ac2fd6d207e647c1b034bad"
+  },
+  "tags": [],
+  "stats": {
+    "plays": 0
+  },
+  "categories": [],
+  "metadata": {
+    "connections": {
+      "comments": {
+        "uri": "/videos/328830965/comments",
+        "options": [
+          "GET",
+          "POST"
+        ],
+        "total": 0
+      },
+      "credits": {
+        "uri": "/videos/328830965/credits",
+        "options": [
+          "GET",
+          "POST"
+        ],
+        "total": 1
+      },
+      "likes": {
+        "uri": "/videos/328830965/likes",
+        "options": [
+          "GET"
+        ],
+        "total": 0
+      },
+      "pictures": {
+        "uri": "/videos/328830965/pictures",
+        "options": [
+          "GET",
+          "POST"
+        ],
+        "total": 0
+      },
+      "texttracks": {
+        "uri": "/videos/328830965/texttracks",
+        "options": [
+          "GET",
+          "POST"
+        ],
+        "total": 0
+      },
+      "related": null,
+      "recommendations": {
+        "uri": "/videos/328830965/recommendations",
+        "options": [
+          "GET"
+        ]
+      }
+    },
+    "interactions": {
+      "watchlater": {
+        "uri": "/users/96440539/watchlater/328830965",
+        "options": [
+          "GET",
+          "PUT",
+          "DELETE"
+        ],
+        "added": false,
+        "added_time": null
+      },
+      "report": {
+        "uri": "/videos/328830965/report",
+        "options": [
+          "POST"
+        ],
+        "reason": [
+          "pornographic",
+          "harassment",
+          "advertisement",
+          "ripoff",
+          "incorrect rating",
+          "spam"
+        ]
+      }
+    }
+  },
+  "user": {
+    "uri": "/users/96440539",
+    "name": "A Palmer",
+    "link": "https://vimeo.com/user96440539",
+    "location": null,
+    "bio": null,
+    "created_time": "2019-03-20T15:02:40+00:00",
+    "pictures": {
+      "uri": "/users/96440539/pictures/30843492",
+      "active": true,
+      "type": "custom",
+      "sizes": [
+        {
+          "width": 30,
+          "height": 30,
+          "link": "https://i.vimeocdn.com/portrait/30843492_30x30"
+        },
+        {
+          "width": 75,
+          "height": 75,
+          "link": "https://i.vimeocdn.com/portrait/30843492_75x75"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "link": "https://i.vimeocdn.com/portrait/30843492_100x100"
+        },
+        {
+          "width": 300,
+          "height": 300,
+          "link": "https://i.vimeocdn.com/portrait/30843492_300x300"
+        },
+        {
+          "width": 72,
+          "height": 72,
+          "link": "https://i.vimeocdn.com/portrait/30843492_72x72"
+        },
+        {
+          "width": 144,
+          "height": 144,
+          "link": "https://i.vimeocdn.com/portrait/30843492_144x144"
+        },
+        {
+          "width": 216,
+          "height": 216,
+          "link": "https://i.vimeocdn.com/portrait/30843492_216x216"
+        },
+        {
+          "width": 288,
+          "height": 288,
+          "link": "https://i.vimeocdn.com/portrait/30843492_288x288"
+        },
+        {
+          "width": 360,
+          "height": 360,
+          "link": "https://i.vimeocdn.com/portrait/30843492_360x360"
+        }
+      ],
+      "resource_key": "76c49556dd65bb209efa9311e71e79c48960d481"
+    },
+    "websites": [],
+    "metadata": {
+      "connections": {
+        "albums": {
+          "uri": "/users/96440539/albums",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "appearances": {
+          "uri": "/users/96440539/appearances",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "categories": {
+          "uri": "/users/96440539/categories",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "channels": {
+          "uri": "/users/96440539/channels",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "feed": {
+          "uri": "/users/96440539/feed",
+          "options": [
+            "GET"
+          ]
+        },
+        "followers": {
+          "uri": "/users/96440539/followers",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "following": {
+          "uri": "/users/96440539/following",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "groups": {
+          "uri": "/users/96440539/groups",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "likes": {
+          "uri": "/users/96440539/likes",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "moderated_channels": {
+          "uri": "/users/96440539/channels?filter=moderated",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "portfolios": {
+          "uri": "/users/96440539/portfolios",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "videos": {
+          "uri": "/users/96440539/videos",
+          "options": [
+            "GET"
+          ],
+          "total": 9
+        },
+        "watchlater": {
+          "uri": "/users/96440539/watchlater",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "shared": {
+          "uri": "/users/96440539/shared/videos",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "pictures": {
+          "uri": "/users/96440539/pictures",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "total": 1
+        },
+        "watched_videos": {
+          "uri": "/me/watched/videos",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        },
+        "folders": {
+          "uri": "/me/folders",
+          "options": [
+            "GET",
+            "POST"
+          ],
+          "total": 0
+        },
+        "block": {
+          "uri": "/me/block",
+          "options": [
+            "GET"
+          ],
+          "total": 0
+        }
+      }
+    },
+    "preferences": {
+      "videos": {
+        "privacy": {
+          "view": "anybody",
+          "comments": "anybody",
+          "embed": "public",
+          "download": true,
+          "add": true
+        }
+      }
+    },
+    "content_filter": [
+      "language",
+      "drugs",
+      "violence",
+      "nudity",
+      "safe",
+      "unrated"
+    ],
+    "upload_quota": {
+      "space": {
+        "free": 524288000,
+        "max": 524288000,
+        "used": 0,
+        "showing": "periodic"
+      },
+      "periodic": {
+        "free": 524288000,
+        "max": 524288000,
+        "used": 0,
+        "reset_date": "2019-04-10 00:00:00"
+      },
+      "lifetime": {
+        "free": 5368709120,
+        "max": 5368709120,
+        "used": 0
+      }
+    },
+    "resource_key": "f05c50ec5d547b5e06aac254f787d9863a605150",
+    "account": "basic"
+  },
+  "review_page": {
+    "active": true,
+    "link": "https://vimeo.com/user96440539/review/328830965/f3c53c5538"
+  },
+  "parent_folder": null,
+  "last_user_action_event_date": null,
+  "app": {
+    "name": "livetolearn",
+    "uri": "/apps/145068"
+  },
+  "status": "uploading",
+  "resource_key": "22837090f5ad53bffb06f193e19a882877172e10",
+  "upload": {
+    "status": "in_progress",
+    "upload_link": "https://files.tus.vimeo.com/files/vimeo-prod-src-tus-us/0d28ca99d31fcf822b0ebea69b440f83",
+    "form": null,
+    "complete_uri": null,
+    "approach": "tus",
+    "size": 237975,
+    "redirect_url": null,
+    "link": null
+  },
+  "transcode": {
+    "status": "in_progress"
+  }
+}
