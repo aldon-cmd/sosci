@@ -45,9 +45,9 @@
       <br />
 
       <div class="row">
-        <div class="span8">
-          <div class="progress progress-striped progress-success">
-            <div class="bar" style="width: 0%;"></div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-success">
+            <span class="bar" style="width: 0%;"></span>
           </div>
         </div>
         <div class="span4">
@@ -73,7 +73,7 @@ var uploadIsRunning = false;
 var toggleBtn       = document.querySelector("#toggle-btn");
 var resumeCheckbox  = document.querySelector("#resume");
 var input           = document.querySelector("input[type=file]");
-var progress        = document.querySelector(".progress");
+var progress        = document.querySelector(".progress-bar");
 var progressBar     = progress.querySelector(".bar");
 var alertBox        = document.querySelector("#support-alert");
 var uploadList      = document.querySelector("#upload-list");

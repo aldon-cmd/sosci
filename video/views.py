@@ -15,7 +15,6 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404, get_list_or_404
 from customer import models as customer_models
 
-
 class VideoPlayerView(TemplateView):
     template_name = "video/player.html"
 
@@ -24,24 +23,6 @@ class VideoPlayerView(TemplateView):
         video_id = self.kwargs.get("video_id")
         context['object'] = models.Video.objects.filter(pk=video_id).first()
         return context
-
-class CourseListView(ListView):
-    template_name = "video/course_list.html"
-    paginate_by = 10
-    model = models.Course
-
-class CourseCreateView(CreateView):
-    template_name = "video/course_form.html"
-    model = models.Course
-    fields = ['name']
-
-    def form_valid(self, form):
-        form.instance.user_id = self.request.user.pk
-        form.save()
-        return HttpResponseRedirect(self.get_success_url())
-
-    def get_success_url(self):
-        return reverse('video:course-list')
 
 class VideoListView(ListView):
     template_name = "video/video_list.html"

@@ -1,0 +1,31 @@
+{% extends "layout/base.html" %}
+
+
+{% block content %}
+<form method="post" action="{% url 'customer:login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <input type="hidden" name="next" value='{{next}}'> 
+    <div ng-class="{'has-error':vm.form.email.$invalid}"  class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width grid-col-top remove-padding n1">
+        <div class="input-select_select">
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+    </div>
+    <div ng-class="{'has-error':vm.form.password.$invalid}"  class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width">
+        <div class="input-select_select">
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+    </div>
+    <div id="save-btn">
+        <button type="submit" ng-click="vm.submit(vm.form_data)" class="btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
+        <div class="login-footer">
+            Don't have an account?
+            <span class="signup-today">
+               <a href="{% url 'customer:user-registration' %}">Sign Up</a>
+            </span>
+        </div>
+    </div>
+</form>
+{% endblock content %}

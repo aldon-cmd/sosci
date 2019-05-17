@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div>
+
+</div>
+<div>
+    
+</div>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div ng-class="{'has-error':vm.form.email.$invalid}"  class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width grid-col-top remove-padding n1">
+        <div class="input-select_select">
+            {% include 'partials/form_field.html' with field=form.name %}
+        </div>
+    </div>
+    <div id="save-btn">
+        <button type="submit" ng-click="vm.submit(vm.form_data)" class="btn btn-color btn-xtra-large btn-block panel-btn">Enroll</button>
+    </div>
+</form>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div ng-class="{'has-error':vm.form.email.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1 n2">
+        {% include 'partials/nolabel_form_field.html' with field=form.email %}    
+    </div>
+    <div ng-class="{'has-error':vm.form.first_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.first_name %}
+    </div>
+    <div ng-class="{'has-error':vm.form.last_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.last_name %}
+    </div>
+    <div ng-class="{'has-error':vm.form.password.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.password1 %}
+    </div>
+    <div ng-class="{'has-error':vm.form.confirm_password.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width">
+        {% include 'partials/nolabel_form_field.html' with field=form.password2 %}
+    </div>
+    <div id="save-btn">
+        <button type="submit" ng-click="vm.submit(vm.form_data)" class="btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
+        <div class="login-footer">
+            Already have an account?
+            <span class="signup-today">
+               <a href="{% url 'customer:login' %}" >Log in</a>
+            </span>
+        </div>
+    </div>
+</form>
+{% endblock content %}

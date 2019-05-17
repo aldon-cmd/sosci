@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'video.apps.VideoConfig',
     'catalogue.apps.CatalogueConfig',
+    'course.apps.CourseConfig',
     'widget_tweaks'
 ]
 

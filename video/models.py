@@ -6,10 +6,9 @@ from django.conf import settings
 
 # Create your models here.
 class Course(models.Model):
-	name = models.CharField(max_length=200, null=True, blank=True)
-	picture = models.CharField(max_length=250, null=True, blank=True,help_text="a url pointing directly to a preview image of the first video in a course")
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='courses', blank=True, null=True)
-
+	  name = models.CharField(max_length=200, null=True, blank=True)
+	  picture = models.CharField(max_length=250, null=True, blank=True,help_text="a url pointing directly to a preview image of the first video in a course")
+	  user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='courses', blank=True, null=True)
 
 class Video(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
