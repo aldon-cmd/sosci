@@ -23,7 +23,7 @@ location = lambda x: os.path.join(BASE_DIR, x)
 SECRET_KEY = '#7u!s7x577v3uq##&ht3_&n+izi)s6on96o)1dw%*rer9m2wx5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["sosci.herokuapp.com"]
 
