@@ -1,0 +1,436 @@
+
+Conversation opened. 1 unread message.
+
+Skip to content
+Using Gmail with screen readers
+
+5 of 4,398
+Catalogue and Enrollment page
+Inbox
+x
+
+Rafer Johnson
+Attachments
+May 29, 2019, 6:48 PM (3 days ago)
+to me
+
+Attached are the files for the pages listed in the subject line.
+
+3 Attachments
+Got them, thanks!Received, thank you.Thank you!
+
+.hide {
+  display: none;
+}
+
+.test {
+  color: red;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  border: 0;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+article, aside, footer, header, nav, main, section, summary, details, hgroup, figure, figcaption {
+  display: block;
+}
+
+#sosci-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 50px;
+  max-height: 50px;
+  background-color: #24292e;
+  color: hsla(0,0%,100%,.7);
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media only screen and (max-width: 767px) {
+  #sosci-nav .content {
+      padding: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #sosci-nav .header {
+      display: block;
+  }
+}
+
+ .header {
+   display: none;
+   position: absolute;
+   z-index: 5;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 50px;
+   overflow: hidden;
+}
+
+
+#sosci-nav .content {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 22px;
+  position: relative;
+  z-index: 2;
+  padding-left: calc(22px + constant(safe-area-inset-left));
+  padding-right: calc(22px + constant(safe-area-inset-right));
+}
+
+@media only screen and (max-width: 767px) {
+  #sosci-nav .content {
+      padding: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+  }
+}
+
+#sosci-nav .sosci-logo-m {
+  position: absolute;
+  width: 55px;
+  top: 0;
+  left: 50%;
+  margin-left: -24px;
+  text-align: center;
+  z-index: 1;
+}
+
+#sosci-nav .menuicon {
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  width: 48px;
+  border-bottom: none;
+}
+
+#sosci-nav .menuicon-logo {
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  min-width: 100%;
+  border-bottom: none;
+}
+
+#sosci-nav .ac-gn-header .sosci-logo-m {
+  position: absolute;
+  width: 48px;
+  top: 0;
+  left: 50%;
+  margin-left: -24px;
+  text-align: center;
+  z-index: 1;
+}
+
+.navbar-toggler {
+  height: 50px !important;
+}
+
+#sosci-nav .list {
+  cursor: default;
+  margin: 0 -10px;
+  width: auto;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media only screen and (max-width: 767px) {
+  #sosci-nav .list {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: 3.52941em;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      max-width: 664px;
+      margin: 0 auto;
+      padding: 45px 40px 8px;
+      height: auto;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      visibility: hidden;
+      -webkit-transition: visibility 0s linear 1s;
+      transition: visibility 0s linear 1s;
+  }
+}
+
+#sosci .item {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  z-index: 1;
+  vertical-align: top;
+}
+
+#sosci-nav .nav-link {
+  font-size: 14px;
+  line-height: 3.14286;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0 10px;
+  height: 50px;
+  opacity: 1;
+  background: no-repeat;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: -7px;
+}
+
+#sosci-nav .nav-link-m {
+  font-size: 14px;
+  line-height: 3.14286;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  font-family: "SF Pro Text","Myriad Set Pro","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+  color: #fff;
+  z-index: 1;
+  display: inline-block;
+  padding: 0 10px;
+  height: 50px;
+  opacity: 1;
+  background: no-repeat;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: -7px;
+}
+
+#sosci-nav ul {
+  list-style: none;
+}
+
+#sosci-nav {
+  padding: 0px;
+}
+
+#sosci-nav .fa-bars{
+  color: #fff;;
+}
+
+.navbar-toggler .fa-bars {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.nav-hero-m {
+  text-align: center
+}
+
+.nav-hero-logo-m {
+  display: inline-block
+}
+
+.section-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#main .section-content {
+  width: 980px;
+}
+
+.box-part{
+  background: #FFF;
+  border-radius: 0;
+  margin: 10px 0px;
+}
+
+.border {
+  border: 1px solid #e1e4e8!important;
+}
+
+.box-part>.fas, .box-part>.far {
+  font-size: 40px;
+  color: #ec407a ;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: arial;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#enroll .title {
+  font-family: arial;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.text {
+  font-family: Helvetica;
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 25px;
+  
+}
+
+#enroll .description {
+  font-family: Helvetica;
+  font-size: 16px;
+  padding-top: 8px;
+  color: #808080;
+  
+}
+
+.enroll-btn {
+  background: 0 0;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-radius: 5px;
+  -webkit-transition: all .1s ease-in-out;
+  transition: all .1s ease-in-out;
+}
+
+.enroll-btn {
+  color: #fff;
+  background: #f05c8d;
+}
+
+.enroll-btn-text {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Helvetica;
+}
+
+.enroll-btn-icon {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 0;
+  -ms-flex: 1 0 0px;
+  flex: 1 0 0;
+  padding: 1rem 1.0625rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.enroll-btn-icon i {
+  height: 32px;
+  width: 32px;
+  margin: 0 auto;
+  fill: #fff;
+  max-width: 32px;
+  font-size: 27px;
+}
+
+.enroll-btn-text-wrap {
+  -webkit-box-flex: 5.2;
+  -webkit-flex: 5.2 0 0;
+  -ms-flex: 5.2 0 0px;
+  flex: 5.2 0 0;
+  padding: 1.825rem 1.0625rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+  -webkit-transition: all .1s ease-in-out;
+  transition: all .1s ease-in-out;
+}
+
+.enroll-btn-icon {
+  background: rgba(255,255,255,0.14051322372924);
+  color: #fff;
+}
+
+.course-list {
+  background: #F7F7F7;
+  font-family: Helvetica;
+}
+
+.course-list tr {
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.course-list td {
+   line-height: 1.3;
+}
+
+.course-list-count {
+  color: #808080;
+}
+
+.course-list-count {
+  min-width: 2.5rem;
+  text-align: center;
+  padding: 1.4375rem 0;
+}
+
+.course-list-title {
+  max-width: 200px;
+  color: #f05c8d;
+}
+
+.course-list {
+  width: 100%;
+  font-size: .9375rem;
+  counter-reset: episode-count;
+}
+
+.course-list-duration {
+  color: #808080;
+  padding: .625rem;
+  text-align: center;
+}
+css.css
+Displaying css.css.

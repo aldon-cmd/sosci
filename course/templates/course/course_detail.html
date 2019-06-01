@@ -1,22 +1,77 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-<div>
 
-</div>
-<div>
-    
-</div>
-<form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    <div ng-class="{'has-error':vm.form.email.$invalid}"  class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width grid-col-top remove-padding n1">
-        <div class="input-select_select">
-            {% include 'partials/form_field.html' with field=form.name %}
+
+        <div class="row">
+
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="p-3">
+              <div class="box-part text-left">
+                <div class="title">
+                  <h3>Employer's Monthly Statutory Remittance Payroll Deductions (S01)</h3>
+                </div>
+              </div>
+              <div class="description">
+                <p>This is a very intensive and practical course designed for everyone who needs an in-depth refresher. It will look at how to avoid the most common VAT problems and pitfalls. At the end of the course the delegates will be able to make informed
+                  decisions about. This is a very intensive and practical course designed for everyone who needs an in-depth refresher. </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="p-3">
+              <a href="" class="enroll-btn">
+                <div class="enroll-btn-icon">
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="enroll-btn-text-wrap">
+                  <div class="enroll-btn-text">Enroll in this course</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="p-3">
+              <table class="course-list">
+                <tbody>
+                  <tr>
+                    <td class="course-list-count">1</td>
+                    <td class="course-list-title">Introduction to RAiS</td>
+                    <td class="course-list-duration">13:06</td>
+                  </tr>
+                  <tr>
+                    <td class="course-list-count">2</td>
+                    <td class="course-list-title">General Information</td>
+                    <td class="course-list-duration">13:06</td>
+                  </tr>
+                  <tr>
+                    <td class="course-list-count">3</td>
+                    <td class="course-list-title">Details of Statutory Contributions</td>
+                    <td class="course-list-duration">14:56</td>
+                  </tr>
+                  <tr>
+                    <td class="course-list-count">4</td>
+                    <td class="course-list-title">Deductions for Remittance Period</td>
+                    <td class="course-list-duration">11:03</td>
+                  </tr>
+                  <tr>
+                    <td class="course-list-count">5</td>
+                    <td class="course-list-title">Tax Declarations</td>
+                    <td class="course-list-duration">16:29</td>
+                  </tr>
+                  <tr>
+                    <td class="course-list-count">6</td>
+                    <td class="course-list-title">Submitting Revised Returns</td>
+                    <td class="course-list-duration">10:17</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
-    </div>
-    <div id="save-btn">
-        <button type="submit" ng-click="vm.submit(vm.form_data)" class="btn btn-color btn-xtra-large btn-block panel-btn">Enroll</button>
-    </div>
-</form>
+ 
+
 {% endblock content %}

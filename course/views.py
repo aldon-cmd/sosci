@@ -30,12 +30,7 @@ class CourseCreateView(CreateView):
         return reverse('course:course-list')
 
 class CourseDetailView(TemplateView):
-
-    def get_template_names(self):
-        if self.request.is_ajax():
-            return ['course/course_preview.html']
-        else:
-            return ['course/course_detail.html']
+    template_name = "course/course_detail.html"
 
 class CourseEnrollmentView(View):
 
