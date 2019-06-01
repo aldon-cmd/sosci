@@ -22,7 +22,11 @@
   {# Block where global CSS will go. #}
   
   {% block styles %}
-  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>   
+
+
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+
+
   {% endblock styles %}
 
   {# Additional CSS - specific to certain pages #}
@@ -79,6 +83,8 @@
   <!-- JavaScript at the bottom for fast page loading -->
   {% block cdn_scripts %}
   {% endblock cdn_scripts %}
+
+
   <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 
   <script src="{% static 'js/bootstrap-3.3.6.min.js' %}"></script>

@@ -25,7 +25,7 @@ SECRET_KEY = '#7u!s7x577v3uq##&ht3_&n+izi)s6on96o)1dw%*rer9m2wx5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["sosci.herokuapp.com"]
+ALLOWED_HOSTS = ["sosci.herokuapp.com","127.0.0.1","localhost"]
 
 
 # Application definition
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'video.apps.VideoConfig',
     'catalogue.apps.CatalogueConfig',
     'course.apps.CourseConfig',
-    'widget_tweaks'
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
@@ -79,12 +80,16 @@ WSGI_APPLICATION = 'sosci.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
 
 
 # Password validation
@@ -133,10 +138,13 @@ MEDIA_ROOT = location("public/media")
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = location('public/static')
+
 STATICFILES_DIRS = (
-    location('sosci/static/'),
+    location('sosci/static'),
 )
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
