@@ -25,6 +25,7 @@
 
 
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'css/fontawesome/all.css' %}" rel="stylesheet" type="text/css"/>
   <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css"/>
 
 
@@ -73,14 +74,11 @@
     {% endblock navbar %}
 
     <main role="main" class="mt-5 pt-5">
-  <section>
-    <article>
 <div class="container">
         {% include "partials/alert_messages.html" %}
         {% block content %}{% endblock content %}
 </div>
-    </article>
-  </section>
+
 </main>
 
 
@@ -101,6 +99,7 @@
   <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
 
   <script src="{% static 'js/bootstrap.js' %}"></script>
+
 
 
   {% block scripts %}
