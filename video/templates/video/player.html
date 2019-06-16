@@ -1,9 +1,100 @@
 {% extends "layout/base.html" %}
 
+    {% block navbar %}
+<nav id="sosci-nav" class="navbar navbar-expand-md">
+  <div class="content">
+    <div class="header">
+      <div class="d-flex flex-row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+        <a class="sosci-logo-m nav-link-m">Sosci</a>
+      </div>
+    </div>
+    <div class="" id="navbarSupportedContent">
+      <ul class="list">
+        <li class="item"><a class="nav-link">Sosci</a></li>
+        <li class="item"><a class="nav-link">Courses</a></li>
+        <li class="item"><a class="nav-link">Instructors</a></li>
+        <li class="item"><a class="nav-link">Partners</a></li>
+        <li class="item"><a class="nav-link">Pricing</a></li>
+        <li class="item"><a class="nav-link">Sign Up</a></li>
+        <li class="item"><a class="nav-link">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>    {% endblock navbar %}
 
 {% block content %}
-  <iframe src="https://player.vimeo.com/video/{{object.video_id}}" width="{{object.width}}" height="{{object.height}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-  <script src="https://player.vimeo.com/api/player.js"></script>
+<div class="row">
 
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <div class="video-player">
+          <div class='embed-container'><iframe src="https://player.vimeo.com/video/{{object.video_id}}" width="{{object.width}}" height="{{object.height}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+          <div class="primary-video-info">
+            <h1 class="primary-video-info-title">Introduction to RAiS</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
+        <div class="watch-next d-flex flex-row">
+          <div class="video-thumbnail">
+            <div class='embed-container'><iframe src='https://player.vimeo.com/video/66140585' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+          </div>
+          <div>
+            <div class="watch-next-title">Introduction to RAiS</div>
+            <div class="instructor">Rafer Johnson</div>
+            <div class="instructor">Lesson 1</div>
+            <div class="duration">Duration: 13:48</div>
+          </div>
+        </div>
+        <div class="watch-next d-flex flex-row">
+          <div class="video-thumbnail">
+            <div class='embed-container'><iframe src='https://player.vimeo.com/video/66140585' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+          </div>
+          <div>
+            <div class="watch-next-title">Introduction to RAiS</div>
+            <div class="instructor">Rafer Johnson</div>
+            <div class="instructor">Lesson 2</div>
+            <div class="duration">Duration: 13:48</div>
+          </div>
+        </div>
+        <div class="watch-next d-flex flex-row">
+          <div class="video-thumbnail">
+            <div class='embed-container'><iframe src='https://player.vimeo.com/video/66140585' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+          </div>
+          <div>
+            <div class="watch-next-title">Introduction to RAiS</div>
+            <div class="instructor">Rafer Johnson</div>
+            <div class="instructor">Lesson 3</div>
+            <div class="duration">Duration: 13:48</div>
+          </div>
+        </div>
+        <div class="watch-next d-flex flex-row">
+          <div class="video-thumbnail">
+            <div class='embed-container'><iframe src='https://player.vimeo.com/video/66140585' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+            </div>
+          </div>
+          <div>
+            <div class="watch-next-title">Introduction to RAiS</div>
+            <div class="instructor">Rafer Johnson</div>
+            <div class="instructor">Lesson 4</div>
+            <div class="duration">Duration: 13:48</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
 {% endblock content %}
+
+
+
+{% block extrascripts %}
+{{ block.super }}
+  <script src="https://player.vimeo.com/api/player.js"></script>
+{% endblock extrascripts %}

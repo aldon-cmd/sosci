@@ -31,7 +31,7 @@ class VideoListView(ListView):
 
     def get_queryset(self):
         course_id = self.kwargs.get("course_id")
-        return models.Video.objects.filter(course_id=course_id, course__user_id=self.request.user.pk)
+        return models.Video.objects.filter(course_id=course_id)
 
 class VimeoVideoUploadFormView(TemplateView):
     template_name = "video/vimeo_upload.html"
