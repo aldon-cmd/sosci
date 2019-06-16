@@ -56,7 +56,8 @@ class CourseDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context["course"] = self.get_course()
-        context["is_enrolled"] = self.is_enrolled()
+        if self.request.user.is_authenticated():
+           context["is_enrolled"] = self.is_enrolled()
 
         return context
 
