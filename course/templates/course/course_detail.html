@@ -9,26 +9,41 @@
             <div class="p-3">
               <div class="box-part text-left">
                 <div class="title">
-                  <h3>Employer's Monthly Statutory Remittance Payroll Deductions (S01)</h3>
+                  <h3>{{course.name}}</h3>
                 </div>
               </div>
               <div class="description">
-                <p>This is a very intensive and practical course designed for everyone who needs an in-depth refresher. It will look at how to avoid the most common VAT problems and pitfalls. At the end of the course the delegates will be able to make informed
-                  decisions about. This is a very intensive and practical course designed for everyone who needs an in-depth refresher. </p>
+                <p>{{course.description}} </p>
               </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="p-3">
-              <a href="" class="enroll-btn">
+              {% if is_enrolled %}
+              <div href="" class="enroll-btn">
                 <div class="enroll-btn-icon">
                   <i class="fas fa-video"></i>
                 </div>
                 <div class="enroll-btn-text-wrap">
-                  <div class="enroll-btn-text">Enroll in this course</div>
+                  <div class="enroll-btn-text">Enrolled</div>
                 </div>
-              </a>
+              </div>                 
+
+              {% else %}
+              <form action="{% url 'course:course-enrollment' view.kwargs.course_id %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="enroll" />
+              <div href="" class="enroll-btn">
+                <div class="enroll-btn-icon">
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="enroll-btn-text-wrap">
+                  <input type="submit" class="enroll-btn-text">Enroll in this course</input>
+                </div>
+              </div>  
+              </form>         
+              {% endif %}
             </div>
           </div>
           
@@ -36,36 +51,15 @@
             <div class="p-3">
               <table class="course-list">
                 <tbody>
+                  {% for module in course.coursemodules.all %}
                   <tr>
-                    <td class="course-list-count">1</td>
-                    <td class="course-list-title">Introduction to RAiS</td>
-                    <td class="course-list-duration">13:06</td>
+                    <td class="course-list-count">{{ forloop.counter }}</td>
+                    <td class="course-list-title">{{module.name}}</td>
+                    <td class="course-list-duration">{{module.duration}}</td>
                   </tr>
-                  <tr>
-                    <td class="course-list-count">2</td>
-                    <td class="course-list-title">General Information</td>
-                    <td class="course-list-duration">13:06</td>
-                  </tr>
-                  <tr>
-                    <td class="course-list-count">3</td>
-                    <td class="course-list-title">Details of Statutory Contributions</td>
-                    <td class="course-list-duration">14:56</td>
-                  </tr>
-                  <tr>
-                    <td class="course-list-count">4</td>
-                    <td class="course-list-title">Deductions for Remittance Period</td>
-                    <td class="course-list-duration">11:03</td>
-                  </tr>
-                  <tr>
-                    <td class="course-list-count">5</td>
-                    <td class="course-list-title">Tax Declarations</td>
-                    <td class="course-list-duration">16:29</td>
-                  </tr>
-                  <tr>
-                    <td class="course-list-count">6</td>
-                    <td class="course-list-title">Submitting Revised Returns</td>
-                    <td class="course-list-duration">10:17</td>
-                  </tr>
+                  {% empty %}
+                      <tr><td></td><td>No modules yet.</td><td></td></tr>
+                  {% endfor %} 
                 </tbody>
               </table>
             </div>

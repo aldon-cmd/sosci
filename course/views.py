@@ -10,6 +10,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from course import forms
+from django import http
 # Create your views here.
 
 class CourseListView(ListView):
@@ -52,7 +53,36 @@ class CourseCreateView(TemplateView):
 class CourseDetailView(TemplateView):
     template_name = "course/course_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context["course"] = self.get_course()
+        context["is_enrolled"] = self.is_enrolled()
+
+        return context
+
+    def get_course(self):
+        course_id = self.kwargs.get("course_id")
+        return models.Course.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
+        
+    def is_enrolled(self):
+        user = self.request.user
+        course_id = self.kwargs.get("course_id")
+        return models.Enrollment.objects.filter(user=user,course_id=course_id).exists()
+
 class CourseEnrollmentView(View):
+    template_name = "course/course_enrollment.html"
 
     def post(self, request, *args, **kwargs):
-        pass
+        action = self.request.POST.get('action', None)
+        course_id = self.kwargs.get("course_id")
+        if action == 'enroll':
+            if not self.is_enrolled():
+               models.Enrollment.objects.create(user=request.user,course_id=course_id)
+
+        return http.HttpResponseRedirect(
+                    reverse('course:course-detail'))
+
+    def is_enrolled(self):
+        user = self.request.user
+        course_id = self.kwargs.get("course_id")
+        return models.Enrollment.objects.filter(user=user,course_id=course_id).exists()

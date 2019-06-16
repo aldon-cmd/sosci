@@ -2,7 +2,6 @@ npm/
 public/
 .vscode/
 dist/
-*.sqlite
 bin/
 obj/
 *.sln

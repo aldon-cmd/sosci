@@ -13,8 +13,9 @@ class Course(models.Model):
 
 class CourseModule(models.Model):
 	name = models.CharField(max_length=200, null=True, blank=True)
+	duration = models.CharField(max_length=200, null=True, blank=True)
 	course = models.ForeignKey("course.Course", related_name='coursemodules', blank=True, null=True)
 
 class Enrollment(models.Model):
-	  course = models.ForeignKey("course.Course", related_name='enrollments', blank=True, null=True)
-	  user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enrollments', blank=True, null=True)
+	  course = models.ForeignKey("course.Course", related_name='enrollments', blank=True)
+	  user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enrollments', blank=True)

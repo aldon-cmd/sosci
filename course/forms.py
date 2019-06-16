@@ -8,4 +8,4 @@ class CourseForm(ModelForm):
         fields = ['name', 'description']
 
 
-CourseModuleFormset = modelformset_factory(models.CourseModule,fields=('name',),extra=0)          
+CourseModuleFormset = modelformset_factory(models.CourseModule,fields=('name','duration'),extra=0)          
