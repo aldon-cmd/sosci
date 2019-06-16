@@ -81,7 +81,7 @@ class CourseEnrollmentView(View):
                models.Enrollment.objects.create(user=request.user,course_id=course_id)
 
         return http.HttpResponseRedirect(
-                    reverse('course:course-detail'))
+                    reverse('course:course-detail', kwargs={'course_id': course_id}))
 
     def is_enrolled(self):
         user = self.request.user
