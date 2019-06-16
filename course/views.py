@@ -76,7 +76,7 @@ class CourseEnrollmentView(View):
     def post(self, request, *args, **kwargs):
         action = self.request.POST.get('action', None)
         course_id = self.kwargs.get("course_id")
-        if action == 'enroll':
+        if action == 'enroll' and request.user.is_authenticated():
             if not self.is_enrolled():
                models.Enrollment.objects.create(user=request.user,course_id=course_id)
 
