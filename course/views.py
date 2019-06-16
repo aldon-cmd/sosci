@@ -32,7 +32,7 @@ class CourseCreateView(TemplateView):
     def post(self, request, *args, **kwargs):
 
         course_form = forms.CourseForm(request.POST,prefix="course_form")
-        coursemodule_formset = forms.CourseModuleFormset(prefix="coursemodule_formset")
+        coursemodule_formset = forms.CourseModuleFormset(request.POST,prefix="coursemodule_formset")
         if course_form.is_valid() and coursemodule_formset.is_valid():
             course = course_form.save(commit=False)
             course.save()
