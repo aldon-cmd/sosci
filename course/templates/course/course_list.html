@@ -3,26 +3,27 @@
 
 
 {% block content %}
-<div class="row">
+<div id="course-list" class="row">
 	{% for object in object_list %}
-
-
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
-              <a href="{% url 'course:course-detail' object.pk %}">
-            <div class="border p-3">
-              <div class="box-part text-center">
-                <i class="far fa-play-circle"></i>
-                <div class="title">
-                  <h3>{{object.name}}</h3>
-                </div>
-              </div>
-              <div class="text">
-                <p>{{object.description}}</p>
-              </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
+      <a href="{% url 'course:course-detail' object.pk %}">
+        <div class="border p-3">
+          <div class="box-part text-center">
+            <i class="far fa-play-circle"></i>
+            <div class="title">
+              <h3>{{object.name}}</h3>
             </div>
-          </a>
           </div>
-
+          <div class="text">
+            <p class="line-clamp">{{object.description}}</p>
+          </div>
+          <div class="credit-hours">
+            <i class="fas fa-star mr-1"></i>
+            <span>3 credit hours</span>
+          </div>
+        </div>
+      </a>
+    </div>
 {% empty %}
     <p>No courses yet.</p>
 {% endfor %}    
