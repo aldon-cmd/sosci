@@ -475,6 +475,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   }
 }
 
+<<<<<<< Updated upstream
 .playlist-holder {
   position: relative;
   min-width: 366px;
@@ -691,3 +692,77 @@ img, picture {
 }
 
 
+=======
+/* CSS code written outside of codepen */
+
+#course-list .title {
+  font-family: Helvetica;
+  color: #212529;
+}
+
+#course-list .text {
+  font-family: Helvetica;
+  color: #212529;
+}
+
+#course-list a:hover {
+  text-decoration: none;
+}
+
+#course-list p {
+  overflow: hidden;
+  width: 316px;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;  
+}
+
+.credit-hours {
+  font-size: 13px;
+  font-family: Helvetica;
+  color: #586069; 
+}
+
+.mr-1 {
+  margin-right: 4px!important;
+}
+
+.credit-hours-course {
+  font-size: .9375rem;
+  font-family: Helvetica;
+  line-height: 1.25;
+  color: #f05c8d;
+  margin-bottom: 25px !important;
+  margin-top: 5px;
+}
+
+.description-detail {
+  font-family: Helvetica;
+  font-size: 15px;
+}
+
+.tittle-details {
+  font-size: 34px;
+  font-family: Helvetica;
+}
+
+@media only screen and (max-width: 600px) {
+  .tittle-details {
+    font-size: 24px;
+  }
+}
+
+.subheading {
+  padding-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Helvetica;
+}
+
+
+
+/* CSS code written outside of codepen */
+>>>>>>> Stashed changes
