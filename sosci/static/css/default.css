@@ -283,6 +283,32 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 16px;
 }
 
+#course-list a, #course-list a:hover {
+  text-decoration: none !important;
+}
+
+#course-list .line-clamp{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
+.credit-hours {
+  color: #0366d6;
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
+#course-list .text{
+  width: 316px;
+}
+
+#course-list .title, #course-list .text {
+  color: #212529;
+}
+
 #enroll .title {
   font-family: arial;
   font-weight: 600;
@@ -408,11 +434,14 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   counter-reset: episode-count;
 }
 
+
+
 .course-list-duration {
   color: #808080;
   padding: .625rem;
   text-align: center;
 }
+
 
 @media only screen and (max-width: 767px) {
   .column {
