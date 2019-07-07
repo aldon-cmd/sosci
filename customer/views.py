@@ -15,6 +15,21 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import redirect
 from django.urls import reverse
 
+class LoginModalView(auth_views.LoginView):
+    template_name = 'customer/login_modal.html'
+    form_class = CustomAuthenticationForm
+
+    def form_valid(self, form):
+
+        """Security check complete. Log the user in."""
+        auth_login(self.request, form.get_user())
+        return HttpResponseRedirect(self.request.path_info)
+
+    def form_invalid(self, form):
+        response = super(LoginModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response
+
 class LoginView(auth_views.LoginView):
     template_name = 'customer/login.html'
     form_class = CustomAuthenticationForm
@@ -25,6 +40,22 @@ class LoginView(auth_views.LoginView):
         auth_login(self.request, form.get_user())
         return redirect('course:course-list')
 
+class RegistrationModalView(FormView):
+    form_class = EmailUserCreationForm
+    template_name = 'customer/registration_modal.html'
+
+    def form_valid(self, form):
+        form.save()
+        username = form.cleaned_data.get('email')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return redirect('/')
+
+    def form_invalid(self, form):
+        response = super(RegistrationModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response
 
 class UserRegistrationView(FormView):
     form_class = EmailUserCreationForm
@@ -36,4 +67,4 @@ class UserRegistrationView(FormView):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
-        return redirect('onboarding:business-onboarding')
+        return redirect('/')

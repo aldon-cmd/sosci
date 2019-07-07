@@ -20,7 +20,7 @@ from course.views import CourseListView
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
     url(r'^course/', include('course.urls', namespace='course')),
-    url(r'^user/', include('customer.urls', namespace='customer')),
+    url(r'^accounts/', include('customer.urls', namespace='customer')),
     url(r'^admin/', admin.site.urls),
     url('^$', CourseListView.as_view(), name='index')
 

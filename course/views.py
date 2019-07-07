@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from course import forms
 from django import http
+from customer.forms import CustomAuthenticationForm
 # Create your views here.
 
 class CourseListView(ListView):
@@ -55,6 +56,7 @@ class CourseDetailView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context["login_form"] = CustomAuthenticationForm()
         context["course"] = self.get_course()
         if self.request.user.is_authenticated():
            context["is_enrolled"] = self.is_enrolled()

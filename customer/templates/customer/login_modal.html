@@ -1,5 +1,4 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{% load widget_tweaks %}
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,10 +8,10 @@
         </button>
       </div>
       <div class="modal-body">
-<form id="login-form" method="post" action="{% url 'customer:login' %}">
+<form id="login-form" method="post" action="{% url 'customer:login-modal' %}" novalidate>
     {% csrf_token %}
     {{ form.non_field_errors }}
-    <input type="hidden" name="next" value='{{next}}'> 
+
     <div ng-class="{'has-error':vm.form.email.$invalid}"  class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width grid-col-top remove-padding n1">
         <div class="input-select_select">
             {{ form.username }}
@@ -30,15 +29,58 @@
         <div class="login-footer">
             Don't have an account?
             <span class="signup-today">
-               <a href="{% url 'customer:user-registration' %}">Sign Up</a>
+               <a class="open-registration-modal" href="{% url 'customer:registration-modal' %}">Sign Up</a>
             </span>
         </div>
     </div>
 </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>
+
+
+  <script>
+
+  $('#login-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_success_response,
+      error: get_error_response       
+    });
+
+    function get_success_response(responseText, statusText, xhr, $form){
+
+              window.location.reload();
+          }
+
+              function get_error_response(data){
+
+              $("#authentication-modal").html(data.responseText);
+          }
+
+           
+</script>
+
+<script>
+  $(document).on('click',".open-registration-modal", function (event) {
+    event.preventDefault();
+    open_registration_modal($(this).attr('href'));
+
+    
+  });
+
+function open_registration_modal(url){
+
+    $('#authentication-modal').load(url,function(){
+
+        $('#authentication-modal').modal('show');
+        
+        
+    });
+
+    
+}
+
+</script>
