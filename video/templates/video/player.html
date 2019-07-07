@@ -9,9 +9,9 @@
           <div class="grd-row row test">
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 no-padding test-1">
               <div class="video-player">
-                <div class='embed-container'><iframe src='https://player.vimeo.com/video/{{object.video_id}}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+                <div class='embed-container'><iframe src='https://player.vimeo.com/video/{{video.video_id}}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
                 <div class="primary-video-info d-flex">
-                  <div class="primary-video-info-title col-lg-7 col-md-7 col-sm-7 col-xs-12">IFRS 7 Financial Instruments</div>
+                  <div class="primary-video-info-title col-lg-7 col-md-7 col-sm-7 col-xs-12">{{video.name}}</div>
                   <div class="video-assets col-lg-5 col-md-5 col-sm-5 col-xs-12 d-flex hide">
                     <ul class="list">
                       <li class="d-flex">
@@ -35,150 +35,27 @@
               <div class="">
                 <div class="">
                   <ul class="">
+                    {% for video in videos %}
                     <li class="modules-list">
                       <div class="modules">
-                        <div class="module-number">1.</div>
+                        <div class="module-number">{{ forloop.counter }}</div>
                         <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
+                          <h3><a href="{% url 'video:video-player' video.video_id %}">{{video.name}}</a></h3>
                           <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
+                          <p class="course-video-info">{{video.description}}</p>
                         </div>
                         <div class="module-duration">
-                          <span>8:35</span>
+                          <span>{{video.duration}}</span>
                         </div>
                         <div class="module-status">
+                          {% if video.seen %}
                           <i class="fas fa-check-circle"></i>
+                          {% endif %}
                         </div>
                       </div>
                     </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">2</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                   <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">3</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p>Rafer Johnson </p>
-                          <p>Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">4</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">5</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">6</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                   <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">7</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">8</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">9</div>
-                        <div class="box-content">
-                          <h3>IFRS 7 Financial Instruments - Module 1</h3>
-                          <p class="instructor">Rafer Johnson </p>
-                          <p class="course-video-info">Some random information</p>
-                        </div>
-                        <div class="module-duration">
-                          <span>8:35</span>
-                        </div>
-                        <div class="module-status">
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
+
+                   {% endfor %}   
                   </ul>
                 </div>
               </div>

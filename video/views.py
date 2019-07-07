@@ -21,7 +21,11 @@ class VideoPlayerView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(VideoPlayerView, self).get_context_data(**kwargs)
         video_id = self.kwargs.get("video_id")
-        context['object'] = models.Video.objects.filter(pk=video_id).first()
+        video = models.Video.objects.filter(video_id=video_id).first()
+        video.seen = True
+        video.save()
+        context['video'] = video
+        context['videos'] = models.Video.objects.filter(course_id=video.course_id).exclude(pk=video.pk)
         return context
 
 class VideoListView(ListView):

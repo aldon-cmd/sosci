@@ -9,6 +9,7 @@ class Video(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=300, blank=True, null=True)
     video_id = models.IntegerField()
+    seen = models.BooleanField(default=False,help_text='determines whether a video has been watched or not')    
     width = models.IntegerField(default=800)
     height = models.IntegerField(default=480)
     duration = models.DecimalField(max_digits=64, decimal_places=2, default=0,help_text="duration of the video")
