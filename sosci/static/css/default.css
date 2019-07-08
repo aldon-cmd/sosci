@@ -287,6 +287,30 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   text-decoration: none !important;
 }
 
+.p-3 {
+  font-family: Helvetica;
+}
+
+.credit-hours-course {
+  margin: 5px 0px 38px 0px;
+  font-size: 16px;
+}
+
+.description-detail p {
+  line-height: 1.2;
+  font-size: 16px;
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 3px 0px 10px 0px;
+}
+
+.title-details {
+  font-size: 25px !important;
+}
+
 #course-list .line-clamp{
   text-overflow: ellipsis;
   overflow: hidden;
