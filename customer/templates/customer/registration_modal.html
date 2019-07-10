@@ -1,9 +1,9 @@
   {% load widget_tweaks %}
 
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-box" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -27,7 +27,7 @@
         {% include 'partials/nolabel_form_field.html' with field=form.password2 %}
     </div>
     <div id="save-btn">
-        <button type="submit" ng-click="vm.submit(vm.form_data)" class="btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
+        <button type="submit" ng-click="vm.submit(vm.form_data)" class="enroll-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
         <div class="login-footer">
             Already have an account?
             <span class="signup-today">

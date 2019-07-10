@@ -8,6 +8,10 @@
   color: red;
 }
 
+.no-padding {
+  padding: 0px !important;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
@@ -371,6 +375,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 .enroll-btn {
   color: #fff;
   background: #f05c8d;
+  cursor: pointer;
 }
 
 .enroll-btn-text {
@@ -551,4 +556,95 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   .secondary {
     padding-top: 20px;
   }
+}
+
+.modal-box {
+  background-color: rgb(255, 255, 255) !important;
+  max-width: 568px !important;
+  width: 100% !important;
+  position: relative !important;
+  margin: auto !important;
+}
+
+.modal {
+  top: 64px !important;
+  font-family: Helvetica !important;
+  font-size: 15px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+#save-btn {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#save-btn .btn{
+  padding: 10px 22px 10px 22px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.form-control {
+  border-radius: 0px !important;
+  padding: 11px !important;
+  height: 46px !important;
+}
+
+.input-select_select, #login-form .btn {
+  margin-bottom: 16px;
+}
+
+#login-form .form-control {
+  font-size: 15px;
+}
+
+#login-form .custom-control-label {
+  line-height: 1.6
+}
+
+#login-form .password {
+  line-height: 1.6;
+  right: 0;
+}
+
+#login-form .password {
+  background-color: transparent !important;
+  border: 0 none;
+  color: #008489 ;
+}
+
+.password:hover {
+  color: #008489 !important;
+  text-decoration: underline !important;
+}
+
+.signup-today > a {
+  color: #008489 !important;
+}
+
+.option-box {
+  margin-bottom: 16px;
+}
+
+#registration-form > div {
+  margin-bottom: 16px;
+}
+
+.modal-header, .modal-content, .modal-footer {
+  border-radius: 0px !important;
+  border: 0px !important;
+}
+
+#registration-form .btn:hover, #login-form .btn:hover {
+  color: #ffffff;
+}
+
+#registration-form .btn, #login-form .btn {
+  font-weight: 600;
 }
