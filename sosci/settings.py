@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'video.apps.VideoConfig',
     'catalogue.apps.CatalogueConfig',
     'course.apps.CourseConfig',
+    'promotions.apps.PromotionsConfig',
     'widget_tweaks',
 
 ]
