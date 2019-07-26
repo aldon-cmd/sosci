@@ -94,7 +94,10 @@ class VimeoVideoUploadAttemptView(View):
 
         picture = thumbnail_response['sizes'][2]['link_with_play_button']
 
-        models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,course_id=course_id)
+        video = models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,course_id=course_id)
+
+        self.create_course_module(post_data,video,course_id)
+
 
         if not course.picture:
         #set the initial preview image of the course
@@ -102,6 +105,12 @@ class VimeoVideoUploadAttemptView(View):
             course.save()
 
         return JsonResponse(video_creation_response)
+
+    def create_course_module(self,post_data,video,course_id):
+        name = post_data.get("name","")
+        duration = post_data.get("duration","")
+
+        course_models.CourseModule.objects.create(name=name,duration=duration,video=video,course_id=course_id)
 
     def create_vimeo_video(self,url,data,headers):
         return self.make_request(url,data,headers)
