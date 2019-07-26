@@ -1,59 +1,25 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
+     
+                               
 <form action="" method="post" class="text-truncate">
-      {% csrf_token %}
+  {% csrf_token %}
 
-      <div class="p-2 bg-dark text-white font-weight-bold">Course</div>
-  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=course_form.name %}</div>
-    </div>
-    <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=course_form.description %}</div>
-    </div>
-      <div class="p-2 bg-dark text-white font-weight-bold">Course Module</div>
-      {{ coursemodule_formset.management_form }}
-      {% for form in coursemodule_formset.forms %}
-      {% for hidden in form.hidden_fields %}
-          {{ hidden }}
-      {% endfor %}                                
-      <div class="row">
-         
-        <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
-    </div>
-
-<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.duration %}</div>
-    </div>    
-      {% endfor %}
-            <div id="add-coursemodule_formset" class="form-group text-right">
-        <button onclick="add_row('coursemodule_formset');" type="button" class="btn btn-danger">
-          Add
-          </button>
-      </div>
-        <div class="form-group text-right">
-    <button type="submit" class="btn btn-danger">
-      Submit
-      </button>
-  </div>
-
-  </form>
-
-      <div id="empty_coursemodule_formset_form" style="display:none">
-      <div class="row">
-        <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=coursemodule_formset.empty_form.name %}</div>
-    </div>  
-
-    <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=coursemodule_formset.empty_form.duration %}</div>
-    </div>                     
-    </div> 
+  <div class="p-2 bg-dark text-white font-weight-bold">Course</div>
+  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
 </div>
+<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.description %}</div>
+</div>
+
+
+<div class="form-group text-right">
+  <button type="submit" class="btn btn-danger">
+    Submit
+  </button>
+</div>
+
+</form>
+
 {% endblock content %}
 
-{% block extrascripts %}
-{{ block.super }}
-<script>
-  function add_row(form_id) {
-      var form_index = $('#id_'+form_id+'-TOTAL_FORMS').val();
-      $('#add-'+form_id).before($('#empty_'+form_id+'_form').html().replace(/__prefix__/g, form_index));
-      $('#id_'+form_id+'-TOTAL_FORMS').val(parseInt(form_index) + 1);
-  }
-</script>
-{% endblock extrascripts %}

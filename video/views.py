@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from video import models
+from course import models as course_models
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
@@ -38,16 +39,21 @@ class VideoListView(ListView):
         return models.Video.objects.filter(course_id=course_id)
 
 class VimeoVideoUploadFormView(TemplateView):
+    """
+    this view displays an upload form
+    """
     template_name = "video/vimeo_upload.html"
 
-class VimeoVideoCreateView(View):
-
+class VimeoVideoUploadAttemptView(View):
+    """
+    this view creates an upload attempt on the vimeo server
+    """
     def post(self, request, *args, **kwargs):
 
         post_data = request.POST
         course_id = self.kwargs.get("course_id")
 
-        course = get_object_or_404(models.Course, pk=course_id,user_id=self.request.user.pk)
+        course = get_object_or_404(course_models.Course, pk=course_id,user_id=self.request.user.pk)
 
         headers = { 
                  'Authorization': 'bearer ' + settings.VIMEO_ACCESS_TOKEN,

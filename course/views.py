@@ -12,6 +12,7 @@ from django.urls import reverse
 from course import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
+from django.views.generic.edit import FormView
 # Create your views here.
 
 class CourseListView(ListView):
@@ -19,37 +20,31 @@ class CourseListView(ListView):
     paginate_by = 10
     model = models.Course
 
-class CourseCreateView(TemplateView):
+class CourseCreateView(CreateView):
     template_name = "course/course_form.html"
     model = models.Course
+    form_class = forms.CourseForm
+
+    def get_success_url(self):
+
+        return reverse('course:module-create-form', kwargs={'course_id': self.object.id})
+
+class ModuleCreateView(TemplateView):
+    template_name = "course/course_module_form.html"
+
+    # def get_success_url(self):
+
+    #     return reverse('course:course-create-form', kwargs={'course_id': self.object.course_id})
 
     def get_context_data(self, **kwargs):
-        context = super(CourseCreateView, self).get_context_data(**kwargs)
+        context = super(ModuleCreateView, self).get_context_data(**kwargs)
+        course_id = self.kwargs.get('course_id')
+        context["form"] = forms.CourseModuleForm()
+        context["course"] = models.Course.objects.filter(pk=course_id).first()
+        context["modules"] = models.CourseModule.objects.filter(course_id=course_id)
 
-        context["course_form"]  = forms.CourseForm(prefix="course_form")  # instance= None
-        context["coursemodule_formset"] = forms.CourseModuleFormset(queryset=models.CourseModule.objects.none(),prefix="coursemodule_formset")
 
         return context
-
-    def post(self, request, *args, **kwargs):
-
-        course_form = forms.CourseForm(request.POST,prefix="course_form")
-        coursemodule_formset = forms.CourseModuleFormset(request.POST,prefix="coursemodule_formset")
-        if course_form.is_valid() and coursemodule_formset.is_valid():
-            course = course_form.save(commit=False)
-            course.save()
-
-            coursemodule_instances = coursemodule_formset.save(commit=False)
-            for obj in coursemodule_instances:
-                obj.course = course
-            models.CourseModule.objects.bulk_create(coursemodule_instances)
-
-            #clear forms
-            course_form = forms.CourseForm(prefix="course_form")
-            coursemodule_formset = forms.CourseModuleFormset(queryset=models.CourseModule.objects.none(),prefix="coursemodule_formset")
-
-        return self.render_to_response(self.get_context_data(**{'course_form': course_form, 'coursemodule_formset':coursemodule_formset}))
-
 
 class CourseDetailView(TemplateView):
     template_name = "course/course_detail.html"

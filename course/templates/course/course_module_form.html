@@ -1,5 +1,5 @@
 {% extends "layout/base.html" %}
-{% load static %}
+{% load static widget_tweaks %}
 
 {% block styles %}
 
@@ -10,49 +10,61 @@
 }
 </style>
 {% endblock styles %}
-
 {% block content %}
-      <table>
-        <tr>
-          <td>
-            <label for="chunksize">
-              Chunk size (bytes):
-            </label>
-          </td>
-          <td>
-            <input type="number" id="chunksize" name="chunksize">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="resume">
-              Perform full upload:
-              <br />
-              <small>(even if we could resume)</small>
-            </label>
-          </td>
-          <td>
-            <input type="checkbox" id="resume">
-          </td>
-        </tr>
-      </table>
+<h1>{{ course.name }}</h1>
+<p>{{ course.description }}</p>
 
-      <br />
-      <input type="file">
 
-      <br />
-      <br />
 
-      <div class="row">
+<div class="row">
+{% for module in modules %}
+<h1>{{ module.name }}</h1>
+<p>{{ module.duration }}</p>
+{% endfor %}
+</div>
+
+<div class="form-group text-right">
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#module-modal">
+    Add
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="module-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<form id="course-module-form" class="text-truncate">
+
+		  <div class="p-2 bg-dark text-white font-weight-bold">Course Module</div>
+		  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
+		</div>
+		<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.duration %}</div>
+		</div>
+				  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.chunksize|append_attr:"id:chunksize" %}</div>
+		</div>
+		<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.video_file %}</div>
+		</div>
+
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-success">
             <span class="bar" style="width: 0%;"></span>
           </div>
         </div>
-        <div class="span4">
-          <button class="btn stop" id="toggle-btn">start upload</button>
-        </div>
-      </div>
+		<div class="form-group">
+		  <button type="button" class="btn btn-danger stop" id="toggle-btn">
+		    upload
+		  </button>
+		</div>
+	
+		</form>
 
       <hr />
       <h3>Uploads</h3>
@@ -60,6 +72,12 @@
         Succesful uploads will be listed here. Try one!
       </p>
 
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
 
@@ -72,7 +90,7 @@ var upload          = null;
 var uploadIsRunning = false;
 var toggleBtn       = document.querySelector("#toggle-btn");
 var resumeCheckbox  = document.querySelector("#resume");
-var input           = document.querySelector("input[type=file]");
+var video_file_input = $("input[name=video_file]");
 var progress        = document.querySelector(".progress-bar");
 var progressBar     = progress.querySelector(".bar");
 var alertBox        = document.querySelector("#support-alert");
@@ -95,13 +113,17 @@ toggleBtn.addEventListener("click", function (e) {
 });
 
 function create_video(){
-    var file = input.files[0];
+    var file = video_file_input.prop("files")[0];
+    var course_module_form_data = {}; 
+    $("#course-module-form").serializeArray().forEach(function(x){course_module_form_data[x.name] = x.value;});
 
     $.ajax({
       url: "{% url 'video:video-upload-attempt' view.kwargs.course_id %}",
       method: "POST",
       dataType: "json",
       data: {
+      		  name: course_module_form_data.name,
+      		  duration: course_module_form_data.duration,
               file_size: file.size,
               csrfmiddlewaretoken: '{{ csrf_token }}'
             }
@@ -118,10 +140,10 @@ function create_video(){
         uploadIsRunning = true;
       }
     } else {
-      if (input.files.length > 0) {
+      if (video_file_input.prop("files").length > 0) {
         start_upload(data.upload.upload_link);
       } else {
-        input.click();
+        video_file_input.click();
       }
     }
 
@@ -130,7 +152,7 @@ function create_video(){
 }
 
 function start_upload(upload_link) {
-  var file = input.files[0];
+  var file = video_file_input.prop("files")[0];
   // Only continue if a file has actually been selected.
   // IE will trigger a change event even if we reset the input element
   // using reset() and we do not want to blow up later.
@@ -191,7 +213,7 @@ function start_upload(upload_link) {
 }
 
 function reset() {
-  input.value = "";
+  video_file_input.value = "";
   toggleBtn.textContent = "start upload";
   upload = null;
   uploadIsRunning = false;
