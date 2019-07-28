@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from course.views import CourseListView
+from promotions.views import LandingView
 
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
@@ -23,6 +24,6 @@ urlpatterns = [
     url(r'^course/', include('course.urls', namespace='course')),
     url(r'^accounts/', include('customer.urls', namespace='customer')),
     url(r'^admin/', admin.site.urls),
-    url('^$', CourseListView.as_view(), name='index')
+    url('^$', LandingView.as_view(), name='index')
 
 ]

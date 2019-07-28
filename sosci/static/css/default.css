@@ -286,6 +286,10 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   border: 1px solid #e1e4e8!important;
 }
 
+#course-list .border {
+  margin-bottom: 20px;
+}
+
 .box-part>.fas, .box-part>.far {
   font-size: 40px;
   color: #ec407a ;
@@ -480,6 +484,18 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   color: #808080;
   padding: .625rem;
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .course-detail .p-3 {
+    padding-top: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .course-detail .box-part {
+    margin: 0px !important;
+  }
 }
 
 
