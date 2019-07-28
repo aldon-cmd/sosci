@@ -1,5 +1,16 @@
 /*Updated default CSS */
 
+/* #################   List of fonts #################*/
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:900&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Muli:900|Source+Sans+Pro:900&display=swap');
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+
+/* #################   List of fonts #################*/
+
 .hide {
   display: none;
 }
@@ -1071,3 +1082,133 @@ img, picture {
   line-height: 1.2;
 }
 
+.page-landing {
+  margin: auto;
+  padding: 2.5rem 2.9rem 2.5rem 2.9rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .page-landing {
+    padding: 0rem 2.9rem 2.5rem 2.9rem;
+  }
+}
+
+.heading-display {
+  font-size: 7rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  line-height: 1;
+  color: #1e1f20;
+  margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 600px) {
+  .heading-display {
+    font-size: 3rem;
+  }
+}
+
+.page-landing h1 {
+  letter-spacing: -.0375em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page-landing span {
+   color: #ec407a;
+}
+
+.text-large {
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #343a40;
+}
+
+.hero-message {
+  margin-bottom: 2.5rem;
+  font-family: 'Roboto', arial, sans-serif;
+}
+
+.text-input .text-input-wrapper input {
+  font-size: 14px;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 400;
+  border-radius: 0;
+  padding: 8px 18px 8px 18px;
+  height: 44px;
+  margin-bottom: 0;
+}
+
+.text-input-wrapper input {
+  width: 100%;
+}
+
+.login-text-input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.get-started input {
+  width: 350px;
+  border-color: #1e1f20;
+}
+
+.get-started button {
+  width: 50px;
+  color: #ffff;
+  background-color: #1e1f20;
+  border-color: #1e1f20;
+  border-style: none;
+}
+
+.sign-in-hero {
+  font-size: 1.6rem;
+  line-height: 1.5rem;
+  font-family: arial, sans-serif;
+  letter-spacing: -.03125rem;
+  font-weight: bold;
+  color: #1e1f20;
+  margin-bottom: 2rem;
+}
+
+.sign-in-form {
+  padding: 2.5rem 2.9rem 2.5rem 2.9rem;
+  margin-bottom: auto;
+}
+
+.text-input-wrapper label {
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #1e1f20;
+  font-family: 'Roboto', arial, sans-serif;
+  margin-bottom: 5px;
+}
+
+.sign-in-btn {
+  margin-top: 2.5rem;
+}
+
+.sign-in-btn button {
+  width: 100%;
+  height: 44px;
+  color: #ffff;
+  background-color: #ec407a;
+  border-color: #ec407a;
+  border-style: none;
+}
+
+.sign-in-btn button {
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 300;
+}
+
+.terms {
+  margin-top: 20px;
+  color:#1e1f20;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.5;
+} 
