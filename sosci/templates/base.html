@@ -1,0 +1,127 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" }}" class="no-js">
+    <head>
+        <title>{% block title %}{{ shop_name }} - {{ shop_tagline }}{% endblock %}</title>
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="created" content="{% now "jS M Y h:i" %}" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="robots" content="NOARCHIVE,NOCACHE" />
+        {% block favicon %}
+            <link rel="shortcut icon" href="{% static "oscar/favicon.ico" %}" />
+        {% endblock %}
+
+        {# Block where global CSS will go. #}
+        {% block styles %}
+
+
+          <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+          <link href="{% static 'css/fontawesome/all.css' %}" rel="stylesheet" type="text/css"/>
+          <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css"/>
+
+
+        {% endblock styles %}
+
+        {# Additional CSS - specific to certain pages #}
+        {% block extrastyles %}{% endblock %}
+
+        {% block extrahead %}{% endblock %}
+
+        {% block tracking %}
+            {# Default to using Google analytics #}
+            {% include "partials/google_analytics.html" %}
+        {% endblock %}
+    </head>
+
+    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
+    {% block navbar %}
+
+{% if request.user.is_authenticated and request.user.is_staff %}
+<nav id="sosci-nav" class="navbar navbar-expand-md">
+  <div class="content">
+    <div class="header">
+      <div class="d-flex flex-row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+        <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci Admin</a>
+      </div>
+    </div>
+    <div class="" id="navbarSupportedContent">
+      <ul class="list">
+        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci Admin</a></li>
+        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Courses</a></li>
+        <li class="item"><a class="nav-link" href="{% url 'catalogue:course-create-form' %}">Create Course</a></li>
+        <li class="item"><a class="nav-link">Instructors</a></li>
+        <li class="item"><a class="nav-link">Partners</a></li>
+      
+        <li class="item"><a class="nav-link" >Enroll</a></li>
+        <li class="item"><a class="nav-link">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% else %}
+
+<nav id="sosci-nav" class="navbar navbar-expand-md">
+  <div class="content">
+    <div class="header">
+      <div class="d-flex flex-row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+        <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci</a>
+      </div>
+    </div>
+    <div class="" id="navbarSupportedContent">
+      <ul class="list">
+        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
+        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">CPD Courses</a></li>
+        <li class="item"><a class="nav-link" >Certificate Programs</a></li>
+        <li class="item"><a class="nav-link">SME School</a></li>
+        <li class="item"><a class="nav-link">About Us</a></li>
+      
+        <li class="item"><a class="nav-link" >Sign Up</a></li>
+        <li class="item"><a class="nav-link">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
+    {% endblock navbar %}
+        {% block content %}{% endblock content %}
+
+        {# Scripts loaded from a CDN. #}
+        {% block cdn_scripts %}
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')</script>
+        {% endblock %}
+
+        {# Local scripts #}
+        {% block scripts %}
+         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+
+         <script src="{% static 'js/bootstrap.js' %}"></script>
+        {% endblock %}
+
+        {# Additional JS scripts #}
+        {% block extrascripts %}{% endblock %}
+
+        {# Block for body onload functions #}
+        <script>
+            $(function() {
+                {% block onbodyload %}{% endblock %}
+            });
+        </script>
+
+        {# Page meta-data - this is populated by the 'metadata' template context processor #}
+    </body>
+</html>

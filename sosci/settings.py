@@ -41,9 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',    
     'video.apps.VideoConfig',
-    # 'course.apps.CourseConfig',
     'custom_user.apps.CustomUserConfig',
-    # 'promotions.apps.PromotionsConfig',
     'widget_tweaks',
 
 ] + get_core_apps(['customer','promotions','catalogue','basket','order','checkout'])
