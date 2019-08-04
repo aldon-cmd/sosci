@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from course.views import CourseListView
-from promotions.views import LandingView
+# from course.views import CourseListView
+# from promotions.views import LandingView
+from app import application
 
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
-    url(r'^promotions/', include('promotions.urls', namespace='promotions')),
-    url(r'^course/', include('course.urls', namespace='course')),
-    url(r'^accounts/', include('customer.urls', namespace='customer')),
+    # url(r'^promotions/', include('promotions.urls', namespace='promotions')),
+    # url(r'^course/', include('course.urls', namespace='course')),
+    # url(r'^accounts/', include('customer.urls', namespace='customer')),
     url(r'^admin/', admin.site.urls),
-    url('^$', LandingView.as_view(), name='index')
+    # url('^$', LandingView.as_view(), name='index')
+    url(r'', include(application.urls)),
 
 ]

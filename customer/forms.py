@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils.http import is_safe_url
 from django.contrib.auth import password_validation
 from customer import models
+from custom_user import models as user_models
 from customer.utils import normalise_email
 
 def generate_username():
@@ -18,9 +19,9 @@ def generate_username():
     uname = ''.join([random.choice(letters + string.digits + '_')
                      for i in range(30)])
     try:
-        models.User.objects.get(username=uname)
+        user_models.User.objects.get(username=uname)
         return generate_username()
-    except models.User.DoesNotExist:
+    except user_models.User.DoesNotExist:
         return uname
 
 
@@ -34,7 +35,7 @@ class EmailUserCreationForm(forms.ModelForm):
         widget=forms.HiddenInput, required=False)
 
     class Meta:
-        model = models.User
+        model = user_models.User
         fields = ('email','first_name','last_name',)
 
     def __init__(self, host=None, *args, **kwargs):
@@ -46,7 +47,7 @@ class EmailUserCreationForm(forms.ModelForm):
         Checks for existing users with the supplied email address.
         """
         email = normalise_email(self.cleaned_data['email'])
-        if models.User._default_manager.filter(email__iexact=email).exists():
+        if user_models.User._default_manager.filter(email__iexact=email).exists():
             raise forms.ValidationError(
                 "A user with that email address already exists")
         return email
@@ -73,7 +74,7 @@ class EmailUserCreationForm(forms.ModelForm):
         user = super(EmailUserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
 
-        if 'username' in [f.name for f in models.User._meta.fields]:
+        if 'username' in [f.name for f in user_models.User._meta.fields]:
             user.username = generate_username()
         if commit:
             user.save()

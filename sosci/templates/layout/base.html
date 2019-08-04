@@ -1,146 +1,58 @@
-{% load static %}
+{% load i18n %}
+{% load staticfiles %}
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta charset="utf-8">
+<html lang="{{ LANGUAGE_CODE|default:"en-gb" }}" class="no-js">
+    <head>
+        <title>{% block title %}{{ shop_name }} - {{ shop_tagline }}{% endblock %}</title>
 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="created" content="{% now "jS M Y h:i" %}" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
+        <meta name="robots" content="NOARCHIVE,NOCACHE" />
+        {% block favicon %}
+            <link rel="shortcut icon" href="{% static "oscar/favicon.ico" %}" />
+        {% endblock %}
 
+        {# Block where global CSS will go. #}
+        {% block styles %}{% endblock %}
 
-  <title>{% block page_title %}{{ _("SOSCI") }}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}{% endblock %}">
-  <meta name="author" content="{% block meta_author %}{% endblock %}">
+        {# Additional CSS - specific to certain pages #}
+        {% block extrastyles %}{% endblock %}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block extrahead %}{% endblock %}
 
-  {% block meta %}
-  {% endblock meta %}
-  
+        {% block tracking %}
+            {# Default to using Google analytics #}
+            {% include "partials/google_analytics.html" %}
+        {% endblock %}
+    </head>
 
+    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
+        {# Main content goes in this 'layout' block #}
+        {% block layout %}{% endblock %}
 
+        {# Scripts loaded from a CDN. #}
+        {% block cdn_scripts %}
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')</script>
+        {% endblock %}
 
-  {# Block where global CSS will go. #}
-  
-  {% block styles %}
+        {# Local scripts #}
+        {% block scripts %}
+        {% endblock %}
 
+        {# Additional JS scripts #}
+        {% block extrascripts %}{% endblock %}
 
-  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
-  <link href="{% static 'css/fontawesome/all.css' %}" rel="stylesheet" type="text/css"/>
-  <link href="{% static 'css/default.css' %}" rel="stylesheet" type="text/css"/>
+        {# Block for body onload functions #}
+        <script>
+            $(function() {
+                {% block onbodyload %}{% endblock %}
+            });
+        </script>
 
-
-  {% endblock styles %}
-
-  {# Additional CSS - specific to certain pages #}
-  {% block extrastyles %}{% endblock extrastyles %}
-  
-
-  {% block extrahead %} {% endblock extrahead %}
-
-
-   {# Local scripts #}
-  
-
-</head>
-<body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
-
-    {% block navbar %}
-
-{% if request.user.is_authenticated and request.user.is_staff %}
-<nav id="sosci-nav" class="navbar navbar-expand-md">
-  <div class="content">
-    <div class="header">
-      <div class="d-flex flex-row">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
-        <a class="sosci-logo-m nav-link-m" href="{% url 'index' %}">Sosci Admin</a>
-      </div>
-    </div>
-    <div class="" id="navbarSupportedContent">
-      <ul class="list">
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">Sosci Admin</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">Courses</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'course:course-create-form' %}">Create Course</a></li>
-        <li class="item"><a class="nav-link">Instructors</a></li>
-        <li class="item"><a class="nav-link">Partners</a></li>
-      
-        <li class="item"><a class="nav-link" >Enroll</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% else %}
-
-<nav id="sosci-nav" class="navbar navbar-expand-md">
-  <div class="content">
-    <div class="header">
-      <div class="d-flex flex-row">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
-        <a class="sosci-logo-m nav-link-m" href="{% url 'index' %}">Sosci</a>
-      </div>
-    </div>
-    <div class="" id="navbarSupportedContent">
-      <ul class="list">
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">Sosci</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">CPD Courses</a></li>
-        <li class="item"><a class="nav-link" >Certificate Programs</a></li>
-        <li class="item"><a class="nav-link">SME School</a></li>
-        <li class="item"><a class="nav-link">About Us</a></li>
-      
-        <li class="item"><a class="nav-link" >Sign Up</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% endif %}
-    {% endblock navbar %}
-
-    <main role="main" class="mt-5 pt-5">
-<div class="container">
-        {% include "partials/alert_messages.html" %}
-        {% block content %}{% endblock content %}
-</div>
-
-</main>
-
-
-  <footer>
-    {% block footer %}
-    <div class="container-fluid">
-
-    </div>
-    {% endblock footer %}
-  </footer>
-
-
-  <!-- JavaScript at the bottom for fast page loading -->
-  {% block cdn_scripts %}
-  {% endblock cdn_scripts %}
-
-
-  <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
-
-  <script src="{% static 'js/bootstrap.js' %}"></script>
-
-
-
-  {% block scripts %}
-  {% endblock scripts %}
-
-  {# Additional JS scripts #}
-
-  {% block extrascripts %}
-
-  {% endblock extrascripts %}
-
-</body>
+        {# Page meta-data - this is populated by the 'metadata' template context processor #}
+    </body>
 </html>

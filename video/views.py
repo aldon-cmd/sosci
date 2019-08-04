@@ -9,12 +9,11 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from video import models
-from course import models as course_models
+from catalogue import models as catalogue_models
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, get_list_or_404
-from customer import models as customer_models
 
 class VideoPlayerView(TemplateView):
     template_name = "video/player.html"
@@ -53,7 +52,7 @@ class VimeoVideoUploadAttemptView(View):
         post_data = request.POST
         course_id = self.kwargs.get("course_id")
 
-        course = get_object_or_404(course_models.Course, pk=course_id,user_id=self.request.user.pk)
+        course = get_object_or_404(catalogue_models.Course, pk=course_id,user_id=self.request.user.pk)
 
         headers = { 
                  'Authorization': 'bearer ' + settings.VIMEO_ACCESS_TOKEN,
@@ -110,7 +109,7 @@ class VimeoVideoUploadAttemptView(View):
         name = post_data.get("name","")
         duration = post_data.get("duration","")
 
-        course_models.CourseModule.objects.create(name=name,duration=duration,video=video,course_id=course_id)
+        catalogue_models.CourseModule.objects.create(name=name,duration=duration,video=video,course_id=course_id)
 
     def create_vimeo_video(self,url,data,headers):
         return self.make_request(url,data,headers)

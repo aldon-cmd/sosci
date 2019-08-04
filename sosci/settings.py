@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+from oscar import OSCAR_MAIN_TEMPLATE_DIR
+from oscar import get_core_apps
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer.apps.CustomerConfig',
+    'django.contrib.sites',
+    'django.contrib.flatpages',    
     'video.apps.VideoConfig',
-    'catalogue.apps.CatalogueConfig',
-    'course.apps.CourseConfig',
-    'promotions.apps.PromotionsConfig',
+    # 'course.apps.CourseConfig',
+    'custom_user.apps.CustomUserConfig',
+    # 'promotions.apps.PromotionsConfig',
     'widget_tweaks',
 
-]
+] + get_core_apps(['customer','promotions','catalogue','basket','order','checkout'])
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'oscar.apps.basket.middleware.BasketMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
 ]
 
 ROOT_URLCONF = 'sosci.urls'
@@ -62,7 +66,10 @@ ROOT_URLCONF = 'sosci.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'sosci','templates'),],
+        'DIRS': [
+                 os.path.join(BASE_DIR,'sosci','templates'),
+                 OSCAR_MAIN_TEMPLATE_DIR
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +77,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'oscar.apps.search.context_processors.search_form',
+                'oscar.apps.promotions.context_processors.promotions',
+                'oscar.apps.checkout.context_processors.checkout',
+                'oscar.apps.customer.notifications.context_processors.notifications',
+                'oscar.core.context_processors.metadata',
             ],
         },
     },
@@ -119,6 +132,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/Jamaica'
 
+SITE_ID = 1
+
 USE_I18N = True
 
 USE_L10N = True
@@ -127,7 +142,12 @@ USE_TZ = True
 
 DATE_FORMAT = "d M Y"
 
-AUTH_USER_MODEL = 'customer.User'
+AUTH_USER_MODEL = 'custom_user.User'
+
+AUTHENTICATION_BACKENDS = (
+    'oscar.apps.customer.auth_backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -156,3 +176,19 @@ VIMEO_ACCESS_TOKEN = '39b43eb6883cc7e0bae61b1e6dc59dd4'
 VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'
 
 VIMEO_GET_ALL_THUMBNAILS_URL = 'https://api.vimeo.com/videos/{0}/pictures'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
+
+from oscar.defaults import *
+
+OSCAR_INITIAL_ORDER_STATUS = 'Pending'
+OSCAR_INITIAL_LINE_STATUS = 'Pending'
+OSCAR_ORDER_STATUS_PIPELINE = {
+    'Pending': ('Being processed', 'Cancelled',),
+    'Being processed': ('Processed', 'Cancelled',),
+    'Cancelled': (),
+}
