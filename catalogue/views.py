@@ -16,12 +16,12 @@ from django.views.generic.edit import FormView
 # Create your views here.
 
 class CourseListView(ListView):
-    template_name = "course/course_list.html"
+    template_name = "catalogue/course_list.html"
     paginate_by = 10
     model = models.Product
 
 class CourseCreateView(CreateView):
-    template_name = "course/course_form.html"
+    template_name = "catalogue/course_form.html"
     model = models.Product
     form_class = forms.CourseForm
 
@@ -30,7 +30,7 @@ class CourseCreateView(CreateView):
         return reverse('course:module-create-form', kwargs={'course_id': self.object.id})
 
 class ModuleCreateView(TemplateView):
-    template_name = "course/course_module_form.html"
+    template_name = "catalogue/course_module_form.html"
 
     # def get_success_url(self):
 
@@ -47,7 +47,7 @@ class ModuleCreateView(TemplateView):
         return context
 
 class CourseDetailView(TemplateView):
-    template_name = "course/course_detail.html"
+    template_name = "catalogue/course_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
@@ -68,7 +68,7 @@ class CourseDetailView(TemplateView):
         return models.Enrollment.objects.filter(user=user,course_id=course_id).exists()
 
 class CourseEnrollmentView(View):
-    template_name = "course/course_enrollment.html"
+    template_name = "catalogue/course_enrollment.html"
 
     def post(self, request, *args, **kwargs):
         action = self.request.POST.get('action', None)
