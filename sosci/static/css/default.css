@@ -8,6 +8,8 @@
 
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
 
 /* #################   List of fonts #################*/
 
@@ -17,6 +19,7 @@
 
 .test {
   color: red;
+  border: solid 1px red;
 }
 
 .no-padding {
@@ -516,9 +519,24 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
  max-width: 1360px;
 }*/
 
-#video .row {
-  max-width: 1900px;
+
+
+@media only screen and (max-width: 600px) {
+  #video {
+      padding: 0px !important;
+  }
+}
+
+#video .container {
+  max-width: 1700px;
   margin: auto;
+}
+
+
+@media only screen and (max-width: 600px) {
+  #video .container {
+      padding: 0px !important;
+  }
 }
 
 .watch-next {
@@ -550,16 +568,32 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: block;
   border-bottom: 1px solid #e0e0e0;
   padding: 20px 0 20px 0;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .primary-video-info-title {
   display: block;
   overflow: hidden;
-  font-size: 1.8rem!important;
-  font-weight: 400;
-  line-height: 1.5rem;
-  color: var(--ytd-video-primary-info-renderer-title-color, var(--yt-spec-text-primary));
-  font-family: Helvetica;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: red;
+  font-family: 'Fira Sans', arial, sans-serif;
+  padding: 20px 20px 20px 20px;
+  font-weight: bold;
+  color: #0d0d0d;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .primary-video-info-title {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+}
+
+.video-series {
+  background-color: #f6f6f6;
 }
 
 .watch-next-title {
@@ -569,6 +603,16 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   color: #0a0a0a;
   font-weight: bold;
   margin-bottom: 4px;
+  padding: 18px 30px 18px 30px;
+  border-bottom: solid 2px rgb(255, 255, 255);
+}
+
+
+@media only screen and (max-width: 600px) {
+  .watch-next-title {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
 }
 
 .instructor, .duration {
@@ -576,7 +620,10 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-family: Helvetica;
   line-height: 1.1428;
   color: #606060;
-  margin-bottom: 2px;
+}
+
+.instructor {
+  margin-top: 4px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -690,6 +737,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 .video-page {
   /*padding-top: 50px;*/
+  max-width: 1700px;
 }
 
 .watch-hub .container {
@@ -710,107 +758,8 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 @media only screen and (max-width: 650px) {
 .watch-hub {
-    padding-top: 0.5rem;
+    .padding-top: 0.5rem;
   }
-}
-
-@media only screen and (min-width: 1250px) {
-.grd-row {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-}
-
-@media only screen and (min-width: 1050px) {
-.grd-row {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-}
-
-@media only screen and (min-width: 850px) {
-.grd-row {
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-}
-
-@media only screen and (min-width: 1600px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-}
-
-@media only screen and (min-width: 700px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-}
-
-@media only screen and (min-width: 1250px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-}
-
-@media only screen and (min-width: 1050px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-}
-
-@media only screen and (min-width: 850px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-}
-
-@media only screen and (min-width: 650px) {
-.grd-row {
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 100%;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-}
-
-.grd-row {
-  display: flex;
-  flex-wrap: wrap;
-  min-width: 100%;
-  margin-left: -5px;
-  margin-right: -5px;
 }
 
 .#video .container {
@@ -840,33 +789,19 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   height: 100%;
 }
 
-.primary-video-info {
-  display: block;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 20px 0 20px 0;
-}
-
-.primary-video-info-title {
-  font-size: 28px;
-  font-family: Helvetica;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-@media only screen and (max-width: 600px) {
-.primary-video-info-title {
-    font-size: 20px;
-  }
-}
-
-
 .watch-next-title {
-  font-size: 16px;
+  font-size: 14px;
   font-family: Helvetica;
   line-height: 1.1428;
   color: #0a0a0a;
   font-weight: bold;
   margin-bottom: 4px;
+}
+
+.watch-next-title .fa-play-circle {
+  font-size: 16px;
+  color: red;
+  margin-right: 9px;
 }
 
 .instructor, .duration {
@@ -1025,6 +960,13 @@ img, picture {
   padding: 25px 30px 10px 30px;
 }
 
+@media only screen and (max-width: 600px) {
+  #video ul {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
 #video li {
   display: inline-block;
   display: -moz-inline-stack;
@@ -1064,12 +1006,12 @@ img, picture {
   margin-bottom: 3px;
 }
 
-.box-content h3 {
-  font-family: Helvetica;
-  color: #0d0d0d;
-  font-weight: 600;
-  font-size: 15px;
-  margin: 0px 0px 4px 0px;
+.box-content a {
+  font-family: Arial, sans-serif;
+  color: #24292e;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .box-content p {
@@ -1081,20 +1023,24 @@ img, picture {
 .modules .fa-check-circle {
   color: #4B515D;
   font-size: 1.4rem;
-  line-height: 1.96rem;
+  line-height: 1;
 }
 
 .module-status {
-  width: 7rem;
+  width: 0rem;
   text-align: center;
 }
+
+.module-status .fas {
+  color: #ef9a9a;
+}
+
 
 .module-duration {
   width: 7rem;
   text-align: center;
   font-family: Helvetica;
-  margin-top: 6px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.2;
 }
 

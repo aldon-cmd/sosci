@@ -42,7 +42,7 @@
   
 
 </head>
-<body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
+<body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}" style="background-color: rgb(233, 233, 233);" >
 
     {% block navbar %}
 
@@ -93,10 +93,10 @@
         <li class="item"><a class="nav-link" href="{% url 'course:course-list' %}">CPD Courses</a></li>
         <li class="item"><a class="nav-link" >Certificate Programs</a></li>
         <li class="item"><a class="nav-link">SME School</a></li>
-        <li class="item"><a class="nav-link">About Us</a></li>
+        <li class="item"><a class="nav-link">Help</a></li>
       
-        <li class="item"><a class="nav-link" >Sign Up</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
+        <li class="item"><a class="nav-link" >My Courses</a></li>
+        <li class="item"><a class="nav-link">My Account</a></li>
       </ul>
     </div>
   </div>
@@ -104,18 +104,18 @@
 {% endif %}
     {% endblock navbar %}
 
-    <main role="main" class="mt-5 pt-5">
-<div class="container">
-        {% include "partials/alert_messages.html" %}
-        {% block content %}{% endblock content %}
-</div>
+<main id="video" role="main" class="mt-5 pt-4">
+  <div class="container no-padding">
+          {% include "partials/alert_messages.html" %}
+          {% block content %}{% endblock content %}
+  </div>
 
 </main>
 
 
   <footer>
     {% block footer %}
-    <div class="container-fluid">
+    <div class="container-fluid no-padding">
 
     </div>
     {% endblock footer %}
