@@ -1,5 +1,6 @@
 npm/
 public/static/
+public/media/cache/
 .vscode/
 dist/
 bin/
