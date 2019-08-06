@@ -42,6 +42,15 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: block;
 }
 
+.container {
+  margin-top: 50px !important;
+}
+
+
+.row {
+  padding-top: 2rem !important;
+}
+
 #sosci-nav {
   position: absolute;
   top: 0;
