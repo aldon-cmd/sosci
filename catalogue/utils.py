@@ -21,7 +21,7 @@ class CatalogueCreator(object):
 
         # Create item class and item
         product_class, __ \
-            = ProductClass.objects.get_or_create(name=product_class)
+            = ProductClass.objects.get_or_create(name=product_class,requires_shipping=False,track_stock=False)
 
         item = Product()
         item.title = title
