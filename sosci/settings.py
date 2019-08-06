@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
 
-] + get_core_apps(['customer','promotions','catalogue','basket','order','checkout'])
+] + get_core_apps(['customer','promotions','catalogue','partner','order','checkout'])
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

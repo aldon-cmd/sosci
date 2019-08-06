@@ -13,6 +13,7 @@ from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
 from django.views.generic.edit import FormView
+from catalogue.utils import CatalogueCreator
 # Create your views here.
 
 class CourseListView(ListView):
@@ -25,9 +26,14 @@ class CourseCreateView(CreateView):
     model = models.Product
     form_class = forms.CourseForm
 
+    def form_valid(self, form):
+        product = form.instance
+        CatalogueCreator().create_product("Course","Course > General",product.title,product.description,1.00,1)
+        return super(CourseCreateView, self).form_valid(form)
+
     def get_success_url(self):
 
-        return reverse('course:module-create-form', kwargs={'course_id': self.object.id})
+        return reverse('catalogue:module-create-form', kwargs={'course_id': self.object.id})
 
 class ModuleCreateView(TemplateView):
     template_name = "catalogue/course_module_form.html"
@@ -78,7 +84,7 @@ class CourseEnrollmentView(View):
                models.Enrollment.objects.create(user=request.user,course_id=course_id)
 
         return http.HttpResponseRedirect(
-                    reverse('course:course-detail', kwargs={'course_id': course_id}))
+                    reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
 
     def is_enrolled(self):
         user = self.request.user

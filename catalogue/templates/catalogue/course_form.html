@@ -1,15 +1,23 @@
-{% extends "base.html" %}
+
 
 {% block content %}
      
                                
 <form action="" method="post" class="text-truncate">
   {% csrf_token %}
-
+  {{ form.non_field_errors }}
   <div class="p-2 bg-dark text-white font-weight-bold">Course</div>
-  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
+  <div class="form-group">
+{{ form.title.errors }}
+           <div class="col">{% include 'partials/form_field.html' with field=form.title %}</div>
 </div>
-<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.description %}</div>
+<div class="form-group">
+{{ form.description.errors }}
+         <div class="col">{% include 'partials/form_field.html' with field=form.description %}</div>
+</div>
+<div class="form-group">
+{{ form.product_class.errors }}
+         <div class="col">{% include 'partials/form_field.html' with field=form.product_class %}</div>
 </div>
 
 

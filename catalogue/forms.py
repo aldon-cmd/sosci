@@ -4,9 +4,14 @@ from catalogue import models
 
 
 class CourseForm(ModelForm):
+    CHOICES = (
+        ("Product Class", "Course"),
+    )
+    product_class = forms.ModelChoiceField(queryset=models.ProductClass.objects.filter(name="Course"))
     class Meta:
+
         model = models.Product
-        fields = ['name', 'description']
+        fields = ['title', 'description','product_class']
 
 
 class CourseModuleForm(forms.Form):
