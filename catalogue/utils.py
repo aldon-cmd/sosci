@@ -42,10 +42,8 @@ class CatalogueCreator(object):
         partner_sku = "1337"
         partner, _ = Partner.objects.get_or_create(
             name=partner_name)
-        try:
-            stock = StockRecord.objects.get(partner_sku=partner_sku)
-        except StockRecord.DoesNotExist:
-            stock = StockRecord()
+
+        stock = StockRecord()
 
         stock.product = item
         stock.partner = partner
