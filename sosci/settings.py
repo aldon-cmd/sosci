@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
 
-] + get_core_apps(['customer','promotions','catalogue','payment','partner','order','checkout'])
+] + get_core_apps(['customer','promotions','basket','catalogue','payment','partner','order','checkout'])
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +65,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
                  os.path.join(BASE_DIR,'sosci','templates'),
-                 OSCAR_MAIN_TEMPLATE_DIR
         ],
         'APP_DIRS': True,
         'OPTIONS': {
