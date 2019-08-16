@@ -15,6 +15,7 @@ class CatalogueCreator(object):
 
         self._create_stockrecord(item,
                             price_excl_tax, num_in_stock)
+        return item
 
     def _create_item(self, product_class, category_str, title,
                      description):
@@ -39,7 +40,7 @@ class CatalogueCreator(object):
                             price_excl_tax, num_in_stock):
         # Create partner and stock record
         partner_name = "Nesberry"
-        partner_sku = "1337"
+        # partner_sku = "1337"
         partner, _ = Partner.objects.get_or_create(
             name=partner_name)
 
@@ -47,7 +48,7 @@ class CatalogueCreator(object):
 
         stock.product = item
         stock.partner = partner
-        stock.partner_sku = partner_sku
+        stock.partner_sku = item.pk
         stock.price_excl_tax = D(price_excl_tax)
         stock.num_in_stock = num_in_stock
         stock.save()

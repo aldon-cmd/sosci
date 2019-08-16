@@ -28,12 +28,12 @@ class CourseCreateView(CreateView):
 
     def form_valid(self, form):
         product = form.instance
-        CatalogueCreator().create_product("Course","Course > General",product.title,product.description,1.00,1)
-        return HttpResponseRedirect(self.get_success_url())
+        created_product = CatalogueCreator().create_product("Course","Course > General",product.title,product.description,1.00,1)
+        return HttpResponseRedirect(self.get_success_url(created_product))
 
-    def get_success_url(self):
+    def get_success_url(self,product):
 
-        return reverse('catalogue:module-create-form', kwargs={'course_id': self.object.id})
+        return reverse('catalogue:module-create-form', kwargs={'course_id': product.pk})
 
 class ModuleCreateView(TemplateView):
     template_name = "catalogue/course_module_form.html"
