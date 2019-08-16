@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
+
+
 {% block content %}
   <div class="container no-padding">
     <div class="row">
@@ -23,31 +26,40 @@
       </div>
 
       <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 px-0 test-4">
-        <div class="sign-in-form">
+
+        <form method="post" class="sign-in-form" action="{% url 'customer:login' %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <input type="hidden" name="next" value='{{next}}'> 
           <h2 class="sign-in-hero">Sign in to take a course</h2>
           <div class="text-input login-text-input ">
             <div class="text-input-error"></div>
             <div class="text-input-wrapper">
               <label>Email</label>
-              <input type="email" , class="text-input-input" value="">
+              {{ form.username|append_attr:"class:text-input-input" }}
+            {{ form.username.errors }}
             </div>
           </div>
           <div class="text-input login-text-input ">
             <div class="text-input-error"></div>
             <div class="text-input-wrapper">
               <label>Password</label>
-              <input type="password" , class="text-input-input" value="">
+              {{ form.password|append_attr:"class:text-input-input" }}
+            {{ form.password.errors }}
             </div>
           </div>
           <div class="sign-in-btn">
-            <button type="button">
+            <button type="submit">
               <span>Start Learning Now</span>
             </button>
           </div>
           <div class="terms">
             <p>This page is protected by reCAPTCHA, and subject to Google’s Privacy Policy & Terms of Service. By signing up for Social Science, you agree to our Terms of Service & Privacy Policy.</p>
           </div>
-        </div>
+</form>
+
+
+
       </div>
 
     </div>
