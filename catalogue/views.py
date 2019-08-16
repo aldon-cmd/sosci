@@ -29,7 +29,7 @@ class CourseCreateView(CreateView):
     def form_valid(self, form):
         product = form.instance
         CatalogueCreator().create_product("Course","Course > General",product.title,product.description,1.00,1)
-        return super(CourseCreateView, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
 

@@ -38,63 +38,7 @@
 
     <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
     {% block navbar %}
-
-{% if request.user.is_authenticated and request.user.is_staff %}
-<nav id="sosci-nav" class="navbar navbar-expand-md">
-  <div class="content">
-    <div class="header">
-      <div class="d-flex flex-row">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
-        <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci Admin</a>
-      </div>
-    </div>
-    <div class="" id="navbarSupportedContent">
-      <ul class="list">
-        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci Admin</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Courses</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'catalogue:course-create-form' %}">Create Course</a></li>
-        <li class="item"><a class="nav-link">Instructors</a></li>
-        <li class="item"><a class="nav-link">Partners</a></li>
-      
-        <li class="item"><a class="nav-link" >Enroll</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% else %}
-
-<nav id="sosci-nav" class="navbar navbar-expand-md">
-  <div class="content">
-    <div class="header">
-      <div class="d-flex flex-row">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
-        <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci</a>
-      </div>
-    </div>
-    <div class="" id="navbarSupportedContent">
-      <ul class="list">
-        <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">CPD Courses</a></li>
-        <li class="item"><a class="nav-link" >Certificate Programs</a></li>
-        <li class="item"><a class="nav-link">SME School</a></li>
-        <li class="item"><a class="nav-link">About Us</a></li>
-      
-        <li class="item"><a class="nav-link" >Sign Up</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-{% endif %}
+       {% include "partials/navbar.html" %}
     {% endblock navbar %}
     
 

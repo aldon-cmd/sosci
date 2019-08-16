@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
     # url(r'^promotions/', include('promotions.urls', namespace='promotions')),
     # url(r'^course/', include('course.urls', namespace='course')),
-    # url(r'^accounts/', include('customer.urls', namespace='customer')),
+    url(r'^accounts/', include('customer.urls', namespace='customer')),
     url(r'^admin/', admin.site.urls),
     # url('^$', LandingView.as_view(), name='index')
     url(r'', include(application.urls)),
