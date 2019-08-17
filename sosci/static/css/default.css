@@ -1109,6 +1109,7 @@ img, picture {
   padding: 8px 18px 8px 18px;
   height: 44px;
   margin-bottom: 0;
+  border: 1px solid #b9c7d5 !important;
 }
 
 .text-input-wrapper input {
@@ -1183,3 +1184,7 @@ img, picture {
   font-size: 13px;
   line-height: 1.5;
 } 
+
+button > i, span {
+  color: #ffffff !important;
+}
