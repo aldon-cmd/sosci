@@ -15,6 +15,16 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import redirect
 from django.urls import reverse
 
+
+class LogoutView(auth_views.LogoutView):
+
+
+    def get(self, request):
+        logout(request)
+
+        return redirect('/')
+
+
 class LoginModalView(auth_views.LoginView):
     template_name = 'customer/login_modal.html'
     form_class = CustomAuthenticationForm
@@ -50,7 +60,7 @@ class RegistrationModalView(FormView):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
-        return redirect('/')
+        return HttpResponseRedirect(self.request.path_info)
 
     def form_invalid(self, form):
         response = super(RegistrationModalView, self).form_invalid(form)

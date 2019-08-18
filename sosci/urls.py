@@ -19,6 +19,7 @@ from django.contrib import admin
 # from promotions.views import LandingView
 from app import application
 
+
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
     # url(r'^promotions/', include('promotions.urls', namespace='promotions')),
