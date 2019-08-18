@@ -2,11 +2,11 @@
 
 
 {% block content %}
-
-<div class="row">
+<div class="container no-padding">
+  <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 test">
-      <div class="">
-        <h3 class="">Choose your payment method<span>.</span></h3>
+      <div class="checkout-card">
+        <h3 class="payment-hero">Choose your payment method<span>.</span></h3>
 
         <div id="accordion">
 
@@ -55,8 +55,8 @@
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 test">
-      <div class="sign-in-form">
-        <h3 class="sign-in-hero">Order Summary</h3>
+      <div class="payment-form">
+        <h3 class="payment-hero">Order Summary</h3>
         <table class="table">
           <tbody>
             <tr>
@@ -81,6 +81,6 @@
         </table>
       </div>
     </div>
-
   </div>
-  {% endblock content %}
+</div>
+{% endblock content %}

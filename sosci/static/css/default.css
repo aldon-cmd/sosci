@@ -1144,9 +1144,41 @@ img, picture {
   margin-bottom: 2rem;
 }
 
+.payment-hero {
+  font-size: 1.6rem;
+  line-height: 1.5rem;
+  font-family: arial, sans-serif;
+  letter-spacing: -.03125rem;
+  font-weight: bold;
+  color: #444444;
+  margin-bottom: 2rem;
+}
+
 .sign-in-form {
   padding: 2.5rem 2.9rem 2.5rem 2.9rem;
   margin-bottom: auto;
+}
+
+.payment-form {
+  padding: 2.5rem 2.9rem 2.5rem 2.9rem;
+  margin-bottom: auto;
+  color: #444444;
+}
+
+.checkout-card .card-header,  .checkout-card .card-link {
+  font-family: Helvetica;
+  font-size: 15px;
+  color: #444444 !important;
+}
+
+
+#accordion .card  {
+  border-radius: 0px;
+}
+
+.payment-form > table {
+  font-family: Helvetica;
+  font-size: 15px;
 }
 
 .text-input-wrapper label {
@@ -1187,4 +1219,8 @@ img, picture {
 
 button > i, span {
   color: #ffffff !important;
+}
+
+.checkout-card {
+  padding: 2.5rem 2.9rem 2.5rem 2.9rem;   
 }
