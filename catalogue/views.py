@@ -14,6 +14,7 @@ from django import http
 from customer.forms import CustomAuthenticationForm
 from django.views.generic.edit import FormView
 from catalogue.utils import CatalogueCreator
+from catalogue import mixins
 # Create your views here.
 
 class CourseListView(ListView):
@@ -28,7 +29,8 @@ class CourseCreateView(CreateView):
 
     def form_valid(self, form):
         product = form.instance
-        created_product = CatalogueCreator().create_product("Course","Course > General",product.title,product.description,1.00,1)
+        user = self.request.user
+        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,1.00,1)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
     def get_success_url(self,product):
@@ -47,20 +49,30 @@ class ModuleCreateView(TemplateView):
         course_id = self.kwargs.get('course_id')
         context["form"] = forms.CourseModuleForm()
         context["course"] = models.Product.objects.filter(pk=course_id).first()
-        context["modules"] = models.CourseModule.objects.filter(course_id=course_id)
+        context["modules"] = models.CourseModule.objects.filter(product_id=course_id)
 
 
         return context
 
-class CourseDetailView(TemplateView):
+class CourseDetailView(TemplateView,mixins.EnrollmentMixin):
     template_name = "catalogue/course_detail.html"
+
+    def dispatch(self, request, *args, **kwargs):
+
+        course_id = self.kwargs.get('course_id')
+        if request.user.is_authenticated() and self.is_enrolled(request.user,course_id, models):
+            
+            return http.HttpResponseRedirect(
+                    reverse('video:video-player', kwargs={'course_id': course_id}))
+
+        return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context["login_form"] = CustomAuthenticationForm()
         context["course"] = self.get_course()
         if self.request.user.is_authenticated():
-           context["is_enrolled"] = self.is_enrolled()
+           context["is_pending"] = False
 
         return context
 
@@ -68,10 +80,6 @@ class CourseDetailView(TemplateView):
         course_id = self.kwargs.get("course_id")
         return models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
         
-    def is_enrolled(self):
-        user = self.request.user
-        course_id = self.kwargs.get("course_id")
-        return models.Enrollment.objects.filter(user=user,course_id=course_id).exists()
 
 class CourseEnrollmentView(View):
     template_name = "catalogue/course_enrollment.html"
@@ -81,7 +89,7 @@ class CourseEnrollmentView(View):
         course_id = self.kwargs.get("course_id")
         if action == 'enroll' and request.user.is_authenticated():
             if not self.is_enrolled():
-               models.Enrollment.objects.create(user=request.user,course_id=course_id)
+               models.Enrollment.objects.create(user=request.user,product_id=course_id)
 
         return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
@@ -89,4 +97,4 @@ class CourseEnrollmentView(View):
     def is_enrolled(self):
         user = self.request.user
         course_id = self.kwargs.get("course_id")
-        return models.Enrollment.objects.filter(user=user,course_id=course_id).exists()
+        return models.Enrollment.objects.filter(user=user,product_id=course_id).exists()

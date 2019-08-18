@@ -1,35 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-    {% block navbar %}
-<nav id="sosci-nav" class="navbar navbar-expand-md">
-  <div class="content">
-    <div class="header">
-      <div class="d-flex flex-row">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
-        <a class="sosci-logo-m nav-link-m" href="{% url 'index' %}">Sosci</a>
-      </div>
-    </div>
-    <div class="" id="navbarSupportedContent">
-      <ul class="list">
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">Sosci</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'index' %}">Courses</a></li>
-        <li class="active"><a class="nav-link" href="{% url 'video:video-upload-form' view.kwargs.course_id %}">Add Video</a></li>
-        <li class="item"><a class="nav-link">Instructors</a></li>
-        <li class="item"><a class="nav-link">Partners</a></li>
-      
-        <li class="item"><a class="nav-link">Sign Up</a></li>
-        <li class="item"><a class="nav-link">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-    {% endblock navbar %}
-
 {% block content %}
         <div class="row">
           

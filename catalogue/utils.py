@@ -7,17 +7,17 @@ from oscar.apps.catalogue.categories import create_from_breadcrumbs
 class CatalogueCreator(object):
 
     @atomic
-    def create_product(self, product_class, category_str, title,
+    def create_product(self,user, product_class, category_str, title,
                      description,price_excl_tax, num_in_stock):
 
-        item = self._create_item(product_class, category_str, title,
+        item = self._create_item(user,product_class, category_str, title,
                      description)
 
         self._create_stockrecord(item,
                             price_excl_tax, num_in_stock)
         return item
 
-    def _create_item(self, product_class, category_str, title,
+    def _create_item(self,user, product_class, category_str, title,
                      description):
 
         # Create item class and item
@@ -25,6 +25,7 @@ class CatalogueCreator(object):
             = ProductClass.objects.get_or_create(name=product_class,requires_shipping=False,track_stock=False)
 
         item = Product()
+        item.user = user
         item.title = title
         item.description = description
         item.product_class = product_class

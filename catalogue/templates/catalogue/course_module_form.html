@@ -11,7 +11,8 @@
 </style>
 {% endblock styles %}
 {% block content %}
-<h1>{{ course.name }}</h1>
+<div class="container">
+<h1>{{ course.title }}</h1>
 <p>{{ course.description }}</p>
 
 
@@ -78,7 +79,7 @@
     </div>
   </div>
 </div>
-
+</div>
 {% endblock content %}
 
 {% block extrascripts %}

@@ -13,19 +13,43 @@ from catalogue import models as catalogue_models
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
+from catalogue import mixins
+from django import http
 
-class VideoPlayerView(TemplateView):
+class VideoPlayerView(TemplateView,mixins.EnrollmentMixin):
     template_name = "video/player.html"
+
+    def dispatch(self, request, *args, **kwargs):
+
+        course_id = self.kwargs.get('course_id')
+        if not request.user.is_authenticated():
+            return http.HttpResponseRedirect('/') 
+
+        if not self.is_enrolled(request.user,course_id, catalogue_models):
+            
+            return http.HttpResponseRedirect(
+                    reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
+
+        return super(VideoPlayerView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(VideoPlayerView, self).get_context_data(**kwargs)
-        video_id = self.kwargs.get("video_id")
-        video = models.Video.objects.filter(video_id=video_id).first()
-        video.seen = True
-        video.save()
+        course_id = self.kwargs.get("course_id")
+        #display the first video in the playlist on page load
+        video = models.Video.objects.filter(product_id=course_id).order_by('pk').first()
+        if not video:
+            raise http.Http404()
         context['video'] = video
-        context['videos'] = models.Video.objects.filter(course_id=video.course_id).exclude(pk=video.pk)
+        video_id = self.kwargs.get("video_id")
+        #get video by id if a video_id is set in the url
+        if video_id:        
+            video = get_object_or_404(models.Video, video_id=video_id)
+
+            context['video'] = video
+        video.seen = True
+        video.save()            
+        context['videos'] = models.Video.objects.filter(product_id=course_id).exclude(pk=video.pk)
         return context
 
 class VideoListView(ListView):
@@ -35,7 +59,7 @@ class VideoListView(ListView):
 
     def get_queryset(self):
         course_id = self.kwargs.get("course_id")
-        return models.Video.objects.filter(course_id=course_id)
+        return models.Video.objects.filter(product_id=course_id)
 
 class VimeoVideoUploadFormView(TemplateView):
     """
@@ -52,7 +76,7 @@ class VimeoVideoUploadAttemptView(View):
         post_data = request.POST
         course_id = self.kwargs.get("course_id")
 
-        course = get_object_or_404(catalogue_models.Course, pk=course_id,user_id=self.request.user.pk)
+        course = get_object_or_404(catalogue_models.Product, pk=course_id,user_id=self.request.user.pk)
 
         headers = { 
                  'Authorization': 'bearer ' + settings.VIMEO_ACCESS_TOKEN,
@@ -93,7 +117,7 @@ class VimeoVideoUploadAttemptView(View):
 
         picture = thumbnail_response['sizes'][2]['link_with_play_button']
 
-        video = models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,course_id=course_id)
+        video = models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,product_id=course_id)
 
         self.create_course_module(post_data,video,course_id)
 
@@ -109,7 +133,7 @@ class VimeoVideoUploadAttemptView(View):
         name = post_data.get("name","")
         duration = post_data.get("duration","")
 
-        catalogue_models.CourseModule.objects.create(name=name,duration=duration,video=video,course_id=course_id)
+        catalogue_models.CourseModule.objects.create(name=name,duration=duration,video=video,product_id=course_id)
 
     def create_vimeo_video(self,url,data,headers):
         return self.make_request(url,data,headers)

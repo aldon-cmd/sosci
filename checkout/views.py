@@ -6,7 +6,8 @@ from oscar.apps.checkout import signals
 from oscar.apps.payment.exceptions import PaymentError, UnableToTakePayment,RedirectRequired
 from oscar.apps.order.exceptions import UnableToPlaceOrder
 from django.utils.translation import ugettext as _
-from checkout import mixins   
+from checkout import mixins
+from catalogue import mixins as catalogue_mixins   
 from django import shortcuts
 from catalogue import models as catalogue_models
 from django.db import IntegrityError, transaction
@@ -17,7 +18,8 @@ from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
 
 
-class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
+
+class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_mixins.EnrollmentMixin):
     """
     For taking the details of payment and creating the order.
 
@@ -72,6 +74,12 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
 
         if not course_id:
             raise http.Http404()
+
+        if request.user.is_authenticated() and self.is_enrolled(request.user,course_id,catalogue_models):
+           return http.HttpResponseRedirect(
+                    reverse('video:video-player', kwargs={'course_id': course_id}))
+
+
 
         # Assign the checkout session manager so it's available in all checkout
         # views.
