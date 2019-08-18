@@ -48,7 +48,7 @@ class LoginView(auth_views.LoginView):
 
         """Security check complete. Log the user in."""
         auth_login(self.request, form.get_user())
-        return redirect('course:course-list')
+        return redirect('catalogue:course-list')
 
 class RegistrationModalView(FormView):
     form_class = EmailUserCreationForm
