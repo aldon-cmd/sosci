@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<form method="post" action="{% url 'customer:login' %}">
+<form method="post" action="{% url 'customer:user-login' %}">
     {% csrf_token %}
     {{ form.non_field_errors }}
     <input type="hidden" name="next" value='{{next}}'> 
