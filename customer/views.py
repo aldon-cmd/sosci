@@ -78,3 +78,15 @@ class UserRegistrationView(FormView):
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
         return redirect('/')
+
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = 'customer/registration/password_reset_done.html'
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'customer/registration/password_reset_confirm.html'
+
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = 'customer/registration/password_reset_complete.html'
+
+class PasswordResetView(auth_views.PasswordResetView):
+    template_name = 'customer/registration/password_reset_form.html'       

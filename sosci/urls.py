@@ -17,11 +17,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 # from course.views import CourseListView
 # from promotions.views import LandingView
+from customer import views as auth_views
 from app import application
 
 
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
+    url(r'^payment/', include('payment.urls', namespace='payment')),
+    url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    url(r'^password_reset/$', auth_views.PasswordResetView.as_view(), name='password_reset'),
     url(r'^admin/', admin.site.urls),
     url(r'', include(application.urls)),
 
