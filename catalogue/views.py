@@ -17,6 +17,14 @@ from catalogue.utils import CatalogueCreator
 from catalogue import mixins
 # Create your views here.
 
+class MyCoursesListView(ListView):
+    template_name = "catalogue/course_list.html"
+    paginate_by = 10
+    model = models.Product
+
+    def get_queryset(self):
+        return models.Product.objects.filter(user=self.request.user)
+
 class CourseListView(ListView):
     template_name = "catalogue/course_list.html"
     paginate_by = 10

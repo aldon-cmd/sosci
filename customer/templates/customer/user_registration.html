@@ -2,6 +2,7 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<div class="container">
 <form action="" method="post">
     {% csrf_token %}
     <div ng-class="{'has-error':vm.form.email.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1 n2">
@@ -29,4 +30,5 @@
         </div>
     </div>
 </form>
+</div>
 {% endblock content %}
