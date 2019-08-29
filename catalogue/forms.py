@@ -7,6 +7,7 @@ class CourseForm(ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
+    price = forms.DecimalField(max_digits=6,decimal_places=2)
     product_class = forms.ModelChoiceField(queryset=models.ProductClass.objects.filter(name="Course"))
     class Meta:
 

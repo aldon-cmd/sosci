@@ -18,6 +18,11 @@
                      <div class="col">{% include 'partials/form_field.html' with field=form.description %}</div>
             </div>
             <div class="form-group">
+            {{ form.price.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.price %}</div>
+            </div>
+
+            <div class="form-group">
             {{ form.product_class.errors }}
                      <div class="col">{% include 'partials/form_field.html' with field=form.product_class %}</div>
             </div>

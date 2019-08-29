@@ -38,7 +38,8 @@ class CourseCreateView(CreateView):
     def form_valid(self, form):
         product = form.instance
         user = self.request.user
-        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,1.00,1)
+        price = form.cleaned_data['price']
+        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,price,1)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
     def get_success_url(self,product):
