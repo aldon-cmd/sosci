@@ -1,84 +1,100 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% load static %} 
 
 
 {% block content %}
-<div class="container no-padding">
-  <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 test">
-      <div class="checkout-card">
-        <h3 class="payment-hero">Choose your payment method<span>.</span></h3>
+<div id="checkout">
+  <div class="container no-padding">
+    <div class="row ">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 checkout-box-1">
+        <div class="checkout-card">
+          <h3 class="payment-hero">Select a payment method<span>.</span></h3>
 
-        <div id="accordion">
+          <div id="accordion">
+            <div class="payment-options">
+              <div class="card payment-method">
+                <div class="card-header d-flex">
+                  <a class="card-link col-lg-6 col-md-6 col-sm-6 " data-toggle="collapse" href="#collapseOne">
+                    <span>Credit or Debit card</span>
+                  </a>
+                  <div class="card-types col-lg-6 col-md-6 col-sm-6 ">
+                    <div class="icons">
+                      <img src="{% static 'img/visa.png' %}" />
+                      <img src="{% static 'img/mastercard.png' %}"/>
+                    </div>
+                  </div>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="pay-btn">
+                      <button type="submit" class="btn btn-color btn-xtra-large btn-block panel-btn">
+                        <div class="pay-icons">
+                          <i class="far fa-credit-card"></i>
+                          <span>Pay with debit or credit card</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <div class="card">
-            <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#collapseOne">Use Credit or Debit card</a>
-            </div>
-            <div id="collapseOne" class="collapse show" data-parent="#accordion">
-              <div class="card-body">
+              <div class="card payment-method">
+                <div class="card-header other-method">
+                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">Bank Transfer</a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                    <form action="{% url 'checkout:payment-details' view.kwargs.course_id %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="payment_method" value="bank_transfer" />
+                      <input type="hidden" name="action" value="place_order" />
+                    <p>Lorem ipsum..</p>
+                    <button type="submit" class="btn btn-color btn-xtra-large btn-block panel-btn">Place Order</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
 
+              <div class="card payment-method">
+                <div class="card-header other-method">
+                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">Use a Prepaid Plan</a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                    Lorem ipsum..
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="card">
-            <div class="card-header">
-              <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">Use Bank Transfer</a>
-            </div>
-            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-              <div class="card-body">
-                <form action="{% url 'checkout:payment-details' view.kwargs.course_id %}" method="post">
-                  {% csrf_token %}
-                  <input type="hidden" name="payment_method" value="bank_transfer" />
-                  <input type="hidden" name="action" value="place_order" />
-                <p>Lorem ipsum..</p>
-                <button type="submit" class="btn btn-color btn-xtra-large btn-block panel-btn">Place Order</button>
-              </form>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">Use a Prepaid Plan</a>
-            </div>
-            <div id="collapseThree" class="collapse" data-parent="#accordion">
-              <div class="card-body">
-                Lorem ipsum..
-              </div>
-            </div>
-          </div>
-
         </div>
-
       </div>
-    </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 test">
-      <div class="payment-form">
-        <h3 class="payment-hero">Order Summary</h3>
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>IFRS 7 Financial Instruments CPD Course</th>
-              <th>$7,500</th>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>Sub-total</td>
-              <td>$7,500.00</td>
-            </tr>
-            <tr>
-              <td>Tax</td>
-              <td>$0.00</td>
-            </tr>
-            <tr>
-              <td>Total</td>
-              <td>$7,500.00</td>
-            </tr>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 px-0 checkout-box-2">
+        <div class="payment-form">
+          <h3 class="payment-hero">Order Summary</h3>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>IFRS 7 Financial Instruments CPD Course</th>
+                <th>$7,500</th>
+              </tr>
+            </tbody>
             <tfoot>
-        </table>
+              <tr>
+                <td>Sub-total</td>
+                <td>$7,500.00</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td>$0.00</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>$7,500.00</td>
+              </tr>
+              <tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </div>
