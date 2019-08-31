@@ -1,0 +1,29 @@
+<form action="{% url 'payment:settle-pnp-payment' %}" method="post">
+<input type="hidden" id="publisher_name" value="pnpdemo">
+<input type="hidden" id="mode" value="auth">
+<input type="hidden" id="convert" value="underscores">
+<input type="hidden" id="response" >
+
+
+<label for="card_amount">Amount</label>
+<input type="text" id="card_amount">
+
+
+<label for="card_name">Name</label> 
+<input type="text" id="card_name">
+
+
+<label for="card_number">Card Number</label>
+<input type="text" id="card_number" placeholder="4111111111111111">
+
+
+<label for="card_exp">Exp Date</label> 
+<input type="text" id="card_exp" placeholder="MM/YY">
+
+
+<label for="card_cvv">CVV</label> 
+<input type="text" id="card_cvv">
+  
+
+<input type="button" value="Submit" onclick="payment_api.send();">
+</form>

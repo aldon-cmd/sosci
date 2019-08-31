@@ -5,7 +5,7 @@
     <head>
         <title>{% block title %}{{ shop_name }} - {{ shop_tagline }}{% endblock %}</title>
 
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <meta name="created" content="{% now "jS M Y h:i" %}" />
         <meta name="description" content="{% block description %}{% endblock %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -28,7 +28,13 @@
         {# Additional CSS - specific to certain pages #}
         {% block extrastyles %}{% endblock %}
 
-        {% block extrahead %}{% endblock %}
+        {% block extrahead %}
+         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+         <script src="https://pay1.plugnpay.com/api/iframe/P3Tm8BYjgA/client/"></script>
+
+
+
+        {% endblock %}
 
         {% block tracking %}
             {# Default to using Google analytics #}
@@ -51,8 +57,6 @@
 
         {# Local scripts #}
         {% block scripts %}
-         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
-
          <script src="{% static 'js/bootstrap.js' %}"></script>
         {% endblock %}
 
