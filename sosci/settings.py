@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',    
     'video.apps.VideoConfig',
+    'livestream.apps.LivestreamConfig',
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
 
@@ -178,6 +179,10 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
 }
+
+TWILIO_ACCOUNT_SID = 'AC293bc491919b8de551c1ead83f4d0952'
+TWILIO_API_KEY = 'SK2325ec445e8f31215de4ad87e8308330'
+TWILIO_API_SECRET = 'arhLGag0aloEdziiW67ZiNhTUX8fBZ7p'
 
 from oscar.defaults import *
 

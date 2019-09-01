@@ -1,0 +1,19 @@
+{
+  "name": "sosci-twilio-programmable-video",
+  "version": "1.0.0",
+  "description": "a twilio programmable video api for sosci",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf ..\\..\\sosci/static/js/sosci-live.js",
+    "build": "npm run clean && browserify sosci_live/src/index.js > ..\\..\\sosci/static/js/sosci-live.js"
+  },
+  "author": "aldon palmer",
+  "license": "ISC",
+  "dependencies": {
+    "twilio-video": "^1.18.1"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "rimraf": "^2.6.1"
+  }
+}

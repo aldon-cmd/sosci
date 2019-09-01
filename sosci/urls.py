@@ -23,6 +23,7 @@ from app import application
 
 urlpatterns = [
     url(r'^video/', include('video.urls', namespace='video')),
+    url(r'^live/', include('livestream.urls', namespace='livestream')),
     url(r'^payment/', include('payment.urls', namespace='payment')),
     url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
