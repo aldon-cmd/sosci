@@ -38,6 +38,10 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
   vertical-align: baseline;
 }
 
+a:hover {
+  text-decoration: none !important;
+}
+
 article, aside, footer, header, nav, main, section, summary, details, hgroup, figure, figcaption {
   display: block;
 }
@@ -1249,16 +1253,6 @@ button > i, .span {
 
 #accordion .card {
   border: 0px;
-}
-
-#accordion {
-  border-top: 1px solid rgba(0, 0, 0, 0.125); 
-  border-right: 1px solid rgba(0, 0, 0, 0.125);
-  border-left: 1px solid rgba(0, 0, 0, 0.125); 
-}
-
-#accordion .show {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);  
 }
 
 .checkout-box-1 {
