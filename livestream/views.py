@@ -61,8 +61,6 @@ class TwilioRoomView(TemplateView):
         grant.room = course_id
         token.add_grant(grant)
 
-        models.TwilioRoom.objects.create(name=course_id,user=self.request.user)
-
         context["token"] = token.to_jwt()
 
 
