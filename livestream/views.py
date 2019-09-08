@@ -57,7 +57,7 @@ class TwilioRoomView(TemplateView):
         token.identity = self.request.user.email
         
         # Grant access to Video
-        grant = VideoGrant(room=course_id)
+        grant = VideoGrant()
         grant.room = course_id
         token.add_grant(grant)
 
