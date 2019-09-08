@@ -1,4 +1,4 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.sosci_live = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
   "_from": "@twilio/sip.js@^0.7.7",
   "_id": "@twilio/sip.js@0.7.7",
@@ -36420,7 +36420,6 @@ var Video = require('twilio-video');
 
 var activeRoom;
 var previewTracks;
-var identity;
 var roomName;
 
 // Attach the Tracks to the DOM.
@@ -36451,52 +36450,11 @@ function detachParticipantTracks(participant) {
   detachTracks(tracks);
 }
 
-// When we are about to transition away from this page, disconnect
-// from the room, if joined.
-window.addEventListener('beforeunload', leaveRoomIfJoined);
-
-// Obtain a token from the server in order to connect to the Room.
-$.getJSON('/live/token', function(data) {
-  identity = data.identity;
-  document.getElementById('room-controls').style.display = 'block';
-
-  // Bind button to join Room.
-  document.getElementById('button-join').onclick = function() {
-    roomName = document.getElementById('room-name').value;
-    if (!roomName) {
-      alert('Please enter a room name.');
-      return;
-    }
-
-    log("Joining room '" + roomName + "'...");
-    var connectOptions = {
-      name: roomName,
-      logLevel: 'debug'
-    };
-
-    if (previewTracks) {
-      connectOptions.tracks = previewTracks;
-    }
-
-    // Join the Room with the token from the server and the
-    // LocalParticipant's Tracks.
-    Video.connect(data.token, connectOptions).then(roomJoined, function(error) {
-      log('Could not connect to Twilio: ' + error.message);
-    });
-  };
-
-  // Bind button to leave Room.
-  document.getElementById('button-leave').onclick = function() {
-    log('Leaving room...');
-    activeRoom.disconnect();
-  };
-});
-
 // Successfully connected!
 function roomJoined(room) {
   window.room = activeRoom = room;
 
-  log("Joined as '" + identity + "'");
+  log("Joined");
   document.getElementById('button-join').style.display = 'none';
   document.getElementById('button-leave').style.display = 'inline';
 
@@ -36555,6 +36513,65 @@ function roomJoined(room) {
   });
 }
 
+// Activity log.
+function log(message) {
+  var logDiv = document.getElementById('log');
+  logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
+  logDiv.scrollTop = logDiv.scrollHeight;
+}
+
+// Leave Room.
+function leaveRoomIfJoined() {
+  if (activeRoom) {
+    activeRoom.disconnect();
+  }
+}
+
+
+function initialize(token){
+
+// Obtain a token from the server in order to connect to the Room.
+
+  document.getElementById('room-controls').style.display = 'block';
+
+  // Bind button to join Room.
+  document.getElementById('button-join').onclick = function() {
+    roomName = document.getElementById('room-name').value;
+    if (!roomName) {
+      alert('Please enter a room name.');
+      return;
+    }
+
+    log("Joining room '" + roomName + "'...");
+    var connectOptions = {
+      name: roomName,
+      logLevel: 'debug'
+    };
+
+    if (previewTracks) {
+      connectOptions.tracks = previewTracks;
+    }
+
+    // Join the Room with the token from the server and the
+    // LocalParticipant's Tracks.
+    Video.connect(token, connectOptions).then(roomJoined, function(error) {
+      log('Could not connect to Twilio: ' + error.message);
+    });
+  };
+
+  // Bind button to leave Room.
+  document.getElementById('button-leave').onclick = function() {
+    log('Leaving room...');
+    activeRoom.disconnect();
+  };
+
+}
+
+
+// When we are about to transition away from this page, disconnect
+// from the room, if joined.
+window.addEventListener('beforeunload', leaveRoomIfJoined);
+
 // Preview LocalParticipant's Tracks.
 document.getElementById('button-preview').onclick = function() {
   var localTracksPromise = previewTracks
@@ -36573,18 +36590,6 @@ document.getElementById('button-preview').onclick = function() {
   });
 };
 
-// Activity log.
-function log(message) {
-  var logDiv = document.getElementById('log');
-  logDiv.innerHTML += '<p>&gt;&nbsp;' + message + '</p>';
-  logDiv.scrollTop = logDiv.scrollHeight;
-}
-
-// Leave Room.
-function leaveRoomIfJoined() {
-  if (activeRoom) {
-    activeRoom.disconnect();
-  }
-}
-
-},{"twilio-video":68}]},{},[187]);
+module.exports = {init: initialize};
+},{"twilio-video":68}]},{},[187])(187)
+});

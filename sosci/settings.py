@@ -168,6 +168,15 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+LOGIN_REQUIRED_URLS = (
+)
+
+ANONYMOUS_REQUIRED_URLS = (
+    r'^/account/login$',
+    r'^/account/registration$',
+    r'^/landing$',
+)
+
 VIMEO_ACCESS_TOKEN = '39b43eb6883cc7e0bae61b1e6dc59dd4'
 
 VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'

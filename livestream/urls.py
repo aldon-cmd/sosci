@@ -3,7 +3,5 @@ from django.conf.urls import url
 from livestream import views
 
 urlpatterns = [
-    url(r'^token$', views.TwilioTokenView.as_view(), name='twilio-token'),
-    url(r'^player$', views.TwilioPlayerView.as_view(), name='twilio-player'),
-
+    url(r'^room/(?P<course_id>\d+)$', views.TwilioRoomView.as_view(), name='twilio-room'),
 ]

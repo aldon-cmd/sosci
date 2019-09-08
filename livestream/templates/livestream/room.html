@@ -9,7 +9,8 @@
 
 
 {% block content %}
-<div id="remote-media"></div>
+<div class="container">
+ <div id="remote-media"></div>
 <div id="controls">
   <div id="preview">
     <p class="instructions">Hello Beautiful</p>
@@ -24,11 +25,17 @@
   </div>
   <div id="log"></div>
 </div>
+</div>
+
+
 {% endblock content %}
-
-
 
 {% block extrascripts %}
 {{ block.super }}
 <script src="{% static 'js/sosci-live.js' %}"></script>
+{% autoescape off %}
+<script>
+sosci_live.init("{{token}}");
+</script>
+{% endautoescape %}
 {% endblock extrascripts %}

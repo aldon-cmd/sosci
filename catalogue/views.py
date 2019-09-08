@@ -22,13 +22,55 @@ class MyCoursesListView(ListView):
     paginate_by = 10
     model = models.Product
 
+class LiveCourseListView(ListView):
+    template_name = "catalogue/live_course_list.html"
+    paginate_by = 10
+    model = models.Product
+
     def get_queryset(self):
-        return models.Product.objects.filter(user=self.request.user)
+        return models.Product.objects.filter(product_class__name="Live")
+
+class LiveCourseCreateView(CreateView):
+    template_name = "catalogue/course_form.html"
+    model = models.Product
+    form_class = forms.CourseForm
+
+    def form_valid(self, form):
+        product = form.instance
+        user = self.request.user
+        price = form.cleaned_data['price']
+        created_product = CatalogueCreator().create_product(user,"Course","Course > Live",product.title,product.description,price,1)
+        return HttpResponseRedirect(self.get_success_url(created_product))
+
+    def get_success_url(self,product):
+
+        return reverse('catalogue:live-course-detail', kwargs={'course_id': product.pk})
+
+
+class LiveCourseDetailView(TemplateView,mixins.EnrollmentMixin):
+    template_name = "catalogue/live_course_detail.html"
+
+
+    def get_context_data(self, **kwargs):
+        context = super(LiveCourseDetailView, self).get_context_data(**kwargs)
+        context["login_form"] = CustomAuthenticationForm()
+        context["course"] = self.get_course()
+        if self.request.user.is_authenticated():
+           context["is_pending"] = False
+
+        return context
+
+    def get_course(self):
+        course_id = self.kwargs.get("course_id")
+        return models.Product.objects.filter(pk=course_id).first()
 
 class CourseListView(ListView):
     template_name = "catalogue/course_list.html"
     paginate_by = 10
     model = models.Product
+
+    def get_queryset(self):
+        return models.Product.objects.filter(product_class__name="General")
 
 class CourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"

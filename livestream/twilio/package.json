@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf ..\\..\\sosci/static/js/sosci-live.js",
-    "build": "npm run clean && browserify sosci_live/src/index.js > ..\\..\\sosci/static/js/sosci-live.js"
+    "build": "npm run clean && browserify sosci_live/src/index.js --standalone sosci_live > ..\\..\\sosci/static/js/sosci-live.js"
   },
   "author": "aldon palmer",
   "license": "ISC",
