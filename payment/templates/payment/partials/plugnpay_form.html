@@ -1,29 +1,45 @@
-<form action="{% url 'payment:settle-pnp-payment' %}" method="post">
-<input type="hidden" id="publisher_name" value="pnpdemo">
-<input type="hidden" id="mode" value="auth">
-<input type="hidden" id="convert" value="underscores">
-<input type="hidden" id="response" >
+<form id="payment-form" action="{% url 'payment:settle-pnp-payment' %}" method="post" id="payment-form">
+	<input type="hidden" id="publisher_name" value="pnpdemo">
+	<input type="hidden" id="mode" value="auth">
+	<input type="hidden" id="convert" value="underscores">
+	<input type="hidden" id="response" >
 
+	<div class="hide">
+		<label for="card_amount">Amount</label>
+		<input type="text" id="card_amount">
+	</div>
 
-<label for="card_amount">Amount</label>
-<input type="text" id="card_amount">
+	<div class="text-input-wrapper">
+		<label class="pnp-card-name text-input-wrapper" for="card_name">Name on card</label> 
+		<div>
+			<input type="text" id="card_name" class="form-control text-input-input">
+		</div>
+	</div>
 
+	
+	<div class="text-input-wrapper">
+		<label class="pnp-card-number" for="card_number">Card Number</label>
+		<div>
+			<input type="text" id="card_number" class="form-control text-input-input">
+		</div>
+	</div>
+	
 
-<label for="card_name">Name</label> 
-<input type="text" id="card_name">
-
-
-<label for="card_number">Card Number</label>
-<input type="text" id="card_number" placeholder="4111111111111111">
-
-
-<label for="card_exp">Exp Date</label> 
-<input type="text" id="card_exp" placeholder="MM/YY">
-
-
-<label for="card_cvv">CVV</label> 
-<input type="text" id="card_cvv">
-  
-
-<input type="button" value="Submit" onclick="payment_api.send();">
+	<div class="card-security d-flex">
+		<div class="col-lg-3 col-md-3 col-sm-3 text-input-wrapper card-security-exp">
+			<label class="pnp-card-exp" for="card_exp">Exp Date</label> 
+			<div>
+				<input type="text" id="card_exp" placeholder="MM/YY" class="form-control text-input-input">
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3 text-input-wrapper">
+			<label class="pnp-card-cvv" for="card_cvv">CVV</label> 
+			<div>
+				<input type="text" id="card_cvv" class="form-control text-input-input">
+			</div>
+		</div>
+	</div>
+	<div class="payment-submit">
+		<input type="button" value="Confirm & Pay" onclick="payment_api.send();">
+	</div>
 </form>
