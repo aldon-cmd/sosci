@@ -70,7 +70,7 @@ class CourseListView(ListView):
     model = models.Product
 
     def get_queryset(self):
-        return models.Product.objects.filter(product_class__name="General")
+        return models.Product.objects.filter(product_class__name="Course")
 
 class CourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"
