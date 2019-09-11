@@ -1461,12 +1461,16 @@ button > i, .span {
 }
 
 #course-detail-module .subheading {
-  font-family: Arial;
-  font-size: 16px;
-  line-height: 19px;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 28px /*1.1875*/;
   color: #322f37; 
-  font-family: 600 !important;
-  margin-bottom: 20px;
+  padding: 12px;
+  border-left: 1px solid #dad8de!important;
+  border-right: 1px solid #dad8de!important;
+  border-top: 1px solid #dad8de!important;
+  margin: 0px !important;
+  background-color: #f6f8fa;
 }
 
 #course-detail-module .box-border {
@@ -1481,9 +1485,25 @@ button > i, .span {
 
  #course-detail-module p {
   font-family: Helvetica;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
   color: #19171c;
+}
+
+#course-detail-module .btn {
+  padding: 0px 11px 0px 11px;
+  line-height: 26px;
+  font-size: 12px;
+  border-radius: 2px;
+  height: 28px;
+  text-align: center;
+  border: 1px solid;
+  font-weight: bold;
+  border-color: rgb(218, 221, 225);
+  background-color: rgb(245, 246, 247);
+  letter-spacing: normal;
+  color: rgb(68, 73, 80);
+  float: right;
 }
 
 
