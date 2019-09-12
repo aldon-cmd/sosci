@@ -88,6 +88,22 @@ class CourseCreateView(CreateView):
 
         return reverse('catalogue:module-create-form', kwargs={'course_id': product.pk})
 
+class PublishCourseView(TemplateView):
+    template_name = "catalogue/course_publish.html"
+
+    # def get_success_url(self):
+
+    #     return reverse('course:course-create-form', kwargs={'course_id': self.object.course_id})
+
+    def get_context_data(self, **kwargs):
+        context = super(PublishCourseView, self).get_context_data(**kwargs)
+        course_id = self.kwargs.get('course_id')
+        context["course"] = models.Product.objects.filter(pk=course_id).first()
+        context["modules"] = models.CourseModule.objects.filter(product_id=course_id)
+
+
+        return context
+
 class ModuleCreateView(TemplateView):
     template_name = "catalogue/course_module_form.html"
 

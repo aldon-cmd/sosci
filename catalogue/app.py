@@ -10,6 +10,7 @@ class CatalogueApplication(app.CatalogueApplication):
 			    url(r'^detail/(?P<course_id>\d+)$', views.CourseDetailView.as_view(), name='course-detail'),
                 url(r'^live/detail/(?P<course_id>\d+)$', views.LiveCourseDetailView.as_view(), name='live-course-detail'),
 			    url(r'^enroll/(?P<course_id>\d+)$', views.CourseEnrollmentView.as_view(), name='course-enrollment'),
+                url(r'^publish/(?P<course_id>\d+)$', views.PublishCourseView.as_view(), name='publish-course'),
 			    url(r'^module/create/(?P<course_id>\d+)$', views.ModuleCreateView.as_view(), name='module-create-form'),
 			    url(r'^create$', views.CourseCreateView.as_view(), name='course-create-form'),
                 url(r'^live/create$', views.LiveCourseCreateView.as_view(), name='live-course-create-form'),
