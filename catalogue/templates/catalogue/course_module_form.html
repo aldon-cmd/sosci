@@ -56,9 +56,7 @@
       </div>
     </div>
     <div class="form-group text-right">
-      <button type="submit" class="btn">
-        Continue
-      </button>
+     <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">Continue</a>
     </div>
   </div>
 </main>
