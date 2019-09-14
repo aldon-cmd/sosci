@@ -1506,7 +1506,98 @@ button > i, .span {
   float: right;
 }
 
+#create-form .btn {
+  color: #24292e;
+  background-color: #eff3f6;
+  background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+  user-select: none;
+  background-repeat: repeat-x;
+  background-position: -1px -1px;
+  border: 1px solid rgba(27,31,35,.2);
+}
 
+.progressbar-container {
+  max-width: 800px;
+  margin-top: 100px !important;
+  margin: auto; 
+}
+
+.progressbar {
+  counter-reset: step;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0px 15px 0px 15px;
+}
+
+.progressbar li {
+  list-style-type: none;
+  font-size: 14px;
+  position: relative;
+  text-align: center;
+  color: #7d7d7d;
+  font-family: Helvetica;
+}
+
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 30px;
+  border: 2px solid #7d7d7d;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.progressbar li:after {
+  width: 320px;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  right: 65%;
+  z-index: -1;
+}
+
+@media only screen and (max-width: 600px) {
+  .progressbar li:after {
+    width: 200px;
+    right: 37%;
+  }
+}
+
+.progressbar li:first-child:after {
+  content: none;
+}
+
+.progressbar li.active {
+  color: green;
+}
+
+.progressbar li.active:before {
+  border-color: #55b776;
+}
+
+.progressbar li.active + li:after {
+  background-color: #55b776;
+}
+
+#create-form .row {
+  padding-top: 0px !important;
+}
+
+#course-detail-module .course-list {
+  background: #fff;
+}
 
 /*
 .card-header:first-child {
