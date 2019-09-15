@@ -8,12 +8,24 @@ class CourseForm(ModelForm):
         ("Product Class", "Course"),
     )
     price = forms.DecimalField(max_digits=6,decimal_places=2)
-    product_class = forms.ModelChoiceField(queryset=models.ProductClass.objects.all())
+    product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Course"))
+
     class Meta:
 
         model = models.Product
         fields = ['title', 'description','product_class']
 
+class LiveCourseForm(ModelForm):
+    CHOICES = (
+        ("Product Class", "Course"),
+    )
+    price = forms.DecimalField(max_digits=6,decimal_places=2)
+    product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Live"))
+
+    class Meta:
+
+        model = models.Product
+        fields = ['title', 'description','product_class']
 
 class CourseModuleForm(forms.Form):
     name = forms.CharField(max_length=100)

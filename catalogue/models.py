@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from oscar.apps.catalogue.abstract_models import AbstractProduct
+from django.utils.translation import ugettext_lazy as _
 
 class Product(AbstractProduct):
       name = models.CharField(max_length=200, null=True, blank=True)

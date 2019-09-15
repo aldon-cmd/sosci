@@ -33,7 +33,7 @@ class LiveCourseListView(ListView):
 class LiveCourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"
     model = models.Product
-    form_class = forms.CourseForm
+    form_class = forms.LiveCourseForm
 
     def form_valid(self, form):
         product = form.instance
@@ -41,6 +41,16 @@ class LiveCourseCreateView(CreateView):
         price = form.cleaned_data['price']
         created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product.title,product.description,price,1)
         return HttpResponseRedirect(self.get_success_url(created_product))
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(LiveCourseCreateView, self).get_form_kwargs()
+        product_class = models.ProductClass.objects.filter(name = "Live").first()
+
+        kwargs['initial'] = {'product_class': product_class.pk}
+        return kwargs
 
     def get_success_url(self,product):
 
@@ -82,6 +92,16 @@ class CourseCreateView(CreateView):
         created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,price,1)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(LiveCourseCreateView, self).get_form_kwargs()
+        product_class = models.ProductClass.objects.filter(name = "Live").first()
+
+        kwargs['initial'] = {'product_class': product_class.pk}
+        return kwargs
+        
     def get_success_url(self,product):
 
         return reverse('catalogue:module-create-form', kwargs={'course_id': product.pk})
