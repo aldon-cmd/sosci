@@ -66,9 +66,20 @@
             <ul class="list">
               <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
               <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
-              <li class="item"><a class="nav-link">Certificate Programs</a></li>
-              <li class="item"><a class="nav-link">SME School</a></li>
-              <li class="item"><a class="nav-link">Help</a></li>
+              <li class="item dropdown">
+                <div class="dropdown show">
+                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="nav-create-course">My Courses</span>
+                    <span class="">
+                      <i class="fas fa-angle-down"></i>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">My Courses</a>
+                    <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
+                  </div>
+                </div>
+              </li>
               <li class="item dropdown">
                 <div class="dropdown show">
                   <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,20 +100,9 @@
                   </div>
                 </div>
               </li>
-              <li class="item dropdown">
-                <div class="dropdown show">
-                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="nav-create-course">My Courses</span>
-                    <span class="">
-                      <i class="fas fa-angle-down"></i>
-                    </span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">My Courses</a>
-                    <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
-                  </div>
-                </div>
-              </li>
+              <!-- <li class="item"><a class="nav-link">Certificate Programs</a></li> -->
+              <!-- <li class="item"><a class="nav-link">SME School</a></li> -->
+              <li class="item"><a class="nav-link">Help</a></li>
               <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
             </ul>
         </div>
