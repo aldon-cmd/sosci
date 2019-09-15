@@ -3,6 +3,7 @@ from django.db.transaction import atomic
 from partner.models import Partner, StockRecord 
 from catalogue.models import ProductClass, Product, Category, ProductCategory
 from oscar.apps.catalogue.categories import create_from_breadcrumbs
+from livestream import models as twilio_models
 
 class CatalogueCreator(object):
 
@@ -31,6 +32,8 @@ class CatalogueCreator(object):
         item.product_class = product_class
         item.save()
 
+        self._create_room(item)
+
         # Category
         cat = create_from_breadcrumbs(category_str)
         ProductCategory.objects.update_or_create(product=item, category=cat)
@@ -53,3 +56,6 @@ class CatalogueCreator(object):
         stock.price_excl_tax = D(price_excl_tax)
         stock.num_in_stock = num_in_stock
         stock.save()
+
+    def _create_room(self,product):
+        twilio_models.TwilioRoom.objects.create(name=product.pk,product=product)

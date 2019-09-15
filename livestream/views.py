@@ -15,12 +15,25 @@ from catalogue import models as catalogue_models
 from django import http
 from django.urls import reverse
 from django.contrib import messages
+from twilio.rest import Client
+from twilio.base.exceptions import TwilioRestException
 
 class StartSessionView(TemplateView):
     """
     creates a room, token , identity for a user
     """
     template_name = "livestream/start_session.html"
+
+class TwilioRoomStatusView(View):
+    """
+
+    """
+
+
+    def post(self, request, **kwargs):
+
+        return HttpResponse(status=204)
+
 
 class TwilioRoomView(TemplateView):
     """
@@ -52,6 +65,7 @@ class TwilioRoomView(TemplateView):
         account_sid = settings.TWILIO_ACCOUNT_SID
         api_key = settings.TWILIO_API_KEY
         api_secret = settings.TWILIO_API_SECRET
+        rest_api_auth_token = settings.TWILIO_REST_API_AUTH_TOKEN
 
         course_id = self.kwargs.get('course_id')
 
@@ -66,7 +80,37 @@ class TwilioRoomView(TemplateView):
         grant.room = course_id
         token.add_grant(grant)
 
-        context["token"] = token.to_jwt()
+        auth_token = token.to_jwt()
+
+        """
+        https://www.twilio.com/docs/video/api/rooms-resource?code-sample=code-create-a-group-room&code-language=Python&code-sdk-version=6.x
+        """
+
+        client = Client(account_sid, rest_api_auth_token)
+
+        try:
+            room = client.video.rooms.create(
+                                          record_participants_on_connect=True,
+                                          status_callback=self.request.build_absolute_uri(reverse('livestream:twilio-room-status')),
+                                          type='group',
+                                          unique_name=course_id
+                                      )
+            #keep track of the status of the room
+            twilio_room_status = models.TwilioRoomStatus.objects.filter(name="Active").first()
+            twilio_room = models.TwilioRoom.objects.filter(name=course_id).first()
+            twilio_room.twilio_room_status = twilio_room_status
+            twilio_room.end_time = room.end_time
+            twilio_room.save()            
+            
+        except TwilioRestException as e:
+               message = e.msg
+               code = e.code
+               room = models.TwilioRoom.objects.filter(name=course_id).first()
+               context["end_time"] = room.end_time
+
+
+        context["token"] = auth_token
+        
 
 
         return context
