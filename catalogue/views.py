@@ -96,7 +96,7 @@ class CourseCreateView(CreateView):
         """This method is what injects forms with their keyword
             arguments."""
         # grab the current set of form #kwargs
-        kwargs = super(LiveCourseCreateView, self).get_form_kwargs()
+        kwargs = super(CourseCreateView, self).get_form_kwargs()
         product_class = models.ProductClass.objects.filter(name = "Live").first()
 
         kwargs['initial'] = {'product_class': product_class.pk}
