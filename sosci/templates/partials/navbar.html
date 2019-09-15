@@ -19,7 +19,18 @@
         <li class="item"><a class="nav-link">Instructors</a></li>
         <li class="item"><a class="nav-link">Partners</a></li>
       
-        <li class="item"><a class="nav-link" >Enroll</a></li>
+         <li class="nav-item dropdown">
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Create Course
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">Create Course</a>
+    <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">Create Live Course</a>
+  </div>
+</div>  
+</li>  
         <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
       </ul>
     </div>
@@ -45,6 +56,18 @@
         <li class="item"><a class="nav-link" >Certificate Programs</a></li>
         <li class="item"><a class="nav-link">SME School</a></li>
         <li class="item"><a class="nav-link">Help</a></li>
+         <li class="nav-item dropdown">
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Create Course
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">Create Course</a>
+    <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">Create Live Course</a>
+  </div>
+</div>  
+</li>       
         <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
         <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
       </ul>
@@ -72,7 +95,7 @@
         <li class="item"><a class="nav-link">About Us</a></li>
       
         <li class="item"><a class="nav-link">Sign Up</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'customer:login' %}">Sign In</a></li>
+        <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Sign In</a></li>
       </ul>
     </div>
   </div>
@@ -97,7 +120,7 @@
         <li class="item"><a class="nav-link">SME School</a></li>
         <li class="item"><a class="nav-link">About Us</a></li>
         <li class="item"><a class="nav-link" >Sign Up</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'customer:login' %}">Sign In</a></li>
+        <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Sign In</a></li>
       </ul>
     </div>
   </div>

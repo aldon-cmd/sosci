@@ -24,8 +24,11 @@
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="p-3">
 
+
                     {% if request.user.is_authenticated == True %}
-                    <a href="{% url 'livestream:twilio-room' view.kwargs.course_id %}">
+                          {# check if the currently logged in user owns the course #}
+                          { if course.user_id == request.user.pk }
+                         <a href="{% url 'livestream:start-session' view.kwargs.course_id %}">
                     <div class="enroll-btn" >
                       <div class="enroll-btn-icon">
                         <i class="fas fa-video"></i>
@@ -35,15 +38,28 @@
                       </div>
                     </div>
                   </a>
-                    {% else %}
-                    <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
+                          {% else %}
+                    <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
+                    <div class="enroll-btn" >
                       <div class="enroll-btn-icon">
                         <i class="fas fa-video"></i>
                       </div>
                       <div class="enroll-btn-text-wrap">
-                        <div class="enroll-btn-text">Start Session</div>
+                        <div class="enroll-btn-text">Enroll in this course</div>
                       </div>
-                    </div>                      
+                    </div>
+                  </a>
+                  {% endif %}
+                    {% else %}
+
+                          <div class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
+                            <div class="enroll-btn-icon">
+                              <i class="fas fa-video"></i>
+                            </div>
+                            <div class="enroll-btn-text-wrap">
+                              <div class="enroll-btn-text">Enroll in this course</div>
+                            </div>
+                          </div>                      
                     {% endif %}
      
   

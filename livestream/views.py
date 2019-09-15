@@ -16,6 +16,11 @@ from django import http
 from django.urls import reverse
 from django.contrib import messages
 
+class StartSessionView(TemplateView):
+    """
+    creates a room, token , identity for a user
+    """
+    template_name = "livestream/start_session.html"
 
 class TwilioRoomView(TemplateView):
     """

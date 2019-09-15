@@ -55,8 +55,6 @@ class LiveCourseDetailView(TemplateView,mixins.EnrollmentMixin):
         context = super(LiveCourseDetailView, self).get_context_data(**kwargs)
         context["login_form"] = CustomAuthenticationForm()
         context["course"] = self.get_course()
-        if self.request.user.is_authenticated():
-           context["is_pending"] = False
 
         return context
 
@@ -138,8 +136,6 @@ class CourseDetailView(TemplateView,mixins.EnrollmentMixin):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         context["login_form"] = CustomAuthenticationForm()
         context["course"] = self.get_course()
-        if self.request.user.is_authenticated():
-           context["is_pending"] = False
 
         return context
 

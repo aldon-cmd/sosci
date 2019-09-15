@@ -3,6 +3,8 @@
 
 {% block content %}
 <div class="container">
+    <div class="row">
+         <div class="col-sm-6 offset-sm-3">
 <form method="post" action="{% url 'customer:user-login' %}">
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -29,5 +31,7 @@
         </div>
     </div>
 </form>
+</div>
+</div>
 </div>
 {% endblock content %}
