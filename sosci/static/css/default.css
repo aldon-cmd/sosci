@@ -1432,7 +1432,7 @@ button > i, .span {
   white-space: initial;
 }
 
-#create-form .control-label {
+#create-form .control-label, #module-modal .control-label {
   font-family: Helvetica;
   font-size: 14px;
   margin-bottom: 5px;
@@ -1504,6 +1504,34 @@ button > i, .span {
   letter-spacing: normal;
   color: rgb(68, 73, 80);
   float: right;
+}
+
+.cont-btn > a {
+  font-family: Helvetica;
+  width: 120px;
+  height: 36px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.publish-btn > a {
+  width: 150px !important;
+}
+
+.publish-btn > a > span {
+  margin-left: 5px;
+}
+
+.publish-btn > a > i {
+  color: #28a745!important;
+}
+
+.cont-btn span {
+  margin-right: 4px;
+}
+
+.cont-btn .fas {
+  font-size: 14px !important;
 }
 
 #create-form .btn {
@@ -1597,6 +1625,113 @@ button > i, .span {
 
 #course-detail-module .course-list {
   background: #fff;
+}
+
+.video-file {
+  width: 70%;
+}
+
+.upload-btn {
+  width: 30%;
+  height: 45px;
+  margin-right: 15px;
+  margin-top: 23px;
+  border-radius: 3px;
+}
+
+.video-upload .form-control {
+  padding: 8px 11px 8px 11px !important;
+}
+
+#id_video_file {
+  color: transparent;
+}
+
+#id_video_file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+#id_video_file::before {
+  content: 'Select some files';
+  color: black;
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px 0px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 12px;
+  height: 28px;
+}
+
+#id_video_file:hover::before {
+  border-color: black;
+}
+
+#id_video_file:active {
+  outline: 0;
+}
+
+#id_video_file:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+}
+
+#module-modal .modal-title {
+  color: #1d2129;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Helvetica;
+  font-weight: 600;
+  padding-left: 15px;
+}
+
+#module-modal .modal-header {
+  background-color: #f5f6f7;
+  border-bottom: 1px solid #e5e5e5 !important;
+  border-radius: 3px 3px 0 0 !important;
+  color: #1d2129;
+  font-weight: bold;
+  line-height: 19px;
+  padding: 10px 12px;
+}
+
+#module-modal hr {
+  margin-bottom: 0px !important;
+}
+
+#module-modal .modal-footer {
+  padding-top: 2px !important;
+}
+
+.modal-btn > .text-right {
+  margin-right: 15px;
+}
+
+.upload-btn > span {
+  font-size: 14px;
+}
+
+.modal-btn .btn {
+  padding: 0px 11px 0px 11px;
+  line-height: 26px;
+  font-size: 12px;
+  border-radius: 2px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid;
+  font-weight: bold;
+  border-color: rgb(218, 221, 225);
+  background-color: rgb(245, 246, 247);
+  letter-spacing: normal;
+  color: rgb(68, 73, 80);
+  float: right;
 }
 
 /*

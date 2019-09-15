@@ -15,7 +15,7 @@
   <div class="progressbar-container">
     <ul class="progressbar d-flex">
       <li class="active">Create course</li>
-      <li>Create modules</li>
+      <li >Create modules</li>
       <li>Publish course</li> 
     </ul>
   </div>
@@ -55,8 +55,11 @@
         </div>
       </div>
     </div>
-    <div class="form-group text-right">
-     <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">Continue</a>
+    <div class="text-right cont-btn">
+      <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">
+        <span>Continue</span>
+        <i class="fas fa-arrow-circle-right"></i>
+      </a>
     </div>
   </div>
 </main>
@@ -67,50 +70,49 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Create course module</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
-		<form id="course-module-form" class="text-truncate">
-
-		  <div class="p-2 bg-dark text-white font-weight-bold">Course Module</div>
-		  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
-		</div>
-		<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.duration %}</div>
-		</div>
-				  <div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.chunksize|append_attr:"id:chunksize" %}</div>
-		</div>
-		<div class="form-group">         <div class="col">{% include 'partials/form_field.html' with field=form.video_file %}</div>
-		</div>
-
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped progress-bar-success">
-            <span class="bar" style="width: 0%;"></span>
+        <form id="course-module-form" class="text-truncate">
+          <div class="form-group">
+            <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
           </div>
-        </div>
-		<div class="form-group">
-		  <button type="button" class="btn btn-danger stop" id="toggle-btn">
-		    upload
-		  </button>
-		</div>
-	
-		</form>
+          <div class="form-group">
+            <div class="col">{% include 'partials/form_field.html' with field=form.duration %}</div>
+          </div>
+          <div class="form-group hide">
+            <div class="col">{% include 'partials/form_field.html' with field=form.chunksize|append_attr:"id:chunksize" %}</div>
+          </div>
+          <div class="form-group d-flex video-upload">
+            <div class="col video-file">{% include 'partials/form_field.html' with field=form.video_file %}</div>
+            <button type="button" class="btn btn-danger stop upload-btn" id="toggle-btn">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>Upload files</span>
+            </button>
+          </div>
 
-      <hr />
-      <h3>Uploads</h3>
-      <p id="upload-list">
-        Succesful uploads will be listed here. Try one!
-      </p>
+          <div class="progress hide">
+            <div class="progress-bar progress-bar-striped progress-bar-success">
+              <span class="bar" style="width: 0%;"></span>
+            </div>
+          </div>
+        </form>
 
+        <hr />
+        <p class="hide" id="upload-list">
+          Succesful uploads will be listed here. Try one!
+        </p>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer modal-btn">
+        <div class="text-right">
+          <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">Add course module</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 {% endblock content %}
 

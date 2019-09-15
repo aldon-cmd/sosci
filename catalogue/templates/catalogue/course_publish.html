@@ -4,33 +4,64 @@
 
 {% block content %}
 <main id="course-detail-module">
+  <div class="progressbar-container">
+    <ul class="progressbar d-flex">
+      <li class="active">Create course</li>
+      <li class="active">Create modules</li>
+      <li>Publish course</li> 
+    </ul>
+  </div>
   <div class="container ss-relative">
     <div class="box">
       <div>
-        <h3 class="subheading">Course Title</h3>
+        <h3 class="subheading">
+          <span>Course Title</span>
+          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+            Edit
+          </button>
+        </h3>
         <div class="box-border">
           <p class="settings-row">{{ course.title }}</p>
         </div>
       </div>
       <div>     
-        <h3 class="subheading">Course Description</h3>
+        <h3 class="subheading">
+          <span>Course Description</span>
+          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+            Edit
+          </button>
+        </h3>
         <div class="box-border">
           <p class="settings-row">{{ course.description }}</p>
         </div>
       </div>
-      <div>
-        <div class="form-group text-right">
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#module-modal">
-            Add
+      <div>     
+        <h3 class="subheading">
+          <span>Course Module</span>
+          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+            Edit
           </button>
-        </div>
-        {% for module in modules %}
-        <h3 class="subheading">{{ module.name }}</h3>
+        </h3>
         <div class="box-border">
-          <p class="settings-row">{{ module.duration }}</p>
+          <table class="course-list">
+            <tbody>
+              <tr>
+              {% for module in modules %}
+                <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
+                <td class="settings-row">{{ module.name }}</td>
+                <td class="settings-row">{{ module.duration }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-        {% endfor %}
       </div>
+    </div>
+    <div class="text-right cont-btn publish-btn">
+      <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">
+        <i class="fas fa-check-circle"></i>
+        <span>Publish course</span>
+      </a>
     </div>
   </div>
 </main>
