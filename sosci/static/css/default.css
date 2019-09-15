@@ -1522,7 +1522,7 @@ button > i, .span {
   margin-left: 5px;
 }
 
-.publish-btn > a > i {
+.publish-btn > a > i {  
   color: #28a745!important;
 }
 
@@ -1733,6 +1733,63 @@ button > i, .span {
   color: rgb(68, 73, 80);
   float: right;
 }
+
+.dropdown > .btn {
+  font-family: Helvetica;
+  line-height: 3.571;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0 10px;
+  height: 50px;
+  opacity: 1;
+  background: no-repeat;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: -7px;
+}
+
+.dropdown .nav-create-course {
+  margin-right: 5px !important;
+}
+
+:focus {
+  outline: none !important;
+}
+
+.btn:focus, .btn.focus {
+  outline: 0;
+  box-shadow: none !important;
+}
+
+#sosci-nav .dropdown-menu {
+  border-radius: 3px;
+}
+
+div > .dropdown-item {
+  height: 40px;
+  padding: 8px 16px 8px 16px !important;
+  align-items: center;
+  display: inline-block !important;
+  z-index: 1;
+  display: inline-block;
+  white-space: nowrap;
+  outline-offset: -7px;
+  line-height: 24px;
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
+.dropdown-item > .fas {
+  margin-right: 8px;
+}
+
+
 
 /*
 .card-header:first-child {
