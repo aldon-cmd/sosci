@@ -39,7 +39,7 @@ class LiveCourseCreateView(CreateView):
         product = form.instance
         user = self.request.user
         price = form.cleaned_data['price']
-        created_product = CatalogueCreator().create_product(user,"Course","Course > Live",product.title,product.description,price,1)
+        created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product.title,product.description,price,1)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
     def get_success_url(self,product):

@@ -14,7 +14,19 @@
     <div class="" id="navbarSupportedContent">
       <ul class="list">
         <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci Admin</a></li>
-        <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+
+         <li class="nav-item dropdown">
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    My Courses
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">My Courses</a>
+    <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
+  </div>
+</div>  
+</li>          
         <li class="item"><a class="nav-link" href="{% url 'catalogue:course-create-form' %}">Create Course</a></li>
         <li class="item"><a class="nav-link">Instructors</a></li>
         <li class="item"><a class="nav-link">Partners</a></li>
@@ -68,7 +80,18 @@
   </div>
 </div>  
 </li>       
-        <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+         <li class="nav-item dropdown">
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    My Courses
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">My Courses</a>
+    <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
+  </div>
+</div>  
+</li>   
         <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
       </ul>
     </div>
