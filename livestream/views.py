@@ -90,7 +90,7 @@ class TwilioRoomParticipantView(TemplateView):
         return request.user.pk == course.user_id
 
     def room_exists(self,course_id):
-        return models.TwilioRoom.objects.filter(name=course_id).exists()   
+        return models.TwilioRoom.objects.filter(name=course_id,twilio_room_status__name="Active").exists()   
 
 
 
@@ -180,6 +180,3 @@ class TwilioRoomView(TemplateView):
         check if user owns course
         """
         return request.user.pk == course.user_id
-
-    def room_exists(self,course_id):
-        return models.TwilioRoom.objects.filter(name=course_id).exists()             
