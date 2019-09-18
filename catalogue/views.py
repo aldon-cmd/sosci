@@ -97,7 +97,7 @@ class CourseCreateView(CreateView):
             arguments."""
         # grab the current set of form #kwargs
         kwargs = super(CourseCreateView, self).get_form_kwargs()
-        product_class = models.ProductClass.objects.filter(name = "Live").first()
+        product_class = models.ProductClass.objects.filter(name = "Course").first()
 
         kwargs['initial'] = {'product_class': product_class.pk}
         return kwargs
