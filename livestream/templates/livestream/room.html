@@ -9,23 +9,87 @@
 
 
 {% block content %}
-<div class="container">
- <div id="remote-media"></div>
-<div id="controls">
-  <div id="preview">
-    <p class="instructions">Hello Beautiful</p>
-    <div id="local-media"></div>
-    <button id="button-preview">Preview My Camera</button>
+<main id="class-room">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-1 col-md-1 col-sm-1 no-padding border-right audience-channel">
+        <div>
+          <div class="side-nav-header">
+            <i class="fas fa-video"></i>
+            <span>Students Online</span>
+          </div>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Trishauna Hemmings</td>
+              </tr>
+              <tr>
+                <td>Aldon Palmer</td>
+              </tr>
+              <tr>
+                <td>Rafer Johnson</td>
+              </tr>
+              <tr>
+                <td>Novia Hill</td>
+              </tr>
+              <tr>
+                <td>Joyce McKenzie</td>
+              </tr>
+              <tr>
+                <td>Adrian Adman</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 no-padding">
+        <div class="full-width">
+          <div class="full-height">
+            <div class="player">
+              <div class="player">
+                <div class="player-overlay fullscreen">
+                  <div class="pl-error">
+                    <div class="player-center-content">
+                      <p>There seems to be an error, please try again</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 no-padding border-left">
+        <div id="controls" class="test">
+          <div id="preview" class="test-1">
+            <div id="remote-media" class="test-2">
+              <audio autoplay=""></audio>
+              <video autoplay="" playsinline=""></video>
+            </div>
+          </div>
+        </div>
+        <div id="controls" class="test">
+          <div id="preview" class="test-1">
+            <div id="local-media" class="test-2">
+              <audio autoplay=""></audio>
+              <!--<video autoplay="" playsinline=""></video>  -->
+            </div>
+            <button id="button-preview" class="btn btn-primary">
+              <span class="cam-btn">Preview My Camera</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="room-controls" class="hide">
+        <p class="instructions">Room Name:</p>
+        <input id="room-name" type="text" placeholder="Enter a room name" />
+        <button id="button-join">Join Room</button>
+        <button id="button-leave">Leave Room</button>
+      </div>
+      <div id="log" class="hide"></div>
+    </div>
   </div>
-  <div id="room-controls">
-    <p class="instructions">Room Name:</p>
-    <input id="room-name" type="text" placeholder="Enter a room name" />
-    <button id="button-join">Join Room</button>
-    <button id="button-leave">Leave Room</button>
-  </div>
-  <div id="log"></div>
-</div>
-</div>
+</main>
 
 
 {% endblock content %}
@@ -35,7 +99,7 @@
 <script src="{% static 'js/sosci-live.js' %}"></script>
 {% autoescape off %}
 <script>
-//sosci_live.init("{{token}}");
+sosci_live.init("{{token}}");
 </script>
 {% endautoescape %}
 {% endblock extrascripts %}

@@ -14,12 +14,27 @@
 /* #################   List of fonts #################*/
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .test {
   color: red;
   border: solid 1px red;
+  padding: 0px;
+  position: relative;
+  overflow: hidden;
+}
+
+.test-1 {
+  color: green;
+  border: solid 1px green;
+  padding: 0px;
+}
+
+.test-2 {
+  color: blue;
+  border: solid 1px blue !important;
+  padding: 0px;
 }
 
 .no-padding {
@@ -28,6 +43,7 @@
 
 body {
   font-family: Helvetica, Roboto, Arial, sans-serif;
+  background: #fff !important;
 }
 
 a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
@@ -1860,6 +1876,176 @@ div > .dropdown-item {
 #sign-in-form .login-footer {
   font-family: Helvetica;
   font-size: 14px;  
+}
+
+#local-media {
+  width: 464.75px !important;
+  height: 338px !important;
+}
+
+#remote-media {
+  width: 464.75px !important;
+  height: 338px !important;
+  margin: 0px !important;
+}
+
+#remote-media video, #local-media video {
+  height: 100% !important;
+  max-width: 100% !important;
+  margin: 0px !important;
+  border: 1px solid rgb(218, 216, 222) !important;
+  background-color: #fff !important;
+}
+
+#controls {
+  .padding: 0px !important; /*   remember to remove the period */
+}
+
+#preview {
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+#class-room .row {
+  padding-top: 50px !important;
+}
+
+#class-room .border-right {
+  border-right: 1px solid rgb(218, 216, 222);
+  border-bottom: 1px solid rgb(218, 216, 222);
+}
+
+#class-room .border-left {
+  border-left: 1px solid rgb(218, 216, 222);
+  border-bottom: 1px solid rgb(218, 216, 222);
+}
+
+div#controls {
+  padding: 0.25em !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.full-height {
+  padding: 2rem;
+  height: 100% !important;
+}
+
+.video-player .player {
+  max-height: calc(100vh - 16rem);
+}
+
+.player {
+  bottom: 0px;
+  color: rgb(255, 255, 255);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 10px;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: rgb(0, 0, 0);
+  overflow: hidden;
+}
+
+.player-overlay {
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: rgb(0, 0, 0);
+}
+
+.pl-error {
+  cursor: default;
+  display: block;
+  user-select: none;
+}
+
+.pl-error, .pl-storm-warning {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  background: rgb(0, 0, 0);
+}
+
+.player-center-content {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.player-center-content p {
+  font-size: 1.4em;
+  line-height: 1.5;
+  margin: 0px;
+  padding: 1em 0px;
+}
+
+.audience-channel {
+  background: #f6f8fa;
+  font-family: Helvetica;
+  font-size: 13px;
+  color: #333333  ;
+}
+
+.side-nav-header {
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.side-nav-header > i {
+  margin-right: 5px;
+  color: #FC9684; 
+  font-size: 14px !important;
+}
+
+#class-room .table-bordered {
+  border: 0px !important;
+  border-bottom: 1px solid #dee2e6;
+}
+
+#class-room .table-bordered th, #class-room .table-bordered td {
+  border-bottom: 1px solid #dee2e6; 
+  border-top: 0px !important; 
+  border-right: 0px !important; 
+  border-left: 0px !important; 
+}
+
+.table th, .table td {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+div#controls div#preview button#button-preview {
+  padding: 0.5em !important;
+}
+
+div#controls button {
+  margin: 0.75em 0em 0.75em 0em !important;
+}
+
+#class-room .btn {
+  letter-spacing: normal;
+  color: rgb(68, 73, 80);
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  line-height: 19.2px;
+  text-align: center;
+  background-color: rgb(245, 246, 247) !important;
+  border:  1px solid rgb(218, 221, 225) !important;
+  height: 32px;
+  border-radius: 2px;
+}
+
+.cam-btn {
+  margin-left: 10px;
 }
 /*
 .card-header:first-child {
