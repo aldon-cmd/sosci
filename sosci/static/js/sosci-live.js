@@ -36450,10 +36450,12 @@ function detachParticipantTracks(participant) {
   detachTracks(tracks);
 }
 
-async function share_screen(){
-  var stream = await navigator.mediaDevices.getDisplayMedia();
-  var screenTrack = new Video.LocalVideoTrack(stream.getTracks()[0]);
-  window.room.localParticipant.publishTrack(screenTrack);
+function share_screen(){
+  var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
+  var screenTrack = stream.getVideoTracks()[0];
+  var videoTrack = Video.LocalVideoTrack(screenTrack);
+  window.room.localParticipant.publishTrack(videoTrack);
+  }); 
 }
 
 
