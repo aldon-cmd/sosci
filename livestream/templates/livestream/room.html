@@ -56,6 +56,10 @@
                 </div>
               </div>
             </div>
+             <button id="btn-share-screen" class="btn btn-primary" style="position: relative;"> 
+              <span class="cam-btn">Share Screen</span>
+            </button>
+            <button id="button-leave" class="btn btn-primary" style="position: relative;">Leave Room</button>           
           </div>
         </div>
       </div>
@@ -99,7 +103,7 @@
 <script src="{% static 'js/sosci-live.js' %}"></script>
 {% autoescape off %}
 <script>
-sosci_live.init("{{token}}");
+sosci_live.join("{{token}}");
 </script>
 {% endautoescape %}
 {% endblock extrascripts %}

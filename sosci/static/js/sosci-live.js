@@ -36450,6 +36450,14 @@ function detachParticipantTracks(participant) {
   detachTracks(tracks);
 }
 
+async function share_screen(){
+  var stream = await navigator.mediaDevices.getDisplayMedia();
+  var screenTrack = new Video.LocalVideoTrack(stream.getTracks()[0]);
+  window.room.localParticipant.publishTrack(screenTrack);
+}
+
+
+
 // Successfully connected!
 function roomJoined(room) {
   window.room = activeRoom = room;
@@ -36528,36 +36536,28 @@ function leaveRoomIfJoined() {
 }
 
 
-function initialize(token){
+function join(token){
 
 // Obtain a token from the server in order to connect to the Room.
 
   document.getElementById('room-controls').style.display = 'block';
 
-  // Bind button to join Room.
-  document.getElementById('button-join').onclick = function() {
-    roomName = document.getElementById('room-name').value;
-    if (!roomName) {
-      alert('Please enter a room name.');
-      return;
-    }
+  log("Joining room ...");
+  var connectOptions = {
 
-    log("Joining room '" + roomName + "'...");
-    var connectOptions = {
-      name: roomName,
-      logLevel: 'debug'
-    };
-
-    if (previewTracks) {
-      connectOptions.tracks = previewTracks;
-    }
-
-    // Join the Room with the token from the server and the
-    // LocalParticipant's Tracks.
-    Video.connect(token, connectOptions).then(roomJoined, function(error) {
-      log('Could not connect to Twilio: ' + error.message);
-    });
+    logLevel: 'debug'
   };
+
+  if (previewTracks) {
+    connectOptions.tracks = previewTracks;
+  }
+
+  // Join the Room with the token from the server and the
+  // LocalParticipant's Tracks.
+  Video.connect(token, connectOptions).then(roomJoined, function(error) {
+    log('Could not connect to Twilio: ' + error.message);
+  });
+ 
 
   // Bind button to leave Room.
   document.getElementById('button-leave').onclick = function() {
@@ -36590,6 +36590,8 @@ document.getElementById('button-preview').onclick = function() {
   });
 };
 
-module.exports = {init: initialize};
+document.getElementById('btn-share-screen').onclick = share_screen;
+
+module.exports = {join: join};
 },{"twilio-video":68}]},{},[187])(187)
 });

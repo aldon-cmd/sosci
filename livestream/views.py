@@ -143,11 +143,10 @@ class TwilioRoomView(TemplateView):
 
         """
         https://www.twilio.com/docs/video/api/rooms-resource?code-sample=code-create-a-group-room&code-language=Python&code-sdk-version=6.x
-        """
-
-        client = Client(account_sid, rest_api_auth_token)
+        """       
 
         try:
+            client = Client(account_sid, rest_api_auth_token)
             room = client.video.rooms.create(
                                           record_participants_on_connect=True,
                                           status_callback=self.request.build_absolute_uri(reverse('livestream:twilio-room-status')),
