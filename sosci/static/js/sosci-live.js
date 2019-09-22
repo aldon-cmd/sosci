@@ -36544,7 +36544,7 @@ function join(token){
 
   log("Joining room ...");
   var connectOptions = {
-
+    name: 'default',
     logLevel: 'debug'
   };
 
