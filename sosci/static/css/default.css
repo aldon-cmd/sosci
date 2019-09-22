@@ -1878,15 +1878,11 @@ div > .dropdown-item {
   font-size: 14px;  
 }
 
-#local-media {
+#local-media, #remote-media {
   width: 464.75px !important;
   height: 338px !important;
-}
-
-#remote-media {
-  width: 464.75px !important;
-  height: 338px !important;
-  margin: 0px !important;
+  position: relative;
+  z-index: 0;
 }
 
 #remote-media video, #local-media video {
@@ -1922,6 +1918,7 @@ div > .dropdown-item {
 
 div#controls {
   padding: 0.25em !important;
+  overflow: hidden;
 }
 
 .full-width {
@@ -2047,6 +2044,32 @@ div#controls button {
 .cam-btn {
   margin-left: 10px;
 }
+
+.remote-cam, .local-cam {
+  background-color: red !important; 
+}
+
+#local-media {
+  background-image: none !important; 
+}
+
+#class-room .remote-cam:after, #class-room .local-cam:after {
+  content: "\f03d";
+  font-family: 'FontAwesome';
+  position: absolute;
+  font-size: 5rem;
+  color: #fff;
+  top: 125px;
+  left: 205px;
+  z-index: 5;
+}
+
+video {
+  position: relative;
+  z-index: 10;
+  top: 0px;
+}
+
 /*
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
