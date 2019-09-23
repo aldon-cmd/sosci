@@ -1879,27 +1879,23 @@ div > .dropdown-item {
 }
 
 #local-media, #remote-media {
-  width: 464.75px !important;
+  width: 447.75px !important;
   height: 338px !important;
   position: relative;
   z-index: 0;
+  border:none !important; /*   remember to add a border */
 }
 
 #remote-media video, #local-media video {
   height: 100% !important;
-  max-width: 100% !important;
+  width: 447.75px !important;
   margin: 0px !important;
-  border: 1px solid rgb(218, 216, 222) !important;
   background-color: #fff !important;
-}
-
-#controls {
-  .padding: 0px !important; /*   remember to remove the period */
 }
 
 #preview {
   margin: 0 auto !important;
-  width: 100% !important;
+  width: 447.75px !important;
 }
 
 #class-room .row {
@@ -1917,7 +1913,7 @@ div > .dropdown-item {
 }
 
 div#controls {
-  padding: 0.25em !important;
+  padding: 4px 9.5px 4px 17.5px !important;
   overflow: hidden;
 }
 
@@ -2046,7 +2042,7 @@ div#controls button {
 }
 
 .remote-cam, .local-cam {
-  background-color: red !important; 
+  background-color: #fff !important; 
 }
 
 #local-media {
@@ -2058,7 +2054,7 @@ div#controls button {
   font-family: 'FontAwesome';
   position: absolute;
   font-size: 5rem;
-  color: #fff;
+  color: #24292e;
   top: 125px;
   left: 205px;
   z-index: 5;
