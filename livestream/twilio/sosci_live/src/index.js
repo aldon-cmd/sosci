@@ -37,7 +37,7 @@ function detachParticipantTracks(participant) {
 function share_screen(){
   var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
   var screenTrack = stream.getVideoTracks()[0];
-  var videoTrack = Video.LocalVideoTrack(screenTrack);
+  var videoTrack = Video.LocalVideoTrack(screenTrack,{name: 'share-screen'});
   window.room.localParticipant.publishTrack(videoTrack);
   }); 
 }
@@ -73,8 +73,13 @@ function roomJoined(room) {
   // When a Participant adds a Track, attach it to the DOM.
   room.on('trackAdded', function(track, participant) {
     log(participant.identity + " added track: " + track.kind);
-    var previewContainer = document.getElementById('remote-media');
-    attachTracks([track], previewContainer);
+    var container = document.getElementById('remote-media');
+
+    if (track.name.localeCompare("share-screen") == 0){
+      container = document.getElementById('share-screen-media');
+    }
+    
+    attachTracks([track], container);
   });
 
   // When a Participant removes a Track, detach it from the DOM.
