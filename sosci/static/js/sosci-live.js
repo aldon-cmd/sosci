@@ -36492,7 +36492,7 @@ function roomJoined(room) {
     log(participant.identity + " added track: " + track.kind);
     var container = document.getElementById('remote-media');
 
-    if (track.name.localeCompare(room.localParticipant.identity +'-screen-share') == 0){
+    if (track.name.localeCompare(window.room.localParticipant.identity +'-screen-share') == 0){
       container = document.getElementById('screen-share-media');
     }
 
