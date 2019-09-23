@@ -37,7 +37,8 @@ function detachParticipantTracks(participant) {
 function share_screen(){
   var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
   var screenTrack = stream.getVideoTracks()[0];
-  var videoTrack = Video.LocalVideoTrack(screenTrack,{name: 'share-screen'});
+  var trackName = window.room.localParticipant.identity +'-screen-share'
+  var videoTrack = Video.LocalVideoTrack(screenTrack,{name: trackName});
   window.room.localParticipant.publishTrack(videoTrack);
   }); 
 }
@@ -75,10 +76,10 @@ function roomJoined(room) {
     log(participant.identity + " added track: " + track.kind);
     var container = document.getElementById('remote-media');
 
-    if (track.name.localeCompare("share-screen") == 0){
-      container = document.getElementById('share-screen-media');
+    if (track.name.localeCompare(room.localParticipant.identity +'-screen-share') == 0){
+      container = document.getElementById('screen-share-media');
     }
-    
+
     attachTracks([track], container);
   });
 
