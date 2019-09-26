@@ -1878,24 +1878,30 @@ div > .dropdown-item {
   font-size: 14px;  
 }
 
-#local-media, #remote-media {
-  width: 447.75px !important;
-  height: 338px !important;
-  position: relative;
-  z-index: 0;
-  border:none !important; /*   remember to add a border */
+div#remote-media video {
+  width: 1268.66px !important;
+  height: 960px !important
+  border: none;
 }
 
-#remote-media video, #local-media video {
-  height: 100% !important;
-  width: 447.75px !important;
-  margin: 0px !important;
-  background-color: #fff !important;
+div#remote-media {
+  width: 1268.66px !important;
+  height: 960px !important; 
+  background-color: #edf0f3 !important;
 }
 
-#preview {
-  margin: 0 auto !important;
-  width: 447.75px !important;
+div#local-media video {
+  width: 320px !important;
+  height: 240px !important
+  border: none;
+}
+
+div#local-media {
+  width: 320px !important;
+  height: 240px !important;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 #class-room .row {
@@ -1912,79 +1918,8 @@ div > .dropdown-item {
   border-bottom: 1px solid rgb(218, 216, 222);
 }
 
-div#controls {
-  padding: 4px 9.5px 4px 17.5px !important;
-  overflow: hidden;
-}
-
 .full-width {
   width: 100% !important;
-}
-
-.full-height {
-  padding: 2rem;
-  height: 100% !important;
-}
-
-.video-player .player {
-  max-height: calc(100vh - 16rem);
-}
-
-.player {
-  bottom: 0px;
-  color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 10px;
-  left: 0px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  background: rgb(0, 0, 0);
-  overflow: hidden;
-}
-
-.player-overlay {
-  bottom: 0px;
-  left: 0px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  background: rgb(0, 0, 0);
-}
-
-.pl-error {
-  cursor: default;
-  display: block;
-  user-select: none;
-}
-
-.pl-error, .pl-storm-warning {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  background: rgb(0, 0, 0);
-}
-
-.player-center-content {
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-}
-
-.player-center-content p {
-  font-size: 1.4em;
-  line-height: 1.5;
-  margin: 0px;
-  padding: 1em 0px;
-}
-
-.audience-channel {
-  background: #f6f8fa;
-  font-family: Helvetica;
-  font-size: 13px;
-  color: #333333  ;
 }
 
 .side-nav-header {
@@ -2049,17 +1984,6 @@ div#controls button {
   background-image: none !important; 
 }
 
-#class-room .remote-cam:after, #class-room .local-cam:after {
-  content: "\f03d";
-  font-family: 'FontAwesome';
-  position: absolute;
-  font-size: 5rem;
-  color: #24292e;
-  top: 125px;
-  left: 205px;
-  z-index: 5;
-}
-
 video {
   position: relative;
   z-index: 10;
@@ -2070,3 +1994,4 @@ video {
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 }*/
+

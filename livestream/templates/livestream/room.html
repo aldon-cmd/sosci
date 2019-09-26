@@ -12,11 +12,11 @@
 <main id="class-room">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-1 col-md-1 col-sm-1 no-padding border-right audience-channel">
+      <div class="col-lg-2 col-md-2 col-sm-2 no-padding border-right audience-channel">
         <div>
           <div class="side-nav-header">
             <i class="fas fa-video"></i>
-            <span>Students Online</span>
+            <span>Students Online</span> 
           </div>
           <table class="table table-bordered">
             <tbody>
@@ -44,32 +44,23 @@
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 no-padding">
         <div class="full-width">
-          <div class="full-height">
-            <div id="screen-share-media" class="player">
-              <div class="player">
-                <div class="player-overlay fullscreen">
-                  <div class="pl-error">
-                    <div class="player-center-content">
-                      <p>There seems to be an error, please try again</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-             <button id="btn-share-screen" class="btn btn-primary" style="position: relative;"> 
-              <span class="cam-btn">Share Screen</span>
+          <div>
+            <div id="remote-media"></div>
+            <div id="local-media"></div>
+            <button id="button-preview" class="btn btn-primary">
+              <span class="cam-btn">Preview My Camera</span>
             </button>
-            <button id="button-leave" class="btn btn-primary" style="position: relative;">Leave Room</button>           
           </div>
+          <div id="screen-share-media" class="player"></div>
+          <!--   -->
+          <button id="btn-share-screen" class="btn btn-primary" style="position: relative;"> 
+            <span class="cam-btn">Share Screen</span>
+          </button>
+          <button id="button-leave" class="btn btn-primary" style="position: relative;">Leave Room</button>  <!--   -->
         </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3 no-padding border-left">
-        <div id="controls" class=".test remote-cam-container">
-          <div id="preview" class=".test-1">
-            <div id="remote-media" class=".test-2 remote-cam">
-            </div>
-          </div>
-        </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 no-padding border-left">
+        <!--
         <div id="controls" class=".test local-cam-container">
           <div id="preview" class=".test-1">
             <div id="local-media" class=".test-2 local-cam">
@@ -78,7 +69,7 @@
               <span class="cam-btn">Preview My Camera</span>
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
       <div id="room-controls" class="hide">
         <p class="instructions">Room Name:</p>
