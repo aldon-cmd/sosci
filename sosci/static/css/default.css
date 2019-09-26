@@ -1903,7 +1903,7 @@ div#local-media {
   height: 240px !important;
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
 }
 
 #class-room .row {
