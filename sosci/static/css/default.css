@@ -1880,7 +1880,9 @@ div > .dropdown-item {
 
 div#remote-media video {
   width: 1268.66px !important;
-  height: 960px !important
+  max-width: 1268.66px !important;
+  height: 960px !important;
+  margin: 0px !important;
   border: none;
 }
 
@@ -1901,7 +1903,7 @@ div#local-media {
   height: 240px !important;
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
 }
 
 #class-room .row {
