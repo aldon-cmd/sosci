@@ -1879,16 +1879,16 @@ div > .dropdown-item {
 }
 
 div#remote-media video {
-  width: 1268.66px !important;
-  max-width: 1268.66px !important;
-  height: 960px !important;
+  width: 1280px !important;
+  max-width: 1280px !important;
+  height: 720px !important;
   margin: 0px !important;
   border: none;
 }
 
 div#remote-media {
-  width: 1268.66px !important;
-  height: 960px !important; 
+  width: 1280px !important;
+  height: 720px !important; 
   background-color: #edf0f3 !important;
 }
 
