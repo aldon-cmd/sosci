@@ -62,7 +62,7 @@ class TwilioRoomParticipantView(TemplateView):
         context = super(TwilioRoomParticipantView, self).get_context_data(**kwargs)
 
         account_sid = settings.TWILIO_ACCOUNT_SID
-        api_key = settings.TWILIO_API_KEY
+        api_key = settings.TWILIO_API_KEY_SID
         api_secret = settings.TWILIO_API_SECRET
 
         course_id = self.kwargs.get('course_id')
@@ -122,7 +122,7 @@ class TwilioRoomView(TemplateView):
         context = super(TwilioRoomView, self).get_context_data(**kwargs)
 
         account_sid = settings.TWILIO_ACCOUNT_SID
-        api_key = settings.TWILIO_API_KEY
+        api_key = settings.TWILIO_API_KEY_SID
         api_secret = settings.TWILIO_API_SECRET
         rest_api_auth_token = settings.TWILIO_REST_API_AUTH_TOKEN
 
