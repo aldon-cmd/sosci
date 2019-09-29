@@ -10,9 +10,41 @@
 
 {% block content %}
 <main id="class-room">
-  <div class="container-fluid">
+  <div class="full-width">
     <div class="row">
-      <div class="col-lg-2 col-md-2 col-sm-2 no-padding border-right audience-channel">
+      <div class="col-lg-9 col-md-9 col-sm-9 no-padding">
+        <div>
+          <div id="remote-media"></div>
+          <div id="local-media"></div>
+          <div class="streamstatus">
+            <i class="fas fa-circle"></i>
+            <span>LIVE</span>
+          </div>
+        </div>
+        <div id="screen-share-media" class="player"></div>
+        <div class="video-nav dp-flex">
+          <div style="text-align:center">
+            <a class="dot on" href="#" id="button-preview" title='Camera On'>
+              <i class="fas fa-video"></i>
+            </a>
+            <a class="dot option" href="#" id="btn-share-screen" title='Share Screen'>
+              <i class="fas fa-video"></i>
+            </a>
+            <a class="dot option" href="#" title='Whiteboard'>
+              <i class="fas fa-video"></i>
+            </a>
+            <a class="dot off" href="#" id="button-leave" title='Leave Room'>
+              <i class="fas fa-video"></i>
+            </a>
+          </div>
+          <div class="hide">
+            <button id="button-preview" class="btn btn-primary">Camera On</span></button>
+            <button id="btn-share-screen" class="btn btn-primary" style="position: relative;">Share Screen</button>
+            <button id="button-leave" class="btn btn-primary" style="position: relative;">Leave Room</button> 
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 no-padding border">
         <div>
           <div class="side-nav-header">
             <i class="fas fa-video"></i>
@@ -41,35 +73,6 @@
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 no-padding">
-        <div class="full-width">
-          <div>
-            <div id="remote-media"></div>
-            <div id="local-media"></div>
-            <button id="button-preview" class="btn btn-primary">
-              <span class="cam-btn">Preview My Camera</span>
-            </button>
-          </div>
-          <div id="screen-share-media" class="player"></div>
-          <!--   -->
-          <button id="btn-share-screen" class="btn btn-primary" style="position: relative;"> 
-            <span class="cam-btn">Share Screen</span>
-          </button>
-          <button id="button-leave" class="btn btn-primary" style="position: relative;">Leave Room</button>  <!--   -->
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 no-padding border-left">
-        <!--
-        <div id="controls" class=".test local-cam-container">
-          <div id="preview" class=".test-1">
-            <div id="local-media" class=".test-2 local-cam">
-            </div>
-            <button id="button-preview" class="btn btn-primary">
-              <span class="cam-btn">Preview My Camera</span>
-            </button>
-          </div>
-        </div> -->
       </div>
       <div id="room-controls" class="hide">
         <p class="instructions">Room Name:</p>

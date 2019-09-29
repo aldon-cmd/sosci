@@ -384,6 +384,10 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   color: #212529;
 }
 
+#course-list .title {
+ height: 36px;
+}
+
 #enroll .title {
   font-family: arial;
   font-weight: 600;
@@ -1878,6 +1882,12 @@ div > .dropdown-item {
   font-size: 14px;  
 }
 
+.full-width {
+  max-width: 1754px;
+  margin: 0 auto;
+  padding-top: 24px;
+}
+
 div#remote-media video {
   width: 1280px !important;
   max-width: 1280px !important;
@@ -1889,39 +1899,31 @@ div#remote-media video {
 div#remote-media {
   width: 1280px !important;
   height: 720px !important; 
-  background-color: #edf0f3 !important;
+  background-color: #000 /*#edf0f3*/ !important;
+  margin: 0px !important;
 }
 
 div#local-media video {
   width: 320px !important;
-  height: 240px !important
+  height: 180px !important
   border: none;
 }
 
 div#local-media {
   width: 320px !important;
-  height: 240px !important;
+  height: 180px !important;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
 }
 
 #class-room .row {
   padding-top: 50px !important;
+  margin: 0px;
 }
 
-#class-room .border-right {
-  border-right: 1px solid rgb(218, 216, 222);
-  border-bottom: 1px solid rgb(218, 216, 222);
-}
-
-#class-room .border-left {
-  border-left: 1px solid rgb(218, 216, 222);
-  border-bottom: 1px solid rgb(218, 216, 222);
-}
-
-.full-width {
-  width: 100% !important;
+#class-room .border {
+  border: 1px solid rgb(218, 216, 222);
 }
 
 .side-nav-header {
@@ -1990,6 +1992,133 @@ video {
   position: relative;
   z-index: 10;
   top: 0px;
+}
+
+.streamstatus {
+  cursor: default;
+  display: block;
+  padding: 1.5em 1.5em 5.5rem 5.5rem;
+  pointer-events: none;
+  position: absolute;
+  right: 35px;
+  text-transform: uppercase;
+  top: 0;
+}
+
+.streamstatus > .fa-circle {
+  font-size: 12px;
+  color: #fc3636;
+}
+
+.streamstatus > span {
+  font-family: Helvetica;
+  color: #fff;
+  font-size: 12;
+  line-height: 1;
+}
+
+.video-nav {
+  max-width: 1280px;
+  padding: 22px;
+}
+
+.video-nav-btn {
+  display: inline-block;
+}
+
+.video-nav-icon {
+  height: 65px;
+  width: 65px;
+  background-color: #fff;
+  border-radius: 50%;
+  border:  1px solid rgb(218, 221, 225) !important;
+}
+
+.dot {
+  height: 45px;
+  width: 45px;
+  display: inline-block !important;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0rem 1rem 0rem 1rem ;
+}
+
+.dot > .fa-video {
+  line-height: 17px;
+  padding: 14px 0px 14px 0px;
+}
+
+.video-nav .on {
+  background-color: #4cbb17;
+  color: #fff;
+}
+
+.video-nav .off {
+  background-color: #fc3636;
+  color: #fff;
+}
+
+.video-nav .option {
+  color: rgb(187,187,187);
+  border:  1px solid rgb(187,187,187) !important;
+}
+
+.start-stream-intro {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.start-stream-box {
+  padding-top: 50px
+}
+
+@media only screen and (max-width: 600px) {
+  .start-stream-box {
+    padding-top: 10px;
+  }
+}
+
+.stream-text-title {
+  font-size: 45px;
+  font-weight: 700;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin-bottom: 16px;
+  color: #484848;
+  font-family: Helvetica;
+}
+
+.start-stream-intro > p {
+  font-size: 16px;
+  line-height: 1.6667;
+  color: #484848;
+  font-family: Helvetica ,sans-serif;
+}
+
+.stream-btn > a {
+  padding: 15px;
+  display: block;
+  line-height: 16px !important;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.stream-btn > a > span {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.stream-btn > a:hover {
+  color: #fff;
+}
+
+.stream-btn .fa-video {
+  font-size: 16px;
+  line-height: 1;  
 }
 
 /*
