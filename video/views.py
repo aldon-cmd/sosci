@@ -117,10 +117,9 @@ class VimeoVideoUploadAttemptView(View):
 
         picture = thumbnail_response['sizes'][2]['link_with_play_button']
 
-        video = models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,product_id=course_id)
+        module = self.create_course_module(post_data,course_id)
 
-        self.create_course_module(post_data,video,course_id)
-
+        models.Video.objects.create(name=name,description=description,video_id=video_id,width=width,height=height,duration=duration,picture=picture,upload_link=upload_link,upload_status=upload_status,transcode_status=transcode_status,module=module,product_id=course_id)
 
         if not course.picture:
         #set the initial preview image of the course
@@ -129,11 +128,12 @@ class VimeoVideoUploadAttemptView(View):
 
         return JsonResponse(video_creation_response)
 
-    def create_course_module(self,post_data,video,course_id):
+    def create_course_module(self,post_data,course_id):
         name = post_data.get("name","")
-        duration = post_data.get("duration","")
+        start_date = post_data.get("start_date","")
 
-        catalogue_models.CourseModule.objects.create(name=name,duration=duration,video=video,product_id=course_id)
+        module = catalogue_models.CourseModule.objects.create(name=name,start_date=start_date,product_id=course_id)
+        return module
 
     def create_vimeo_video(self,url,data,headers):
         return self.make_request(url,data,headers)

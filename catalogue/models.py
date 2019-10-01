@@ -11,8 +11,8 @@ class Product(AbstractProduct):
 
 class CourseModule(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
+    start_date = models.DateTimeField(null=True, blank=True)
     duration = models.CharField(max_length=200, null=True, blank=True)
-    video = models.ForeignKey("video.Video", related_name='coursemodules', blank=True, null=True)
     product = models.ForeignKey("catalogue.Product", related_name='coursemodules', blank=True, null=True)
 
 class Enrollment(models.Model):

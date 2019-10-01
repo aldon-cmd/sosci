@@ -1,9 +1,8 @@
-from django.forms import ModelForm
 from django import forms
 from catalogue import models
 
 
-class CourseForm(ModelForm):
+class CourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
@@ -15,7 +14,7 @@ class CourseForm(ModelForm):
         model = models.Product
         fields = ['title', 'description','product_class']
 
-class LiveCourseForm(ModelForm):
+class LiveCourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
@@ -27,11 +26,15 @@ class LiveCourseForm(ModelForm):
         model = models.Product
         fields = ['title', 'description','product_class']
 
+class LiveCourseModuleForm(forms.ModelForm):
+
+    class Meta:
+        model = models.CourseModule
+        fields = ['name', 'start_date']
+
+
 class CourseModuleForm(forms.Form):
     name = forms.CharField(max_length=100)
     duration = forms.CharField(max_length=100)
     chunksize = forms.IntegerField()
     video_file = forms.FileField()
-
-    class Meta:
-        model = models.CourseModule       

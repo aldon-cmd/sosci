@@ -54,8 +54,33 @@ class LiveCourseCreateView(CreateView):
 
     def get_success_url(self,product):
 
-        return reverse('catalogue:live-course-detail', kwargs={'course_id': product.pk})
+        return reverse('catalogue:live-module-create-form', kwargs={'course_id': product.pk})
 
+
+class LiveModuleCreateView(CreateView):
+    template_name = "catalogue/live_course_module_form.html"
+    form_class = forms.LiveCourseModuleForm
+
+    def get_success_url(self):
+        course_id = self.kwargs.get('course_id')
+        return reverse('catalogue:live-module-create-form', kwargs={'course_id': course_id})
+
+    def form_valid(self, form):
+        course_module = form.instance
+        course_id = self.kwargs.get('course_id')
+        course = models.Product.objects.filter(pk=course_id).first()
+        course_module.product = course
+        course_module.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super(LiveModuleCreateView, self).get_context_data(**kwargs)
+        course_id = self.kwargs.get('course_id')
+        context["course"] = models.Product.objects.filter(pk=course_id).first()
+        context["modules"] = models.CourseModule.objects.filter(product_id=course_id)
+
+
+        return context
 
 class LiveCourseDetailView(TemplateView,mixins.EnrollmentMixin):
     template_name = "catalogue/live_course_detail.html"
