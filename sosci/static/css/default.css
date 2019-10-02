@@ -1959,6 +1959,8 @@ div > .dropdown-item {
   position: relative;
   overflow: hidden;
   background-color: #000 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 #remote-media video {
