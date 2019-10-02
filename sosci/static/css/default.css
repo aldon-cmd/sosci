@@ -41,6 +41,10 @@
   padding: 0px !important;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   font-family: Helvetica, Roboto, Arial, sans-serif;
   background: #fff !important;
@@ -1890,9 +1894,69 @@ div > .dropdown-item {
   font-size: 14px;  
 }
 
+.content-relative {
+  position: relative !important;
+}
+
+.content-flex-grow {
+  flex-grow: 1!important;
+}
+
+.content-flex-column {
+  flex-direction: column!important;
+}
+
+.content-overflow-hidden {
+  overflow: hidden!important;
+}
+
+.full-height {
+  height: 100%!important;
+}
+
+.full-width {
+  width: 100%!important;
+}
+
+.player-video .video {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.player {
+  background: #000;
+  bottom: 0;
+  color: #fff;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 10px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.video-player .player {
+  max-height: calc(100vh - 5rem);
+}
+
+.video-player {
+  background: #000;
+}
+
+.aspect-spacer {
+  padding-bottom: 56.25%;
+}
+
+.aspect-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
 #remote-media {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 -> 9/16x100 */
   overflow: hidden;
   background-color: #000 !important;
 }
@@ -1901,8 +1965,6 @@ div > .dropdown-item {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
 }
 
 #local-media {
@@ -2032,8 +2094,9 @@ video {
 }
 
 .video-nav {
-  max-width: 1280px;
-  padding: 22px;
+  width: 100%;
+  bottom: 28px;
+  position: absolute;
 }
 
 .video-nav-btn {
@@ -2134,6 +2197,7 @@ video {
   font-size: 16px;
   line-height: 1;  
 }
+
 
 /*
 .card-header:first-child {
