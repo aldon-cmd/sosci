@@ -1975,8 +1975,8 @@ div > .dropdown-item {
 
 #local-media {
   position: absolute;
-  top: 7px;
-  left: 7px;
+  top: 0;
+  left: 0;
 }
 
 @media only screen and (min-width: 1224px) {
