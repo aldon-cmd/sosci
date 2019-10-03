@@ -36509,13 +36509,8 @@ function roomJoined(room) {
   // When a Participant adds a Track, attach it to the DOM.
   room.on('trackSubscribed', function(track, participant) {
     log(participant.identity + " added track: " + track.kind);
-    var container = document.getElementById('remote-media');
-
-    if (track.name.localeCompare(window.room.localParticipant.identity +'-screen-share') == 0){
-      container = document.getElementById('screen-share-media');
-    }
-
-    attachTracks([track], container);
+    var previewContainer = document.getElementById('remote-media');
+    attachTracks([track], previewContainer);
   });
 
   // When a Participant removes a Track, detach it from the DOM.
