@@ -36507,7 +36507,7 @@ function roomJoined(room) {
   });
 
   // When a Participant adds a Track, attach it to the DOM.
-  room.on('trackAdded', function(track, participant) {
+  room.on('trackSubscribed', function(track, participant) {
     log(participant.identity + " added track: " + track.kind);
     var container = document.getElementById('remote-media');
 
@@ -36519,7 +36519,7 @@ function roomJoined(room) {
   });
 
   // When a Participant removes a Track, detach it from the DOM.
-  room.on('trackRemoved', function(track, participant) {
+  room.on('trackUnsubscribed', function(track, participant) {
     log(participant.identity + " removed track: " + track.kind);
     detachTracks([track]);
   });
