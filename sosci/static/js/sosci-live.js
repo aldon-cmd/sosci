@@ -36490,10 +36490,10 @@ function roomJoined(room) {
   document.getElementById('button-leave').style.display = 'inline';
 
   // Attach LocalParticipant's Tracks, if not already attached.
-  var previewContainer = document.getElementById('local-media');
-  if (!previewContainer.querySelector('video')) {
-    attachParticipantTracks(room.localParticipant, previewContainer);
-  }
+  // var previewContainer = document.getElementById('local-media');
+  // if (!previewContainer.querySelector('video')) {
+  //   attachParticipantTracks(room.localParticipant, previewContainer);
+  // }
 
   // Attach the Tracks of the Room's Participants.
   room.participants.forEach(function(participant) {
