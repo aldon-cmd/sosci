@@ -34,6 +34,24 @@ function detachParticipantTracks(participant) {
   detachTracks(tracks);
 }
 
+function create_local_tracks() {
+  var localTracksPromise = previewTracks
+    ? Promise.resolve(previewTracks)
+    : Video.createLocalTracks();
+
+  localTracksPromise.then(function(tracks) {
+    window.previewTracks = previewTracks = tracks;
+    var previewContainer = document.getElementById('local-media');
+    if (!previewContainer.querySelector('video')) {
+      attachTracks(tracks, previewContainer);
+    }
+  }, function(error) {
+    console.error('Unable to access local media', error);
+    log('Unable to access Camera and Microphone');
+  });
+};
+
+
 function share_screen(){
   var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
   var screenTrack = stream.getVideoTracks()[0];
@@ -48,8 +66,10 @@ function share_screen(){
 // Successfully connected!
 function roomJoined(room) {
   window.room = activeRoom = room;
+  
+  log("Joined Room");
 
-  log("Joined");
+  create_local_tracks();
   document.getElementById('button-join').style.display = 'none';
   document.getElementById('button-leave').style.display = 'inline';
 
@@ -164,24 +184,6 @@ function join(token){
 // When we are about to transition away from this page, disconnect
 // from the room, if joined.
 window.addEventListener('beforeunload', leaveRoomIfJoined);
-
-// Preview LocalParticipant's Tracks.
-document.getElementById('button-preview').onclick = function() {
-  var localTracksPromise = previewTracks
-    ? Promise.resolve(previewTracks)
-    : Video.createLocalTracks();
-
-  localTracksPromise.then(function(tracks) {
-    window.previewTracks = previewTracks = tracks;
-    var previewContainer = document.getElementById('local-media');
-    if (!previewContainer.querySelector('video')) {
-      attachTracks(tracks, previewContainer);
-    }
-  }, function(error) {
-    console.error('Unable to access local media', error);
-    log('Unable to access Camera and Microphone');
-  });
-};
 
 document.getElementById('btn-share-screen').onclick = share_screen;
 
