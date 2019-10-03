@@ -2086,6 +2086,7 @@ video {
   right: 35px;
   text-transform: uppercase;
   top: 0;
+  z-index: 15;
 }
 
 .streamstatus > .fa-circle {
@@ -2104,6 +2105,7 @@ video {
   width: 100%;
   bottom: 28px;
   position: absolute;
+  z-index: 15;
 }
 
 .video-nav-btn {
