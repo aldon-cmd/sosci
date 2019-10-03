@@ -1969,8 +1969,9 @@ div > .dropdown-item {
   height: 100% !important;
   width: 100% !important;
   margin: 0px !important;
-  background-color: #000; 
+  background-color: #000 !important; 
   position: absolute;
+  border: 0px !important;
 }
 
 #local-media {
