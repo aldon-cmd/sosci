@@ -73,19 +73,6 @@ function roomJoined(room) {
   document.getElementById('button-join').style.display = 'none';
   document.getElementById('button-leave').style.display = 'inline';
 
-  // Attach LocalParticipant's Tracks, if not already attached.
-  // var previewContainer = document.getElementById('local-media');
-  // if (!previewContainer.querySelector('video')) {
-  //   attachParticipantTracks(room.localParticipant, previewContainer);
-  // }
-
-  // Attach the Tracks of the Room's Participants.
-  room.participants.forEach(function(participant) {
-    log("Already in Room: '" + participant.identity + "'");
-    var previewContainer = document.getElementById('remote-media');
-    attachParticipantTracks(participant, previewContainer);
-  });
-
   // When a Participant joins the Room, log the event.
   room.on('participantConnected', function(participant) {
     log("Joining: '" + participant.identity + "'");
