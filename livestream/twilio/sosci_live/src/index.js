@@ -49,7 +49,7 @@ function create_local_tracks() {
     console.error('Unable to access local media', error);
     log('Unable to access Camera and Microphone');
   });
-};
+}
 
 
 function share_screen(){
@@ -66,7 +66,7 @@ function share_screen(){
 // Successfully connected!
 function roomJoined(room) {
   window.room = activeRoom = room;
-  
+
   log("Joined Room");
 
   create_local_tracks();
