@@ -36597,6 +36597,7 @@ function join(token){
   var connectOptions = {
     name: 'default',
     video: {width: 1920, height: 1080,aspectRatio: 1.7777777778},
+    audio: true,
     logLevel: 'debug'
   };
 
