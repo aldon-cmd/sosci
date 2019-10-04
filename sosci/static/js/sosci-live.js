@@ -26197,26 +26197,54 @@ function updateEncodingParameters(pcv2) {
     var maxBitrate = maxBitrates.get(sender.track.kind);
     var params = sender.getParameters();
 
-    if (isFirefox) {
-      params.encodings = [{ maxBitrate: maxBitrate }];
+    if (maxBitrate === null || maxBitrate === 0) {
+      removeMaxBitrate(params);
     } else {
-      params.encodings.forEach(function (encoding) {
-        encoding.maxBitrate = maxBitrate;
-      });
-      if (pcv2._dscpTagging && params.encodings.length > 0) {
-        // NOTE(mmalavalli): "networkPriority" is a per-sender property and not
-        // a per-encoding-layer property. So, we set the value only on the first
-        // encoding layer. Any attempt to set the value on subsequent encoding
-        // layers (in the case of simulcast) will result in the Promise returned
-        // by RTCRtpSender.setParameters() being rejected.
-        params.encodings[0].networkPriority = 'high';
-      }
+      setMaxBitrate(params, maxBitrate);
+    }
+
+    if (!isFirefox && pcv2._dscpTagging && params.encodings.length > 0) {
+      // NOTE(mmalavalli): "networkPriority" is a per-sender property and not
+      // a per-encoding-layer property. So, we set the value only on the first
+      // encoding layer. Any attempt to set the value on subsequent encoding
+      // layers (in the case of simulcast) will result in the Promise returned
+      // by RTCRtpSender.setParameters() being rejected.
+      params.encodings[0].networkPriority = 'high';
     }
 
     sender.setParameters(params).catch(function (error) {
       pcv2._log.warn('Error while setting encodings parameters for ' + sender.track.kind + ' Track ' + sender.track.id + ': ' + (error.message || error.name));
     });
   });
+}
+
+/**
+ * Remove maxBitrate from the RTCRtpSendParameters' encodings.
+ * @param {RTCRtpSendParameters} params
+ * @returns {void}
+ */
+function removeMaxBitrate(params) {
+  if (Array.isArray(params.encodings)) {
+    params.encodings.forEach(function (encoding) {
+      return delete encoding.maxBitrate;
+    });
+  }
+}
+
+/**
+ * Set the given maxBitrate in the RTCRtpSendParameters' encodings.
+ * @param {RTCRtpSendParameters} params
+ * @param {number} maxBitrate
+ * @returns {void}
+ */
+function setMaxBitrate(params, maxBitrate) {
+  if (isFirefox) {
+    params.encodings = [{ maxBitrate: maxBitrate }];
+  } else {
+    params.encodings.forEach(function (encoding) {
+      encoding.maxBitrate = maxBitrate;
+    });
+  }
 }
 
 module.exports = PeerConnectionV2;
@@ -35621,28 +35649,29 @@ to get a new one, but we\'ve run out of retries; returning it anyway.');
 module.exports = workaround;
 },{"./audiocontext":178,"./detectsilence":179}],181:[function(require,module,exports){
 module.exports={
-  "_from": "twilio-video@^1.18.1",
-  "_id": "twilio-video@1.19.1",
+  "_from": "twilio-video@1.19.2",
+  "_id": "twilio-video@1.19.2",
   "_inBundle": false,
-  "_integrity": "sha512-iEAeOgK0WVc1VQF1FQWoyDwOl1yiuowaqLe+HjeEUxiPR4WeysbThQHu32uNEtxM0v9qy2/ilSs6l1LiSMF+uA==",
+  "_integrity": "sha512-OfuFXxjVDH4DpXs0xz6ZfDILTndC2rBeVvXZuUwV/zwyVJGIlFdIRbyY8zfikDBlF173NBIarq5F8p27wJlcQA==",
   "_location": "/twilio-video",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "twilio-video@^1.18.1",
+    "raw": "twilio-video@1.19.2",
     "name": "twilio-video",
     "escapedName": "twilio-video",
-    "rawSpec": "^1.18.1",
+    "rawSpec": "1.19.2",
     "saveSpec": null,
-    "fetchSpec": "^1.18.1"
+    "fetchSpec": "1.19.2"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/twilio-video/-/twilio-video-1.19.1.tgz",
-  "_shasum": "d6d58896bd42959ae448060e338c8fdebadf598a",
-  "_spec": "twilio-video@^1.18.1",
+  "_resolved": "https://registry.npmjs.org/twilio-video/-/twilio-video-1.19.2.tgz",
+  "_shasum": "ef3d66f6a44ce6675838742335a11fdce21797fb",
+  "_spec": "twilio-video@1.19.2",
   "_where": "C:\\Users\\apalmer\\Desktop\\sosci.git\\livestream\\twilio",
   "author": {
     "name": "Mark Andrus Roberts",
@@ -35782,7 +35811,7 @@ module.exports={
     "test:unit": "mocha ./test/unit/index.js"
   },
   "title": "Twilio Video",
-  "version": "1.19.1"
+  "version": "1.19.2"
 }
 
 },{}],182:[function(require,module,exports){
@@ -36507,14 +36536,14 @@ function roomJoined(room) {
   });
 
   // When a Participant adds a Track, attach it to the DOM.
-  room.on('trackAdded', function(track, participant) {
+  room.on('trackSubscribed', function(track, participant) {
     log(participant.identity + " added track: " + track.kind);
     var previewContainer = document.getElementById('remote-media');
     attachTracks([track], previewContainer);
   });
 
   // When a Participant removes a Track, detach it from the DOM.
-  room.on('trackRemoved', function(track, participant) {
+  room.on('trackUnsubscribed', function(track, participant) {
     log(participant.identity + " removed track: " + track.kind);
     detachTracks([track]);
   });

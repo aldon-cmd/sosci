@@ -10,7 +10,7 @@
   "author": "aldon palmer",
   "license": "ISC",
   "dependencies": {
-    "twilio-video": "^1.18.1"
+    "twilio-video": "^1.19.2"
   },
   "devDependencies": {
     "browserify": "^14.3.0",
