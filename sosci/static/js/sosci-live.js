@@ -36485,14 +36485,14 @@ function roomJoined(room) {
 
   log("Joined Room");
 
-  // create_local_tracks();
+  create_local_tracks();
 
 
   // Attach LocalParticipant's Tracks, if not already attached.
-  var previewContainer = document.getElementById('local-media');
-  if (!previewContainer.querySelector('video')) {
-    attachParticipantTracks(room.localParticipant, previewContainer);
-  }
+  // var previewContainer = document.getElementById('local-media');
+  // if (!previewContainer.querySelector('video')) {
+  //   attachParticipantTracks(room.localParticipant, previewContainer);
+  // }
 
   // Attach the Tracks of the Room's Participants.
   room.participants.forEach(function(participant) {
