@@ -14,20 +14,8 @@
         <div class="" id="navbarSupportedContent">
             <ul class="list">
                 <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-                <li class="item dropdown">
-                  <div class="dropdown show">
-                    <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      My Courses
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">
-                          <i class="fas fa-video"></i>
-                          <span>My Courses</span>
-                        </a>
-                        <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
-                    </div>
-                  </div>
-                </li>
+                <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+                <li class="item"><a class="nav-link" href="{% url 'catalogue:my-enrolled-courses-list' %}">My Enrolled Courses</a></li>
                 <li class="item"><a class="nav-link" href="{% url 'catalogue:course-create-form' %}">Create Course</a></li>
                 <li class="item"><a class="nav-link">Instructors</a></li>
                 <li class="item"><a class="nav-link">Partners</a></li>
@@ -65,20 +53,8 @@
             <ul class="list">
               <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
               <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
-              <li class="item dropdown">
-                <div class="dropdown show">
-                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="nav-create-course">My Courses</span>
-                    <span class="">
-                      <i class="fas fa-angle-down"></i>
-                    </span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'catalogue:my-course-list' %}">My Courses</a>
-                    <a class="dropdown-item" href="{% url 'catalogue:live-course-list' %}">My Live Courses</a>
-                  </div>
-                </div>
-              </li>
+                <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+                <li class="item"><a class="nav-link" href="{% url 'catalogue:my-enrolled-courses-list' %}">My Enrolled Courses</a></li>
               <li class="item dropdown">
                 <div class="dropdown show">
                   <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
