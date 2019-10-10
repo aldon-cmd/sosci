@@ -4,6 +4,23 @@
 
 {% block content %}
 <div class="container">
+  <div class="course-nav-header">
+
+    <a href="#" class="course-nav-link">
+      <span class="course-nav-title">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>My created courses</span>
+      </span>
+    </a>
+
+    <a href="#" class="course-nav-link">
+      <span class="course-nav-title">
+        <i class="fas fa-user-graduate"></i>
+        <span>My enrolled courses</span>
+      </span>
+    </a>
+
+  </div>
   <div id="course-list" class="row">
   	{% for object in object_list %}
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">

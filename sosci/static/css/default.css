@@ -380,6 +380,41 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   -webkit-box-orient: vertical;
 }
 
+@media only screen and (max-width: 600px) {
+  #course-list .line-clamp, #create-form .line-clamp {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  }
+}
+
+.course-nav-header {
+  padding: 50px 0px 0px 0px;
+}
+
+.course-nav-title {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1.3333;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #495057;
+  padding: 8px 10px;
+  background-color: #f2f3f5;
+  border: 1px solid #f2f3f5;
+  border-radius: 3px;
+}
+
+.course-nav-title > i {
+  margin-right: 5px;
+}
+
+.course-nav-link {
+  margin-right: 10px;
+}
+
 #course-list .title-clamp, #create-form .title-clamp {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -396,6 +431,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 #course-list .text{
   width: 316px;
+}
+
+@media only screen and (max-width: 600px) {
+  #course-list .text {
+    width: 419px;
+  }
 }
 
 #course-list .title, #course-list .text {
