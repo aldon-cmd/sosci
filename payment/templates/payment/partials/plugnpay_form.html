@@ -20,26 +20,26 @@
 	<div class="text-input-wrapper">
 		<label class="pnp-card-number" for="card_number">Card Number</label>
 		<div>
-			<input type="text" id="card_number" placeholder="4111111111111111" class="form-control text-input-input">
+			<input type="text" id="card_number" placeholder="" class="form-control text-input-input">
 		</div>
 	</div>
 	
 
 	<div class="card-security d-flex">
-		<div class="col-lg-3 col-md-3 col-sm-3 text-input-wrapper card-security-exp">
+		<div class="col-lg-6 col-md-6 col-sm-6 text-input-wrapper card-security-l">
 			<label class="pnp-card-exp" for="card_exp">Exp Date</label> 
 			<div>
 				<input type="text" id="card_exp" placeholder="MM/YY" class="form-control text-input-input">
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-3 text-input-wrapper">
+		<div class="col-lg-6 col-md-6 col-sm-6 text-input-wrapper card-security-r">
 			<label class="pnp-card-cvv" for="card_cvv">CVV</label> 
 			<div>
 				<input type="text" id="card_cvv" class="form-control text-input-input">
 			</div>
 		</div>
 	</div>
-	<div class="payment-submit">
-		<input type="button" value="Confirm & Pay" onclick="payment_api.send();">
+	<div class="form-group text-right">
+		<input type="button" value="Confirm & Pay" onclick="payment_api.send();" class="btn">
 	</div>
 </form>

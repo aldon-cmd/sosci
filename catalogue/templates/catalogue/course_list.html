@@ -6,14 +6,14 @@
 <div class="container">
   <div class="course-nav-header">
 
-    <a href="#" class="course-nav-link">
+    <a href="{% url 'catalogue:my-course-list' %}" class="course-nav-link">
       <span class="course-nav-title">
         <i class="fas fa-chalkboard-teacher"></i>
         <span>My created courses</span>
       </span>
     </a>
 
-    <a href="#" class="course-nav-link">
+    <a href="{% url 'catalogue:my-enrolled-courses-list' %}" class="course-nav-link">
       <span class="course-nav-title">
         <i class="fas fa-user-graduate"></i>
         <span>My enrolled courses</span>
