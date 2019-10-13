@@ -1914,6 +1914,11 @@ button > i, .span {
   outline-offset: -7px;
 }
 
+input[type=text] {
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
 #sosci-nav .btn-secondary, #sosci-nav .dropdown-toggle {
   background-color: #24292e;
   border-color: #24292e;
