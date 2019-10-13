@@ -12,26 +12,70 @@
             </div>
         </div>
         <div class="" id="navbarSupportedContent">
-            <ul class="list">
-                <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
-                <li class="item"><a class="nav-link">SME School</a></li>
-                <li class="item"><a class="nav-link">Investor School</a></li>
-                <li class="item dropdown">
-                    <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Create Course
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">Create Course</a>
-                            <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">Create Live Course</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
-            </ul>
+          <ul class="list">
+            <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">Programs</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>SME School</span>
+                  </a>
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Investor School</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">Create Course</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Video stream</span>
+                  </a>
+                  <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
+                    <i class="fas fa-video"></i>
+                    <span>Live stream</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">John Doe</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Invite Friends</span>
+                  </a>
+                  <a class="dropdown-item" href="{% url 'customer:logout' %}">
+                    <i class="fas fa-power-off"></i>
+                    <span>Logout</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
     </div>
 </nav>
@@ -39,46 +83,80 @@
 <nav id="sosci-nav" class="navbar navbar-expand-md">
     <div class="content">
         <div class="header">
-            <div class="d-flex flex-row">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
-                        <i class="fas fa-bars"></i>
-                    </span>
-                </button>
-                <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci</a>
-            </div>
+          <div class="d-flex flex-row">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <a class="sosci-logo-m nav-link-m" href="{% url 'promotions:home' %}">Sosci</a>
+          </div>
         </div>
         <div class="" id="navbarSupportedContent">
-            <ul class="list">
-              <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-              <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
-              <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
-              <li class="item dropdown">
-                <div class="dropdown show">
-                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="nav-create-course">Create Course</span>
-                    <span class="">
-                      <i class="fas fa-angle-down"></i>
-                    </span>
+          <ul class="list">
+            <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">Programs</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>SME School</span>
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                      <i class="fas fa-play-circle"></i>
-                      <span>Video stream</span>
-                    </a>
-                    <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
-                      <i class="fas fa-video"></i>
-                      <span>Live stream</span>
-                    </a>
-                  </div>
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Investor School</span>
+                  </a>
                 </div>
-              </li>
-              <!-- <li class="item"><a class="nav-link">Certificate Programs</a></li> -->
-              <!-- <li class="item"><a class="nav-link">SME School</a></li> -->
-              <li class="item"><a class="nav-link">SME School</a></li>
-              <li class="item"><a class="nav-link">Investor School</a></li>
-              <li class="item"><a class="nav-link" href="{% url 'customer:logout' %}">Logout</a></li>
-            </ul>
+              </div>
+            </li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">Create Course</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Video stream</span>
+                  </a>
+                  <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
+                    <i class="fas fa-video"></i>
+                    <span>Live stream</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">John Doe</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Invite Friends</span>
+                  </a>
+                  <a class="dropdown-item" href="{% url 'customer:logout' %}">
+                    <i class="fas fa-power-off"></i>
+                    <span>Logout</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
     </div>
 </nav>
@@ -96,15 +174,33 @@
             </div>
         </div>
         <div class="" id="navbarSupportedContent">
-            <ul class="list">
-                <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
-                <li class="item"><a class="nav-link" href="">SME School</a></li>
-                <li class="item"><a class="nav-link" href="">Investor School</a></li>
-                <li class="item"><a class="nav-link" href="">About Us</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Sign Up</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Sign In</a></li>
-            </ul>
+          <ul class="list">
+            <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
+            <li class="item dropdown">
+              <div class="dropdown show">
+                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="nav-create-course">Programs</span>
+                  <span class="">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>SME School</span>
+                  </a>
+                  <a class="dropdown-item" href="">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Investor School</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="item"><a class="nav-link" href="">About</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Sign Up</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
+          </ul>
         </div>
     </div>
 </nav>
@@ -124,12 +220,30 @@
         <div class="" id="navbarSupportedContent">
             <ul class="list">
                 <li class="item"><a class="nav-link" href="{% url 'promotions:home' %}">Sosci</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse Courses</a></li>
-                <li class="item"><a class="nav-link" href="">SME School</a></li>
-                <li class="item"><a class="nav-link" href="">Investor School</a></li>
-                <li class="item"><a class="nav-link">About Us</a></li>
+                <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
+                <li class="item dropdown">
+                  <div class="dropdown show">
+                    <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="nav-create-course">Programs</span>
+                      <span class="">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>SME School</span>
+                      </a>
+                      <a class="dropdown-item" href="">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Investor School</span>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li class="item"><a class="nav-link">About</a></li>
                 <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Sign Up</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Sign In</a></li>
+                <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
             </ul>
         </div>
     </div>

@@ -1914,6 +1914,11 @@ button > i, .span {
   outline-offset: -7px;
 }
 
+#sosci-nav .btn-secondary, #sosci-nav .dropdown-toggle {
+  background-color: #24292e;
+  border-color: #24292e;
+}
+
 .dropdown .nav-create-course {
   margin-right: 5px !important;
 }
