@@ -3,26 +3,6 @@
 {% load currency_filters %}
 {% load purchase_info_tags %}
 
-{% block extrahead %}
-{{ block.super }}
-<script>
-   function submit_payment(){
-  payment_api.send();
- }
-$(document).ready(function() {
- payment_api.setCallback(function(data) { 
-    console.log(data);
-   // 'data' is the querystring returned by the payment request.  
-   // Perform any response handling you would like to do here.  
-   // For example, such as putting the value of data into a field and calling submit on the form.  
-   
-   })
-  $("#btn-submit-payment").click(submit_payment); 
- });
-
-
-</script>
-{% endblock %}
 
 {% block content %}
 <div id="checkout">
@@ -77,3 +57,29 @@ $(document).ready(function() {
   </div>
 </div>
 {% endblock content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<script>
+   function submit_payment(){
+  
+  //payment_api.send();
+
+  $('#payment-form').submit();
+ }
+
+$(document).ready(function() {
+
+ payment_api.setCallback(function(data) { 
+    console.log(data);
+   // 'data' is the querystring returned by the payment request.  
+   // Perform any response handling you would like to do here.  
+   // For example, such as putting the value of data into a field and calling submit on the form.  
+   
+   });
+
+ });
+
+  $("#btn-submit-payment").click(submit_payment);
+</script>
+{% endblock extrascripts %} 

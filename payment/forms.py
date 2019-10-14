@@ -1,5 +1,5 @@
 from django import forms
 
 
-class PlugnPayPaymentForm(forms.ModelForm):
-    response = forms.CharField(widget=forms.Textarea)
+class PlugnPayPaymentForm(forms.Form):
+    response = forms.CharField(widget=forms.Textarea,required=False)

@@ -1,4 +1,5 @@
-<form id="payment-form" action="{% url 'payment:settle-pnp-payment' %}" method="post" id="payment-form">
+<form id="payment-form" action="{% url 'checkout:payment-details' view.kwargs.course_id %}" method="post" id="payment-form">
+	{% csrf_token %}
 	<input type="hidden" id="publisher_name" value="pnpdemo">
 	<input type="hidden" id="mode" value="auth">
 	<input type="hidden" id="convert" value="underscores">

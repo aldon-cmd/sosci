@@ -3,6 +3,6 @@ from payment import views
 
 
 urlpatterns = [
-    url(r'^settle-pnp-payment/$', views.SettlePlugnPayPaymentView.as_view(), name='settle-pnp-payment'),
+    url(r'^settle-pnp-payment/(?P<course_id>\d+)$', views.SettlePlugnPayPaymentView.as_view(), name='settle-pnp-payment'),
 ]
 
