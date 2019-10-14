@@ -17,47 +17,6 @@ from django.urls import reverse
 from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
 
-
-# class ThankYouView(generic.DetailView):
-#     """
-#     Displays the 'thank you' page which summarises the order just submitted.
-#     """
-#     template_name = 'checkout/thank_you.html'
-#     context_object_name = 'order'
-
-#     def get_object(self):
-#         # We allow superusers to force an order thank-you page for testing
-#         order = None
-#         if self.request.user.is_superuser:
-#             if 'order_number' in self.request.GET:
-#                 order = Order._default_manager.get(
-#                     number=self.request.GET['order_number'])
-#             elif 'order_id' in self.request.GET:
-#                 order = Order._default_manager.get(
-#                     id=self.request.GET['order_id'])
-
-#         if not order:
-#             if 'checkout_order_id' in self.request.session:
-#                 order = Order._default_manager.get(
-#                     pk=self.request.session['checkout_order_id'])
-#             else:
-#                 raise http.Http404(_("No order found"))
-
-#         return order
-
-#     def get_context_data(self, *args, **kwargs):
-#         ctx = super(ThankYouView, self).get_context_data(*args, **kwargs)
-#         # Remember whether this view has been loaded.
-#         # Only send tracking information on the first load.
-#         key = 'order_{}_thankyou_viewed'.format(ctx['order'].pk)
-#         if not self.request.session.get(key, False):
-#             self.request.session[key] = True
-#             ctx['send_analytics_event'] = True
-#         else:
-#             ctx['send_analytics_event'] = False
-
-#         return ctx
-        
 class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_mixins.EnrollmentMixin):
     """
     For taking the details of payment and creating the order.
@@ -106,43 +65,43 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_m
     # details ready for submission.
     preview = False
 
-    # def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
 
 
-    #     course_id = self.kwargs.get('course_id',None)
+        course_id = self.kwargs.get('course_id',None)
 
-    #     if not course_id:
-    #         raise http.Http404()
+        if not course_id:
+            raise http.Http404()
 
-    #     if request.user.is_authenticated() and self.is_enrolled(request.user,course_id,catalogue_models):
-    #        return http.HttpResponseRedirect(
-    #                 reverse('video:video-player', kwargs={'course_id': course_id}))
+        if request.user.is_authenticated() and self.is_enrolled(request.user,course_id,catalogue_models):
+           return http.HttpResponseRedirect(
+                    reverse('video:video-player', kwargs={'course_id': course_id}))
 
 
 
-    #     # Assign the checkout session manager so it's available in all checkout
-    #     # views.
-    #     self.checkout_session = CheckoutSessionData(request)
+        # Assign the checkout session manager so it's available in all checkout
+        # views.
+        self.checkout_session = CheckoutSessionData(request)
 
-    #     # No shipping required - we store a special code to indicate so.
-    #     self.checkout_session.use_shipping_method(
-    #             NoShippingRequired().code)
+        # No shipping required - we store a special code to indicate so.
+        self.checkout_session.use_shipping_method(
+                NoShippingRequired().code)
 
-    #     # Enforce any pre-conditions for the view.
-    #     try:
-    #         self.check_pre_conditions(request)
-    #     except exceptions.FailedPreCondition as e:
-    #         for message in e.messages:
-    #             messages.warning(request, message)
-    #         return http.HttpResponseRedirect(e.url)
+        # Enforce any pre-conditions for the view.
+        try:
+            self.check_pre_conditions(request)
+        except exceptions.FailedPreCondition as e:
+            for message in e.messages:
+                messages.warning(request, message)
+            return http.HttpResponseRedirect(e.url)
 
-    #     # Check if this view should be skipped
-    #     try:
-    #         self.check_skip_conditions(request)
-    #     except exceptions.PassedSkipCondition as e:
-    #         return http.HttpResponseRedirect(e.url)
+        # Check if this view should be skipped
+        try:
+            self.check_skip_conditions(request)
+        except exceptions.PassedSkipCondition as e:
+            return http.HttpResponseRedirect(e.url)
 
-    #     return super(views.PaymentDetailsView, self).dispatch(request, *args, **kwargs)
+        return super(views.PaymentDetailsView, self).dispatch(request, *args, **kwargs)
 
     def get_skip_conditions(self, request):
         # if not self.preview:
@@ -184,6 +143,8 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_m
         """
 
         course_id = self.kwargs.get('course_id')
+
+        catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=request.user)
 
         product = shortcuts.get_object_or_404(
             catalogue_models.Product, pk=course_id)
