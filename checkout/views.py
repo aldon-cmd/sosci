@@ -111,6 +111,15 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_m
         #     return ['skip_unless_payment_is_required']
         return []
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(PaymentDetailsView, self).get_context_data(*args, **kwargs)
+        course_id = self.kwargs.get('course_id',None)
+        queryset = catalogue_models.Product.browsable.base_queryset()
+        context['product'] = queryset.filter(pk=course_id).first()
+        
+
+        return context
+
     def post(self, request, *args, **kwargs):
 
         try:

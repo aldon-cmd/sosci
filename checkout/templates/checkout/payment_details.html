@@ -1,18 +1,26 @@
 {% extends "base_plugnpay.html" %} 
 {% load static %} 
+{% load currency_filters %}
+{% load purchase_info_tags %}
 
 {% block extrahead %}
 {{ block.super }}
 <script>
-$(document).ready(function() { 
+   function submit_payment(){
+  payment_api.send();
+ }
+$(document).ready(function() {
  payment_api.setCallback(function(data) { 
     console.log(data);
    // 'data' is the querystring returned by the payment request.  
    // Perform any response handling you would like to do here.  
    // For example, such as putting the value of data into a field and calling submit on the form.  
    
-   }) 
- }); 
+   })
+  $("#btn-submit-payment").click(submit_payment); 
+ });
+
+
 </script>
 {% endblock %}
 
@@ -35,6 +43,7 @@ $(document).ready(function() {
           </div>
           <div>
             <div>
+              {% purchase_info_for_product request product as session %}
               {% include "payment/partials/plugnpay_form.html" %}
             </div>
           </div>
@@ -45,20 +54,20 @@ $(document).ready(function() {
         <div class="payment-container">
           <div class="payment-panel">
             <div class="payment-header">
-              <h3>IFRS 7 Financial Instruments CPD Course</h3>
+              <h3>{{product.get_title}}</h3>
             </div>
             <div class="payment-panel-body">
               <div class="subtotal d-flex">
                 <div class="subtotal-title col-lg-6 col-md-6 col-sm-6 no-padding">Course subtotal</div>
-                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">$7,500.00</div>
+                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">{{ session.price.excl_tax|currency:session.price.currency }}</div>
               </div>
               <div class="subtax d-flex">
                 <div class="subtax-title col-lg-6 col-md-6 col-sm-6 no-padding">Applicable Taxes</div>
-                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">$0.00</div>
+                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">{{ session.price.incl_tax|currency:session.price.currency }}</div>
               </div>
               <div class="due-amount d-flex">
                 <div class="total-title col-lg-6 col-md-6 col-sm-6 no-padding">Amount Due</div>
-                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">$7,500.00</div>
+                <div class="amount col-lg-6 col-md-6 col-sm-6 no-padding">{{ session.price.incl_tax|currency:session.price.currency }}</div>
               </div>
             </div>
           </div>
