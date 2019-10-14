@@ -182,15 +182,15 @@ class ModuleCreateView(TemplateView):
 class CourseDetailView(TemplateView,mixins.EnrollmentMixin):
     template_name = "catalogue/course_detail.html"
 
-    def dispatch(self, request, *args, **kwargs):
+    # def dispatch(self, request, *args, **kwargs):
 
-        course_id = self.kwargs.get('course_id')
-        if request.user.is_authenticated() and self.is_enrolled(request.user,course_id, models):
+    #     course_id = self.kwargs.get('course_id')
+    #     if request.user.is_authenticated() and self.is_enrolled(request.user,course_id, models):
             
-            return http.HttpResponseRedirect(
-                    reverse('video:video-player', kwargs={'course_id': course_id}))
+    #         return http.HttpResponseRedirect(
+    #                 reverse('video:video-player', kwargs={'course_id': course_id}))
 
-        return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
+    #     return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
