@@ -41,6 +41,9 @@
               <a class="dot off" href="#" id="button-leave" title='Leave Room'>
                 <i class="fas fa-video"></i>
               </a>
+              <a class="dot option" data-toggle="modal" data-target="#end-session-modal" id="end-session" title='End Session'>
+                <i class="fas fa-sign-out-alt"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -64,31 +67,8 @@
 
           <div class="side-box-content">
             <h4 class="">Participants</h4>
-            <ul>
-              <li>
-                <div class="participant">Trishauna Hemmings</div>
-                <i class="fas fa-circle"></i>
-              </li>
-              <li>
-                <div class="participant">Adrian Adman</div>
-                <i class="fas fa-circle"></i>
-              </li>
-              <li>
-                <div class="participant">Aldon Palmer</div>
-                <i class="fas fa-circle"></i>
-              </li>
-              <li>
-                <div class="participant">Novia Hill</div>
-                <i class="fas fa-circle"></i>
-              </li>
-              <li>
-                <div class="participant">Tristen Jackson</div>
-                <i class="fas fa-circle"></i>
-              </li>
-              <li>
-                <div class="participant">Devon Smith</div>
-                <i class="fas fa-circle"></i>
-              </li>
+            <ul id="participants">
+
             </ul>
           </div>
 
@@ -109,23 +89,79 @@
 
         </div>
       </div>
-      <div id="room-controls" class="hide">
-        <p class="instructions">Room Name:</p>
-        <input id="room-name" type="text" placeholder="Enter a room name" />
-        <button id="button-join">Join Room</button>
-        <button id="button-leave">Leave Room</button>
-      </div>
-      <div id="log" class="hide"></div>
     </div>
   </div>
 </main>
 
 
+
+<div class="modal fade" id="end-session-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure that you want to end this session?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-confirm-end-session" class="btn btn-secondary">Yes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form id="csrftoken-form">
+{% csrf_token %}
+</form>
 {% endblock content %}
 
 {% block extrascripts %}
 {{ block.super }}
 <script src="{% static 'js/sosci-live.js' %}"></script>
+
+<script type="text/javascript">
+// using jQuery
+var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+<script>
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+
+<script>
+function end_session(){
+    $.ajax({
+      type: "POST",
+      url: "{% url 'live:end-session' view.kwargs.course_id %}",
+      data: {"room_sid":room.sid},
+      success: function () {
+        $('#end-session-modal').modal('hide');
+      },
+      error: function () {
+        $('#end-session-modal').modal('hide');
+      }
+    });
+}
+
+$("#btn-confirm-end-session").on("click", end_session);
+
+</script>
+
 {% autoescape off %}
 <script>
 sosci_live.join("{{token}}");

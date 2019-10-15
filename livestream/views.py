@@ -18,6 +18,22 @@ from django.contrib import messages
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 
+class EndSessionView(View):
+
+    def post(self, request, **kwargs):
+        account_sid = settings.TWILIO_ACCOUNT_SID
+        rest_api_auth_token = settings.TWILIO_REST_API_AUTH_TOKEN
+
+        try:
+
+           client = Client(account_sid, rest_api_auth_token)
+           room_sid = request.POST.get("room_sid")
+           client.video.rooms(room_sid).update(status='completed')
+           return   HttpResponse(status=200)        
+            
+        except TwilioRestException as e:
+            return HttpResponse(status=500)
+
 class StartSessionView(TemplateView):
     """
     creates a room, token , identity for a user
@@ -149,7 +165,7 @@ class TwilioRoomView(TemplateView):
             client = Client(account_sid, rest_api_auth_token)
             room = client.video.rooms.create(
                                           record_participants_on_connect=True,
-                                          status_callback=self.request.build_absolute_uri(reverse('livestream:twilio-room-status')),
+                                          status_callback=self.request.build_absolute_uri(reverse('live:twilio-room-status')),
                                           type='group',
                                           unique_name=course_id
                                       )
