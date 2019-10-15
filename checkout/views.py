@@ -128,6 +128,14 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_m
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
+    def handle_user_enrollment(self,course_id):
+        """
+        enrolls the current user into a course
+        """
+
+        catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=self.request.user)
+
+
     def handle_place_order_submission(self, request):
         """
         Handle a request to place an order.
@@ -144,8 +152,8 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin,catalogue_m
 
         course_id = self.kwargs.get('course_id')
 
-        catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=request.user)
-
+        self.handle_user_enrollment(course_id)
+    
         product = shortcuts.get_object_or_404(
             catalogue_models.Product, pk=course_id)
 
