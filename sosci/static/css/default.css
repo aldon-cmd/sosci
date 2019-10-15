@@ -2407,6 +2407,113 @@ ol, ul {
   padding-bottom: 10px;
 }
 
+.basket-items, .basket-summary, .basket-options {
+  width: 100%;
+}
+
+#payment-confirmation .container {
+  max-width: 530px;
+  margin: auto;
+  padding: 15px !important;
+}
+
+#payment-confirmation .row {
+  margin: 0px;
+}
+
+.amount-ty {
+  float: right;
+  text-align: right;
+}
+
+.amount-ty {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.dot-ty {
+  height: 40px;
+  width: 40px;
+  display: inline-block !important;
+  background-color: #f8f7fa;
+  border-radius: 50%;
+  display: inline-block;
+  color: #4b4d63;
+}
+
+.dot-ty > .fas {
+  padding: 12px 11px;
+}
+
+.description-ty {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.description-ty > a {
+  color: #212529;
+}
+
+.basket-items {
+  padding-bottom: 15px;
+}
+
+.basket-summary {
+  padding-top: 15px;
+}
+
+#payment-confirmation .hide {
+  display: none !important;
+}
+
+#payment-confirmation .table th, #payment-confirmation .table td {
+  padding-left: 0px !important;
+}
+
+#payment-confirmation .total {
+  color: #212529;
+}
+
+.basket-options .option-a {
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.quantity-ty {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #7e7e7e;
+}
+
+#payment-confirmation .btn-a, #payment-confirmation .btn-a:hover {
+  color: #f05c8d;
+  background-color: #fff;
+  border-color: #f05c8d;
+  border-radius: 0px !important;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 15px;
+  line-height: 1 !important;
+}
+
+#payment-confirmation .btn-b, #payment-confirmation .btn-b:hover {
+  color: #fff;
+  background-color: #f05c8d;
+  border-color: #f05c8d;
+  border-radius: 0px !important;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 15px;
+  line-height: 1 !important;
+}
+
+
 /*
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
