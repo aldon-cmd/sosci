@@ -129,7 +129,7 @@ class TwilioRoomView(TemplateView):
 
             messages.error(request, 'only the course owner can create a room for a course that they own')
 
-            return http.HttpResponseRedirect(reverse('catalouge:live-course-list'))
+            return http.HttpResponseRedirect(reverse('catalogue:live-course-list'))
     
         return super(TwilioRoomView, self).dispatch(request, *args, **kwargs)
 
