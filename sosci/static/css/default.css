@@ -2214,7 +2214,17 @@ video {
   margin: 0rem 1rem 0rem 1rem ;
 }
 
-.dot > .fa-video, .dot > .fa-desktop, .dot > .fa-microphone {
+.dot-control {
+  height: 45px;
+  width: 45px;
+  display: inline-block !important;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0rem 1rem 0rem 1rem ;
+}
+
+.dot-control > .fas, .dot-control > .far {
   line-height: 17px;
   padding: 14px 0px 14px 0px;
 }
@@ -2525,3 +2535,6 @@ ol, ul {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 }*/
 
+.hide {
+  display: none !important;
+}
