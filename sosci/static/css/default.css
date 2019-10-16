@@ -429,6 +429,14 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 14px;
 }
 
+.price {
+  color: #0366d6;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0366d6;
+}
+
 #course-list .text{
   width: 316px;
 }
@@ -457,8 +465,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-family: Helvetica;
   font-size: 14px;
   padding-top: 8px;
-  padding-bottom: 25px;
-  
+  padding-bottom: 20px;
 }
 
 #enroll .description {
@@ -466,7 +473,6 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 16px;
   padding-top: 8px;
   color: #808080;
-  
 }
 
 .enroll-btn, .login-btn {
