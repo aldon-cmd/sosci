@@ -69,7 +69,7 @@ class TwilioRoomParticipantView(TemplateView):
 
             messages.error(request, 'This course is not live yet, check back later')
 
-            return http.HttpResponseRedirect(reverse('catalouge:live-course-list'))
+            return http.HttpResponseRedirect(reverse('catalogue:live-course-list'))
     
         return super(TwilioRoomParticipantView, self).dispatch(request, *args, **kwargs)
 
