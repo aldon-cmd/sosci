@@ -118,20 +118,20 @@ class TwilioRoomView(TemplateView):
 
 
 
-    def dispatch(self, request, *args, **kwargs):
+    # def dispatch(self, request, *args, **kwargs):
 
 
-        course_id = self.kwargs.get('course_id',None)
+    #     course_id = self.kwargs.get('course_id',None)
 
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+    #     course = catalogue_models.Product.objects.filter(pk=course_id).first()
 
-        if not self.is_owner(request,course):
+    #     if not self.is_owner(request,course):
 
-            messages.error(request, 'only the course owner can create a room for a course that they own')
+    #         messages.error(request, 'only the course owner can create a room for a course that they own')
 
-            return http.HttpResponseRedirect(reverse('catalogue:live-course-list'))
+    #         return http.HttpResponseRedirect(reverse('catalogue:live-course-list'))
     
-        return super(TwilioRoomView, self).dispatch(request, *args, **kwargs)
+    #     return super(TwilioRoomView, self).dispatch(request, *args, **kwargs)
 
 
     def get_context_data(self, **kwargs):
