@@ -17,6 +17,7 @@ from django.urls import reverse
 from django.contrib import messages
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+from custom_user import models as user_models
 
 class EndSessionView(View):
 
@@ -77,11 +78,13 @@ class TwilioRoomParticipantView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TwilioRoomParticipantView, self).get_context_data(**kwargs)
 
+
         account_sid = settings.TWILIO_ACCOUNT_SID
         api_key = settings.TWILIO_API_KEY_SID
         api_secret = settings.TWILIO_API_SECRET
 
         course_id = self.kwargs.get('course_id')
+        context["owner"] = self.get_owner(course_id)
 
         # Create an Access Token
         token = AccessToken(account_sid, api_key, api_secret)
@@ -98,6 +101,12 @@ class TwilioRoomParticipantView(TemplateView):
 
         return context
 
+    def get_owner(course_id):
+
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+        owner = user_models.User.objects.filter(pk=course.user_id).first()
+
+        return owner
 
     def is_owner(self,request, course):
         """
@@ -143,6 +152,7 @@ class TwilioRoomView(TemplateView):
         rest_api_auth_token = settings.TWILIO_REST_API_AUTH_TOKEN
 
         course_id = self.kwargs.get('course_id')
+        context["owner"] = self.get_owner(course_id)
 
         # Create an Access Token
         token = AccessToken(account_sid, api_key, api_secret)
@@ -189,6 +199,12 @@ class TwilioRoomView(TemplateView):
 
         return context
 
+    def get_owner(course_id):
+
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+        owner = user_models.User.objects.filter(pk=course.user_id).first()
+
+        return owner
 
     def is_owner(self,request, course):
         """
