@@ -101,7 +101,7 @@ class TwilioRoomParticipantView(TemplateView):
 
         return context
 
-    def get_owner(course_id):
+    def get_owner(self,course_id):
 
         course = catalogue_models.Product.objects.filter(pk=course_id).first()
         owner = user_models.User.objects.filter(pk=course.user_id).first()
@@ -199,7 +199,7 @@ class TwilioRoomView(TemplateView):
 
         return context
 
-    def get_owner(course_id):
+    def get_owner(self,course_id):
 
         course = catalogue_models.Product.objects.filter(pk=course_id).first()
         owner = user_models.User.objects.filter(pk=course.user_id).first()
