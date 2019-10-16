@@ -18,6 +18,7 @@ from django.contrib import messages
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 from custom_user import models as user_models
+from livestream import mixins
 
 class EndSessionView(View):
 
@@ -51,7 +52,7 @@ class TwilioRoomStatusView(View):
 
         return HttpResponse(status=204)
 
-class TwilioRoomParticipantView(TemplateView):
+class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
     """
     creates a room, token , identity for a participant
     """
@@ -90,7 +91,9 @@ class TwilioRoomParticipantView(TemplateView):
         token = AccessToken(account_sid, api_key, api_secret)
 
         # Set the Identity of this token
-        token.identity = self.request.user.email
+        token.identity = self.get_identity(self.request)
+
+        
         
         # Grant access to Video
         grant = VideoGrant()
@@ -100,26 +103,9 @@ class TwilioRoomParticipantView(TemplateView):
         context["token"] = token.to_jwt()
 
         return context
+  
 
-    def get_owner(self,course_id):
-
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
-        owner = user_models.User.objects.filter(pk=course.user_id).first()
-
-        return owner
-
-    def is_owner(self,request, course):
-        """
-        check if user owns course
-        """
-        return request.user.pk == course.user_id
-
-    def room_exists(self,course_id):
-        return models.TwilioRoom.objects.filter(name=course_id,twilio_room_status__name="Active").exists()   
-
-
-
-class TwilioRoomView(TemplateView):
+class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
     """
     creates a room, token , identity for a host
     """
@@ -158,7 +144,7 @@ class TwilioRoomView(TemplateView):
         token = AccessToken(account_sid, api_key, api_secret)
 
         # Set the Identity of this token
-        token.identity = self.request.user.email
+        token.identity = self.get_identity(self.request)
         
         # Grant access to Video
         grant = VideoGrant()
@@ -198,16 +184,3 @@ class TwilioRoomView(TemplateView):
 
 
         return context
-
-    def get_owner(self,course_id):
-
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
-        owner = user_models.User.objects.filter(pk=course.user_id).first()
-
-        return owner
-
-    def is_owner(self,request, course):
-        """
-        check if user owns course
-        """
-        return request.user.pk == course.user_id

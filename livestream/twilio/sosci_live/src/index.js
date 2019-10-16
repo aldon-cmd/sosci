@@ -61,15 +61,37 @@ function share_screen(){
   }); 
 }
 
+function create_participants_list_item(participant){
+    var participants_list = document.getElementById('participants');
+    var participants_list_item = document.createElement("LI"); 
+    var participants_list_item_content;
+    var participant_identity;
+    var paricipant_full_name;
+
+    participants_list_item.setAttribute("id",participant.SID);
+
+    participant_identity = participant.identity.split("/");
+
+    paricipant_full_name = 1 in participant_identity ? participant_identity[1] : "";
+
+    participants_list_item_content = '<div class="participant">'+ paricipant_full_name +'</div><i class="fas fa-circle"></i>';
+
+    participants_list_item.innerHTML = participants_list_item_content;
+
+    participants_list.appendChild(participants_list_item);     
+}
+
+function delete_participants_list_item(participant){
+  var participants_list_item = document.getElementById(participant.SID);
+  participants_list_item.parentNode.removeChild(elem);
+}
+
 function populate_participant_list(room){
-     var participants_list = document.getElementById('participants');
-     var participants_list_item = document.createElement("LI"); 
-     var participants_list_item_content;
+
 
      room.participants.forEach(function(participant) {
-      participants_list_item_content = '<div class="participant">'+participant.identity+'</div><i class="fas fa-circle"></i>';
-      participants_list_item.innerHTML = participants_list_item_content;
-      participants_list.appendChild(participants_list_item);
+
+      create_participants_list_item(participant);
     });
 }
 
@@ -100,6 +122,7 @@ function roomJoined(room) {
   // When a Participant joins the Room, log the event.
   room.on('participantConnected', function(participant) {
     console.log("Joining: '" + participant.identity + "'");
+    create_participants_list_item(participant);
   });
 
   // When a Participant adds a Track, attach it to the DOM.
@@ -118,6 +141,7 @@ function roomJoined(room) {
   // When a Participant leaves the Room, detach its Tracks.
   room.on('participantDisconnected', function(participant) {
     console.log("Participant '" + participant.identity + "' left the room");
+    delete_participants_list_item(participant);
     detachParticipantTracks(participant);
   });
 
