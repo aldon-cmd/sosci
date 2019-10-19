@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+  <div class="course-nav-header">
+
+    <a href="{% url 'catalogue:my-course-list' %}" class="course-nav-link">
+      <span class="course-nav-title">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span>My created courses</span>
+      </span>
+    </a>
+
+    <a href="{% url 'catalogue:my-enrolled-courses-list' %}" class="course-nav-link">
+      <span class="course-nav-title">
+        <i class="fas fa-user-graduate"></i>
+        <span>My enrolled courses</span>
+      </span>
+    </a>
+
+  </div>
+  <div id="course-list" class="row">
+  	{% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
+        <a href="{% url 'catalogue:course-detail' object.pk %}">
+          <div class="border p-3">
+            <div class="box-part text-center">
+              <i class="far fa-play-circle"></i>
+              <div class="title">
+                <h3 class="title-clamp">{{object.title}}</h3>
+              </div>
+            </div>
+            <div class="text">
+              <p class="line-clamp">{{object.description}}</p>
+            </div>
+            <div>
+              <div class="price">
+                <span>$12,500.00</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+  {% empty %}
+      <p>No courses yet.</p>
+  {% endfor %}    
+  </div>
+
+
+   {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }};q={{q}}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }};q={{q}}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock content %}

@@ -221,3 +221,12 @@ class CourseEnrollmentView(View):
         user = self.request.user
         course_id = self.kwargs.get("course_id")
         return models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
+
+
+class SmeCourseListView(ListView):
+    template_name = "catalogue/sme_course_list.html"
+    paginate_by = 10
+    model = models.Product
+
+    def get_queryset(self):
+        return models.Product.objects.filter(product_class__name="Course")

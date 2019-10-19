@@ -19,6 +19,7 @@ class CatalogueApplication(app.CatalogueApplication):
                 url(r'^my-enrolled-courses$', views.MyEnrolledCoursesListView.as_view(), name='my-enrolled-courses-list'),
 			    url(r'^list$', views.CourseListView.as_view(), name='course-list'),
                 url(r'^live/list$', views.LiveCourseListView.as_view(), name='live-course-list'),
+                url(r'^sme/list$', views.SmeCourseListView.as_view(), name='sme-course-list'),
         ]
         urlpatterns += super(CatalogueApplication, self).get_urls()
         return self.post_process_urls(urlpatterns)
