@@ -2529,6 +2529,63 @@ ol, ul {
   line-height: 1 !important;
 }
 
+.top-header-container {
+  margin-top: 50px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+#sponsored-content .container {
+  margin-top: 0px !important;
+}
+
+.top-header {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.top-header-content {
+  padding: 15px;
+}
+
+.top-header-content > .title-sponsor {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.top-header-content > .sponsor-search {
+  text-align: right;
+  font-size: 20px;
+  color: #212529;
+  padding-right: 15px;
+}
+
+.sponsor-search > .fas {
+  margin-right: 10px;
+  color: #828282;
+}
+
+.title-sponsor > p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.divider {
+  margin-left: 5px;
+  margin-right: 5px;
+  line-height: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .sponsor-search {
+    display: none !important;
+  }
+}
+
 
 /*
 .card-header:first-child {
