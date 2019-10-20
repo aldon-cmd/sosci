@@ -6,14 +6,17 @@
 {% block content %}
 <div id='payment-confirmation'>
    <div class='container no-padding'>
-      <div class="row ">
+        <div class="row ">
 
-         <div class="cc-header">Order Confirmation</div>
-         <div class="text">
-           <p class="line-clamp overflow-visible">Thanks for enrolling in the following course(s). You can click the <b>Start Live Stream</b> button to begin your class sessions, or you can continue viewing other courses by selecting the <b>Course Catalog</b> button.</p>
-         </div>
+            <div class="cc-header d-flex">
+                <i class="fas fa-check-circle"></i>
+                <div class="">Order Confirmation</div>
+            </div>
+            <div class="text">
+               <p class="line-clamp overflow-visible">Thanks for enrolling in the following course(s). You can click the <b>Start Live Stream</b> button to begin your class sessions, or you can continue viewing other courses by selecting the <b>Course Catalog</b> button.</p>
+            </div>
 
-         {% for line in order.lines.all %}
+            {% for line in order.lines.all %}
             <div class="basket-items">
                <div class="d-flex">
 

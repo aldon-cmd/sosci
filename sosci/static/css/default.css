@@ -2586,6 +2586,12 @@ ol, ul {
   }
 }
 
+.cc-header .fas {
+  color: ;
+  margin: 4px 10px 4px 0px;
+ color: rgb(66, 183, 42);
+}
+
 
 /*
 .card-header:first-child {
