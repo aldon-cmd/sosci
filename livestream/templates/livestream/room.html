@@ -67,18 +67,22 @@
           </div>
           
 
-          <div class="side-box-content">
+          <div id="myParticipants" class="side-box-content">
             <h4 class="">Participants</h4>
             <ul id="participants">
             <li><div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div><i class="fas fa-circle"></i></li>
             </ul>
           </div>
 
+          <div id="myChat" class="side-box-content">
+            <h4 class="">This is the Chatbox</h4>
+          </div>
+
           <div class="side-box-footer ">
             <div class="side-box-functions">
               <i class="fas fa-user-friends"></i> 
             </div>
-            <div class="side-box-functions">
+            <div class="side-box-functions" onclick="myFunction()">
               <i class="fas fa-comment"></i>  
             </div>
             <div class="side-box-functions">
@@ -143,6 +147,17 @@ $.ajaxSetup({
         }
     }
 });
+</script>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myChat");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 </script>
 
 <script>
