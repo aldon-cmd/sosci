@@ -3,6 +3,7 @@
 var Video = require('twilio-video');
 
 var activeRoom;
+var screenTrack;
 var previewTracks;
 var roomName;
 
@@ -34,32 +35,23 @@ function detachParticipantTracks(participant) {
   detachTracks(tracks);
 }
 
-function create_local_tracks() {
-  var localTracksPromise = previewTracks
-    ? Promise.resolve(previewTracks)
-    : Video.createLocalTracks();
-
-  localTracksPromise.then(function(tracks) {
-    window.previewTracks = previewTracks = tracks;
-    var previewContainer = document.getElementById('local-media');
-    if (!previewContainer.querySelector('video')) {
-      attachTracks(tracks, previewContainer);
-    }
-  }, function(error) {
-    console.error('Unable to access local media', error);
-    console.log('Unable to access Camera and Microphone');
-  });
-}
-
-
 function share_screen(){
   var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
-  var screenTrack = stream.getVideoTracks()[0];
-  var trackName = window.room.localParticipant.identity +'-screen-share'
+  screenTrack = stream.getVideoTracks()[0];
+  var trackName = window.room.localParticipant.identity +'/screen-share'
   var videoTrack = Video.LocalVideoTrack(screenTrack,{name: trackName});
   window.room.localParticipant.publishTrack(videoTrack);
+  document.getElementById('btn-share-screen').style.display = 'none';
+  document.getElementById('btn-unshare-screen').style.display = 'inline';
   }); 
 }
+
+function unshare_screen() {
+  activeRoom.localParticipant.unpublishTrack(screenTrack);
+  screenTrack = null;
+  document.getElementById('btn-share-screen').style.display = 'inline';
+  document.getElementById('btn-unshare-screen').style.display = 'none';
+};
 
 function create_participants_list_item(participant){
     var participants_list = document.getElementById('participants');
@@ -103,9 +95,6 @@ function roomJoined(room) {
 
   populate_participant_list(room);
 
-  // create_local_tracks();
-
-
   // Attach LocalParticipant's Tracks, if not already attached.
   var previewContainer = document.getElementById('local-media');
   if (!previewContainer.querySelector('video')) {
@@ -128,7 +117,9 @@ function roomJoined(room) {
   // When a Participant adds a Track, attach it to the DOM.
   room.on('trackSubscribed', function(track, participant) {
     console.log(participant.identity + " added track: " + track.kind);
+
     var previewContainer = document.getElementById('remote-media');
+
     attachTracks([track], previewContainer);
   });
 
@@ -198,11 +189,16 @@ function join(token){
 
 }
 
+document.getElementById('btn-share-screen').onclick = share_screen;
+
+
+document.getElementById('btn-unshare-screen').onclick = unshare_screen;
+
 
 // When we are about to transition away from this page, disconnect
 // from the room, if joined.
 window.addEventListener('beforeunload', leaveRoomIfJoined);
 
-document.getElementById('btn-share-screen').onclick = share_screen;
+
 
 module.exports = {join: join};
