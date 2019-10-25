@@ -60,7 +60,7 @@ function create_participants_list_item(participant){
     var participant_identity;
     var paricipant_full_name;
 
-    participants_list_item.setAttribute("id",participant.SID);
+    participants_list_item.setAttribute("id",participant.sid);
 
     participant_identity = participant.identity.split("/");
 
@@ -74,8 +74,8 @@ function create_participants_list_item(participant){
 }
 
 function delete_participants_list_item(participant){
-  var participants_list_item = document.getElementById(participant.SID);
-  participants_list_item.parentNode.removeChild(elem);
+  var participants_list_item = document.getElementById(participant.sid);
+  participants_list_item.parentNode.removeChild(participants_list_item);
 }
 
 function populate_participant_list(room){
