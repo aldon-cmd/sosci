@@ -56,7 +56,7 @@
             <span>Behavioural Economics and the Modern Economy</span> 
           </div>
 
-          <div id="myParticipants" class="side-box-content">
+          <div id="myParticipants" class="side-box-content hide">
             <h4 class="">Participants</h4>
             <ul id="participants">
             <li><div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div><i class="fas fa-circle"></i></li>
@@ -64,8 +64,62 @@
           </div>
 
           <div id="myChat" class="side-box-content">
-            <h4 class="">This is the Chatbox</h4>
+
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
+
+
+            <div class="chat-box">
+              <div class="chat-container">
+                <textarea placeholder="Send message..."></textarea>
+                <span class="attachment">
+                  <i class="fas fa-paperclip"></i>
+                </span>
+              </div>
+            </div>
+
           </div>
+
+          
 
           <div class="side-box-footer ">
             <div class="side-box-functions">
@@ -137,6 +191,28 @@ $.ajaxSetup({
     }
 });
 </script>
+
+<!----------- Random colour generator ---------->
+
+<script>
+  var safeColors = ['00','33','66','99','cc','ff'];
+  var rand = function() {
+      return Math.floor(Math.random()*6);
+  };
+  var randomColor = function() {
+      var r = safeColors[rand()];
+      var g = safeColors[rand()];
+      var b = safeColors[rand()];
+      return "#"+r+g+b;
+  };
+  $(document).ready(function() {
+        $('.chat-badge').each(function() {
+            $(this).css('color',randomColor());
+        });
+    });
+</script>
+
+<!----------- Random colour generator ---------->
 
 <script>
 function end_session(){

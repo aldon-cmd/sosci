@@ -2351,6 +2351,7 @@ ol, ul {
 .side-box-content {
   padding: 15px;
   font-size: 14px;
+  height: 100%;
 }
 
 .side-box-content > h4 {
@@ -2592,7 +2593,72 @@ ol, ul {
  color: rgb(66, 183, 42);
 }
 
+.live-chat {
+  font-size: 13px;
+  padding: 8px 4px;
+  word-wrap: break-word;
+}
 
+.chat-line-username {
+  cursor: pointer;
+  outline: none;
+  word-break: break-all;
+  font-weight: 700;
+  line-height: 1;
+  color: #da1c00;
+}
+
+.chat-badge {
+  margin-bottom: .2rem;
+  margin-right: .3rem;
+  vertical-align: middle;
+}
+
+.chat-badge > .fas {
+  font-size: 15px;
+  color: #606770;
+}
+
+.chat-box {
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+}
+
+.chat-container {
+  padding: 10px;
+}
+
+.chat-container > textarea {
+  width: 100%;
+  padding: 10px 65px 10px 10px;
+  height: 38px;
+  overflow-y: hidden;
+}
+
+textarea::placeholder {
+  line-height: 16px;
+}
+
+textarea:-moz-placeholder {
+  line-height: 16px;
+}
+
+textarea::-moz-placeholder {
+  line-height: 16px;
+}
+
+textarea:-ms-input-placeholder { 
+  line-height: 16px;
+}
+
+.attachment {
+  position: absolute;
+  right: 30px;
+  bottom: 22px;
+}
 /*
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
