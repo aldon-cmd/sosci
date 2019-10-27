@@ -16,3 +16,4 @@ Create the template.
 Create the url that points to the class in the apps.py file 
 
 Copy the course_publish template, and make your modifications. 
+

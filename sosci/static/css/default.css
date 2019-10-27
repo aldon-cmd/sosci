@@ -2192,6 +2192,11 @@ video {
   z-index: 15;
 }
 
+.video-btn-container {
+  max-width: 470px;
+  margin: 0 auto;
+}
+
 .video-nav-btn {
   display: inline-block;
 }
@@ -2665,5 +2670,9 @@ textarea:-ms-input-placeholder {
 }*/
 
 .hide {
+  display: none !important;
+}
+
+#button-leave {
   display: none !important;
 }
