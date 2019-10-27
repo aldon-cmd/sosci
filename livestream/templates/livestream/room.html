@@ -133,7 +133,7 @@
             <div class="side-box-functions">
               <i class="fas fa-user-friends"></i> 
             </div>
-            <div class="side-box-functions" onclick="myFunction()">
+            <div class="side-box-functions">
               <i class="fas fa-comment"></i>  
             </div>
             <div class="side-box-functions">
@@ -179,7 +179,7 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<script src="{% static 'js/sosci-live.js' %}"></script>
+<script src="{% static 'js/sosci.js' %}"></script>
 
 <script type="text/javascript">
 // using jQuery
@@ -239,7 +239,7 @@ $("#btn-confirm-end-session").on("click", end_session);
 
 {% autoescape off %}
 <script>
-sosci_live.join("{{token}}");
+Sosci.init("{{identity}}","{{token}}");
 </script>
 {% endautoescape %}
 {% endblock extrascripts %}

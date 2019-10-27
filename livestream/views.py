@@ -4,7 +4,7 @@ import string
 import random
 from django.views import View
 from twilio.jwt.access_token import AccessToken
-from twilio.jwt.access_token.grants import VideoGrant
+from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
@@ -83,6 +83,7 @@ class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
         account_sid = settings.TWILIO_ACCOUNT_SID
         api_key = settings.TWILIO_API_KEY_SID
         api_secret = settings.TWILIO_API_SECRET
+        chat_service_sid = settings.TWILIO_CHAT_SERVICE_SID
 
         course_id = self.kwargs.get('course_id')
         context["owner"] = self.get_owner(course_id)
@@ -100,7 +101,11 @@ class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
         grant.room = course_id
         token.add_grant(grant)
 
+        chat_grant = ChatGrant(service_sid=chat_service_sid)
+        token.add_grant(chat_grant)
+
         context["token"] = token.to_jwt()
+        context["identity"] = token.identity
 
         return context
   
@@ -136,6 +141,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         api_key = settings.TWILIO_API_KEY_SID
         api_secret = settings.TWILIO_API_SECRET
         rest_api_auth_token = settings.TWILIO_REST_API_AUTH_TOKEN
+        chat_service_sid = settings.TWILIO_CHAT_SERVICE_SID
 
         course_id = self.kwargs.get('course_id')
         context["owner"] = self.get_owner(course_id)
@@ -150,6 +156,9 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         grant = VideoGrant()
         grant.room = course_id
         token.add_grant(grant)
+
+        chat_grant = ChatGrant(service_sid=chat_service_sid)
+        token.add_grant(chat_grant)
 
         auth_token = token.to_jwt()
 
@@ -180,6 +189,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
 
 
         context["token"] = auth_token
+        context["identity"] = token.identity
         
 
 
