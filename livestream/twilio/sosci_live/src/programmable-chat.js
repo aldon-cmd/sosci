@@ -153,6 +153,6 @@ class ProgrammableChat{
       this.input.val('');
     }
    }
-
-
 }
+
+export { ProgrammableChat }

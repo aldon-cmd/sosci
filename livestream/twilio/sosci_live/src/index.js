@@ -12,7 +12,7 @@ class Sosci{
     programmablevideo.join(token);
     var room = programmablevideo.room;
     const screenshare = new ScreenShare(room);
-    const ProgrammableChat = new ProgrammableChat(identity,token);
+    const programmablechat = new ProgrammableChat(identity,token);
 
     document.getElementById('btn-share-screen').onclick = screenshare.share_screen;
 
