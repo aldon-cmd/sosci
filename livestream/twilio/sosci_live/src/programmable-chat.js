@@ -1,4 +1,5 @@
 'use strict';
+import {Client} from 'twilio-chat';
 
 class ProgrammableChat{
 
@@ -37,41 +38,45 @@ class ProgrammableChat{
   print(infoMessage, asHtml) {
     var msg = document.createElement("DIV"); 
     msg.setAttribute("class","info");
-
+    var infoMessage_txt = document.createTextNode(infoMessage);
 
     if (asHtml) {
-      msg.appendChild(infoMessage);
+      msg.appendChild(infoMessage_txt);
     } else {
-      var txt = document.createTextNode(infoMessage);
-      msg.appendChild(txt);
+      
+      msg.appendChild(infoMessage_txt);
     }
     this.chat_window.append(msg);
   }
 
   // Helper function to print chat message to the chat window
   printMessage(fromUser, message) {
-    var user = document.createElement("SPAN"); 
-    user.setAttribute("class","username");
-    var user_txt = document.createTextNode(fromUser + ':');
-    user.appendChild(user_txt);
+    var message_container = document.createElement("DIV"); 
+    message_container.setAttribute("class","live-chat");
 
-    if (fromUser === this.username) {
-      user.classList.add("me");
-    }
-    var $message = $('<span class="message">').text(message);
-
-    var msg = document.createElement("SPAN"); 
-    msg.setAttribute("class","message");
-    var msg_txt = document.createTextNode(message);
-    msg.appendChild(msg_txt);
+    //avoid xss with textContent
+    var message_txt = document.createTextNode(message);
+    var message_span = document.createElement("SPAN");
+    message_span.appendChild(message_txt);
 
 
-    var container = document.createElement("DIV"); 
-    container.setAttribute("class","message-container");
 
-    container.appendChild(user).appendChild(msg);
-    this.chat_window.appendChild(container);
-    this.chat_window.scrollTop = this.chat_window.scrollHeight;
+    var chat_list_item = '<div class="">'+
+                '<span class="chat-badge">'+
+                  '<i class="fas fa-user-circle"></i>'+
+                '</span>'+
+                '<span class="chat-line-username">'+
+                  '<span>'+fromUser+'<span>:</span></span>'+
+                '</span>'+
+                '<span>'+
+                  '<span>'+message_span.textContent+'</span>'+
+                '</span>'+
+             '</div>';
+    message_container.innerHTML = chat_list_item;
+
+
+    this.chat_window.appendChild(message_container);
+    // this.chat_window.scrollTop = this.chat_window.scrollHeight;
   }
 
 
@@ -82,27 +87,27 @@ class ProgrammableChat{
  create_chat_client(){
 
         // Initialize the Chat client
-    Twilio.Chat.Client.create(this.token).then(client => {
+    Client.create(this.token).then(client => {
       console.log('Created chat client');
       this.chatClient = client;
       this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel);
 
     // Alert the user they have been assigned a random username
     this.username = this.identity;
-    print('You have been assigned a random username of: '
+    this.print('You have been assigned a random username of: '
     + '<span class="me">' + this.username + '</span>', true);
 
     }).catch(error => {
       console.error(error);
-      print('There was an error creating the chat client:<br/>' + error, true);
-      print('Please check your .env file.', false);
+      this.print('There was an error creating the chat client:<br/>' + error, true);
+      this.print('Please check your .env file.', false);
     });
  }
 
   createOrJoinGeneralChannel() {
     // Get the general chat channel, which is where all the messages are
     // sent in this simple application
-    print('Attempting to join "general" chat channel...');
+    this.print('Attempting to join "general" chat channel...');
     this.chatClient.getChannelByUniqueName('general')
     .then(function(channel) {
       this.generalChannel = channel;
@@ -131,7 +136,7 @@ class ProgrammableChat{
   setupChannel() {
     // Join the general channel
     this.generalChannel.join().then(function(channel) {
-      print('Joined channel as '
+      this.print('Joined channel as '
       + '<span class="me">' + this.username + '</span>.', true);
     });
 

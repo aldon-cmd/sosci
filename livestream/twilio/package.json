@@ -10,6 +10,9 @@
   "author": "aldon palmer",
   "license": "ISC",
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "twilio-chat": "^3.3.2",
+    "twilio-common": "^0.1.7",
     "twilio-video": "^1.19.2"
   },
   "devDependencies": {

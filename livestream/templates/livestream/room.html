@@ -29,18 +29,18 @@
           <div class="video-nav">
             <div style="text-align:center" class="video-btn-container d-flex">
               <div>
-                <a class="dot-control on" href="#" id="button-preview" title='Camera On' onclick="switchVisible();">
+                <a class="dot-control on" href="#" id="button-preview" title='Camera On'>
                   <i class="fas fa-video"></i>
                 </a>
-                <a class="dot-control off hide" href="#" id="button-leave" title='Leave Room' onclick="switchVisible();">
+                <a class="dot-control off hide" href="#" id="button-leave" title='Leave Room'>
                   <i class="fas fa-video-slash"></i>
                 </a>
               </div>
               <div>
-                <a id="share-on" class="dot-control" href="#" id="btn-share-screen active" title='Share Screen'>
+                <a class="dot-control" href="#" id="btn-share-screen" title='Share Screen'>
                   <i class="fas fa-desktop"></i>
                 </a>
-                <a id="share-off" class="dot-control hide" href="#" id="btn-unshare-screen" title='UnShare Screen' style="display:none">
+                <a class="dot-control hide" href="#" id="btn-unshare-screen" title='UnShare Screen' style="display:none">
                   <i class="fas fa-desktop"></i>
                 </a>
               </div>
@@ -71,54 +71,13 @@
             </ul>
           </div>
 
-          <div id="myChat" class="side-box-content">
+          <div id="messages" class="side-box-content">
 
-            <div class="live-chat">
-              <div class="">
-                <span class="chat-badge">
-                  <i class="fas fa-user-circle"></i>
-                </span>
-                <span class="chat-line-username">
-                  <span>Rafer Johnson<span>:</span></span>
-                </span>
-                <span>
-                  <span>some text messagges that I am sending to be seen in the chat box</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="live-chat">
-              <div class="">
-                <span class="chat-badge">
-                  <i class="fas fa-user-circle"></i>
-                </span>
-                <span class="chat-line-username">
-                  <span>Rafer Johnson<span>:</span></span>
-                </span>
-                <span>
-                  <span>some text messagges that I am sending to be seen in the chat box</span>
-                </span>
-              </div>
-            </div>
-
-            <div class="live-chat">
-              <div class="">
-                <span class="chat-badge">
-                  <i class="fas fa-user-circle"></i>
-                </span>
-                <span class="chat-line-username">
-                  <span>Rafer Johnson<span>:</span></span>
-                </span>
-                <span>
-                  <span>some text messagges that I am sending to be seen in the chat box</span>
-                </span>
-              </div>
-            </div>
 
 
             <div class="chat-box">
               <div class="chat-container">
-                <textarea placeholder="Send message..."></textarea>
+                <textarea id="chat-input" placeholder="Send message..."></textarea>
                 <span class="attachment">
                   <i class="fas fa-paperclip"></i>
                 </span>
@@ -200,23 +159,7 @@ $.ajaxSetup({
 });
 </script>
 
-<!----------- button toggle ---------->
 
-<script>
-  function switchVisible() {
-    if (document.getElementById("button-preview")) {
-      if (document.getElementById("button-preview").style.display == "none") {
-        document.getElementById("button-preview").style.display = "block";
-        document.getElementById("button-leave").style.display = "none";
-      } else {
-        document.getElementById("button-preview").style.display = "none";
-        document.getElementById("button-leave").style.display = "block";
-      }
-    }
-  }
-</script>
-
-<!----------- button toggle ---------->
 
 <script>
 function end_session(){
