@@ -26,36 +26,6 @@
               </div>
             </div>
           </div>
-          <div class="video-nav">
-            <div style="text-align:center" class="video-btn-container d-flex">
-              <div>
-                <a class="dot-control on" href="#" id="button-preview" title='Camera On'>
-                  <i class="fas fa-video"></i>
-                </a>
-                <a class="dot-control off hide" href="#" id="button-leave" title='Leave Room'>
-                  <i class="fas fa-video-slash"></i>
-                </a>
-              </div>
-              <div>
-                <a class="dot-control" href="#" id="btn-share-screen" title='Share Screen'>
-                  <i class="fas fa-desktop"></i>
-                </a>
-                <a class="dot-control hide" href="#" id="btn-unshare-screen" title='UnShare Screen' style="display:none">
-                  <i class="fas fa-desktop"></i>
-                </a>
-              </div>
-              <div>
-                <a class="dot-control  option" href="#" id="" title='Mute Mic'>
-                  <i class="fas fa-microphone"></i>
-                </a>
-              </div>
-              <div>
-                <a class="dot-control option" data-toggle="modal" data-target="#end-session-modal" id="end-session" title='End Session'>
-                  <i class="fas fa-sign-out-alt"></i>
-                </a>
-            </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
@@ -71,35 +41,117 @@
             </ul>
           </div>
 
-          <div id="messages" class="side-box-content">
+          <div id="myChat" class="side-box-content hide">
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
 
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
 
+            <div class="live-chat">
+              <div class="">
+                <span class="chat-badge">
+                  <i class="fas fa-user-circle"></i>
+                </span>
+                <span class="chat-line-username">
+                  <span>Rafer Johnson<span>:</span></span>
+                </span>
+                <span>
+                  <span>some text messagges that I am sending to be seen in the chat box</span>
+                </span>
+              </div>
+            </div>
 
             <div class="chat-box">
               <div class="chat-container">
-                <textarea id="chat-input" placeholder="Send message..."></textarea>
+                <textarea placeholder="Send message..."></textarea>
                 <span class="attachment">
                   <i class="fas fa-paperclip"></i>
                 </span>
               </div>
             </div>
-
           </div>
 
-          
+          <div id="" class="side-box-content">
+            <div class="video-nav">
+              <div style="text-align:center">
+                <div class="">
+                  <div class="video-nav-list">
+                    <div>
+                      <a class="dot-control .on icon-btn" href="#" id="button-preview" title='Camera On'>
+                        <i class="fas fa-video"></i>
+                      </a>
+                      <p>Camera On</p>
+                    </div>
+                    <div>
+                      <a class="dot-control .off icon-btn" href="#" id="button-leave" title='Leave Room'>
+                        <i class="fas fa-video-slash"></i>
+                      </a>
+                      <p>Camera Off</p>
+                    </div>  
+                    <div>
+                      <a id="share-on" class="dot-control icon-btn" href="#" id="btn-share-screen active" title='Share Screen'>
+                        <i class="fas fa-desktop"></i>
+                      </a>
+                      <p>Share Screen</p>
+                    </div>
+                  </div>
+                  <div class="video-nav-list">
+                    <div>
+                      <a id="share-off" class="dot-control icon-btn" href="#" id="btn-unshare-screen" title='UnShare Screen' style="display:none">
+                        <i class="fas fa-desktop"></i>
+                      </a>
+                      <p>Unshare Screen</p>
+                    </div>
+                    <div>
+                      <a class="dot-control icon-btn" href="#" id="" title='Mute Mic'>
+                        <i class="fas fa-microphone"></i>
+                      </a>
+                      <p>Mic</p>
+                    </div>
+                    <div>
+                      <a class="dot-control icon-btn" href="#" data-toggle="modal" data-target="#end-session-modal" id="end-session" title='End Session'>
+                        <i class="fas fa-sign-out-alt"></i>
+                      </a>
+                      <p>Leave Course</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="side-box-footer ">
             <div class="side-box-functions">
               <i class="fas fa-user-friends"></i> 
             </div>
-            <div class="side-box-functions">
+            <div class="side-box-functions" onclick="myFunction()">
               <i class="fas fa-comment"></i>  
             </div>
             <div class="side-box-functions">
-              <i class="fas fa-share"></i> 
-            </div>
-            <div class="side-box-functions">
-              <i class="fas fa-ellipsis-h"></i> 
+              <i class="fas fa-gamepad"></i>
             </div>
           </div>
 
@@ -138,7 +190,7 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<script src="{% static 'js/sosci.js' %}"></script>
+<script src="{% static 'js/sosci-live.js' %}"></script>
 
 <script type="text/javascript">
 // using jQuery
@@ -158,8 +210,6 @@ $.ajaxSetup({
     }
 });
 </script>
-
-
 
 <script>
 function end_session(){
@@ -182,7 +232,7 @@ $("#btn-confirm-end-session").on("click", end_session);
 
 {% autoescape off %}
 <script>
-Sosci.init("{{identity}}","{{token}}");
+sosci_live.join("{{token}}");
 </script>
 {% endautoescape %}
 {% endblock extrascripts %}

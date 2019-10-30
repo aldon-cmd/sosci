@@ -2187,14 +2187,29 @@ video {
 
 .video-nav {
   width: 100%;
-  bottom: 28px;
-  position: absolute;
   z-index: 15;
+  display: block;
 }
 
-.video-btn-container {
-  max-width: 470px;
-  margin: 0 auto;
+.video-nav-list {
+  width: 100%;
+  display: inline-flex;
+}
+
+.video-nav-list p {
+  margin-top: 7px;
+  font-size: 13px;
+  line-height: 1;
+  color: #495057;
+}
+
+.video-nav-list div {
+  display: inline-block;
+  height: 100%;
+  flex: 1 100%;
+  text-align: center;
+  cursor: default;
+  padding: 2em 0;
 }
 
 .video-nav-btn {
@@ -2210,8 +2225,8 @@ video {
 }
 
 .dot {
-  height: 45px;
-  width: 45px;
+  height: 55px;
+  width: 55px;
   display: inline-block !important;
   background-color: #fff;
   border-radius: 50%;
@@ -2220,19 +2235,15 @@ video {
 }
 
 .dot-control {
-  height: 45px;
-  width: 45px;
   display: inline-block !important;
-  background-color: #fff;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 0rem 1rem 0rem 1rem ;
 }
 
 .dot-control > .fas, .dot-control > .far {
-  line-height: 17px;
-  padding: 14px 0px 14px 0px;
+  line-height: 1;
+  font-size: 39px;
 }
+
+/* Video button colours */
 
 .video-nav .on {
   background-color: #4cbb17;
@@ -2248,6 +2259,13 @@ video {
   color: rgb(187,187,187);
   border: 1px solid rgb(187,187,187) !important;
 }
+
+.video-nav .icon-btn {
+  color: #495057 !important;
+  background-color: #fff;
+}
+
+/* Video button colours */
 
 .nav-menu-icon > i {
   color: #495057;
@@ -2670,9 +2688,5 @@ textarea:-ms-input-placeholder {
 }*/
 
 .hide {
-  display: none !important;
-}
-
-#button-leave {
   display: none !important;
 }
