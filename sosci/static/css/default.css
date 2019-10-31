@@ -2197,7 +2197,7 @@ video {
 }
 
 .video-nav-list p {
-  margin-top: 7px;
+  margin-top: 20px;
   font-size: 13px;
   line-height: 1;
   color: #495057;
@@ -2374,7 +2374,7 @@ ol, ul {
 .side-box-content {
   padding: 15px;
   font-size: 14px;
-  height: 100%;
+  min-height: 550px;
 }
 
 .side-box-content > h4 {
