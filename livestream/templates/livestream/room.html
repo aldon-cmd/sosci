@@ -41,12 +41,12 @@
             </ul>
           </div>
 
-          <div id="messages" class="side-box-content hide">
+          <div id="messages" class="side-box-content">
 
 
             <div class="chat-box">
               <div class="chat-container">
-                <textarea placeholder="Send message..."></textarea>
+                <textarea id="chat-input" placeholder="Send message..."></textarea>
                 <span class="attachment">
                   <i class="fas fa-paperclip"></i>
                 </span>
@@ -72,7 +72,7 @@
                       <p>Camera Off</p>
                     </div>  
                     <div>
-                      <a class="dot-control icon-btn" href="#" id="btn-share-screen active" title='Share Screen'>
+                      <a class="dot-control icon-btn" href="#" id="btn-share-screen" title='Share Screen'>
                         <i class="fas fa-desktop"></i>
                       </a>
                       <p>Share Screen</p>
@@ -153,6 +153,7 @@
 
 <form id="csrftoken-form">
 {% csrf_token %}
+<input type="hidden" id="input-room-sid">
 </form>
 {% endblock content %}
 
@@ -178,12 +179,20 @@ $.ajaxSetup({
 });
 </script>
 
+
+{% autoescape off %}
+<script>
+Sosci.init("{{identity}}","{{token}}");
+</script>
+{% endautoescape %}
+
+
 <script>
 function end_session(){
     $.ajax({
       type: "POST",
       url: "{% url 'live:end-session' view.kwargs.course_id %}",
-      data: {"room_sid":room.sid},
+      data: {"room_sid":document.getElementById('input-room-sid').value},
       success: function () {
         $('#end-session-modal').modal('hide');
       },
@@ -197,9 +206,5 @@ $("#btn-confirm-end-session").on("click", end_session);
 
 </script>
 
-{% autoescape off %}
-<script>
-Sosci.init("{{identity}}","{{token}}");
-</script>
-{% endautoescape %}
+
 {% endblock extrascripts %}

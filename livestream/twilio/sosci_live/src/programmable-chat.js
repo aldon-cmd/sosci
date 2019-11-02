@@ -5,22 +5,11 @@ class ProgrammableChat{
 
 
     constructor(identity,token){
-        this.identity = identity;
+        this.identity_arr = identity.split("/");
+        this.identity = 1 in this.identity_arr ? this.identity_arr[1] : "";
+        
         this.token = token;
-        // Get handle to the chat div
-        this.chat_window = document.getElementById('messages');
 
-
-        this.create_chat_client();
-
-        
-        this.input = document.getElementById('chat-input');
-
-
-
-        this.input.addEventListener('keydown', this.key_logger);
-
-        
         // Our interface to the Chat service
         this.chatClient = null;
         // A handle to the "general" chat channel - the one and only channel we
@@ -30,8 +19,28 @@ class ProgrammableChat{
         // here     
         this.username = null;
 
+        // Get handle to the chat div
+        this.chat_window = document.getElementById('messages');
+
+        this.input = document.getElementById('chat-input');
+
+
+
+        this.input.addEventListener('keydown', (e) => this.key_logger(e));
+
         // Alert the user they have been assigned a random username
         this.print('Logging in...');
+
+
+
+
+        this.create_chat_client();
+
+        
+
+
+        
+
     }
 
   // Helper function to print info messages to the chat window
@@ -46,7 +55,7 @@ class ProgrammableChat{
       
       msg.appendChild(infoMessage_txt);
     }
-    this.chat_window.append(msg);
+    this.chat_window.appendChild(msg);
   }
 
   // Helper function to print chat message to the chat window
@@ -66,7 +75,7 @@ class ProgrammableChat{
                   '<i class="fas fa-user-circle"></i>'+
                 '</span>'+
                 '<span class="chat-line-username">'+
-                  '<span>'+fromUser+'<span>:</span></span>'+
+                  '<span>'+this.identity+'<span>:</span></span>'+
                 '</span>'+
                 '<span>'+
                   '<span>'+message_span.textContent+'</span>'+
@@ -90,12 +99,12 @@ class ProgrammableChat{
     Client.create(this.token).then(client => {
       console.log('Created chat client');
       this.chatClient = client;
-      this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel);
+      this.chatClient.getSubscribedChannels().then(() => this.createOrJoinGeneralChannel());
 
     // Alert the user they have been assigned a random username
     this.username = this.identity;
-    this.print('You have been assigned a random username of: '
-    + '<span class="me">' + this.username + '</span>', true);
+    this.print('You have been assigned the username: '
+    + this.username, true);
 
     }).catch(error => {
       console.error(error);
@@ -104,46 +113,62 @@ class ProgrammableChat{
     });
  }
 
-  createOrJoinGeneralChannel() {
-    // Get the general chat channel, which is where all the messages are
-    // sent in this simple application
-    this.print('Attempting to join "general" chat channel...');
-    this.chatClient.getChannelByUniqueName('general')
-    .then(function(channel) {
+  getChannelByUniqueNamelHandler(channel){
       this.generalChannel = channel;
       console.log('Found general channel:');
       console.log(this.generalChannel);
-      setupChannel();
-    }).catch(function() {
+      this.setupChannel(channel);
+  }
+
+  createChannelCatch(channel){
+
+        console.log('Channel could not be created:');
+        console.log(channel);
+  }
+
+  createChannel(channel) {
+        console.log('Created general channel:');
+        console.log(channel);
+        this.generalChannel = channel;
+        this.setupChannel(channel);
+      }
+
+  getChannelByUniqueNamelHandlerCatch() {
       // If it doesn't exist, let's create it
       console.log('Creating general channel');
       this.chatClient.createChannel({
         uniqueName: 'general',
         friendlyName: 'General Chat Channel'
-      }).then(function(channel) {
-        console.log('Created general channel:');
-        console.log(channel);
-        this.generalChannel = channel;
-        setupChannel();
-      }).catch(function(channel) {
-        console.log('Channel could not be created:');
-        console.log(channel);
-      });
-    });
+      }).then((channel) => this.createChannel(channel)).catch((channel) => this.createChannelCatch(channel));
+    }
+
+  createOrJoinGeneralChannel() {
+    // Get the general chat channel, which is where all the messages are
+    // sent in this simple application
+    this.print('Attempting to join "general" chat channel...');
+    this.chatClient.getChannelByUniqueName('general')
+    .then((channel) => this.getChannelByUniqueNamelHandler(channel)).catch(
+      () => this.getChannelByUniqueNamelHandlerCatch()
+      );
   }
 
+joinedChannel(channel){
+      this.print('Joined channel as '+this.username , true);
+}
   // Set up channel after it has been found
-  setupChannel() {
+  setupChannel(channel) {
     // Join the general channel
-    this.generalChannel.join().then(function(channel) {
-      this.print('Joined channel as '
-      + '<span class="me">' + this.username + '</span>.', true);
-    });
+    if(channel.state.status !== "joined"){
+      this.generalChannel.join().then((channel) => this.joinedChannel(channel));
+    }else{
+      this.joinedChannel(channel);
+    }
+    
 
     // Listen for new messages sent to the channel
-    this.generalChannel.on('messageAdded', function(message) {
-      printMessage(message.author, message.body);
-    });
+    this.generalChannel.on('messageAdded', (message) =>
+      this.printMessage(message.author, message.body)
+    );
   }
 
   // Send a new message to the general channel
@@ -154,8 +179,8 @@ class ProgrammableChat{
         this.print('The Chat Service is not configured. Please check your .env file.', false);
         return;
       }
-      this.generalChannel.sendMessage(this.input.val())
-      this.input.val('');
+      this.generalChannel.sendMessage(this.input.value)
+      this.input.value = '';
     }
    }
 }

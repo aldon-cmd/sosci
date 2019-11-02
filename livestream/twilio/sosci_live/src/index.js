@@ -9,10 +9,18 @@ class Sosci{
 
     static init(identity,token){
     const programmablevideo = new ProgrammableVideo();
-    programmablevideo.join(token);
-    var room = programmablevideo.room;
-    const screenshare = new ScreenShare(room);
-    const programmablechat = new ProgrammableChat(identity,token);
+    var room;
+    var screenshare;
+    var programmablechat;
+    var room_sid_input
+    programmablevideo.join(token).then( function(active_room) { 
+
+    room = active_room
+    room_sid_input = document.getElementById('input-room-sid');   
+    room_sid_input.value = room.sid
+
+    screenshare = new ScreenShare(room);
+    programmablechat = new ProgrammableChat(identity,token);
 
     document.getElementById('btn-share-screen').onclick = screenshare.share_screen;
 
@@ -23,6 +31,9 @@ class Sosci{
     // When we are about to transition away from this page, disconnect
     // from the room, if joined.
     window.addEventListener('beforeunload', programmablevideo.leaveRoomIfJoined);
+
+    });
+
   }
 }
 
