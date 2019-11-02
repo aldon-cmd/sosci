@@ -292,11 +292,11 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   padding: 0px;
 }
 
-#sosci-nav .fa-bars{
+#sosci-nav .fas {
   color: #fff;;
 }
 
-.navbar-toggler .fa-bars {
+.navbar-toggler .fas {
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -352,9 +352,13 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-family: Helvetica;
 }
 
-.credit-hours-course {
+.course-detail-info {
   margin: 5px 0px 38px 0px;
-  font-size: 16px;
+  font-size: 15px;
+}
+
+.publisher {
+  margin-left: 1px;
 }
 
 .description-detail p {
@@ -447,6 +451,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   }
 }
 
+@media only screen and (max-width: 400px) {
+  #course-list .text {
+    width: 336px;
+  }
+}
+
 #course-list .title, #course-list .text {
   color: #212529;
 }
@@ -502,9 +512,16 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .enroll-btn-text {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Helvetica;
+}
+
+.cost {
+  font-size: 18px;
   font-weight: 600;
   font-family: Helvetica;
+  margin-bottom: 2px;
 }
 
 .enroll-btn-icon {
@@ -539,7 +556,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   -webkit-flex: 5.2 0 0;
   -ms-flex: 5.2 0 0px;
   flex: 5.2 0 0;
-  padding: 1.825rem 1.0625rem;
+  padding: 17px 17px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #fff;
@@ -1382,6 +1399,18 @@ button > i, .span {
   padding-top: 4rem !important;
 }
 
+@media only screen and (max-width: 600px) {
+  #checkout .row {
+    padding-top: 2rem !important
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #checkout .box-container {
+    padding: 0px 15px !important
+  }
+}
+
 #checkout .table {
   margin: 0px;
 }
@@ -1391,8 +1420,20 @@ button > i, .span {
   float: right;
 }
 
+@media only screen and (max-width: 600px) {
+  .card-image {
+    width: 23%;
+  }
+}
+
 .payment-title {
   width: 80%;
+}
+
+@media only screen and (max-width: 600px) {
+  .payment-title {
+    width: 77%;
+  }
 }
 
 #checkout img {
