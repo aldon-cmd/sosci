@@ -296,6 +296,10 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   color: #fff;;
 }
 
+#sosci-nav .dropdown-item > .fas {
+  color: #757575;
+}
+
 .navbar-toggler .fas {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -319,7 +323,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .box-part{
-  background: #FFF;
+  background: #fff;
   border-radius: 0;
   margin: 10px 0px;
 }
@@ -363,7 +367,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 .description-detail p {
   line-height: 1.2;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .subheading {
@@ -374,6 +378,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 .title-details {
   font-size: 25px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .title-details {
+    font-size: 23px !important;
+  }
 }
 
 #course-list .line-clamp, #create-form .line-clamp {
@@ -567,6 +577,18 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 .enroll-btn-icon {
   background: rgba(255,255,255,0.14051322372924);
   color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+  .buy-btn-1 {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .buy-btn-2 {
+    display: none;
+  }
 }
 
 .course-list {
@@ -2723,6 +2745,23 @@ textarea:-ms-input-placeholder {
   right: 30px;
   bottom: 22px;
 }
+
+@media only screen and (max-width: 600px) {
+  .pay-form-1 {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .pay-form-2 {
+    display: none;
+  }
+}
+
+.pay-form-2 {
+  margin-top: 30px;
+}    
+
 /*
 .card-header:first-child {
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;

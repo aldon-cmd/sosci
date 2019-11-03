@@ -8,6 +8,7 @@
 <div id="checkout">
   <div class="container no-padding">
     <div class="row ">
+
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 box-container">
         <div class="payment-container">
           <div class="cc-header d-flex">
@@ -17,15 +18,14 @@
               <img src="{% static 'img/mastercard.png' %}"/>
             </div>
           </div>
-
           <div class="text">
             <p class="line-clamp overflow-visible">Fill in all the fields below, and when you're finshed, click the "Confirm & Pay" button to process your Debit or Credit card.</p>
           </div>
+        </div>
+        <div class="payment-container pay-form-1">
           <div>
-            <div>
-              {% purchase_info_for_product request product as session %}
-              {% include "payment/partials/plugnpay_form.html" %}
-            </div>
+            {% purchase_info_for_product request product as session %}
+            {% include "payment/partials/plugnpay_form.html" %}
           </div>
         </div>
       </div> 
@@ -53,6 +53,14 @@
           </div>
         </div>
       </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 box-container pay-form-2">
+        <div>
+          {% purchase_info_for_product request product as session %}
+          {% include "payment/partials/plugnpay_form.html" %}
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
