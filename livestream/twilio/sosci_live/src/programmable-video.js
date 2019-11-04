@@ -8,6 +8,14 @@ class ProgrammableVideo {
 		this.previewTracks = null;
 	}
 
+	create_local_tracks(){
+	  // Attach LocalParticipant's Tracks, if not already attached.
+	  var previewContainer = document.getElementById('local-media');
+	  if (!previewContainer.querySelector('video')) {
+	    this.attachParticipantTracks(this.room.localParticipant, previewContainer);
+	  }
+	}
+
 	// Attach the Tracks to the DOM.
 	attachTracks(tracks, container) {
 	  tracks.forEach(function(track) {
@@ -76,10 +84,7 @@ class ProgrammableVideo {
 	  this.populate_participant_list(room);
 
 	  // Attach LocalParticipant's Tracks, if not already attached.
-	  var previewContainer = document.getElementById('local-media');
-	  if (!previewContainer.querySelector('video')) {
-	    this.attachParticipantTracks(room.localParticipant, previewContainer);
-	  }
+	  this.create_local_tracks();
 
 	  // Attach the Tracks of the Room's Participants.
 	  room.participants.forEach((participant) => {

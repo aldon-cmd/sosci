@@ -1,10 +1,20 @@
+'use strict';
+
+import Video from 'twilio-video';
+
 class ScreenShare{
-	constructor(room){
+	constructor(room,programmablevideo){
 		this.room = room;
+		this.programmablevideo = programmablevideo;
 		this.screen_track = null;
 	}
 
 	share_screen(){
+		if(this.screen_track){
+			this.unshare_screen();
+			this.programmablevideo.create_local_tracks();
+		}
+	  
 	  var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
 	  this.screen_track = stream.getVideoTracks()[0];
 	  var trackName = this.room.localParticipant.identity +'/screen-share'
@@ -15,12 +25,14 @@ class ScreenShare{
 	  }); 
 	}
 
-	unshare_screen(room,screen_track) {
-	  room.localParticipant.unpublishTrack(screen_track);
-	  this.screen_track = null;
-	  document.getElementById('btn-share-screen').style.display = 'inline';
-	  document.getElementById('btn-unshare-screen').style.display = 'none';
-	};
+	unshare_screen() {
+		if(this.screen_track){
+		  this.room.localParticipant.unpublishTrack(this.screen_track);
+		  this.screen_track = null;
+		  document.getElementById('btn-share-screen').style.display = 'inline';
+		  document.getElementById('btn-unshare-screen').style.display = 'none';
+		}
+	}
 }
 
 export { ScreenShare }

@@ -20,13 +20,13 @@ class Sosci{
     room_sid_input = document.getElementById('input-room-sid');   
     room_sid_input.value = room.sid
 
-    screenshare = new ScreenShare(room);
+    screenshare = new ScreenShare(room,programmablevideo);
     programmablechat = new ProgrammableChat(identity,token);
 
-    document.getElementById('btn-share-screen').onclick = screenshare.share_screen;
+    document.getElementById('btn-share-screen').onclick = () => screenshare.share_screen();
 
 
-    document.getElementById('btn-unshare-screen').onclick = screenshare.unshare_screen;
+    document.getElementById('btn-unshare-screen').onclick = () => screenshare.unshare_screen();
 
 
     // When we are about to transition away from this page, disconnect
