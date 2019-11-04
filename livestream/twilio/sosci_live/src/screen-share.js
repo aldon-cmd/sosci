@@ -17,6 +17,8 @@ class ScreenShare{
 	  
 	  var stream = navigator.mediaDevices.getDisplayMedia().then(stream => {
 	  this.screen_track = stream.getVideoTracks()[0];
+
+	  this.screen_track.oninactive = ()=> {this.programmablevideo.create_local_tracks();};
 	  var trackName = this.room.localParticipant.identity +'/screen-share'
 	  var videoTrack = Video.LocalVideoTrack(this.screen_track,{name: trackName});
 	  this.room.localParticipant.publishTrack(videoTrack);
