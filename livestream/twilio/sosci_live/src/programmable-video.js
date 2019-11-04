@@ -64,10 +64,7 @@ class ProgrammableVideo {
 	populate_participant_list(room){
 
 
-	     room.participants.forEach(function(participant) {
-
-	      this.create_participants_list_item(participant);
-	    });
+	     room.participants.forEach((participant) => {this.create_participants_list_item(participant);});
 	}
 
 	// Successfully connected!
