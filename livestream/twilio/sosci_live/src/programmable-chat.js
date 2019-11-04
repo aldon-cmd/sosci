@@ -6,7 +6,7 @@ class ProgrammableChat{
 
     constructor(identity,token){
         this.identity_arr = identity.split("/");
-        this.identity = 1 in this.identity_arr ? this.identity_arr[1] : "";
+        this.identity = this.get_name(this.identity_arr);
         
         this.token = token;
 
@@ -43,6 +43,10 @@ class ProgrammableChat{
 
     }
 
+  get_name(identity_arr){
+    return 1 in identity_arr ? identity_arr[1] : "";
+  }
+
   // Helper function to print info messages to the chat window
   print(infoMessage, asHtml) {
     var msg = document.createElement("DIV"); 
@@ -60,6 +64,7 @@ class ProgrammableChat{
 
   // Helper function to print chat message to the chat window
   printMessage(fromUser, message) {
+    var identity_arr = fromUser.split("/");
     var message_container = document.createElement("DIV"); 
     message_container.setAttribute("class","live-chat");
 
@@ -75,7 +80,7 @@ class ProgrammableChat{
                   '<i class="fas fa-user-circle"></i>'+
                 '</span>'+
                 '<span class="chat-line-username">'+
-                  '<span>'+this.identity+'<span>:</span></span>'+
+                  '<span>'+this.get_name(identity_arr)+'<span>:</span></span>'+
                 '</span>'+
                 '<span>'+
                   '<span>'+message_span.textContent+'</span>'+
