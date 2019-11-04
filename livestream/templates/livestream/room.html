@@ -34,14 +34,14 @@
             <span>Behavioural Economics and the Modern Economy</span> 
           </div>
 
-          <div id="myParticipants" class="side-box-content hide">
+          <div id="participants-panel" class="side-box-content">
             <h4 class="">Participants</h4>
-            <ul id="participants">
+            <ul id="participants-list">
             <li><div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div><i class="fas fa-circle"></i></li>
             </ul>
           </div>
 
-          <div id="messages" class="side-box-content">
+          <div id="chat-panel" class="side-box-content hide">
 
 
             <div class="chat-box">
@@ -54,7 +54,7 @@
             </div>
           </div>
 
-          <div id="" class="side-box-content">
+          <div id="video-controls-panel" class="side-box-content hide">
             <div class="video-nav">
               <div style="text-align:center">
                 <div class="">
@@ -111,14 +111,14 @@
             </div>
           </div>
 
-          <div class="side-box-footer ">
-            <div class="side-box-functions">
+          <div class="side-box-footer">
+            <div id="btn-toggle-participants-panel" class="side-box-functions">
               <i class="fas fa-user-friends"></i> 
             </div>
-            <div class="side-box-functions">
+            <div id="btn-toggle-chat-panel" class="side-box-functions">
               <i class="fas fa-comment"></i>  
             </div>
-            <div class="side-box-functions">
+            <div id="btn-toggle-video-controls-panel" class="side-box-functions">
               <i class="fas fa-video"></i>
             </div>
           </div>

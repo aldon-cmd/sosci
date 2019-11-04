@@ -20,7 +20,7 @@ class ProgrammableChat{
         this.username = null;
 
         // Get handle to the chat div
-        this.chat_window = document.getElementById('messages');
+        this.chat_panel = document.getElementById('chat-panel');
 
         this.input = document.getElementById('chat-input');
 
@@ -55,7 +55,7 @@ class ProgrammableChat{
       
       msg.appendChild(infoMessage_txt);
     }
-    this.chat_window.appendChild(msg);
+    this.chat_panel.appendChild(msg);
   }
 
   // Helper function to print chat message to the chat window
@@ -84,8 +84,8 @@ class ProgrammableChat{
     message_container.innerHTML = chat_list_item;
 
 
-    this.chat_window.appendChild(message_container);
-    // this.chat_window.scrollTop = this.chat_window.scrollHeight;
+    this.chat_panel.appendChild(message_container);
+    // this.chat_panel.scrollTop = this.chat_panel.scrollHeight;
   }
 
 

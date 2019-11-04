@@ -37,7 +37,7 @@ class ProgrammableVideo {
 	}
 
 	create_participants_list_item(participant){
-	    var participants_list = document.getElementById('participants');
+	    var participants_list = document.getElementById('participants-list');
 	    var participants_list_item = document.createElement("LI"); 
 	    var participants_list_item_content;
 	    var participant_identity;

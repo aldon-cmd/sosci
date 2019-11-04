@@ -1,6 +1,6 @@
 'use strict';
 
-
+import {RoomUI} from './room-ui';
 import {ProgrammableVideo} from './programmable-video';
 import {ProgrammableChat} from './programmable-chat';
 import {ScreenShare} from './screen-share';
@@ -8,6 +8,7 @@ import {ScreenShare} from './screen-share';
 class Sosci{
 
     static init(identity,token){
+    const roomui = new RoomUI();
     const programmablevideo = new ProgrammableVideo();
     var room;
     var screenshare;
