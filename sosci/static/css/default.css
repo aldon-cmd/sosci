@@ -2500,6 +2500,7 @@ ol, ul {
   background-color: #F2F3F5;
   display: inline-block;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .side-box-functions > .fas {
@@ -2692,6 +2693,7 @@ ol, ul {
   font-weight: 700;
   line-height: 1;
   color: #da1c00;
+  margin: 0px 5px  ;
 }
 
 .chat-badge {
