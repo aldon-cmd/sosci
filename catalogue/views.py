@@ -17,7 +17,14 @@ from catalogue.utils import CatalogueCreator
 from catalogue import mixins
 from django.db.models import Q
 # Create your views here.
+class CourseListView(ListView):
+    template_name = "catalogue/catalogue_list.html"
+    paginate_by = 10
+    model = models.Product
 
+    def get_queryset(self):
+        return models.Product.objects.filter(product_class__name="Course")
+        
 class MyCreatedCoursesListView(ListView):
     """
     list of courses that a user has enrolled in
@@ -125,14 +132,6 @@ class LiveCourseDetailView(TemplateView,mixins.EnrollmentMixin):
     def get_course(self):
         course_id = self.kwargs.get("course_id")
         return models.Product.objects.filter(pk=course_id).first()
-
-class CourseListView(ListView):
-    template_name = "catalogue/catalogue_list.html"
-    paginate_by = 10
-    model = models.Product
-
-    def get_queryset(self):
-        return models.Product.objects.filter(product_class__name="Course")
 
 class CourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"
