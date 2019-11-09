@@ -1,10 +1,10 @@
 # build sosci-live.js module
 
-cd "sosci.git/livestream/twilio"
+cd sosci.git/livestream/twilio
 
 npm run build
 
-Steps for creating a page
+# Steps for creating a page
 
 Create a view class, and see examples in the views.py file, note there is 1 view.py file in each app/folder.
 See line 149 of the views.py file in the catalogue app.
