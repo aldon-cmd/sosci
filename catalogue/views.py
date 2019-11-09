@@ -15,27 +15,41 @@ from customer.forms import CustomAuthenticationForm
 from django.views.generic.edit import FormView
 from catalogue.utils import CatalogueCreator
 from catalogue import mixins
+from django.db.models import Q
 # Create your views here.
 
-
-class MyEnrolledCoursesListView(ListView):
+class MyCreatedCoursesListView(ListView):
     """
     list of courses that a user has enrolled in
     """
-    template_name = "catalogue/course_list.html"
-    paginate_by = 10
-    model = models.Product
-
-class MyCoursesListView(ListView):
-    """
-    list of courses that a user has enrolled in
-    """
-    template_name = "catalogue/course_list.html"
+    template_name = "catalogue/my_created_courses_list.html"
     paginate_by = 10
     model = models.Product
 
     def get_queryset(self):
         return models.Product.objects.filter(user=self.request.user)
+
+class MyEnrolledCoursesListView(ListView):
+    """
+    list of courses that a user has enrolled in
+    """
+    template_name = "catalogue/my_enrolled_courses_list.html"
+    paginate_by = 10
+    model = models.Product
+
+    def get_queryset(self):
+        return models.Product.objects.filter(enrollments__user_id=self.request.user.pk)
+
+class MyCoursesListView(ListView):
+    """
+    list of courses that a user has enrolled in
+    """
+    template_name = "catalogue/my_courses_list.html"
+    paginate_by = 10
+    model = models.Product
+
+    def get_queryset(self):
+        return models.Product.objects.filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user))
 
 class LiveCourseListView(ListView):
     template_name = "catalogue/live_course_list.html"
@@ -113,7 +127,7 @@ class LiveCourseDetailView(TemplateView,mixins.EnrollmentMixin):
         return models.Product.objects.filter(pk=course_id).first()
 
 class CourseListView(ListView):
-    template_name = "catalogue/course_list.html"
+    template_name = "catalogue/catalogue_list.html"
     paginate_by = 10
     model = models.Product
 

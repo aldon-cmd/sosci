@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from oscar import get_core_apps
+from django.core.urlresolvers import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -56,7 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'customer.middlewares.LoginRequiredMiddleware'
 ]
 
 ROOT_URLCONF = 'sosci.urls'
@@ -169,7 +171,13 @@ STATICFILES_FINDERS = (
 )
 
 LOGIN_REQUIRED_URLS = (
+    r'^/catalogue/my-courses$',
+    r'^/catalogue/my-enrolled-courses$',
 )
+
+LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
+
+LOGIN_URL = reverse_lazy('customer:user-login')
 
 ANONYMOUS_REQUIRED_URLS = (
     r'^/account/login$',

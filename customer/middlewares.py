@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse
-from payroll import models
 
 class LoginRequiredMiddleware(object):
     """
