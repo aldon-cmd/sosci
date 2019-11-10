@@ -15,7 +15,7 @@
 					  <p>Click the start streaming button to create your class room. After which, your students can join in to participate.</p>
 					  <hr class="my-4">	
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding stream-btn">
-							<a class="enroll-btn" href="{% url 'live:twilio-room' view.kwargs.course_id %}" role="button">
+							<a class="enroll-btn" href="{% url 'live:twilio-room-host' view.kwargs.course_id %}" role="button">
 								<i class="fas fa-video"></i>
 							    <span class="stream-button">Start Session</span>
 							</a>
