@@ -7,6 +7,9 @@ from livestream import models as twilio_models
 
 class Course(object):
 
+    def get_courses(self):
+        return catalogue_models.Product.objects.select_related("product_class")
+
     def get_course(self,course_id):
         return catalogue_models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
 

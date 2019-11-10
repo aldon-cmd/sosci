@@ -23,7 +23,7 @@ class CourseListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return catalogue_models.Product.objects.filter(product_class__name="Course")
+        return Course().get_courses()
 
 class MyCreatedCoursesListView(ListView):
     """
@@ -34,7 +34,7 @@ class MyCreatedCoursesListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return catalogue_models.Product.objects.filter(user=self.request.user)
+        return Course().get_courses().filter(user=self.request.user)
 
 class MyEnrolledCoursesListView(ListView):
     """
@@ -45,7 +45,7 @@ class MyEnrolledCoursesListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return catalogue_models.Product.objects.filter(enrollments__user_id=self.request.user.pk)
+        return Course().get_courses().filter(enrollments__user_id=self.request.user.pk)
 
 class MyCoursesListView(ListView):
     """
@@ -56,7 +56,7 @@ class MyCoursesListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return catalogue_models.Product.objects.filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user))
+        return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user))
 
 class LiveCourseListView(ListView):
     template_name = "catalogue/live_course_list.html"
@@ -64,7 +64,7 @@ class LiveCourseListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return catalogue_models.Product.objects.filter(product_class__name="Live")
+        return Course().get_courses().filter(product_class__name="Live")
 
 class LiveCourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"
