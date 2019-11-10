@@ -26,8 +26,7 @@
 
 
                   {% if request.user.is_authenticated == True %}
-                          {# check if the currently logged in user owns the course #}
-                          {% if course.user_id == request.user.pk %}
+                        {% if is_enrolled == True %}
                          <a href="{% url 'live:start-session' view.kwargs.course_id %}">
                         <div class="enroll-btn" >
                           <div class="enroll-btn-icon">

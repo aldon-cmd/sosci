@@ -1,9 +1,22 @@
 from decimal import Decimal as D
 from django.db.transaction import atomic    
 from partner.models import Partner, StockRecord 
-from catalogue.models import ProductClass, Product, Category, ProductCategory
+from catalogue import models as catalogue_models
 from oscar.apps.catalogue.categories import create_from_breadcrumbs
 from livestream import models as twilio_models
+
+class Course(object):
+
+    def get_course(self,course_id):
+        return catalogue_models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
+
+class Enrollment(object):
+
+      def enroll(self,user,course_id):
+          catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=user)
+
+      def is_enrolled(self,user, course_id):
+          return catalogue_models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
 
 class CatalogueCreator(object):
 
@@ -23,9 +36,9 @@ class CatalogueCreator(object):
 
         # Create item class and item
         product_class, __ \
-            = ProductClass.objects.get_or_create(name=product_class,requires_shipping=False,track_stock=False)
+            = catalogue_models.ProductClass.objects.get_or_create(name=product_class,requires_shipping=False,track_stock=False)
 
-        item = Product()
+        item = catalogue_models.Product()
         item.user = user
         item.title = title
         item.description = description
@@ -36,7 +49,7 @@ class CatalogueCreator(object):
 
         # Category
         cat = create_from_breadcrumbs(category_str)
-        ProductCategory.objects.update_or_create(product=item, category=cat)
+        catalogue_models.ProductCategory.objects.update_or_create(product=item, category=cat)
 
         return item
 

@@ -2,121 +2,102 @@
 {% load static widget_tweaks %}
 {% block content %}
 
-<div class="container"> 
-  <div class="row course-detail">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
-      <div class="p-3">
-        <div class="box-part text-left">
-          <div class="title title-details">
-            <h3>{{course.title}}</h3>
-          </div>
-          <div class="course-detail-info">
-            <span>Created by:</span>
-            <span class="publisher">Rafer Johnson</span>
-          </div>
-        </div>  
-        <div class="description description-detail">
-          <h3 class="subheading">Course Description</h3>
-          <p>{{course.description}} </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding buy-btn-1">
-      <div class="p-3">
-        {% if request.user.is_authenticated == True %}
-        <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
-          <div class="enroll-btn" >
-            <div class="enroll-btn-icon">
-              <i class="fas fa-video"></i>
-            </div>
-            <div class="enroll-btn-text-wrap">
-              <div>
-                <div class="cost">
-                  <span>Buy for</span>
-                  <span>$12,500</span>
+<div class="container">
+    <div class="row course-detail">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+            <div class="p-3">
+                <div class="box-part text-left">
+                    <div class="title title-details">
+                        <h3>{{course.title}}</h3>
+                    </div>
+                    <div class="course-detail-info">
+                        <span>Created by:</span>
+                        <span class="publisher">Rafer Johnson</span>
+                    </div>
                 </div>
-                <div class="enroll-btn-text">Enroll in this course</div>
-              </div>
+                <div class="description description-detail">
+                    <h3 class="subheading">Course Description</h3>
+                    <p>{{course.description}} </p>
+                </div>
             </div>
-          </div>
-        </a>
-        {% else %}
-        <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
-          <div class="enroll-btn-icon">
-            <i class="fas fa-video"></i>
-          </div>
-          <div class="enroll-btn-text-wrap">
-            <div>
-              <div class="cost">
-                <span>Buy for</span>
-                <span>$12,500</span>
-              </div>
-              <div class="enroll-btn-text">Enroll in this course</div>
-            </div>
-          </div>
-        </div>                      
-        {% endif %}
-      </div>
-    </div>
-    
-    <div id="course-content" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
-      <div class="p-3">
-        <h3 class="subheading">Course Content</h3>
-        <table class="course-list">
-          <tbody>
-            {% for module in course.coursemodules.all %}
-            <tr>
-              <td class="course-list-count">{{ forloop.counter }}</td>
-              <td class="course-list-title">{{module.name}}</td>
-              <td class="course-list-duration">{{module.duration}}</td>
-            </tr>
-            {% empty %}
-                <tr><td></td><td>No modules yet.</td><td></td></tr>
-            {% endfor %} 
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
 
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding buy-btn-2">
-  <div class="p-3">
-    {% if request.user.is_authenticated == True %}
-    <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
-      <div class="enroll-btn" >
-        <div class="enroll-btn-icon">
-          <i class="fas fa-video"></i>
-        </div>
-        <div class="enroll-btn-text-wrap">
-          <div>
-            <div class="cost">
-              <span>Buy for</span>
-              <span>$12,500</span>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding buy-btn-1">
+            <div class="p-3">
+                {% if request.user.is_authenticated == True %}
+
+                {% if is_enrolled == True %}
+                <a href="{% url 'video:video-player' view.kwargs.course_id %}">
+                    <div class="enroll-btn">
+                        <div class="enroll-btn-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="enroll-btn-text-wrap">
+                            <div class="enroll-btn-text">Watch Now</div>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
+                    <div class="enroll-btn">
+                        <div class="enroll-btn-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="enroll-btn-text-wrap">
+                            <div>
+                                <div class="cost">
+                                    <span>Buy for</span>
+                                    <span>$12,500</span>
+                                </div>
+                                <div class="enroll-btn-text">Enroll in this course</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+
+                {% else %}
+                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
+                    <div class="enroll-btn-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="enroll-btn-text-wrap">
+                        <div>
+                            <div class="cost">
+                                <span>Buy for</span>
+                                <span>$12,500</span>
+                            </div>
+                            <div class="enroll-btn-text">Enroll in this course</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
-            <div class="enroll-btn-text">Enroll in this course</div>
-          </div>
         </div>
-      </div>
-    </a>
-    {% else %}
-    <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
-      <div class="enroll-btn-icon">
-        <i class="fas fa-video"></i>
-      </div>
-      <div class="enroll-btn-text-wrap">
-        <div>
-          <div class="cost">
-            <span>Buy for</span>
-            <span>$12,500</span>
-          </div>
-          <div class="enroll-btn-text">Enroll in this course</div>
+
+        <div id="course-content" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+            <div class="p-3">
+                <h3 class="subheading">Course Content</h3>
+                <table class="course-list">
+                    <tbody>
+                        {% for module in course.coursemodules.all %}
+                        <tr>
+                            <td class="course-list-count">{{ forloop.counter }}</td>
+                            <td class="course-list-title">{{module.name}}</td>
+                            <td class="course-list-duration">{{module.duration}}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td>No modules yet.</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-    </div>                      
-    {% endif %}
-  </div>
+    </div>
 </div>
 
 <div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>
@@ -129,25 +110,24 @@
 {{ block.super }}
 <script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
 
-  <script>
-  $(document).on('click',".open-login-modal", function (event) {
-    event.preventDefault();
-    open_login_modal($(this).attr('data-url'));
+<script>
+    $(document).on('click', ".open-login-modal", function(event) {
+        event.preventDefault();
+        open_login_modal($(this).attr('data-url'));
 
-    
-  });
 
-function open_login_modal(url){
-
-    $('#authentication-modal').load(url,function(){
-
-        $('#authentication-modal').modal('show');
-        
-        
     });
 
-    
-}
+    function open_login_modal(url) {
 
+        $('#authentication-modal').load(url, function() {
+
+            $('#authentication-modal').modal('show');
+
+
+        });
+
+
+    }
 </script>
-{% endblock extrascripts %} 
+{% endblock extrascripts %}
