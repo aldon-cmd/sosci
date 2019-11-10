@@ -45,7 +45,7 @@
                         <div class="module-number">{{ forloop.counter }}</div>
                         <div class="box-content">
                           <div>
-                            <a href="{% url 'video:video-player' video.video_id %}">{{video.name}}</a>
+                            <a href="{% url 'video:play-video' view.kwargs.course_id video.video_id %}">{{video.name}}</a>
                             <p class="instructor">Rafer Johnson </p>
                             <p class="course-video-info">{{video.description}}</p>
                           </div>

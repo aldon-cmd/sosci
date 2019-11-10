@@ -14,10 +14,10 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from catalogue import mixins
+from catalogue.utils import Enrollment
 from django import http
 
-class VideoPlayerView(TemplateView,mixins.EnrollmentMixin):
+class VideoPlayerView(TemplateView):
     template_name = "video/player.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -26,7 +26,7 @@ class VideoPlayerView(TemplateView,mixins.EnrollmentMixin):
         if not request.user.is_authenticated():
             return http.HttpResponseRedirect('/') 
 
-        if not self.is_enrolled(request.user,course_id, catalogue_models):
+        if not Enrollment().is_enrolled(request.user,course_id):
             
             return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
