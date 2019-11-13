@@ -13,7 +13,7 @@ In the views.py file, set the template name to the name of the html file, under 
 
 Create the template. 
 
-Create the url that points to the class in the apps.py file 
+Create the url that points to the class in the app.py file 
 
 Copy the course_publish template, and make your modifications. 
 

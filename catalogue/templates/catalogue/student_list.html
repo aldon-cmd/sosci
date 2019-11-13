@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<main id="sponsored-content">
+  <div class="top-header-container">
+    <div class="top-header">
+      <div class="top-header-content d-flex">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 px-0 d-flex title-sponsor">
+          <span>Manage Students</span>
+          <span class="divider">|</span>
+          <p>List View</p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 px-0 sponsor-search">
+          <i class="fas fa-search"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    
+    <div id="student-list" class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      	<table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Course</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>IFRS 2 Share-based Payment</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>IFRS 2 Share-based Payment</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Rafer</td>
+              <td>Johnson</td>
+              <td>IFRS 2 Share-based Payment</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }};q={{q}}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }};q={{q}}">next</a>
+            {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  </div>
+</main>  
+{% endblock content %}

@@ -377,12 +377,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .title-details {
-  font-size: 25px !important;
+  font-size: 23px !important;
 }
 
 @media only screen and (max-width: 600px) {
   .title-details {
-    font-size: 23px !important;
+    font-size: 20px !important;
   }
 }
 
@@ -1542,6 +1542,11 @@ button > i, .span {
   font-size: 13px;
 }
 
+input:required {
+  font-family: Helvetica !important;
+  font-size: 13px;
+}
+
 .payment-submit input {
   font-family: Helvetica;
   font-size: 16px;
@@ -2034,6 +2039,12 @@ div > .dropdown-item {
 #sign-in-form .box {
   max-width: 470px;
   margin: 3rem auto;
+}
+
+@media only screen and (max-width: 500px) {
+  #sign-in-form .box {
+    margin: 0px;
+  }
 }
 
 .form-group-label {
@@ -2765,6 +2776,11 @@ textarea:-ms-input-placeholder {
 .pay-form-2 {
   margin-top: 30px;
 }    
+
+#student-list th, #student-list td {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
 
 /*
 .card-header:first-child {
