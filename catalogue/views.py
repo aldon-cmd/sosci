@@ -237,3 +237,9 @@ class SmeCourseListView(ListView):
 
     def get_queryset(self):
         return catalogue_models.Product.objects.filter(product_class__name="Course")
+
+
+class StudentListView(ListView):
+    template_name = "catalogue/student_list.html"
+    paginate_by = 10
+    model = catalogue_models.Product
