@@ -392,6 +392,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+  min-height: 96px !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -401,6 +402,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+  min-height: 96px !important;
   }
 }
 
