@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'livestream.apps.LivestreamConfig',
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
+    'tinymce',
 
 ] + get_core_apps(['customer','promotions','basket','catalogue','payment','partner','order','checkout'])
 

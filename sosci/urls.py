@@ -22,6 +22,7 @@ from app import application
 
 
 urlpatterns = [
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^video/', include('video.urls', namespace='video')),
     url(r'^live/', include('livestream.urls', namespace='live')),
     url(r'^payment/', include('payment.urls', namespace='payment')),

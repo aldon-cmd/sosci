@@ -1,6 +1,6 @@
 from django import forms
 from catalogue import models
-
+from tinymce.widgets import TinyMCE
 
 class CourseForm(forms.ModelForm):
     CHOICES = (
@@ -8,6 +8,7 @@ class CourseForm(forms.ModelForm):
     )
     price = forms.DecimalField(max_digits=6,decimal_places=2)
     product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Course"))
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
 
@@ -20,6 +21,7 @@ class LiveCourseForm(forms.ModelForm):
     )
     price = forms.DecimalField(max_digits=6,decimal_places=2)
     product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Live"))
+    description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
     class Meta:
 
