@@ -130,9 +130,9 @@ class VimeoVideoUploadAttemptView(View):
 
     def create_course_module(self,post_data,course_id):
         name = post_data.get("name","")
-        start_date = post_data.get("start_date","")
+        # start_date = post_data.get("start_date","")
 
-        module = catalogue_models.CourseModule.objects.create(name=name,start_date=start_date,product_id=course_id)
+        module = catalogue_models.CourseModule.objects.create(name=name,product_id=course_id)
         return module
 
     def create_vimeo_video(self,url,data,headers):
