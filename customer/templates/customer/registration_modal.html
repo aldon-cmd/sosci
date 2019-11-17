@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-<form id="registration-form" action="{% url 'customer:registration-modal' %}" method="post" novalidate>
+<form id="registration-form" action="{% url 'customer:registration-modal' view.kwargs.course_id %}" method="post" novalidate>
     {% csrf_token %}
     <div ng-class="{'has-error':vm.form.email.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1 n2">
         {% include 'partials/nolabel_form_field.html' with field=form.email %}    
@@ -31,7 +31,7 @@
         <div class="login-footer">
             Already have an account?
             <span class="signup-today">
-               <a class="open-user-login-modal" href="{% url 'customer:login-modal' %}" >Log in</a>
+               <a class="open-user-login-modal" href="{% url 'customer:login-modal' view.kwargs.course_id %}" >Log in</a>
             </span>
         </div>
     </div>
@@ -53,7 +53,7 @@
 
     function get_success_response(responseText, statusText, xhr, $form){
 
-              window.location.reload();
+              window.location.replace("{% url 'checkout:payment-details' view.kwargs.course_id %}");
           }
 
               function get_error_response(data){

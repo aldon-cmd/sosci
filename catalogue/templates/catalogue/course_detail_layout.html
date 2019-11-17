@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+{% block extrascripts %}
+{{ block.super }}
+<script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
+
+<script>
+    $(document).on('click', ".open-login-modal", function(event) {
+        event.preventDefault();
+        open_login_modal($(this).attr('data-url'));
+
+
+    });
+
+    function open_login_modal(url) {
+
+        $('#authentication-modal').load(url, function() {
+
+            $('#authentication-modal').modal('show');
+
+
+        });
+
+
+    }
+</script>
+{% endblock extrascripts %}

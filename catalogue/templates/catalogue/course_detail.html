@@ -1,7 +1,11 @@
-{% extends "base.html" %}
+{% extends "catalogue/course_detail_layout.html" %}
 {% load static widget_tweaks %}
-{% block content %}
+{% load currency_filters %}
+{% load purchase_info_tags %}
 
+
+{% block content %}
+{% purchase_info_for_product request course as session %}
 <div class="container">
     <div class="row course-detail">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
@@ -47,7 +51,7 @@
                             <div>
                                 <div class="cost">
                                     <span>Buy for</span>
-                                    <span>$12,500</span>
+                                    <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
                                 </div>
                                 <div class="enroll-btn-text">Enroll in this course</div>
                             </div>
@@ -57,7 +61,7 @@
                 {% endif %}
 
                 {% else %}
-                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' %}" data-toggle="modal" data-target="#login-modal">
+                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' view.kwargs.course_id %}" data-toggle="modal" data-target="#login-modal">
                     <div class="enroll-btn-icon">
                         <i class="fas fa-video"></i>
                     </div>
@@ -65,7 +69,7 @@
                         <div>
                             <div class="cost">
                                 <span>Buy for</span>
-                                <span>$12,500</span>
+                                <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
                             </div>
                             <div class="enroll-btn-text">Enroll in this course</div>
                         </div>
@@ -103,31 +107,3 @@
 <div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>
 
 {% endblock content %}
-
-
-
-{% block extrascripts %}
-{{ block.super }}
-<script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
-
-<script>
-    $(document).on('click', ".open-login-modal", function(event) {
-        event.preventDefault();
-        open_login_modal($(this).attr('data-url'));
-
-
-    });
-
-    function open_login_modal(url) {
-
-        $('#authentication-modal').load(url, function() {
-
-            $('#authentication-modal').modal('show');
-
-
-        });
-
-
-    }
-</script>
-{% endblock extrascripts %}

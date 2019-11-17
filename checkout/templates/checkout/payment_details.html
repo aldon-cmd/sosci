@@ -4,7 +4,9 @@
 {% load purchase_info_tags %}
 
 
+
 {% block content %}
+{% purchase_info_for_product request product as session %}
 <div id="checkout">
   <div class="container no-padding">
     <div class="row ">
@@ -24,7 +26,7 @@
         </div>
         <div class="payment-container pay-form-1">
           <div>
-            {% purchase_info_for_product request product as session %}
+            
             {% include "payment/partials/plugnpay_form.html" %}
           </div>
         </div>
@@ -54,12 +56,7 @@
         </div>
       </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 box-container pay-form-2">
-        <div>
-          {% purchase_info_for_product request product as session %}
-          {% include "payment/partials/plugnpay_form.html" %}
-        </div>
-      </div>
+
 
     </div>
   </div>

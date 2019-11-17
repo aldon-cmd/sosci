@@ -5,5 +5,12 @@ from django.db import models
 
 from oscar.apps.customer.abstract_models import AbstractUser
 
+
 class User(AbstractUser):
-	pass
+	userrole = models.ForeignKey("custom_user.UserRole", related_name='users', blank=True, null=True)
+
+class UserRole(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    
+    def __unicode__(self):
+      return self.name

@@ -1,3 +1,8 @@
+{% load currency_filters %}
+{% load purchase_info_tags %}
+
+{% purchase_info_for_product request object as session %}
+
 {% if object.product_class.name == "Course" %}
 <a href="{% url 'catalogue:course-detail' object.pk %}">
   <div class="border p-3">
@@ -12,7 +17,7 @@
     </div>
     <div>
       <div class="price">
-        <span>$12,500.00</span>
+        <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
       </div>
     </div>
   </div>
@@ -31,7 +36,7 @@
     </div>
     <div>
       <div class="price">
-        <span>$12,500.00</span>
+        <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
       </div>
     </div>
   </div>

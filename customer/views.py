@@ -10,7 +10,7 @@ from customer.forms import CustomAuthenticationForm,EmailUserCreationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth import login as auth_login
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -33,7 +33,7 @@ class LoginModalView(auth_views.LoginView):
 
         """Security check complete. Log the user in."""
         auth_login(self.request, form.get_user())
-        return HttpResponseRedirect(self.request.path_info)
+        return HttpResponse(status=200)
 
     def form_invalid(self, form):
         response = super(LoginModalView, self).form_invalid(form)
@@ -48,7 +48,7 @@ class LoginView(auth_views.LoginView):
 
         """Security check complete. Log the user in."""
         auth_login(self.request, form.get_user())
-        return redirect('catalogue:course-list')
+        return redirect('catalogue:my-course-list')
 
 class RegistrationModalView(FormView):
     form_class = EmailUserCreationForm
@@ -60,7 +60,7 @@ class RegistrationModalView(FormView):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
-        return HttpResponseRedirect(self.request.path_info)
+        return HttpResponse(status=200)
 
     def form_invalid(self, form):
         response = super(RegistrationModalView, self).form_invalid(form)
@@ -77,7 +77,7 @@ class UserRegistrationView(FormView):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
-        return redirect('/')
+        return redirect('catalogue:my-course-list')
 
 class PasswordResetDoneView(auth_views.PasswordResetDoneView):
     template_name = 'customer/registration/password_reset_done.html'
