@@ -23,7 +23,7 @@ class CourseListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return Course().get_courses()
+        return Course().get_courses().filter(is_published=True)
 
 class MyCreatedCoursesListView(ListView):
     """
@@ -121,6 +121,25 @@ class LiveModuleCreateView(CreateView):
 
 class LiveCourseDetailView(TemplateView):
     template_name = "catalogue/live_course_detail.html"
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        course_id = self.kwargs.get('course_id')
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+
+        #redirect teachers to the module form when a course is not published
+        if course.is_published == False and Course().is_owner(course,request.user):
+
+           return http.HttpResponseRedirect(
+                        reverse('catalogue:publish-course', kwargs={'course_id': course_id}))
+
+        #redirect students to the catalogue list when a course is not published
+        elif course.is_published == False and not Course().is_owner(course,request.user):
+
+           return http.HttpResponseRedirect(
+                    reverse('catalogue:course-list'))
+
+        return super(LiveCourseDetailView, self).dispatch(request, *args, **kwargs)
 
 
     def get_context_data(self, **kwargs):
@@ -168,6 +187,33 @@ class PublishCourseView(TemplateView):
 
     #     return reverse('course:course-create-form', kwargs={'course_id': self.object.course_id})
 
+    def dispatch(self, request, *args, **kwargs):
+
+        course_id = self.kwargs.get('course_id')
+        course = catalogue_models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
+
+
+        #cannot publish a course that has no modules
+        if not course.coursemodules.exists():
+
+           return http.HttpResponseRedirect(
+                    reverse('catalogue:module-create-form', kwargs={'course_id': course_id}))
+
+
+
+        return super(PublishCourseView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):    
+            action = self.request.POST.get('action', None)
+            course_id = self.kwargs.get('course_id')
+            course = catalogue_models.Product.objects.filter(pk=course_id).first()
+            if action == 'publish':
+                course.is_published = True
+                course.save()
+
+            return http.HttpResponseRedirect(
+                    reverse('catalogue:my-course-list'))
+
     def get_context_data(self, **kwargs):
         context = super(PublishCourseView, self).get_context_data(**kwargs)
         course_id = self.kwargs.get('course_id')
@@ -196,15 +242,24 @@ class ModuleCreateView(TemplateView):
 class CourseDetailView(TemplateView):
     template_name = "catalogue/course_detail.html"
 
-    # def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
 
-    #     course_id = self.kwargs.get('course_id')
-    #     if request.user.is_authenticated() and self.is_enrolled(request.user,course_id, models):
-            
-    #         return http.HttpResponseRedirect(
-    #                 reverse('video:video-player', kwargs={'course_id': course_id}))
+        course_id = self.kwargs.get('course_id')
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
 
-    #     return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
+        #redirect teachers to the module form when a course is not published
+        if course.is_published == False and Course().is_owner(course,request.user):
+
+           return http.HttpResponseRedirect(
+                        reverse('catalogue:publish-course', kwargs={'course_id': course_id}))
+
+        #redirect students to the catalogue list when a course is not published
+        elif course.is_published == False and not Course().is_owner(course,request.user):
+
+           return http.HttpResponseRedirect(
+                    reverse('catalogue:course-list'))
+
+        return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)

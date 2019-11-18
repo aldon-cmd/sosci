@@ -12,6 +12,9 @@
     </ul>
   </div>
   <div class="container ss-relative">
+    <form method="post" action="{% url 'catalogue:publish-course' view.kwargs.course_id %}" novalidate>
+      {% csrf_token %} 
+      <input type="hidden" name="action" value="publish" />
     <div class="box">
       <div>
         <h3 class="subheading">
@@ -58,11 +61,11 @@
       </div>
     </div>
     <div class="text-right cont-btn publish-btn">
-      <a href="{% url 'catalogue:publish-course' view.kwargs.course_id%}" class="btn btn-primary" role="button" aria-pressed="true">
-        <i class="fas fa-check-circle"></i>
-        <span>Publish course</span>
-      </a>
+      <button type = "submit" class="btn btn-primary" >
+        Publish Course
+      </button>
     </div>
+  </form>
   </div>
 </main>
 

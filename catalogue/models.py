@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 class Product(AbstractProduct):
       name = models.CharField(max_length=200, null=True, blank=True)
       description = models.CharField(max_length=300, null=True, blank=True)
+      is_published = models.BooleanField(default=False)
       picture = models.CharField(max_length=250, null=True, blank=True,help_text="a url pointing directly to a preview image of the first video in a course")
       user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='products', blank=True, null=True)
 

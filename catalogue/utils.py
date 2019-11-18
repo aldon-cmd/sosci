@@ -7,6 +7,9 @@ from livestream import models as twilio_models
 
 class Course(object):
 
+    def is_owner(self,course,user):
+        return course.user == user
+        
     def get_courses(self):
         return catalogue_models.Product.objects.select_related("product_class")
 
