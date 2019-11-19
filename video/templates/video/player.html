@@ -1,71 +1,49 @@
-{% extends "base_player.html" %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-
-  <div class="video-page">
-    <div class="video-page-wrap">
-      <div class="watch-hub">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 no-padding">
-              <div class="video-player">
-                <div class='embed-container'><iframe src='https://player.vimeo.com/video/{{video.video_id}}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
-                <div class="primary-video-info-title">
-                  <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 no-padding">{{video.name}}</div>
-                  <div class="video-assets col-lg-5 col-md-5 col-sm-5 col-xs-12 hide">
-                    <ul class="list">
-                      <li class="">
-                        <i class="far fa-file-pdf"></i>
-                        <h6>PDF Download</h6>
-                      </li>
-                      <li class="">
-                        <i class="far fa-file-excel"></i>
-                        <h6>PDF Download</h6>
-                        </1i>
-                        <li class="">
-                          <i class="fas fa-desktop"></i>
-                          <h6>PDF Download</h6>
-                        </li>
-                    </ul>
-                  </div>
-                </div>
+  <main id="class-room">
+    <div class="full-width">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 primary">
+          <div class="aspect-container">
+            <div class="aspect-spacer"></div>
+            <div class="video-player">
+              <div class="video-player-container player">
+                <iframe src='https://player.vimeo.com/video/{{video.video_id}}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
               </div>
             </div>
-            <aside class="col-lg-3 col-md-3 col-sm-3 col-xs-12 video-series">
-              <div class="">
-                <div class="">
-                  <div class="watch-next-title d-flex">
-                    <i class="fas fa-play-circle"></i>
-                    <h1>WATCH THE NEXT COURSE<h1>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
+          <div class="side-box">
+            <div class="side-box-header">
+              <span>Behavioural Economics and the Modern Economy</span> 
+            </div>
+            <ul class="">
+              {% for video in videos %}
+              <li class="modules-list">
+                <div class="modules">
+                  <div class="module-number">{{ forloop.counter }}</div>
+                  <div class="box-content">
+                    <div>
+                      <a href="{% url 'video:play-video' view.kwargs.course_id video.video_id %}">{{video.name}}</a>
+                      <p class="instructor">Rafer Johnson </p>
+                      <p class="course-video-info">{{video.description}}</p>
+                    </div>
                   </div>
-                  <ul class="">
-                    {% for video in videos %}
-                    <li class="modules-list">
-                      <div class="modules">
-                        <div class="module-number">{{ forloop.counter }}</div>
-                        <div class="box-content">
-                          <div>
-                            <a href="{% url 'video:play-video' view.kwargs.course_id video.video_id %}">{{video.name}}</a>
-                            <p class="instructor">Rafer Johnson </p>
-                            <p class="course-video-info">{{video.description}}</p>
-                          </div>
-                        </div>
-                        <div class="module-duration">
-                          <span>{{video.duration}}</span>
-                        </div>
-                        <div class="module-status">
-                          {% if video.seen %}
-                          {% endif %}
-                          <i class="fas fa-check-circle"></i>
-                        </div>
-                      </div>
-                    </li>
-
-                   {% endfor %}   
-                  </ul>
+                  <div class="module-duration">
+                    <span>{{video.duration}}</span>
+                  </div>
+                  <div class="module-status">
+                    {% if video.seen %}
+                    {% endif %}
+                    <i class="fas fa-check-circle"></i>
+                  </div>
                 </div>
-              </div>
-            </aside>
+              </li>
+             {% endfor %}   
+            </ul>
           </div>
         </div>
       </div>
