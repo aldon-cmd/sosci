@@ -170,7 +170,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
             client = Client(account_sid, rest_api_auth_token)
             room = client.video.rooms.create(
                                           record_participants_on_connect=True,
-                                          status_callback=self.request.build_absolute_uri(reverse('live:twilio-room-status')),
+                                          status_callback=self.request.build_absolute_uri(reverse('instructor:twilio-room-status')),
                                           type='group',
                                           unique_name=course_id
                                       )

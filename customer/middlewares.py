@@ -1,10 +1,114 @@
 import re
 from django.conf import settings
 from django.contrib.auth.decorators import login_required 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse
+from catalogue.utils import Course
+from catalogue import models as catalogue_models
+
+class OwnerRequiredMiddleware(object):
+
+    def __init__(self,get_response=None):
+        # One-time configuration and initialization.
+        self.get_response = get_response
+        self.course_owner_urls = tuple(re.compile(url) for url in settings.COURSE_OWNER_REQUIRED_URLS)        
+
+    def __call__(self, request):
+
+        response = self.get_response(request)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):        
+
+        #check if user visits url that contains course_id
+        course_id = view_kwargs.get("course_id")
+
+        if not course_id:
+            return None
+
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()        
+
+        for url in self.course_owner_urls:
+            if url.match(request.path) and not Course().is_owner(course,request.user) :
+                return redirect(reverse('catalogue:course-list'))                
+
+        return None
+
+class CourseEnrolledMiddleware(object):
+
+    def __init__(self,get_response=None):
+        # One-time configuration and initialization.
+        self.get_response = get_response
+        self.enrollment_public_urls = tuple(re.compile(url) for url in settings.ENROLLMENT_PUBLIC_URLS)        
+
+    def __call__(self, request):
+
+        response = self.get_response(request)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):        
+
+        #check if user visits url that contains course_id
+        course_id = view_kwargs.get("course_id")        
+
+        for url in self.enrollment_public_urls:
+            if url.match(request.path):
+                return None
+                
+        if course_id and not Course().is_enrolled(request.user,course_id):
+           return redirect(reverse('catalogue:course-detail',kwargs={'course_id':course_id}))
+
+
+        return None
+
+
+class CourseExistsMiddleware(object):
+
+    def __init__(self,get_response=None):
+        # One-time configuration and initialization.
+        self.get_response = get_response   
+
+    def __call__(self, request):
+
+        response = self.get_response(request)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):        
+
+        #check if user visits url that contains course_id
+        course_id = view_kwargs.get("course_id")        
+               
+        if course_id and not Course().exists(course_id):
+           return redirect(reverse('catalogue:course-list'))
+
+        return None
+
+class CoursePublishedMiddleware(object):
+    def __init__(self,get_response=None):
+        # One-time configuration and initialization.
+        self.get_response = get_response   
+
+    def __call__(self, request):
+        self.course_published_public_urls = tuple(re.compile(url) for url in settings.COURSE_PUBLISHED_PUBLIC_URLS) 
+        response = self.get_response(request)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):        
+
+        #check if user visits url that contains course_id
+        course_id = view_kwargs.get("course_id")        
+       
+
+        for url in self.course_published_public_urls:
+            if url.match(request.path):
+                return None
+                               
+        if course_id and not Course().is_published(course_id):
+           return redirect(reverse('instructor:publish-course',kwargs={'course_id':course_id}))
+
+        return None
 
 class LoginRequiredMiddleware(object):
     """
@@ -60,7 +164,7 @@ class AnonymousRequiredMiddleware(object):
     def __init__(self,get_response=None):
         # One-time configuration and initialization.
         self.get_response = get_response        
-        self.public_urls = tuple(re.compile(url) for url in settings.ANONYMOUS_REQUIRED_URLS)
+        self.anonymous_urls = tuple(re.compile(url) for url in settings.ANONYMOUS_REQUIRED_URLS)
 
     def __call__(self, request):
 
@@ -74,13 +178,9 @@ class AnonymousRequiredMiddleware(object):
            return None
 
         # An exception match (public_urls) should immediately return None
-        for url in self.public_urls:
-            if url.match(request.path):
-                taxpayername_slug = request.session.get("taxpayername_slug")
-                if taxpayername_slug:
-                   return HttpResponseRedirect(reverse('dashboard:business-dashboard',kwargs={'taxpayername_slug':taxpayername_slug}))
-                else:
-                    return redirect("dashboard:business-list")
+        for url in self.anonymous_urls:
+            if url.match(request.path) and request.user.is_authenticated():
+               return redirect("catalogue:course-list")
 
         # Require login for all non-matching requests
         return None

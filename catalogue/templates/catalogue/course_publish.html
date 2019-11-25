@@ -12,7 +12,7 @@
     </ul>
   </div>
   <div class="container ss-relative">
-    <form method="post" action="{% url 'catalogue:publish-course' view.kwargs.course_id %}" novalidate>
+    <form method="post" action="{% url 'instructor:publish-course' view.kwargs.course_id %}" novalidate>
       {% csrf_token %} 
       <input type="hidden" name="action" value="publish" />
     <div class="box">

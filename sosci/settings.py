@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',    
     'video.apps.VideoConfig',
+    'instructor.apps.InstructorConfig',
     'livestream.apps.LivestreamConfig',
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
@@ -59,7 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'customer.middlewares.LoginRequiredMiddleware'
+    'customer.middlewares.CourseExistsMiddleware',
+    'customer.middlewares.CoursePublishedMiddleware',
+    'customer.middlewares.CourseEnrolledMiddleware',
+    'customer.middlewares.OwnerRequiredMiddleware',
+    'customer.middlewares.AnonymousRequiredMiddleware',
+    'customer.middlewares.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'sosci.urls'
@@ -172,8 +178,11 @@ STATICFILES_FINDERS = (
 )
 
 LOGIN_REQUIRED_URLS = (
-    r'^/catalogue/my-courses$',
-    r'^/catalogue/my-enrolled-courses$',
+    r'^/catalogue/my-courses/$',
+    r'^/catalogue/my-enrolled-courses/$',
+    r'^/catalogue/my-created-courses/$',
+    r'^/catalogue/course/create/$',
+    r'^/catalogue/live/create/$'
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
@@ -181,9 +190,25 @@ LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
 LOGIN_URL = reverse_lazy('customer:user-login')
 
 ANONYMOUS_REQUIRED_URLS = (
-    r'^/account/login$',
-    r'^/account/registration$',
-    r'^/landing$',
+    r'^/account/login/$',
+    r'^/account/registration/$',
+    r'^/$',
+)
+
+COURSE_OWNER_REQUIRED_URLS = (
+    r'^/instructor/',
+)
+
+COURSE_PUBLISHED_PUBLIC_URLS = (
+r'^/catalogue/publish/course/(?P<course_id>\d+)/$',
+r'^catalogue/module/create/(?P<course_id>\d+)/$',
+)
+
+
+ENROLLMENT_PUBLIC_URLS = (
+    r'^/checkout/payment-details/(?P<course_id>\d+)/$',
+    r'^/checkout/thank-you/$',
+    r'^/catalogue/course/details/(?P<course_id>\d+)/$',
 )
 
 VIMEO_ACCESS_TOKEN = '39b43eb6883cc7e0bae61b1e6dc59dd4'

@@ -16,6 +16,8 @@ from django.views.generic.edit import FormView
 from catalogue.utils import CatalogueCreator,Enrollment,Course
 from catalogue import mixins
 from django.db.models import Q
+from django.core.exceptions import ImproperlyConfigured
+
 # Create your views here.
 class CourseListView(ListView):
     template_name = "catalogue/catalogue_list.html"
@@ -91,7 +93,7 @@ class LiveCourseCreateView(CreateView):
 
     def get_success_url(self,product):
 
-        return reverse('catalogue:live-module-create-form', kwargs={'course_id': product.pk})
+        return reverse('instructor:live-module-create-form', kwargs={'course_id': product.pk})
 
 
 class LiveModuleCreateView(CreateView):
@@ -100,7 +102,7 @@ class LiveModuleCreateView(CreateView):
 
     def get_success_url(self):
         course_id = self.kwargs.get('course_id')
-        return reverse('catalogue:live-module-create-form', kwargs={'course_id': course_id})
+        return reverse('instructor:live-module-create-form', kwargs={'course_id': course_id})
 
     def form_valid(self, form):
         course_module = form.instance
@@ -131,7 +133,7 @@ class LiveCourseDetailView(TemplateView):
         if course.is_published == False and Course().is_owner(course,request.user):
 
            return http.HttpResponseRedirect(
-                        reverse('catalogue:publish-course', kwargs={'course_id': course_id}))
+                        reverse('instructor:publish-course', kwargs={'course_id': course_id}))
 
         #redirect students to the catalogue list when a course is not published
         elif course.is_published == False and not Course().is_owner(course,request.user):
@@ -178,7 +180,7 @@ class CourseCreateView(CreateView):
         
     def get_success_url(self,product):
 
-        return reverse('catalogue:module-create-form', kwargs={'course_id': product.pk})
+        return reverse('instructor:module-create-form', kwargs={'course_id': product.pk})
 
 class PublishCourseView(TemplateView):
     template_name = "catalogue/course_publish.html"
@@ -197,7 +199,7 @@ class PublishCourseView(TemplateView):
         if not course.coursemodules.exists():
 
            return http.HttpResponseRedirect(
-                    reverse('catalogue:module-create-form', kwargs={'course_id': course_id}))
+                    reverse('instructor:module-create-form', kwargs={'course_id': course_id}))
 
 
 
@@ -240,7 +242,22 @@ class ModuleCreateView(TemplateView):
         return context
 
 class CourseDetailView(TemplateView):
-    template_name = "catalogue/course_detail.html"
+
+    def get_template_names(self):
+
+        
+        course_id = self.kwargs.get('course_id')
+        course = catalogue_models.Product.objects.select_related("product_class").filter(pk=course_id).first()
+        if self.template_name:
+            return [self.template_name]
+
+        if course.product_class.name == "Live":
+           return ["catalogue/live_course_detail.html"]
+        elif course.product_class.name == "Course":
+            return ["catalogue/course_detail.html"]
+        else:
+            raise ImproperlyConfigured(
+                "this page requires a product class to be set")
 
     def dispatch(self, request, *args, **kwargs):
 
@@ -251,7 +268,7 @@ class CourseDetailView(TemplateView):
         if course.is_published == False and Course().is_owner(course,request.user):
 
            return http.HttpResponseRedirect(
-                        reverse('catalogue:publish-course', kwargs={'course_id': course_id}))
+                        reverse('instructor:publish-course', kwargs={'course_id': course_id}))
 
         #redirect students to the catalogue list when a course is not published
         elif course.is_published == False and not Course().is_owner(course,request.user):

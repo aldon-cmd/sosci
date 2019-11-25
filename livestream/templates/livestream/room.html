@@ -191,7 +191,7 @@ Sosci.init("{{identity}}","{{token}}");
 function end_session(){
     $.ajax({
       type: "POST",
-      url: "{% url 'live:end-session' view.kwargs.course_id %}",
+      url: "{% url 'instructor:end-session' view.kwargs.course_id %}",
       data: {"room_sid":document.getElementById('input-room-sid').value},
       success: function () {
         $('#end-session-modal').modal('hide');
