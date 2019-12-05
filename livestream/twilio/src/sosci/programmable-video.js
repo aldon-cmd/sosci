@@ -3,9 +3,58 @@ import Video from 'twilio-video';
 
 class ProgrammableVideo {
 
-	constructor(){
+	constructor(host_identity){
+		this.host_identity = host_identity;
 		this.room = null;
 		this.previewTracks = null;
+
+		document.getElementById('btn-toggle-audio').onclick = () => this.toggle_audio();
+		document.getElementById('btn-toggle-video').onclick = () => this.toggle_video();
+	}
+
+	get_participant_name(participant){
+	    var participant_identity = participant.identity.split("/");
+
+	    var paricipant_full_name = 1 in participant_identity ? participant_identity[1] : "";
+
+	    return paricipant_full_name;
+	}
+
+	get_participant_email(){
+	    var participant_identity = participant.identity.split("/");
+
+	    var paricipant_email = 1 in participant_identity ? participant_identity[0] : "";
+
+	    return paricipant_email;
+	}
+
+	get_local_participant(){
+		return this.room.localParticipant;
+	}
+
+	toggle_audio(){
+	  var localParticipant = this.get_local_participant();
+
+	  localParticipant.audioTracks.forEach((audioTrack) => {
+	      if (audioTrack.isEnabled) {
+	        audioTrack.disable();
+	      } else {
+	        audioTrack.enable();
+	      }
+	  });
+
+	}
+
+	toggle_video(){
+		var localParticipant = this.get_local_participant();
+
+	    localParticipant.videoTracks.forEach((videoTrack) => {
+	      if (videoTrack.isEnabled) {
+	        videoTrack.disable();
+	      } else {
+	        videoTrack.enable();
+	      }
+	    });
 	}
 
 	create_local_tracks(){
@@ -17,8 +66,11 @@ class ProgrammableVideo {
 	}
 
 	// Attach the Tracks to the DOM.
-	attachTracks(tracks, container) {
+	attachTracks(participant,tracks, container) {
 	  tracks.forEach(function(track) {
+	  	if(participant.identity !== this.host_identity){
+	  		track.disable();
+	  	}
 	    container.appendChild(track.attach());
 	  });
 	}
@@ -48,14 +100,11 @@ class ProgrammableVideo {
 	    var participants_list = document.getElementById('participants-list');
 	    var participants_list_item = document.createElement("LI"); 
 	    var participants_list_item_content;
-	    var participant_identity;
 	    var paricipant_full_name;
 
 	    participants_list_item.setAttribute("id",participant.sid);
 
-	    participant_identity = participant.identity.split("/");
-
-	    paricipant_full_name = 1 in participant_identity ? participant_identity[1] : "";
+	    paricipant_full_name = this.get_participant_name(participant);
 
 	    participants_list_item_content = '<div class="participant">'+ paricipant_full_name +'</div><i class="fas fa-circle"></i>';
 
@@ -105,7 +154,7 @@ class ProgrammableVideo {
 
 	    var previewContainer = document.getElementById('remote-media');
 
-	    this.attachTracks([track], previewContainer);
+	    this.attachTracks(participant,[track], previewContainer);
 	  });
 
 	  // When a Participant removes a Track, detach it from the DOM.

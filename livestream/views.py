@@ -86,7 +86,9 @@ class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
         chat_service_sid = settings.TWILIO_CHAT_SERVICE_SID
 
         course_id = self.kwargs.get('course_id')
-        context["owner"] = self.get_owner(course_id)
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+        course_owner = self.get_owner(course)
+        context["owner"] = course_owner
 
         # Create an Access Token
         token = AccessToken(account_sid, api_key, api_secret)
@@ -144,7 +146,9 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         chat_service_sid = settings.TWILIO_CHAT_SERVICE_SID
 
         course_id = self.kwargs.get('course_id')
-        context["owner"] = self.get_owner(course_id)
+        course = catalogue_models.Product.objects.filter(pk=course_id).first()
+        course_owner = self.get_owner(course)
+        context["owner"] = course_owner
 
         # Create an Access Token
         token = AccessToken(account_sid, api_key, api_secret)
@@ -169,7 +173,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         try:
             client = Client(account_sid, rest_api_auth_token)
             room = client.video.rooms.create(
-                                          record_participants_on_connect=True,
+                                          # record_participants_on_connect=True,
                                           status_callback=self.request.build_absolute_uri(reverse('instructor:twilio-room-status')),
                                           type='group',
                                           unique_name=course_id
@@ -190,6 +194,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
 
         context["token"] = auth_token
         context["identity"] = token.identity
+        context["host_identity"] = self.get_host_identity(course_owner)
         
 
 

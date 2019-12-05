@@ -60,7 +60,7 @@
                 <div class="">
                   <div class="video-nav-list">
                     <div>
-                      <a class="dot-control .on icon-btn" href="#" id="button-preview" title='Camera On'>
+                      <a class="dot-control .on icon-btn" href="#" id="btn-toggle-video" title='Camera On'>
                         <i class="fas fa-video"></i>
                       </a>
                       <p>Camera On</p>
@@ -86,7 +86,7 @@
                       <p>Unshare Screen</p>
                     </div>
                     <div>
-                      <a class="dot-control icon-btn" href="#" id="" title='Mute Mic'>
+                      <a class="dot-control icon-btn" href="#" id="btn-toggle-audio" title='Mute Mic'>
                         <i class="fas fa-microphone"></i>
                       </a>
                       <p>Mic</p>
@@ -182,7 +182,7 @@ $.ajaxSetup({
 
 {% autoescape off %}
 <script>
-Sosci.init("{{identity}}","{{token}}");
+Sosci.init("{{identity}}","{{host_identity}}","{{token}}");
 </script>
 {% endautoescape %}
 

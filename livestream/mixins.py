@@ -5,14 +5,17 @@ from custom_user import models as user_models
 
 class CourseRoomMixin(object):
 
+    def get_host_identity(self,owner):
+
+        return "{0}/{1} {2}".format(owner.user.email,owner.user.first_name,owner.user.last_name)
+
     def get_identity(self,request):
 
         return "{0}/{1} {2}".format(request.user.email,request.user.first_name,request.user.last_name)
 
 
-    def get_owner(self,course_id):
+    def get_owner(self,course):
 
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
         owner = user_models.User.objects.filter(pk=course.user_id).first()
 
         return owner
