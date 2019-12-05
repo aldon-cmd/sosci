@@ -131,7 +131,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 #sosci-nav .content {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1000px;
   padding: 0 22px;
   position: relative;
   z-index: 2;
@@ -2787,6 +2787,10 @@ textarea:-ms-input-placeholder {
 #student-list th, #student-list td {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
+}
+
+.profile-name {
+  margin-right: 1px;
 }
 
 /*

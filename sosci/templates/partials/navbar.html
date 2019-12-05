@@ -39,7 +39,10 @@
             <li class="item dropdown">
               <div class="dropdown show">
                 <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">{{request.user.first_name}}</span>
+                  <span class="nav-create-course">
+                    <span class="profile-name">{{request.user.first_name}}</span>
+                    <span>{{request.user.last_name}}</span>
+                  </span>
                   <span class="">
                     <i class="fas fa-angle-down"></i>
                   </span>
@@ -106,7 +109,10 @@
             <li class="item dropdown">
               <div class="dropdown show">
                 <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">{{request.user.first_name}}</span>
+                  <span class="nav-create-course">
+                    <span class="profile-name">{{request.user.first_name}}</span>
+                    <span>{{request.user.last_name}}</span>
+                  </span>
                   <span class="">
                     <i class="fas fa-angle-down"></i>
                   </span>
@@ -168,8 +174,8 @@
                 </div>
               </div>
             </li>
-            <li class="item"><a class="nav-link" href="">Why Sosci?</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Register</a></li>
+            <li class="item"><a class="nav-link" href="">Study Materials</a></li>
+            <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Get Started</a></li>
             <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
           </ul>
         </div>
@@ -212,8 +218,8 @@
                     </div>
                   </div>
                 </li>
-                <li class="item"><a class="nav-link">Why Sosci?</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Register</a></li>
+                <li class="item"><a class="nav-link">Study Materials</a></li>
+                <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Get Started</a></li>
                 <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
             </ul>
         </div>
