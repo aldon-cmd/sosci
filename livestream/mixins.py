@@ -7,7 +7,7 @@ class CourseRoomMixin(object):
 
     def get_host_identity(self,owner):
 
-        return "{0}/{1} {2}".format(owner.user.email,owner.user.first_name,owner.user.last_name)
+        return "{0}/{1} {2}".format(owner.email,owner.first_name,owner.last_name)
 
     def get_identity(self,request):
 

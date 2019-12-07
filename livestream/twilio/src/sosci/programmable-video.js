@@ -67,7 +67,7 @@ class ProgrammableVideo {
 
 	// Attach the Tracks to the DOM.
 	attachTracks(participant,tracks, container) {
-	  tracks.forEach(function(track) {
+	  tracks.forEach((track) => {
 	  	if(participant.identity !== this.host_identity){
 	  		track.disable();
 	  	}
@@ -78,7 +78,7 @@ class ProgrammableVideo {
 	// Attach the Participant's Tracks to the DOM.
 	attachParticipantTracks(participant, container) {
 	  var tracks = Array.from(participant.tracks.values());
-	  this.attachTracks(tracks, container);
+	  this.attachTracks(participant,tracks, container);
 	}
 
 	// Detach the Tracks from the DOM.
