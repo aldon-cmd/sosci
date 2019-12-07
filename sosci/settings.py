@@ -190,8 +190,10 @@ LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
 LOGIN_URL = reverse_lazy('customer:user-login')
 
 ANONYMOUS_REQUIRED_URLS = (
-    r'^/account/login/$',
-    r'^/account/registration/$',
+    r'^/accounts/login/$',
+    r'^/accounts/registration/modal/(?P<course_id>\d+)/$',
+    r'^/accounts/login/modal/(?P<course_id>\d+)/$',
+    r'^/accounts/registration/$',    
     r'^/$',
 )
 
@@ -207,6 +209,8 @@ r'^/instructor/live/module/create/(?P<course_id>\d+)/$',
 
 
 ENROLLMENT_PUBLIC_URLS = (
+    r'^/accounts/registration/modal/(?P<course_id>\d+)/$',
+    r'^/accounts/login/modal/(?P<course_id>\d+)/$',  
     r'^/instructor/publish/course/(?P<course_id>\d+)/$',    
     r'^/instructor/module/create/(?P<course_id>\d+)/$',
     r'^/instructor/live/module/create/(?P<course_id>\d+)/$',    

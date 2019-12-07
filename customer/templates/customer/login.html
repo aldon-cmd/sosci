@@ -28,7 +28,10 @@
                         <div id="save-btn" class="sign-in-btn">
                           <button type="submit" ng-click="vm.submit(vm.form_data)" class="login-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
                           <div class="login-footer">
-                            Don't have an account?
+     
+                            <span class="signup-today">
+                               <a href="{% url 'customer:password_reset' %}">Forgot your password?</a>
+                            </span>
                             <span class="signup-today">
                                <a href="{% url 'customer:user-registration' %}">Sign Up</a>
                             </span>
