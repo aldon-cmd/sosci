@@ -10,7 +10,7 @@ module.exports = {
   plugins: [new CleanWebpackPlugin(),new HtmlWebpackPlugin()],
   mode: 'development',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',//'[name].[contenthash].js',
     //library: 'sosci',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
