@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'custom_user.apps.CustomUserConfig',
     'widget_tweaks',
     'tinymce',
+    "post_office",
 
 ] + get_core_apps(['customer','promotions','basket','catalogue','payment','partner','order','checkout'])
 

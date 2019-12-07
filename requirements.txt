@@ -1,4 +1,5 @@
 Django==1.11.20
+django-post-office==3.2.1
 django-tinymce==2.8.0
 django-haystack==2.8.1
 django-oscar==1.6.7

@@ -1,20 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import json
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import DecimalField, Count, Sum, When, Case, Q, Prefetch
-from django.contrib.auth.models import Group
 from django.contrib.auth import views as auth_views
 from customer.forms import CustomAuthenticationForm,EmailUserCreationForm
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth import login as auth_login
-from django.shortcuts import redirect
-from django.urls import reverse
 
+from django.urls import reverse
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+
+from django.http import Http404
+from django.contrib import messages
+from django.utils import timezone
+import hashlib, datetime, random
+from django.contrib.sites.shortcuts import get_current_site
+from customer.models import CommunicationEventType
+from customer.utils import Dispatcher
+from django.shortcuts import render
 
 class LogoutView(auth_views.LogoutView):
 
@@ -78,6 +85,87 @@ class UserRegistrationView(FormView):
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
         return redirect('catalogue:my-course-list')
+
+class ConfirmUser(TemplateView):
+    template_name = 'customer/confirm_user.html'
+
+    def get(self, request, *args, **kwargs):
+        #check if user is already logged in and if he is redirect him to some other url, e.g. home
+        # if request.user.is_authenticated():
+        #     return HttpResponseRedirect(reverse('index'))
+
+        # check if there is UserProfile which matches the activation key (if not then display 404)
+
+        if 'activation_key' in self.kwargs:
+            try:
+                user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
+                #check if the activation key has expired, if it hase then render confirm_expired.html
+                if user.key_expires < timezone.now():
+                    email = user.email
+                    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
+                    activation_key = hashlib.sha1(salt+email).hexdigest()            
+                    key_expires = datetime.datetime.today() + datetime.timedelta(2)
+
+                    user.activation_key = activation_key
+                    user.key_expires = key_expires
+                    user.save()
+                    messages.error(request,"This link has expired. Please try sending the confirmation email again")
+                    return super(ConfirmUser, self).get(request, *args, **kwargs)
+                user.is_active = True
+                user.save()
+
+                #have to set backend before login
+                user.backend = settings.AUTHENTICATION_BACKENDS[0]
+                login(self.request, user)
+                return HttpResponseRedirect(reverse('auth:email-confirmation-success'))
+            except Http404:
+
+                 return super(ConfirmUser, self).get(request, *args, **kwargs)
+
+        if 'resend' in self.kwargs:
+            return super(ConfirmUser, self).get(request, *args, **kwargs)
+
+
+        ctx = self.get_context_data()
+        ctx['check_email'] = True
+        return render(self.request, self.template_name,ctx)
+
+
+    def post(self, request, *args, **kwargs):
+        action = self.request.POST.get('action', None)
+        if action == 'resend':
+            email = self.request.POST.get('email', None)
+            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
+            activation_key = hashlib.sha1(salt+email).hexdigest()            
+            key_expires = datetime.datetime.today() + datetime.timedelta(2)
+            try:
+                user = get_object_or_404(get_user_model(), email=email)
+                user.activation_key = activation_key
+                user.key_expires = key_expires
+                user.save()
+            except Http404:
+                 messages.error(request,"A user with that email does not exist")
+                 return super(ConfirmUser, self).get(request, *args, **kwargs)              
+            
+            self.send_confirmation_email(user, request)
+            return HttpResponseRedirect(reverse('auth:email-confirmation-sent'))
+        return super(ConfirmUser, self).post(request, *args, **kwargs)
+
+    def send_confirmation_email(self, user, request):
+        code = "CONFIRMATION"
+        ctx = {'user': user,
+               'activation_key' : user.activation_key,
+               'site': get_current_site(request)}
+        messages = CommunicationEventType.objects.get_and_render(
+            code, ctx)
+        if messages and messages['body']:
+            Dispatcher().dispatch_user_messages(user, messages)
+
+class ConfirmationSuccess(TemplateView):
+    template_name = 'customer/confirmation_success.html'            
+
+class ConfirmationSent(TemplateView):
+    template_name = 'customer/confirmation_sent.html'
 
 class PasswordResetDoneView(auth_views.PasswordResetDoneView):
     template_name = 'customer/registration/password_reset_done.html'

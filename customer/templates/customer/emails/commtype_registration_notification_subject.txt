@@ -1,0 +1,1 @@
+{% load i18n %}{% trans 'A new user has signed up' %}
