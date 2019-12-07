@@ -14,7 +14,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from catalogue.utils import Enrollment
+from catalogue.utils import Course
 from django import http
 
 class VideoPlayerView(TemplateView):
@@ -26,7 +26,7 @@ class VideoPlayerView(TemplateView):
         if not request.user.is_authenticated():
             return http.HttpResponseRedirect('/') 
 
-        if not Enrollment().is_enrolled(request.user,course_id):
+        if not Course().is_enrolled(request.user,course_id):
             
             return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))

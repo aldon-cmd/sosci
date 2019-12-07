@@ -13,7 +13,7 @@ from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
 from django.views.generic.edit import FormView
-from catalogue.utils import CatalogueCreator,Enrollment,Course
+from catalogue.utils import CatalogueCreator,Course,Course
 from catalogue import mixins
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured
@@ -78,7 +78,7 @@ class LiveCourseCreateView(CreateView):
         user = self.request.user
         price = form.cleaned_data['price']
         created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product.title,product.description,price,1)
-        Enrollment().enroll(self.request.user,created_product.pk)
+        Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
     def get_form_kwargs(self):
@@ -124,32 +124,12 @@ class LiveModuleCreateView(CreateView):
 class LiveCourseDetailView(TemplateView):
     template_name = "catalogue/live_course_detail.html"
     
-    def dispatch(self, request, *args, **kwargs):
-
-        course_id = self.kwargs.get('course_id')
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
-
-        #redirect teachers to the module form when a course is not published
-        if course.is_published == False and Course().is_owner(course,request.user):
-
-           return http.HttpResponseRedirect(
-                        reverse('instructor:publish-course', kwargs={'course_id': course_id}))
-
-        #redirect students to the catalogue list when a course is not published
-        elif course.is_published == False and not Course().is_owner(course,request.user):
-
-           return http.HttpResponseRedirect(
-                    reverse('catalogue:course-list'))
-
-        return super(LiveCourseDetailView, self).dispatch(request, *args, **kwargs)
-
-
     def get_context_data(self, **kwargs):
         course_id = self.kwargs.get("course_id")
         context = super(LiveCourseDetailView, self).get_context_data(**kwargs)
         context["login_form"] = CustomAuthenticationForm()
         context["course"] = Course().get_course(course_id)
-        context["is_enrolled"] = Enrollment().is_enrolled(self.request.user,course_id)
+        context["is_enrolled"] = Course().is_enrolled(self.request.user,course_id)
 
 
         return context
@@ -165,7 +145,7 @@ class CourseCreateView(CreateView):
         user = self.request.user
         price = form.cleaned_data['price']
         created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,price,1)
-        Enrollment().enroll(self.request.user,created_product.pk)
+        Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
     def get_form_kwargs(self):
@@ -259,32 +239,13 @@ class CourseDetailView(TemplateView):
             raise ImproperlyConfigured(
                 "this page requires a product class to be set")
 
-    def dispatch(self, request, *args, **kwargs):
-
-        course_id = self.kwargs.get('course_id')
-        course = catalogue_models.Product.objects.filter(pk=course_id).first()
-
-        #redirect teachers to the module form when a course is not published
-        if course.is_published == False and Course().is_owner(course,request.user):
-
-           return http.HttpResponseRedirect(
-                        reverse('instructor:publish-course', kwargs={'course_id': course_id}))
-
-        #redirect students to the catalogue list when a course is not published
-        elif course.is_published == False and not Course().is_owner(course,request.user):
-
-           return http.HttpResponseRedirect(
-                    reverse('catalogue:course-list'))
-
-        return super(CourseDetailView, self).dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         course_id = self.kwargs.get("course_id")
         context["login_form"] = CustomAuthenticationForm()
         context["course"] = Course().get_course(course_id)
 
-        context["is_enrolled"] = Enrollment().is_enrolled(self.request.user,course_id)
+        context["is_enrolled"] = Course().is_enrolled(self.request.user,course_id)
 
         return context        
 
@@ -295,8 +256,8 @@ class CourseEnrollmentView(View):
         action = self.request.POST.get('action', None)
         course_id = self.kwargs.get("course_id")
         if action == 'enroll' and request.user.is_authenticated():
-            if not Enrollment().is_enrolled(request.user,course_id):
-               Enrollment().enroll(request.user,course_id)
+            if not Course().is_enrolled(request.user,course_id):
+               Course().enroll(request.user,course_id)
 
         return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))

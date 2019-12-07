@@ -22,13 +22,11 @@ class Course(object):
     def get_course(self,course_id):
         return catalogue_models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
 
-class Enrollment(object):
+    def enroll(self,user,course_id):
+        catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=user)
 
-      def enroll(self,user,course_id):
-          catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=user)
-
-      def is_enrolled(self,user, course_id):
-          return user.is_authenticated() and catalogue_models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
+    def is_enrolled(self,user, course_id):
+        return user.is_authenticated() and catalogue_models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
 
 class CatalogueCreator(object):
 

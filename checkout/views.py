@@ -16,7 +16,7 @@ from oscar.apps.checkout import exceptions
 from django.urls import reverse
 from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
-from catalogue.utils import Enrollment
+from catalogue.utils import Course
 
 class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
     """
@@ -134,7 +134,7 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
         enrolls the current user into a course
         """
 
-        Enrollment().enroll(self.request.user,course_id)
+        Course().enroll(self.request.user,course_id)
 
 
     def handle_place_order_submission(self, request):
