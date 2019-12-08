@@ -91,6 +91,7 @@ class ConfirmUser(TemplateView):
         # check if there is UserProfile which matches the activation key (if not then display 404)
 
         if 'activation_key' in self.kwargs:
+            ctx = self.get_context_data()
             try:
                 user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
 
@@ -109,6 +110,7 @@ class ConfirmUser(TemplateView):
                     user.key_expires = key_expires
                     user.save()
                     messages.error(request,"This link has expired. Please try sending the confirmation email again")
+                    
                     return super(ConfirmUser, self).get(request, *args, **kwargs)
                 user.is_active = True
                 user.save()
@@ -125,7 +127,7 @@ class ConfirmUser(TemplateView):
             return super(ConfirmUser, self).get(request, *args, **kwargs)
 
 
-        ctx = self.get_context_data()
+        
         #a resend form is displayed when a response is returned before this check_email variable is set
         ctx['check_email'] = True
         return render(self.request, self.template_name,ctx)
