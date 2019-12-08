@@ -93,6 +93,11 @@ class ConfirmUser(TemplateView):
         if 'activation_key' in self.kwargs:
             try:
                 user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
+
+                if user.is_active == True:
+                   messages.success(request,"This user account has already been activated")
+                   return HttpResponseRedirect(reverse('catalogue:course-list'))
+
                 #check if the activation key has expired, if it hase then render confirm_expired.html
                 if user.key_expires < timezone.now():
                     email = user.email
@@ -111,7 +116,7 @@ class ConfirmUser(TemplateView):
                 #have to set backend before login
                 user.backend = settings.AUTHENTICATION_BACKENDS[0]
                 login(self.request, user)
-                return HttpResponseRedirect(reverse('customer:email-confirmation-success'))
+                return HttpResponseRedirect(reverse('catalogue:course-list'))
             except Http404:
 
                  return super(ConfirmUser, self).get(request, *args, **kwargs)
@@ -121,6 +126,7 @@ class ConfirmUser(TemplateView):
 
 
         ctx = self.get_context_data()
+        #a resend form is displayed when a response is returned before this check_email variable is set
         ctx['check_email'] = True
         return render(self.request, self.template_name,ctx)
 
