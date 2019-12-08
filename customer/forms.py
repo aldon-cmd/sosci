@@ -73,6 +73,7 @@ class EmailUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(EmailUserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
+        user.is_active = False # not active until they open activation link
 
         if 'username' in [f.name for f in user_models.User._meta.fields]:
             user.username = generate_username()

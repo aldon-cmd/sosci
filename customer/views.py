@@ -22,6 +22,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from customer.models import CommunicationEventType
 from customer.utils import Dispatcher
 from django.shortcuts import render
+from customer import mixins
 
 class LogoutView(auth_views.LogoutView):
 
@@ -57,16 +58,12 @@ class LoginView(auth_views.LoginView):
         auth_login(self.request, form.get_user())
         return redirect('catalogue:my-course-list')
 
-class RegistrationModalView(FormView):
+class RegistrationModalView(mixins.RegisterUserMixin,FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/registration_modal.html'
 
     def form_valid(self, form):
-        form.save()
-        username = form.cleaned_data.get('email')
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=raw_password)
-        login(self.request, user)
+        self.register_user(form)
         return HttpResponse(status=200)
 
     def form_invalid(self, form):
@@ -74,17 +71,14 @@ class RegistrationModalView(FormView):
         response.status_code = 400
         return response
 
-class UserRegistrationView(FormView):
+class UserRegistrationView(mixins.RegisterUserMixin,FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/user_registration.html'
 
     def form_valid(self, form):
-        form.save()
-        username = form.cleaned_data.get('email')
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=raw_password)
-        login(self.request, user)
-        return redirect('catalogue:my-course-list')
+        self.register_user(form)
+        return HttpResponseRedirect(reverse('customer:email-confirm-user'))
+
 
 class ConfirmUser(TemplateView):
     template_name = 'customer/confirm_user.html'
@@ -117,7 +111,7 @@ class ConfirmUser(TemplateView):
                 #have to set backend before login
                 user.backend = settings.AUTHENTICATION_BACKENDS[0]
                 login(self.request, user)
-                return HttpResponseRedirect(reverse('auth:email-confirmation-success'))
+                return HttpResponseRedirect(reverse('customer:email-confirmation-success'))
             except Http404:
 
                  return super(ConfirmUser, self).get(request, *args, **kwargs)
@@ -147,19 +141,9 @@ class ConfirmUser(TemplateView):
                  messages.error(request,"A user with that email does not exist")
                  return super(ConfirmUser, self).get(request, *args, **kwargs)              
             
-            self.send_confirmation_email(user, request)
-            return HttpResponseRedirect(reverse('auth:email-confirmation-sent'))
+            mixins.RegisterUserMixin().send_confirmation_email(user, self.request)
+            return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
         return super(ConfirmUser, self).post(request, *args, **kwargs)
-
-    def send_confirmation_email(self, user, request):
-        code = "CONFIRMATION"
-        ctx = {'user': user,
-               'activation_key' : user.activation_key,
-               'site': get_current_site(request)}
-        messages = CommunicationEventType.objects.get_and_render(
-            code, ctx)
-        if messages and messages['body']:
-            Dispatcher().dispatch_user_messages(user, messages)
 
 class ConfirmationSuccess(TemplateView):
     template_name = 'customer/confirmation_success.html'            

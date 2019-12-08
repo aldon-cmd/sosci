@@ -28,7 +28,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+DEFAULT_FROM_EMAIL = 'sosci2020@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com' #os.environ.get("EMAIL_HOST", '')
+EMAIL_HOST_USER = 'sosci2020@gmail.com' #os.environ.get("EMAIL_HOST_USER", '')
+EMAIL_HOST_PASSWORD = 'llnwqxakobbdiquw' #os.environ.get("EMAIL_HOST_PASSWORD", '')
+EMAIL_PORT = 587
 
+POST_OFFICE = {
+    'DEFAULT_PRIORITY': 'now'
+}
 # Application definition
 
 INSTALLED_APPS = [

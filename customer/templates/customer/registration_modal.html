@@ -56,7 +56,7 @@
 
     function get_success_response(responseText, statusText, xhr, $form){
 
-              window.location.replace("{% url 'checkout:payment-details' view.kwargs.course_id %}");
+              window.location.replace("{% url 'customer:email-confirm-user' %}");
           }
 
               function get_error_response(data){
