@@ -23,6 +23,7 @@ from customer.models import CommunicationEventType
 from customer.utils import Dispatcher
 from django.shortcuts import render
 from customer import mixins
+from django.urls import reverse_lazy
 
 class LogoutView(auth_views.LogoutView):
 
@@ -110,7 +111,7 @@ class ConfirmUser(TemplateView):
                     user.key_expires = key_expires
                     user.save()
                     messages.error(request,"This link has expired. Please try sending the confirmation email again")
-                    
+
                     return super(ConfirmUser, self).get(request, *args, **kwargs)
                 user.is_active = True
                 user.save()
@@ -163,10 +164,13 @@ class PasswordResetDoneView(auth_views.PasswordResetDoneView):
     template_name = 'customer/registration/password_reset_done.html'
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url = reverse_lazy('customer:password_reset_complete')
     template_name = 'customer/registration/password_reset_confirm.html'
 
 class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
     template_name = 'customer/registration/password_reset_complete.html'
 
 class PasswordResetView(auth_views.PasswordResetView):
+    success_url = reverse_lazy('customer:password_reset_done')
+    email_template_name = 'customer/registration/password_reset_email.html'
     template_name = 'customer/registration/password_reset_form.html'       
