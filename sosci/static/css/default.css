@@ -810,10 +810,25 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   margin-bottom: 16px;
 }
 
+#sign-in-form .btn {
+  height: 61px !important;
+  text-align: center !important;
+}
+
+button {
+  text-align: center !important;
+  -webkit-align-items: center !important;
+  align-items: center !important;
+}
+
 .form-control {
   border-radius: 0px !important;
   padding: 11px !important;
   height: 46px !important;
+}
+
+#sign-in-form .form-control {
+  height: 61px !important;
 }
 
 .input-select_select, #login-form .btn {
@@ -1310,13 +1325,21 @@ img, picture {
 }
 
 .sign-in-hero {
-  font-size: 1.6rem;
-  line-height: 1.5rem;
+  font-size: 24px;
+  line-height: 1;
   font-family: arial, sans-serif;
   letter-spacing: -.03125rem;
   font-weight: bold;
   color: #1e1f20;
-  margin-bottom: 2rem;
+  margin-bottom: 10px;
+}
+
+.sign-in-message {
+  font-size: 15px;
+  line-height: 1;
+  font-family: arial, sans-serif;
+  color: #1e1f20;
+  margin-bottom: 30px;
 }
 
 .sign-in-form {
@@ -1541,12 +1564,14 @@ button > i, .span {
 
 ::placeholder {
   font-family: : Helvetica;
-  font-size: 13px;
+  color: #1f2624 !important;
+  font-size: 15px;
 }
 
 input:required {
   font-family: Helvetica !important;
-  font-size: 13px;
+  font-size: 15px;
+  color: #1f2624 !important;
 }
 
 .payment-submit input {
@@ -2793,11 +2818,18 @@ textarea:-ms-input-placeholder {
   margin-right: 1px;
 }
 
-/*
-.card-header:first-child {
-    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-}*/
+
+/*   display none properties      */
+
+#sign-in-form .form-group-label {
+  display: none !important;
+}
 
 .hide {
   display: none !important;
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
