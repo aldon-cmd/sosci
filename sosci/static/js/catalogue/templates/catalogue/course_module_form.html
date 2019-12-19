@@ -120,7 +120,7 @@
 {{ block.super }}
 
 <script src="{% static 'js/tus.js' %}"></script>
-<script src="{% static 'js/videouploader.e555faddf2499c926854.js' %}"></script>
+<script src="{% static 'js/video/videouploader.e555faddf2499c926854.js' %}"></script>
 <script>
 var videouploader = new VideoUploader("{% url 'video:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
 </script>

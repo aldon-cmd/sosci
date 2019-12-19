@@ -4,25 +4,28 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: { 
-        'sosci/static/js/live/sosci':'./src/sosci/index.js',
-        'sosci/static/js/video/videouploader': './src/videouploader/index.js'
+        sosci:'./src/sosci/index.js',
+        videouploader: './src/videouploader/index.js'
       },
-  plugins: [new CleanWebpackPlugin(cleanOnceBeforeBuildPatterns: ['sosci/static/js/live', 'sosci/static/js/video']),new HtmlWebpackPlugin({
+  plugins: [
+   new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['sosci/static/js/video']}),
+   new HtmlWebpackPlugin({
     inject: false,
-    filename: '../livestream/templates/livestream/room.html',
-    template: 'src/sosci/room.html',
+    filename: 'livestream/templates/livestream/room.html',
+    template: 'src/sosci/room.ejs',
     chunks: ['sosci']
   }),new HtmlWebpackPlugin({
     inject: false,
-    filename: '../../catalogue/templates/catalogue/course_module_form.html',
-    template: 'src/videouploader/course_module_form.html',
+    filename: 'catalogue/templates/catalogue/course_module_form.html',
+    template: 'src/videouploader/course_module_form.ejs',
     chunks: ['videouploader']
   })],
   mode: 'development',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: 'video/[name].[contenthash].js',
     libraryTarget: 'umd',
-    path: path.resolve('../../'),
+    path: path.resolve('../../sosci/static/js'),
+    publicPath: "js"
   },
 module: {
   rules: [

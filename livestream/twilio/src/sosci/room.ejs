@@ -159,7 +159,7 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<script src="{% static 'js/sosci.9725fde3d3d0bef20112.js' %}"></script>
+<script src="{% static '<%= htmlWebpackPlugin.files.chunks.sosci.entry %>' %}"></script>
 <script type="text/javascript">
 // using jQuery
 var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
