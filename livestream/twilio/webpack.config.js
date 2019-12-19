@@ -8,7 +8,7 @@ module.exports = {
         videouploader: './src/videouploader/index.js'
       },
   plugins: [
-   new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['sosci/static/js/video']}),
+   new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['video']}),
    new HtmlWebpackPlugin({
     inject: false,
     filename: 'livestream/templates/livestream/room.html',
@@ -20,7 +20,7 @@ module.exports = {
     template: 'src/videouploader/course_module_form.ejs',
     chunks: ['videouploader']
   })],
-  mode: 'development',
+  mode: 'production',
   output: {
     filename: 'video/[name].[contenthash].js',
     libraryTarget: 'umd',
