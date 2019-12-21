@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,7 +21,7 @@ module.exports = {
     template: 'src/videouploader/course_module_form.ejs',
     chunks: ['videouploader']
   })],
-  mode: 'production',
+  mode: process.env.WEBPACK_MODE || 'production',
   output: {
     filename: 'video/[name].[contenthash].js',
     libraryTarget: 'umd',

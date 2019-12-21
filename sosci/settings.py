@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 from oscar import get_core_apps
 from django.core.urlresolvers import reverse_lazy
+import dj_database_url
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,18 +26,18 @@ location = lambda x: os.path.join(BASE_DIR, x)
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#7u!s7x577v3uq##&ht3_&n+izi)s6on96o)1dw%*rer9m2wx5'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG',False)
 
 ALLOWED_HOSTS = ["*"]
 
 DEFAULT_FROM_EMAIL = 'sosci2020@gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com' #os.environ.get("EMAIL_HOST", '')
-EMAIL_HOST_USER = 'sosci2020@gmail.com' #os.environ.get("EMAIL_HOST_USER", '')
-EMAIL_HOST_PASSWORD = 'llnwqxakobbdiquw' #os.environ.get("EMAIL_HOST_PASSWORD", '')
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 
 POST_OFFICE = {
@@ -110,17 +115,8 @@ WSGI_APPLICATION = 'sosci.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config()}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -229,24 +225,23 @@ ENROLLMENT_PUBLIC_URLS = (
     r'^/catalogue/course/details/(?P<course_id>\d+)/$',
 )
 
-VIMEO_ACCESS_TOKEN = '39b43eb6883cc7e0bae61b1e6dc59dd4'
-
-VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'
-
-VIMEO_GET_ALL_THUMBNAILS_URL = 'https://api.vimeo.com/videos/{0}/pictures'
-
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
 }
 
+VIMEO_ACCESS_TOKEN = os.environ['VIMEO_ACCESS_TOKEN']
 
-TWILIO_ACCOUNT_SID = 'AC3b7a22407d01c5eec4a7310721874b8c'
-TWILIO_API_KEY_SID = 'SK46abd1932778a7ba7aefaa6a3220cc8a'
-TWILIO_API_SECRET = 'lbKx9f3kWw3JQrXld1eUgMfJvw5At1wN'
-TWILIO_REST_API_AUTH_TOKEN = '10bb0bd0e832237d7248951eae0ee8fd'
-TWILIO_CHAT_SERVICE_SID = 'ISda2f872f9c06402d8330e6b01899c02a'
+VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'
+
+VIMEO_GET_ALL_THUMBNAILS_URL = 'https://api.vimeo.com/videos/{0}/pictures'
+
+TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
+TWILIO_API_KEY_SID = os.environ['TWILIO_API_KEY_SID']
+TWILIO_API_SECRET = os.environ['TWILIO_API_SECRET']
+TWILIO_REST_API_AUTH_TOKEN = os.environ['TWILIO_REST_API_AUTH_TOKEN']
+TWILIO_CHAT_SERVICE_SID = os.environ['TWILIO_CHAT_SERVICE_SID']
 
 from oscar.defaults import *
 # Currency
