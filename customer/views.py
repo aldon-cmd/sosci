@@ -85,6 +85,7 @@ class ConfirmUser(TemplateView):
     template_name = 'customer/confirm_user.html'
 
     def get(self, request, *args, **kwargs):
+        ctx = self.get_context_data()
         #check if user is already logged in and if he is redirect him to some other url, e.g. home
         # if request.user.is_authenticated():
         #     return HttpResponseRedirect(reverse('index'))
@@ -92,7 +93,7 @@ class ConfirmUser(TemplateView):
         # check if there is UserProfile which matches the activation key (if not then display 404)
 
         if 'activation_key' in self.kwargs:
-            ctx = self.get_context_data()
+            
             try:
                 user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
 
