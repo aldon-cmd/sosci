@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "clean": "rimraf ..\\..\\sosci/static/js/sosci-live.js",
-    "build": "webpack"
+    "prod-build": "webpack --config webpack.production.config.js",
+    "dev-build": "webpack --config webpack.development.config.js"
   },
   "author": "aldon palmer",
   "license": "ISC",

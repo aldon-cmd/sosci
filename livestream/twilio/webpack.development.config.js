@@ -21,13 +21,13 @@ module.exports = {
     template: 'src/videouploader/course_module_form.ejs',
     chunks: ['videouploader']
   })],
-  mode: process.env.WEBPACK_MODE || 'production',
+  mode: 'development',
   output: {
     filename: 'video/[name].[contenthash].js',
     libraryTarget: 'umd',
     path: path.resolve('../../sosci/static/js'),
     publicPath: "js"
-  },
+  },  
 module: {
   rules: [
     {
