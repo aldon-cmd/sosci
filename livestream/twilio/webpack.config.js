@@ -12,12 +12,12 @@ module.exports = {
    new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['video']}),
    new HtmlWebpackPlugin({
     inject: false,
-    filename: 'livestream/templates/livestream/room.html',
+    filename: '../../../livestream/templates/livestream/room.html',
     template: 'src/sosci/room.ejs',
     chunks: ['sosci']
   }),new HtmlWebpackPlugin({
     inject: false,
-    filename: 'catalogue/templates/catalogue/course_module_form.html',
+    filename: '../../../catalogue/templates/catalogue/course_module_form.html',
     template: 'src/videouploader/course_module_form.ejs',
     chunks: ['videouploader']
   })],
