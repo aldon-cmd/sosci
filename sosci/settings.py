@@ -33,7 +33,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #any string is True and empty strings are False
 DEBUG = (os.environ.get('DEBUG', False) == 'True')
 
-ALLOWED_HOSTS = ["sosci-app.herokuapp.com"]
+ALLOWED_HOSTS = ["*"]
 
 DEFAULT_FROM_EMAIL = 'sosci2020@gmail.com'
 EMAIL_USE_TLS = True
