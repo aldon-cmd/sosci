@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django.contrib.flatpages',    
+    'django.contrib.flatpages',
+    'core.apps.CoreConfig',    
     'video.apps.VideoConfig',
     'instructor.apps.InstructorConfig',
     'livestream.apps.LivestreamConfig',
@@ -147,6 +148,10 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/Jamaica'
 
 SITE_ID = 1
+
+SITE_NAME = "sosci"
+
+SITE_DOMAIN = "sosci.herokuapp.com"
 
 USE_I18N = True
 
