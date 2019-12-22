@@ -1,1 +1,1 @@
-Click on this link to activate your account. http://{{ site.domain }}/accounts/confirm/{{ activation_key }}/
+Click on this link to activate your account. https://{{ site.domain }}/accounts/confirm/{{ activation_key }}/
