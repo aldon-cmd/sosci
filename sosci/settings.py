@@ -29,7 +29,9 @@ location = lambda x: os.path.join(BASE_DIR, x)
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG',False)
+
+#any string is True and empty strings are False
+DEBUG = (os.environ.get('DEBUG', False) == 'True')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -39,6 +41,12 @@ EMAIL_HOST = os.environ['EMAIL_HOST']
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
+
+ADMINS = (
+    ('Aldon', 'wielidon@gmail.com'),  ('Rafer', 'raferbop@gmail.com'),
+)
+
+MANAGERS = ADMINS
 
 POST_OFFICE = {
     'DEFAULT_PRIORITY': 'now'
@@ -53,7 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'django.contrib.flatpages',    
+    'django.contrib.flatpages',
+    'core.apps.CoreConfig',    
     'video.apps.VideoConfig',
     'instructor.apps.InstructorConfig',
     'livestream.apps.LivestreamConfig',
@@ -146,6 +155,10 @@ TIME_ZONE = 'America/Jamaica'
 
 SITE_ID = 1
 
+SITE_NAME = "sosci"
+
+SITE_DOMAIN = "sosci.herokuapp.com"
+
 USE_I18N = True
 
 USE_L10N = True
@@ -182,6 +195,34 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+LOGGING = {
+            'version': 1,
+            'disable_existing_loggers': False,
+            'filters': {
+                'require_debug_false': {
+                    '()': 'django.utils.log.RequireDebugFalse'
+                }
+            },
+            'handlers': {
+                'mail_admins': {
+                    'level': 'ERROR',
+                    'filters': ['require_debug_false'],
+                    'class': 'django.utils.log.AdminEmailHandler',
+                    'include_html': True,
+                },
+                'console':{
+                    'level': 'DEBUG',
+                    'class': 'logging.StreamHandler'
+                },
+             },
+            'loggers': {
+                'django': {
+                  'handlers': ['console','mail_admins'],
+                  'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
+                },            
+             }
+          }
 
 LOGIN_REQUIRED_URLS = (
     r'^/catalogue/my-courses/$',
