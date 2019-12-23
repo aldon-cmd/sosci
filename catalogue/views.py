@@ -255,7 +255,7 @@ class CourseEnrollmentView(View):
     def post(self, request, *args, **kwargs):
         action = self.request.POST.get('action', None)
         course_id = self.kwargs.get("course_id")
-        if action == 'enroll' and request.user.is_authenticated():
+        if action == 'enroll' and request.user.is_authenticated:
             if not Course().is_enrolled(request.user,course_id):
                Course().enroll(request.user,course_id)
 

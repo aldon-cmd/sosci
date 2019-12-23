@@ -87,7 +87,7 @@ class ConfirmUser(TemplateView):
     def get(self, request, *args, **kwargs):
         ctx = self.get_context_data()
         #check if user is already logged in and if he is redirect him to some other url, e.g. home
-        # if request.user.is_authenticated():
+        # if request.user.is_authenticated:
         #     return HttpResponseRedirect(reverse('index'))
 
         # check if there is UserProfile which matches the activation key (if not then display 404)

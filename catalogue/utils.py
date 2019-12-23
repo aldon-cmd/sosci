@@ -26,7 +26,7 @@ class Course(object):
         catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=user)
 
     def is_enrolled(self,user, course_id):
-        return user.is_authenticated() and catalogue_models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
+        return user.is_authenticated and catalogue_models.Enrollment.objects.filter(user=user,product_id=course_id).exists()
 
 class CatalogueCreator(object):
 
