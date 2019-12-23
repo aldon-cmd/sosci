@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from video import views
 
+app_name = 'video'
+
 urlpatterns = [
     url(r'^upload/(?P<course_id>\d+)/$', views.VimeoVideoUploadFormView.as_view(), name='video-upload-form'),
     url(r'^upload/attempt/(?P<course_id>\d+)/$', views.VimeoVideoUploadAttemptView.as_view(), name='video-upload-attempt'),

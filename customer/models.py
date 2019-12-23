@@ -105,7 +105,7 @@ class CommunicationEventType(models.Model):
 
         return messages
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def is_order_related(self):

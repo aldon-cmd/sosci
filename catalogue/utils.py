@@ -1,6 +1,6 @@
 from decimal import Decimal as D
 from django.db.transaction import atomic    
-from partner.models import Partner, StockRecord 
+from oscar.apps.partner.models import Partner, StockRecord 
 from catalogue import models as catalogue_models
 from oscar.apps.catalogue.categories import create_from_breadcrumbs
 from livestream import models as twilio_models
