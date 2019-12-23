@@ -6,7 +6,7 @@ class CourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
-    price = forms.DecimalField(max_digits=6,decimal_places=2)
+    price = forms.DecimalField(max_digits=12,decimal_places=2)
     product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Course"))
     description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
@@ -19,7 +19,7 @@ class LiveCourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
-    price = forms.DecimalField(max_digits=6,decimal_places=2)
+    price = forms.DecimalField(max_digits=12,decimal_places=2)
     product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Live"))
     description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
 
