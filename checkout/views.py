@@ -1,4 +1,4 @@
-from oscar.apps.checkout import views
+from oscar.apps.checkout.views import PaymentDetailsView
 from django.utils import six
 from django import http
 from oscar.apps.checkout.views import logger
@@ -18,7 +18,7 @@ from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
 from catalogue.utils import Course
 
-class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
+class PaymentDetailsView(PaymentDetailsView,mixins.BasketMixin):
     """
     For taking the details of payment and creating the order.
 
@@ -102,7 +102,7 @@ class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
         except exceptions.PassedSkipCondition as e:
             return http.HttpResponseRedirect(e.url)
 
-        return super(views.PaymentDetailsView, self).dispatch(request, *args, **kwargs)
+        return super(PaymentDetailsView, self).dispatch(request, *args, **kwargs)
 
     def get_skip_conditions(self, request):
         # if not self.preview:
