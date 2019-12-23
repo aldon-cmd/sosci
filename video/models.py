@@ -20,5 +20,5 @@ class Video(models.Model):
     module = models.ForeignKey("catalogue.CourseModule", related_name='videos', blank=True, null=True,on_delete=models.CASCADE)
     product = models.ForeignKey('catalogue.Product', related_name='videos', blank=True, null=True,on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
       return self.name

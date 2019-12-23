@@ -8,7 +8,7 @@ from django.contrib.auth import login as auth_login
 from django.shortcuts import redirect
 
 class LandingView(auth_views.LoginView):
-    template_name = "promotions/landing.html"
+    template_name = "shop/landing.html"
     form_class = CustomAuthenticationForm
 
     def form_valid(self, form):
