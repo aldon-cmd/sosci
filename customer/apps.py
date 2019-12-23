@@ -6,6 +6,7 @@ class CustomerConfig(apps.CustomerConfig):
 
     def ready(self):
         super().ready()
+        #https://docs.djangoproject.com/en/3.0/ref/applications/#django.apps.AppConfig.ready
         from customer import views as customer_views
         self.customer_views = customer_views        
 

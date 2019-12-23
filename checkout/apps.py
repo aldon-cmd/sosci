@@ -7,6 +7,7 @@ class CheckoutConfig(apps.CheckoutConfig):
 
     def ready(self):
         super().ready()
+        #https://docs.djangoproject.com/en/3.0/ref/applications/#django.apps.AppConfig.ready
         from checkout import views as checkout_views
         self.checkout_views = checkout_views
 
