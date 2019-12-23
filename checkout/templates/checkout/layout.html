@@ -43,11 +43,7 @@
 
             {% block content %}{% endblock %}
 
-            <div id="promotions">
-                {% for promotion in promotions_page %}
-                    {% render_promotion promotion %}
-                {% endfor %}
-            </div>
+
         </div><!-- /page_inner -->
     </div>
     {% include "partials/footer_checkout.html" %}
