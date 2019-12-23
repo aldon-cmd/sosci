@@ -21,7 +21,7 @@ class RegisterUserMixin(object):
         to).
         """
         email = form.cleaned_data['email']
-        salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
+        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]            
         activation_key = hashlib.sha1(salt+email).hexdigest()            
         key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
