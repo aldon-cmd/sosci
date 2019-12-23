@@ -1,0 +1,14 @@
+{% extends "error.html" %}
+{% load i18n %}
+
+{% block title %}
+{% trans 'Bad Request' %} | {{ block.super }}
+{% endblock %}
+
+{% block error_heading %}
+{% trans "Bad Request!" %}
+{% endblock %}
+
+{% block error_message %}
+<p>{% trans "Your browser sent a request that this server could not understand." %}</p>
+{% endblock %}
