@@ -1,7 +1,7 @@
 from __future__ import absolute_import  # for import below
 import logging
 import django 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from post_office import mail

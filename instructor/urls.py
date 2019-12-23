@@ -2,6 +2,7 @@ from django.conf.urls import url
 from catalogue import views as catalogue_views
 from livestream import views as livestream_views
 
+app_name = 'instructor'
 
 urlpatterns = [
         url(r'^publish/course/(?P<course_id>\d+)/$', catalogue_views.PublishCourseView.as_view(), name='publish-course'),

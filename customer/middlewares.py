@@ -145,7 +145,7 @@ class LoginRequiredMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):        
 
         # No need to process remaining URLs if user already logged in
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return None
 
         # Requests matching a restricted URL pattern are returned
@@ -174,12 +174,12 @@ class AnonymousRequiredMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):        
 
         #continue to response if the user is not logged in
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
            return None
 
         # An exception match (public_urls) should immediately return None
         for url in self.anonymous_urls:
-            if url.match(request.path) and request.user.is_authenticated():
+            if url.match(request.path) and request.user.is_authenticated:
                return redirect("catalogue:course-list")
 
         # Require login for all non-matching requests
