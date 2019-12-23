@@ -2,7 +2,7 @@ from django.views import View
 from django.http import HttpResponseRedirect
 from payment import forms
 from django.urls import reverse
-from urlparse import parse_qs
+from urllib.parse import parse_qs
 from catalogue import models as catalogue_models
 
 class SettlePlugnPayPaymentView(View):

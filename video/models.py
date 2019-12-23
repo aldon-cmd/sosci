@@ -17,8 +17,8 @@ class Video(models.Model):
     upload_link = models.CharField(max_length=250, blank=True, null=True,help_text="a link that points directly to the video on the vimeo server")
     upload_status = models.CharField(max_length=11, blank=True, null=True,help_text="the upload status of the video. possible values are: in_progress, complete, error")
     transcode_status = models.CharField(max_length=11, blank=True, null=True,help_text="the transcoding status of the video. possible values are: in_progress, complete, error")
-    module = models.ForeignKey("catalogue.CourseModule", related_name='videos', blank=True, null=True)
-    product = models.ForeignKey('catalogue.Product', related_name='videos', blank=True, null=True)
+    module = models.ForeignKey("catalogue.CourseModule", related_name='videos', blank=True, null=True,on_delete=models.CASCADE)
+    product = models.ForeignKey('catalogue.Product', related_name='videos', blank=True, null=True,on_delete=models.CASCADE)
 
-    def __unicode__(self):
+    def __str__(self):
       return self.name

@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from oscar import get_core_apps
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 import dj_database_url
 from dotenv import load_dotenv, find_dotenv
 
@@ -62,16 +61,63 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'core.apps.CoreConfig',    
+
+
+
+    'oscar',
+    'oscar.apps.analytics',
+    # 'oscar.apps.checkout',
+    'checkout.apps.CheckoutConfig',
+    'oscar.apps.address',
+    'oscar.apps.shipping',
+    'catalogue.apps.CatalogueConfig',
+    'oscar.apps.catalogue.reviews',
+    # 'partner.apps.PartnerConfig',
+    'basket.apps.BasketConfig',
+    'payment.apps.PaymentConfig',
+    'oscar.apps.partner',
+    # 'oscar.apps.basket',
+    # 'oscar.apps.payment',    
+    'oscar.apps.offer',
+    # 'oscar.apps.order',
+    'order.apps.OrderConfig',
+    # 'oscar.apps.customer',
+    'customer.apps.CustomerConfig',
+    'oscar.apps.search',
+    'oscar.apps.voucher',
+    'oscar.apps.wishlists',
+    'oscar.apps.dashboard',
+    'oscar.apps.dashboard.reports',
+    'oscar.apps.dashboard.users',
+    'oscar.apps.dashboard.orders',
+    'oscar.apps.dashboard.catalogue',
+    'oscar.apps.dashboard.offers',
+    'oscar.apps.dashboard.partners',
+    'oscar.apps.dashboard.pages',
+    'oscar.apps.dashboard.ranges',
+    'oscar.apps.dashboard.reviews',
+    'oscar.apps.dashboard.vouchers',
+    'oscar.apps.dashboard.communications',
+    'oscar.apps.dashboard.shipping',
+
+    'tinymce',
+    "post_office",
+    
+    # 3rd-party apps that oscar depends on
+    'widget_tweaks',
+    'haystack',
+    'treebeard',
+    'sorl.thumbnail',
+    'django_tables2',
+
+    'core.apps.CoreConfig',
+    'shop.apps.SosciShopConfig',    
     'video.apps.VideoConfig',
     'instructor.apps.InstructorConfig',
     'livestream.apps.LivestreamConfig',
     'custom_user.apps.CustomUserConfig',
-    'widget_tweaks',
-    'tinymce',
-    "post_office",
 
-] + get_core_apps(['customer','promotions','basket','catalogue','payment','partner','order','checkout'])
+] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -109,7 +155,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 'oscar.apps.search.context_processors.search_form',
-                'oscar.apps.promotions.context_processors.promotions',
                 'oscar.apps.checkout.context_processors.checkout',
                 'oscar.apps.customer.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
