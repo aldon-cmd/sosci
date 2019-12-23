@@ -76,7 +76,7 @@ class LoginRequiredMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):        
 
         # No need to process remaining URLs if user already logged in
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return None
 
         # An exception match (public_urls) should immediately return None
@@ -105,7 +105,7 @@ class AnonymousRequiredMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):        
 
         #continue to response if the user is not logged in
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
            return None
 
         # An exception match (public_urls) should immediately return None
