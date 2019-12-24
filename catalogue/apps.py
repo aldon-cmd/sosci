@@ -6,6 +6,7 @@ class CatalogueConfig(apps.CatalogueConfig):
 
     def ready(self):
         super().ready()
+        #https://docs.djangoproject.com/en/3.0/ref/applications/#django.apps.AppConfig.ready
         from catalogue import views as catalogue_views
         self.catalogue_views = catalogue_views        
         

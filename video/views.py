@@ -23,7 +23,7 @@ class VideoPlayerView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
 
         course_id = self.kwargs.get('course_id')
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return http.HttpResponseRedirect('/') 
 
         if not Course().is_enrolled(request.user,course_id):

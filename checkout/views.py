@@ -74,7 +74,7 @@ class PaymentDetailsView(PaymentDetailsView,mixins.BasketMixin):
         if not course_id:
             raise http.Http404()
 
-        # if request.user.is_authenticated() and self.is_enrolled(request.user,course_id,catalogue_models):
+        # if request.user.is_authenticated and self.is_enrolled(request.user,course_id,catalogue_models):
         #    return http.HttpResponseRedirect(
         #             reverse('video:video-player', kwargs={'course_id': course_id}))
 
