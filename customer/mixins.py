@@ -2,8 +2,7 @@ from django.contrib.sites.shortcuts import get_current_site
 import hashlib, datetime, random
 from customer import models as customer_models
 from custom_user import models as custom_user_models
-from customer.utils import Dispatcher 
-
+from customer.utils import Dispatcher, create_email_activation_key
 
 
 class RegisterUserMixin(object):
@@ -14,9 +13,8 @@ class RegisterUserMixin(object):
         Create a user instance and send a new registration email (if configured
         to).
         """
-        email = form.cleaned_data['email']
-        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]            
-        activation_key = hashlib.sha1((salt+email).encode('utf-8')).hexdigest()            
+        email = form.cleaned_data['email']           
+        activation_key = create_email_activation_key(email)           
         key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
         user = form.save(commit=False)

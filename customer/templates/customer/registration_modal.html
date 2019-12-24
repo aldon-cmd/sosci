@@ -53,7 +53,7 @@
 
     function get_success_response(responseText, statusText, xhr, $form){
 
-              window.location.replace("{% url 'customer:email-confirm-user' %}");
+              window.location.replace("{% url 'customer:email-confirmation-sent' %}");
           }
 
               function get_error_response(data){

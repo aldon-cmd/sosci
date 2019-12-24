@@ -20,10 +20,11 @@ from django.utils import timezone
 import hashlib, datetime, random
 from django.contrib.sites.shortcuts import get_current_site
 from customer.models import CommunicationEventType
-from customer.utils import Dispatcher
+from customer.utils import create_email_activation_key
 from django.shortcuts import render
 from customer import mixins
 from django.urls import reverse_lazy
+from django.views import View
 
 class LogoutView(auth_views.LogoutView):
 
@@ -78,69 +79,16 @@ class UserRegistrationView(mixins.RegisterUserMixin,FormView):
 
     def form_valid(self, form):
         self.register_user(form)
-        return HttpResponseRedirect(reverse('customer:email-confirm-user'))
+        return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
 
-
-class ConfirmUser(TemplateView):
-    template_name = 'customer/confirm_user.html'
-
-    def get(self, request, *args, **kwargs):
-        ctx = self.get_context_data()
-        #check if user is already logged in and if he is redirect him to some other url, e.g. home
-        # if request.user.is_authenticated:
-        #     return HttpResponseRedirect(reverse('index'))
-
-        # check if there is UserProfile which matches the activation key (if not then display 404)
-
-        if 'activation_key' in self.kwargs:
-            
-            try:
-                user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
-
-                if user.is_active == True:
-                   messages.success(request,"This user account has already been activated")
-                   return HttpResponseRedirect(reverse('catalogue:course-list'))
-
-                #check if the activation key has expired, if it hase then render confirm_expired.html
-                if user.key_expires < timezone.now():
-                    email = user.email
-                    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
-                    activation_key = hashlib.sha1(salt+email).hexdigest()            
-                    key_expires = datetime.datetime.today() + datetime.timedelta(2)
-
-                    user.activation_key = activation_key
-                    user.key_expires = key_expires
-                    user.save()
-                    messages.error(request,"This link has expired. Please try sending the confirmation email again")
-
-                    return super(ConfirmUser, self).get(request, *args, **kwargs)
-                user.is_active = True
-                user.save()
-
-                #have to set backend before login
-                user.backend = settings.AUTHENTICATION_BACKENDS[0]
-                login(self.request, user)
-                return HttpResponseRedirect(reverse('catalogue:course-list'))
-            except Http404:
-
-                 return super(ConfirmUser, self).get(request, *args, **kwargs)
-
-        if 'resend' in self.kwargs:
-            return super(ConfirmUser, self).get(request, *args, **kwargs)
-
-
-        
-        #a resend form is displayed when a response is returned before this check_email variable is set
-        ctx['check_email'] = True
-        return render(self.request, self.template_name,ctx)
-
+class ResendUserEmailConfirmationView(TemplateView):
+    template_name = 'customer/resend_user_confirmation_email.html'
 
     def post(self, request, *args, **kwargs):
         action = self.request.POST.get('action', None)
         if action == 'resend':
-            email = self.request.POST.get('email', None)
-            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
-            activation_key = hashlib.sha1(salt+email).hexdigest()            
+            email = self.request.POST.get('email', None)          
+            activation_key = create_email_activation_key(email)            
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
             try:
                 user = get_object_or_404(get_user_model(), email=email)
@@ -154,6 +102,45 @@ class ConfirmUser(TemplateView):
             mixins.RegisterUserMixin().send_confirmation_email(user, self.request)
             return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
         return super(ConfirmUser, self).post(request, *args, **kwargs)
+
+class UserEmailConfirmationSentView(TemplateView):
+    template_name = 'customer/user_confirmation_email_sent.html'    
+
+class ConfirmUser(View):
+
+    def get(self, request, *args, **kwargs):
+            
+        try:
+            user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
+
+            if user.is_active == True:
+               messages.success(request,"This user account has already been activated")
+               return HttpResponseRedirect(reverse('catalogue:course-list'))
+
+            #check if the activation key has expired, if it hase then render confirm_expired.html
+            if user.key_expires < timezone.now():          
+                activation_key = create_email_activation_key(user.email)            
+                key_expires = datetime.datetime.today() + datetime.timedelta(2)
+
+                user.activation_key = activation_key
+                user.key_expires = key_expires
+                user.save()
+                messages.error(request,"This link has expired. Please try sending the confirmation email again")
+
+                return HttpResponseRedirect(reverse('resend-email-confirmation'))
+            user.is_active = True
+            user.save()
+
+            #have to set backend before login
+            user.backend = settings.AUTHENTICATION_BACKENDS[0]
+            login(self.request, user)
+            return HttpResponseRedirect(reverse('catalogue:course-list'))
+        except Http404:
+
+             return super(ConfirmUser, self).get(request, *args, **kwargs)
+
+
+        return HttpResponseRedirect(reverse('resend-email-confirmation'))
 
 class ConfirmationSuccess(TemplateView):
     template_name = 'customer/confirmation_success.html'            
