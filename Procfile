@@ -1,2 +1,2 @@
-release: python manage.py migrate --fake partner
+release: python manage.py migrate
 web: gunicorn sosci.wsgi

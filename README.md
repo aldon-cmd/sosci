@@ -22,6 +22,8 @@ python manage.py migrate
 
 0003_auto_20191117_1529.py .  creates user roles
 
+0006_auto_20191223_2042.py . creates the default partner
+
 # create and run empty migration
 
 python manage.py makemigrations --empty app_name
