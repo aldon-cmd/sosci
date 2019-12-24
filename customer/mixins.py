@@ -1,15 +1,9 @@
 from django.contrib.sites.shortcuts import get_current_site
-# from oscar.core.loading import get_model
-from oscar.apps.customer.signals import user_registered
-# from oscar.core.loading import get_class
-# from oscar.core.compat import get_user_model
 import hashlib, datetime, random
-from customer.models import CommunicationEventType
-from customer.utils import Dispatcher
+from customer import models as customer_models
+from custom_user import models as custom_user_models
+from customer.utils import Dispatcher 
 
-# User = get_user_model()
-# CommunicationEventType = get_model('customer', 'CommunicationEventType')
-# Dispatcher = get_class('customer.utils', 'Dispatcher')
 
 
 class RegisterUserMixin(object):
@@ -26,6 +20,7 @@ class RegisterUserMixin(object):
         key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
         user = form.save(commit=False)
+        user.userrole = custom_user_models.UserRole.objects.filter(name="Student").first()
         user.activation_key = activation_key
         user.key_expires = key_expires
         user.save()
@@ -65,7 +60,7 @@ class RegisterUserMixin(object):
         ctx = {'user': user,
                'activation_key' : user.activation_key,
                'site': get_current_site(request)}
-        messages = CommunicationEventType.objects.get_and_render(
+        messages = customer_models.CommunicationEventType.objects.get_and_render(
             code, ctx)
         if messages and messages['body']:
             Dispatcher().dispatch_user_messages(user, messages)
@@ -76,7 +71,7 @@ class RegisterUserMixin(object):
         code = self.communication_type_code
         ctx = {'user': user,
                'site': get_current_site(self.request)}
-        messages = CommunicationEventType.objects.get_and_render(
+        messages = customer_models.CommunicationEventType.objects.get_and_render(
             code, ctx)
         if messages and messages['body']:
             Dispatcher().dispatch_user_messages(user, messages)
