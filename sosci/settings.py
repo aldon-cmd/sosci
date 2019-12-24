@@ -75,7 +75,7 @@ INSTALLED_APPS = [
     # 'partner.apps.PartnerConfig',
     'basket.apps.BasketConfig',
     'payment.apps.PaymentConfig',
-    'oscar.apps.partner',
+    'partner.apps.PartnerConfig',
     # 'oscar.apps.basket',
     # 'oscar.apps.payment',    
     'oscar.apps.offer',

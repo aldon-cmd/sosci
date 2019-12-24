@@ -1,6 +1,6 @@
 from decimal import Decimal as D
 from django.db.transaction import atomic    
-from oscar.apps.partner.models import Partner, StockRecord 
+from partner.models import Partner, StockRecord 
 from catalogue import models as catalogue_models
 from oscar.apps.catalogue.categories import create_from_breadcrumbs
 from livestream import models as twilio_models
@@ -67,9 +67,8 @@ class CatalogueCreator(object):
                             price_excl_tax, num_in_stock):
         # Create partner and stock record
         partner_name = "Nesberry"
-        # partner_sku = "1337"
-        partner, _ = Partner.objects.get_or_create(
-            name=partner_name)
+
+        partner = Partner.objects.filter(name=partner_name).first()
 
         stock = StockRecord()
 
