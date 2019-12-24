@@ -31,8 +31,11 @@
           <button type="submit" ng-click="vm.submit(vm.form_data)" class=" enroll-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
           <div class="login-footer">
             <span class="signup-today">
-                               <a href="{% url 'customer:password_reset' %}">Forgot your password?</a>
-                            </span>
+               <a href="{% url 'customer:password_reset' %}">Forgot Your Password?</a>
+            </span>
+            <span class="signup-today">
+               <a href="{% url 'customer:resend-email-confirmation' %}">Resend Confirmation Email?</a>
+            </span>
             <span class="signup-today">
                <a class="open-registration-modal" href="{% url 'customer:registration-modal' view.kwargs.course_id %}">Sign Up</a>
             </span>
