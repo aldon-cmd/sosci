@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views import View
 from catalogue import models as catalogue_models
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -249,7 +248,7 @@ class CourseDetailView(TemplateView):
 
         return context        
 
-class CourseEnrollmentView(View):
+class CourseEnrollmentView(TemplateView):
     template_name = "catalogue/course_enrollment.html"
 
     def post(self, request, *args, **kwargs):
