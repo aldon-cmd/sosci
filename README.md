@@ -18,11 +18,13 @@ python manage.py migrate
 
 # custom migrations
 
-0020_auto_20191221_1832.py . creates default product classes
+catalogue/migrations/0020_auto_20191221_1832.py . creates default product classes
 
-0003_auto_20191117_1529.py .  creates user roles
+custom_user/migrations/0003_auto_20191117_1529.py .  creates user roles
 
-0006_auto_20191223_2042.py . creates the default partner
+partner/migrations/0006_auto_20191223_2042.py . creates the default partner
+
+core/migrations/0001_initial.py . sets the domain of the website
 
 # create and run empty migration
 

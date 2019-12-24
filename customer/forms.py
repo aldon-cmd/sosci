@@ -36,7 +36,7 @@ class EmailUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = user_models.User
-        fields = ('email','userrole','first_name','last_name',)
+        fields = ('email','first_name','last_name',)
 
     def __init__(self, host=None, *args, **kwargs):
         self.host = host
