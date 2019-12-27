@@ -100,7 +100,6 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
 
-    'tinymce',
     "post_office",
     
     # 3rd-party apps that oscar depends on

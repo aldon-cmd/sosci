@@ -19,7 +19,6 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    path('tinymce/', include('tinymce.urls')),
     path('instructor/', include('instructor.urls')),
     path('video/', include('video.urls')),
     path('live/', include('livestream.urls')),
