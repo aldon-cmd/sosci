@@ -34,8 +34,8 @@
             Edit
           </button>
         </h3>
-        <div class="box-border">
-          <p class="settings-row">{{ course.description|safe }}</p>
+        <div class="box-border settings-row-paragraph">
+          <div class="description-paragraph">{{ course.description|safe }}</div>
         </div>
       </div>
       <div>     
@@ -51,8 +51,8 @@
               <tr>
               {% for module in modules %}
                 <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
-                <td class="settings-row">{{ module.name }}</td>
-                <td class="settings-row">{{ module.start_date }}</td>
+                <td class="settings-row-description">{{ module.name }}</td>
+                <td class="settings-row-date">{{ module.start_date }}</td>
               </tr>
               {% endfor %}
             </tbody>

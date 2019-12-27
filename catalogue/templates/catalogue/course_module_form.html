@@ -46,8 +46,8 @@
               <tr>
               {% for module in modules %}
                 <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
-                <td class="settings-row">{{ module.name }}</td>
-                <td class="settings-row">{{ module.duration }}</td>
+                <td class="settings-row-description">{{ module.name }}</td>
+                <td class="settings-row-date">{{ module.duration }}</td>
               </tr>
               {% endfor %}
             </tbody>

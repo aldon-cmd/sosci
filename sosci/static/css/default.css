@@ -455,6 +455,11 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 #course-list .text{
   width: 316px;
+  height: 113.7px;
+}
+
+.rounded-1 {
+  border-radius: 3px!important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1716,7 +1721,7 @@ input:required {
 }
 
 #course-detail-module .box {
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 .ss-relative {
@@ -1741,9 +1746,28 @@ input:required {
   margin-bottom: 40px !important;
 }
 
+ .settings-row-description {
+  width: 75% !important;
+ }
+
+ .settings-row-date {
+  width: 25% !important;
+ }
+
  .settings-row {
   padding: 15px !important;
   width: 100% !important;
+ }
+
+ .settings-row-paragraph {
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+  padding-bottom: 15px !important;
+  width: 100% !important;
+ }
+
+ .description-paragraph > p {
+  padding-top: 15px;
  }
 
  #course-detail-module p {
@@ -1779,6 +1803,10 @@ input:required {
 
 .publish-btn > a {
   width: 150px !important;
+}
+
+.publish-btn {
+  font-family: Helvetica;
 }
 
 .publish-btn > a > span {
@@ -2816,6 +2844,21 @@ textarea:-ms-input-placeholder {
 
 .profile-name {
   margin-right: 1px;
+}
+
+.course-detail-text {
+  display: block;
+  float: left;
+}
+
+.short-description > p:nth-child(n+2) {
+  display: none !important;
+}
+
+.short-description > p {
+  font-family: Helvetica !important;
+  font-size: 14px !important;
+  line-height: 21px !important;
 }
 
 
