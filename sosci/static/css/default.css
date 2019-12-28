@@ -390,9 +390,9 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
-  min-height: 96px !important;
+  min-height: 86px !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -402,7 +402,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
-  min-height: 96px !important;
+  min-height: 86px !important;
   }
 }
 
@@ -446,11 +446,14 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .price {
-  color: #0366d6;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: 600;
   color: #0366d6;
+}
+
+.enroll-btn-text > .price {
+  color: #fff;
 }
 
 #course-list .text{
@@ -491,6 +494,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 .text {
   font-family: Helvetica;
   font-size: 14px;
+  line-height: 1.3;
   padding-top: 8px;
   padding-bottom: 20px;
 }
@@ -534,6 +538,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-family: Helvetica;
 }
 
+.start-class {
+  line-height: 32px !important;
+  font-size: 15px !important;
+  font-weight: 500;
+}
+
 .cost {
   font-size: 18px;
   font-weight: 600;
@@ -573,12 +583,15 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   -webkit-flex: 5.2 0 0;
   -ms-flex: 5.2 0 0px;
   flex: 5.2 0 0;
-  padding: 17px 17px;
+  padding: 16px 17px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #fff;
   -webkit-transition: all .1s ease-in-out;
   transition: all .1s ease-in-out;
+  text-align: left;
+  line-height: 1.2;
+  font-weight: bold;
 }
 
 .enroll-btn-icon {
@@ -1330,13 +1343,13 @@ img, picture {
 }
 
 .sign-in-hero {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   font-family: arial, sans-serif;
   letter-spacing: -.03125rem;
   font-weight: bold;
   color: #1e1f20;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 
 .sign-in-message {
@@ -1398,6 +1411,23 @@ img, picture {
 
 .sign-in-btn {
   margin-top: 2.5rem;
+}
+
+.log-in-btn {
+  margin-top: 25px;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 21px;
+  color: #292929 !important;
+  font-weight: 700;
+}
+
+.signup-today {
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 21px;
+  color: #292929 !important;
+  font-weight: 700;
 }
 
 .sign-in-btn button {
@@ -1760,10 +1790,15 @@ input:required {
  }
 
  .settings-row-paragraph {
+  padding-top: 15px !important;
   padding-right: 15px !important;
   padding-left: 15px !important;
   padding-bottom: 15px !important;
   width: 100% !important;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 21px;
+  color: #19171c;
  }
 
  .description-paragraph > p {
@@ -2861,6 +2896,50 @@ textarea:-ms-input-placeholder {
   line-height: 21px !important;
 }
 
+.description > p, .description-paragraph {
+  white-space: pre-line;
+  white-space: pre-wrap; 
+}
+
+#create-form textarea {
+  height: 200px;
+  min-height: 200px;
+}
+
+#create-form textarea {
+  display: block;
+  width: 100%;
+  max-height: 500px;
+  padding: 8px;
+  resize: vertical;
+}
+
+.title-details > h3 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaecef;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+#sign-in-form .errorlist {
+  padding: 0px 15px;
+  margin-bottom: 15px;
+  font-family: Helvetica;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f65a5b;
+}
+
+.error-block {
+  font-family: Helvetica;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #f65a5b;
+  margin-top: 15px !important;
+}
 
 /*   display none properties      */
 
