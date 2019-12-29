@@ -24,14 +24,17 @@
                   </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Video stream</span>
-                  </a>
+                  
                   <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
                     <i class="fas fa-video"></i>
                     <span>Live stream</span>
                   </a>
+
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Video stream</span>
+                  </a>
+
                 </div>
               </div>
             </li>
@@ -94,13 +97,14 @@
                   </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Video stream</span>
-                  </a>
                   <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
                     <i class="fas fa-video"></i>
                     <span>Live stream</span>
+                  </a>
+
+                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Video stream</span>
                   </a>
                 </div>
               </div>
