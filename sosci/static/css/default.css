@@ -81,6 +81,10 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   padding-top: 2rem !important;
 }
 
+#navbarSupportedContent {
+  display: block;
+}
+
 #sosci-nav {
   position: absolute;
   top: 0;
@@ -131,7 +135,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 #sosci-nav .content {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 100%;
   padding: 0 22px;
   position: relative;
   z-index: 2;
@@ -201,7 +205,6 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -473,7 +476,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 @media only screen and (max-width: 400px) {
   #course-list .text {
-    width: 336px;
+    width: 306px;
   }
 }
 
@@ -882,7 +885,7 @@ button {
 }
 
 .option-box {
-  margin-bottom: 16px;
+  margin-bottom: 25px;
 }
 
 #registration-form > div {
@@ -2939,6 +2942,25 @@ textarea:-ms-input-placeholder {
   line-height: 21px;
   color: #f65a5b;
   margin-top: 15px !important;
+}
+
+.landing-nav .item {
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 18px;
+  padding-top: 16px!important;
+  padding-bottom: 16px!important;
+  margin-right: 32px!important;
+  color: #6a737d;
+  border-bottom: 2px solid transparent;
+}
+
+.landing-nav {
+  border-bottom: 1px solid #eaecef;
+}
+
+.landing-nav .active {
+  border-color: #0366d6;
 }
 
 /*   display none properties      */
