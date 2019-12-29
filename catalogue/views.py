@@ -12,7 +12,7 @@ from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
 from django.views.generic.edit import FormView
-from catalogue.utils import CatalogueCreator,Course,Course
+from catalogue.utils import CatalogueCreator,Course
 from catalogue import mixins
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured
