@@ -16,3 +16,11 @@ class LandingView(auth_views.LoginView):
         """Security check complete. Log the user in."""
         auth_login(self.request, form.get_user())
         return redirect('course:course-list')    
+
+class ExploreCourseListView(ListView):
+    template_name = "shop/landing.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return Course().get_courses().filter(is_published=True)
