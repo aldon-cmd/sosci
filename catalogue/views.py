@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from catalogue import models as catalogue_models
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -16,6 +16,7 @@ from catalogue.utils import CatalogueCreator,Course,Course
 from catalogue import mixins
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured
+from partner import models as partner_models
 
 # Create your views here.
 class CourseListView(ListView):
@@ -66,6 +67,35 @@ class LiveCourseListView(ListView):
 
     def get_queryset(self):
         return Course().get_courses().filter(product_class__name="Live")
+
+class LiveCourseUpdateView(UpdateView):
+    template_name = "catalogue/course_update_form.html"
+    model = catalogue_models.Product
+    form_class = forms.LiveCourseForm
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(LiveCourseUpdateView, self).get_form_kwargs()
+        course_id = self.kwargs.get('pk')
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
+
+        kwargs['initial'] = {'price': stockrecord.price_excl_tax}
+        return kwargs
+
+    def get_success_url(self):
+        course_id = self.kwargs.get('pk')
+        return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
+
+    def form_valid(self, form):
+        product = form.instance
+        price = form.cleaned_data['price']
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=product.pk).first()
+        stockrecord.price_excl_tax = price
+        stockrecord.save()
+        product.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 class LiveCourseCreateView(CreateView):
     template_name = "catalogue/course_form.html"
@@ -132,6 +162,43 @@ class LiveCourseDetailView(TemplateView):
 
 
         return context
+
+
+class CourseUpdateView(UpdateView):
+    template_name = "catalogue/course_update_form.html"
+    model = catalogue_models.Product
+    form_class = forms.CourseForm
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(LiveModuleCreateView, self).get_context_data(**kwargs)
+    #     course_id = self.kwargs.get('pk')
+    #     stockrecord = catalogue_models.StockRecord.objects.filter(product_id=course_id).first()
+    #     context["price"] = stockrecord.price
+    #     context["modules"] = catalogue_models.CourseModule.objects.filter(product_id=course_id)
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(CourseUpdateView, self).get_form_kwargs()
+        course_id = self.kwargs.get('pk')
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
+
+        kwargs['initial'] = {'price': stockrecord.price_excl_tax}
+        return kwargs
+
+    def form_valid(self, form):
+        product = form.instance
+        price = form.cleaned_data['price']
+        stockrecord = catalogue_models.StockRecord.objects.filter(product_id=product.pk).first()
+        stockrecord.price_excl_tax = price
+        stockrecord.save()
+        product.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        course_id = self.kwargs.get('pk')
+        return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
 
 
 class CourseCreateView(CreateView):
