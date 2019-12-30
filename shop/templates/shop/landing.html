@@ -4,44 +4,52 @@
 
 
 {% block content %}
-<div class="landing-nav">
-  <nav class="container no-padding">
-    <ul class="d-flex">
-      <li class="item active">Most popular</li>
-      <li class="item">Recently added</li>
-      <li class="item">Sponsored</li>
-    </ul>
-  </nav>
-</div>
-<div class="container no-padding">
- 
- <div id="course-list" class="row">
-  {% for object in object_list %}
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
-      {% include 'catalogue/partials/product.html' with object=object %}
-
-    </div>
-  {% empty %}
-    <p>No courses yet.</p>
-  {% endfor %}    
+<div id="landing">
+  <div class="landing-nav">
+    <nav class="container no-padding">
+      <ul class="d-flex">
+        <li class="item active">Most popular</li>
+        <li class="item">Recently added</li>
+        <li class="item">Sponsored</li>
+      </ul>
+    </nav>
   </div>
+  <div class="container no-padding">
+   
+   <div id="course-list" class="row">
+    {% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
+        {% include 'catalogue/partials/product.html' with object=object %}
 
-
-  {% if is_paginated %}
-    <div class="pagination">
-      <span class="page-links">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-        <span class="page-current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-        {% endif %}
-      </span>
+      </div>
+    {% empty %}
+    <div>
+      <div>
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <p>No courses in sight</p>
+      <p>After you enroll in a course, it’ll show up here, so it’s easier to get to.</p>
     </div>
-  {% endif %}
-      
+    {% endfor %}    
+    </div>
+
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+          <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+        
+  </div>
 </div>
 {% endblock content %}

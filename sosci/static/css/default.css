@@ -2963,6 +2963,14 @@ textarea:-ms-input-placeholder {
   border-color: #0366d6;
 }
 
+#landing .row {
+  padding-top: 0px !important;
+}
+
+.browse-course {
+  padding-top: 40px;
+}
+
 /*   display none properties      */
 
 #sign-in-form .form-group-label {
