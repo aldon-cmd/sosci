@@ -827,13 +827,13 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 #save-btn .btn{
   padding: 10px 22px 10px 22px;
-  border-radius: 2px;
-  margin-bottom: 16px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 #sign-in-form .btn {
-  height: 61px !important;
-  text-align: center !important;
+  height: 48px !important;
 }
 
 button {
@@ -843,13 +843,21 @@ button {
 }
 
 .form-control {
-  border-radius: 0px !important;
+  border-radius: 3px !important;
   padding: 11px !important;
   height: 46px !important;
 }
 
+#default .form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #f05c8d;
+  outline: 0;
+  box-shadow: none;
+}
+
 #sign-in-form .form-control {
-  height: 61px !important;
+  height: 46px !important;
 }
 
 .input-select_select, #login-form .btn {
@@ -1413,7 +1421,7 @@ img, picture {
 }
 
 .sign-in-btn {
-  margin-top: 2.5rem;
+  margin-top: 20px;
 }
 
 .log-in-btn {
@@ -1431,9 +1439,14 @@ img, picture {
   line-height: 21px;
   color: #292929 !important;
   font-weight: 700;
+  margin: 15px 0px 0px 0px;
 }
 
-.sign-in-btn button {
+.login-footer {
+  margin: 15px 0px 0px 5px;
+}
+
+.sign-in-btn button, .log-in-btn button {
   width: 100%;
   height: 44px;
   color: #ffff;
@@ -1443,7 +1456,7 @@ img, picture {
 }
 
 .sign-in-btn button {
-  font-family: 'Roboto', arial, sans-serif;
+  font-family: arial, sans-serif;
   font-weight: 300;
 }
 
@@ -1608,7 +1621,7 @@ button > i, .span {
 
 input:required {
   font-family: Helvetica !important;
-  font-size: 15px;
+  font-size: 14px;
   color: #1f2624 !important;
 }
 
@@ -2959,6 +2972,12 @@ textarea:-ms-input-placeholder {
   border-bottom: 1px solid #eaecef;
 }
 
+@media only screen and (max-width: 600px) {
+.landing-row {
+  padding: 0px 15px;
+  }
+}
+
 .landing-nav .active {
   border-color: #0366d6;
 }
@@ -2969,6 +2988,35 @@ textarea:-ms-input-placeholder {
 
 .browse-course {
   padding-top: 40px;
+  display: block;
+}
+
+.browse-nav {
+  height: 71px;
+}
+
+.browse-row {
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.browse-item {
+  height: 34px;
+  line-height: 16px;
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
+.browse a {
+  color: #495057 !important;
+}
+
+.adj-container {
+  margin-top: 0px !important;
+}
+
+.browse .fas {
+  margin-right: 5px;
 }
 
 /*   display none properties      */
