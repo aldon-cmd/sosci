@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.views.generic import TemplateView
-from django.shortcuts import render
-from django.contrib.auth import views as auth_views
-from customer.forms import CustomAuthenticationForm
-from django.contrib.auth import login as auth_login
-from django.shortcuts import redirect
+from django.views.generic.list import ListView
+from catalogue.utils import Course
+from catalogue import models as catalogue_models
 
-class LandingView(auth_views.LoginView):
+class LandingView(ListView):
     template_name = "shop/landing.html"
-    form_class = CustomAuthenticationForm
+    paginate_by = 10
+    model = catalogue_models.Product
 
-    def form_valid(self, form):
-
-        """Security check complete. Log the user in."""
-        auth_login(self.request, form.get_user())
-        return redirect('course:course-list')    
+    def get_queryset(self):
+        return Course().get_courses().filter(is_published=True)

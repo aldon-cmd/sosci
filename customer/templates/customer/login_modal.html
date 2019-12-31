@@ -21,23 +21,19 @@
           </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 d-flex option-box">
-          <div class="custom-control custom-checkbox col-lg-9 col-md-9 col-sm-9">
-            <input type="checkbox" class="custom-control-input" id="customCheck2">
-            <label class="custom-control-label" for="customCheck2">Remember me</label>
-          </div>
-          <button class="password col-lg-3 col-md-3 col-sm-3 no-padding">Show password</button>
+          <span class="signup-today">
+             <a href="{% url 'customer:password_reset' %}">Forgot Your Password?</a>
+          </span>
         </div>
         <div id="save-btn">
           <button type="submit" ng-click="vm.submit(vm.form_data)" class=" enroll-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
           <div class="login-footer">
-            <span class="signup-today">
-               <a href="{% url 'customer:password_reset' %}">Forgot Your Password?</a>
-            </span>
-            <span class="signup-today">
+            <span class="signup-today hide">
                <a href="{% url 'customer:resend-email-confirmation' %}">Resend Confirmation Email?</a>
             </span>
             <span class="signup-today">
-               <a class="open-registration-modal" href="{% url 'customer:registration-modal' view.kwargs.course_id %}">Sign Up</a>
+              <span>If you do not have an account</span>
+               <a class="open-registration-modal" href="{% url 'customer:registration-modal' view.kwargs.course_id %}">Sign up here</a>
             </span>
           </div>
         </div>

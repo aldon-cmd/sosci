@@ -1,145 +1,168 @@
 {% if request.user.is_authenticated and request.user.is_staff %}
 <nav id="sosci-nav" class="navbar navbar-expand-md">
-    <div class="content">
-        <div class="header">
-          <div class="d-flex flex-row">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon">
-                     <i class="fas fa-bars"></i>
-                  </span>
-              </button>
-              <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
-          </div>
-        </div>
-        <div class="" id="navbarSupportedContent">
-          <ul class="list">
-            <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Catalogue</a></li>
-            <li class="item dropdown">
-              <div class="dropdown show">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">Create Course</span>
-                  <span class="">
-                    <i class="fas fa-angle-down"></i>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  
-                  <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
-                    <i class="fas fa-video"></i>
-                    <span>Live stream</span>
-                  </a>
-
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Video stream</span>
-                  </a>
-
-                </div>
-              </div>
-            </li>
-            <li class="item"><a class="nav-link" href="{% url 'instructor:student-list' %}" role="button">My Students</a></li>
-            <li class="item dropdown">
-              <div class="dropdown show">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">
-                    <span class="profile-name">{{request.user.first_name}}</span>
-                    <span>{{request.user.last_name}}</span>
-                  </span>
-                  <span class="">
-                    <i class="fas fa-angle-down"></i>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Invite Friends</span>
-                  </a>
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-user-graduate"></i>
-                    <span>My Account</span>
-                  </a>
-                  <a class="dropdown-item" href="{% url 'customer:logout' %}">
-                    <i class="fas fa-power-off"></i>
-                    <span>Logout</span>
-                  </a>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-        </div>
+  <div class="content">
+    <div class="header">
+      <div class="d-flex flex-row">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon">
+                 <i class="fas fa-bars"></i>
+              </span>
+          </button>
+          <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
+      </div>
     </div>
+
+    <div class="d-flex" id="navbarSupportedContent">
+
+      <div class="col-md-4">
+        <ul class="list">
+          <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+          <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Catalogue</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">
+        <ul class="list float-right">
+          <li class="item dropdown">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">Create Course</span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                
+                <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
+                  <i class="fas fa-video"></i>
+                  <span>Live stream</span>
+                </a>
+
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Video stream</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="item"><a class="nav-link" href="{% url 'instructor:student-list' %}" role="button">My Students</a></li>
+          <li class="item dropdown">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">
+                  <span class="profile-name">{{request.user.first_name}}</span>
+                  <span>{{request.user.last_name}}</span>
+                </span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Invite Friends</span>
+                </a>
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-user-graduate"></i>
+                  <span>My Account</span>
+                </a>
+                <a class="dropdown-item" href="{% url 'customer:logout' %}">
+                  <i class="fas fa-power-off"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
 {% elif request.user.is_authenticated %}
 <nav id="sosci-nav" class="navbar navbar-expand-md">
-    <div class="content">
-        <div class="header">
-          <div class="d-flex flex-row">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">
-                    <i class="fas fa-bars"></i>
-                </span>
-            </button>
-            <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
-          </div>
-        </div>
-        <div class="" id="navbarSupportedContent">
-          <ul class="list">
-            <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Catalogue</a></li>
-            <li class="item dropdown">
-              <div class="dropdown show">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">Create Course</span>
-                  <span class="">
-                    <i class="fas fa-angle-down"></i>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
-                    <i class="fas fa-video"></i>
-                    <span>Live stream</span>
-                  </a>
-
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-play-circle"></i>
-                    <span>Video stream</span>
-                  </a>
-                </div>
-              </div>
-            </li>
-            <li class="item"><a class="nav-link" href="{% url 'instructor:student-list' %}" role="button">My Students</a></li>
-            <li class="item dropdown">
-              <div class="dropdown show">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">
-                    <span class="profile-name">{{request.user.first_name}}</span>
-                    <span>{{request.user.last_name}}</span>
-                  </span>
-                  <span class="">
-                    <i class="fas fa-angle-down"></i>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Invite Friends</span>
-                  </a>
-                  <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                    <i class="fas fa-user-graduate"></i>
-                    <span>My Account</span>
-                  </a>
-                  <a class="dropdown-item" href="{% url 'customer:logout' %}">
-                    <i class="fas fa-power-off"></i>
-                    <span>Logout</span>
-                  </a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+  <div class="content">
+    <div class="header">
+      <div class="d-flex flex-row">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-bars"></i>
+            </span>
+        </button>
+        <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
+      </div>
     </div>
+
+
+    <div class="d-flex" id="navbarSupportedContent">
+
+      <div class="col-md-4">
+        <ul class="list">
+          <li class="item"><a class="nav-link" href="{% url 'catalogue:my-course-list' %}">My Courses</a></li>
+          <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Catalogue</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4"></div>
+
+      <div class="col-md-4">
+        <ul class="list float-right">
+          <li class="item dropdown">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">Create Course</span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                
+                <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
+                  <i class="fas fa-video"></i>
+                  <span>Live stream</span>
+                </a>
+
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-play-circle"></i>
+                  <span>Video stream</span>
+                </a>
+
+              </div>
+            </div>
+          </li>
+          <li class="item"><a class="nav-link" href="{% url 'instructor:student-list' %}" role="button">My Students</a></li>
+          <li class="item dropdown">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">
+                  <span class="profile-name">{{request.user.first_name}}</span>
+                  <span>{{request.user.last_name}}</span>
+                </span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Invite Friends</span>
+                </a>
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-user-graduate"></i>
+                  <span>My Account</span>
+                </a>
+                <a class="dropdown-item" href="{% url 'customer:logout' %}">
+                  <i class="fas fa-power-off"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </nav>
 {% elif not request.user.is_authenticated %}
 <nav id="sosci-nav" class="navbar navbar-expand-md">
@@ -154,79 +177,124 @@
                 <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
             </div>
         </div>
-        <div class="" id="navbarSupportedContent">
-          <ul class="list">
-            <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
-            <li class="item dropdown hide">
-              <div class="dropdown show">
-                <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="nav-create-course">Programs</span>
-                  <span class="">
-                    <i class="fas fa-angle-down"></i>
-                  </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span>SME School</span>
+        <div class="d-flex" id="navbarSupportedContent">
+
+          <div class="col-md-4">
+            <ul class="list">
+              <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
+              <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse</a></li>
+              <li class="item dropdown">
+                <div class="dropdown show">
+                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="nav-create-course">Programs</span>
+                    <span class="">
+                      <i class="fas fa-angle-down"></i>
+                    </span>
                   </a>
-                  <a class="dropdown-item" href="">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Investor School</span>
-                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="">
+                      <i class="fas fa-chalkboard-teacher"></i>
+                      <span>SME School</span>
+                    </a>
+                    <a class="dropdown-item" href="">
+                      <i class="fas fa-graduation-cap"></i>
+                      <span>Investor School</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li class="item"><a class="nav-link" href="">Study Materials</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Get Started</a></li>
-            <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
-          </ul>
+              </li>
+            </ul>
+          </div>  
+
+          <div class="col-md-4">
+            
+          </div>
+
+          <div class="col-md-4">
+            <ul class="list float-right">
+              <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Sign Up</a></li>
+              <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
+            </ul>
+          </div>
+
         </div>
     </div>
 </nav>
 {% else %}
 <nav id="sosci-nav" class="navbar navbar-expand-md">
-    <div class="content">
-        <div class="header">
-            <div class="d-flex flex-row">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
-                        <i class="fas fa-bars"></i>
-                    </span>
-                </button>
-                <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
-            </div>
-        </div>
-        <div class="" id="navbarSupportedContent">
-            <ul class="list">
-                <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Courses</a></li>
-                <li class="item dropdown hide">
-                  <div class="dropdown show">
-                    <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <span class="nav-create-course">Programs</span>
-                      <span class="">
-                        <i class="fas fa-angle-down"></i>
-                      </span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <span>SME School</span>
-                      </a>
-                      <a class="dropdown-item" href="">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>Investor School</span>
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                <li class="item"><a class="nav-link">Study Materials</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Get Started</a></li>
-                <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
-            </ul>
+  <div class="content">
+    <div class="header">
+        <div class="d-flex flex-row">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="fas fa-bars"></i>
+                </span>
+            </button>
+            <a class="sosci-logo-m nav-link-m" href="{% url 'home' %}">Sosci</a>
         </div>
     </div>
+    <div class="" id="navbarSupportedContent">
+      
+      <div class="col-md-4">
+        <ul class="list">
+          <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
+          <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse</a></li>
+          <li class="item dropdown .hide">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">Programs</span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <span>SME School</span>
+                </a>
+                <a class="dropdown-item" href="">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Investor School</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>  
+
+      <div class="col-md-4">
+        <ul class="list">
+          <li class="item dropdown hide">
+            <div class="dropdown show">
+              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="nav-create-course">Programs</span>
+                <span class="">
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <span>SME School</span>
+                </a>
+                <a class="dropdown-item" href="">
+                  <i class="fas fa-graduation-cap"></i>
+                  <span>Investor School</span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-4">
+        <ul class="list float-right">
+          <li class="item"><a class="nav-link" href="{% url 'customer:user-registration' %}">Sign Up</a></li>
+          <li class="item"><a class="nav-link" href="{% url 'customer:user-login' %}">Log In</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
 </nav>
 {% endif %}
