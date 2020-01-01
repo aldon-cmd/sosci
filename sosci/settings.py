@@ -297,6 +297,8 @@ r'^/instructor/publish/course/(?P<course_id>\d+)/$',
 r'^/instructor/module/create/(?P<course_id>\d+)/$',
 r'^/instructor/live/module/create/(?P<course_id>\d+)/$',
 r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
+r'^/instructor/live/course/update/(?P<course_id>\d+)/$',
+r'^/instructor/course/update/(?P<course_id>\d+)/$',
 )
 
 
@@ -310,6 +312,8 @@ ENROLLMENT_PUBLIC_URLS = (
     r'^/checkout/thank-you/$',
     r'^/catalogue/course/details/(?P<course_id>\d+)/$',
     r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
+    r'^/instructor/live/course/update/(?P<course_id>\d+)/$',
+    r'^/instructor/course/update/(?P<course_id>\d+)/$',    
 )
 
 HAYSTACK_CONNECTIONS = {
