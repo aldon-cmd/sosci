@@ -360,8 +360,14 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .course-detail-info {
-  margin: 5px 0px 38px 0px;
+  margin: 15px 0px 30px 0px;
   font-size: 15px;
+}
+
+.course-detail-title-info {
+  margin: 5px 0px 15px 0px;
+  font-size: 14px !important;
+  font-family: Helvetica !important;
 }
 
 .publisher {
@@ -381,6 +387,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 .title-details {
   font-size: 23px !important;
+  border-bottom: 1px solid #eaecef;
 }
 
 @media only screen and (max-width: 600px) {
@@ -474,9 +481,39 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   }
 }
 
+@media only screen and (max-width: 414px) {
+  #course-list .text {
+    width: 320px;
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  #course-list .text {
+    width: 317px;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   #course-list .text {
     width: 306px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  #course-list .text {
+    width: 281px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  #course-list .text {
+    width: 266px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #course-list .text {
+    width: 226px;
   }
 }
 
@@ -648,8 +685,6 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   counter-reset: episode-count;
 }
 
-
-
 .course-list-duration {
   color: #808080;
   padding: .625rem;
@@ -658,7 +693,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 @media only screen and (max-width: 600px) {
   .course-detail .p-3 {
-    padding-top: 0px !important;
+    padding: 0px !important;
   }
 }
 
@@ -1828,7 +1863,7 @@ input:required {
   color: #19171c;
 }
 
-#course-detail-module .btn {
+#course-detail-module .btn, #student-content .btn {
   padding: 0px 11px 0px 11px;
   line-height: 26px;
   font-size: 12px;
@@ -2746,7 +2781,7 @@ ol, ul {
   border-bottom: 1px solid #e1e4e8;
 }
 
-#sponsored-content .container {
+#student-content .container {
   margin-top: 0px !important;
 }
 
@@ -2759,30 +2794,64 @@ ol, ul {
   padding: 15px;
 }
 
-.top-header-content > .title-sponsor {
+.top-header-content > .title-student {
   font-family: Arial, sans-serif;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 28px;
   font-weight: 600;
   color: #212529;
 }
 
-.top-header-content > .sponsor-search {
-  text-align: right;
-  font-size: 20px;
-  color: #212529;
-  padding-right: 15px;
+.title-student span, .title-student p {
+  line-height: 28px
 }
 
-.sponsor-search > .fas {
-  margin-right: 10px;
-  color: #828282;
-}
-
-.title-sponsor > p {
+.title-student > p {
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#student-content .btn {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.course-detail-info > span, .course-detail-title-info > span {
+  margin-right: 13px;
+}
+
+.course-detail-info p, .course-detail-title-info p {
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.course-detail-info .fas, .course-detail-info .far, .course-detail-title-info .fas, .course-detail-title-info .far {
+  font-size: 10px;
+  margin-right: 5px;
+  line-height: 16px;
+}
+
+.course-detail .btn {
+  padding: 0px 11px 0px 11px;
+  line-height: 26px;
+  font-size: 12px;
+  border-radius: 2px;
+  height: 28px;
+  text-align: center;
+  border: 1px solid;
+  font-weight: bold;
+  border-color: rgb(218, 221, 225);
+  background-color: rgb(245, 246, 247);
+  letter-spacing: normal;
+  color: rgb(68, 73, 80);
+  float: right;
+}
+
+.course-detail .btn {
+  font-size: 12px;
+  font-weight: 600;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -2792,10 +2861,8 @@ ol, ul {
   line-height: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  .sponsor-search {
-    display: none !important;
-  }
+#student-content .btn {
+  float: right;
 }
 
 .cc-header .fas {
@@ -2932,8 +2999,6 @@ textarea:-ms-input-placeholder {
 
 .title-details > h3 {
   padding-bottom: 10px;
-  border-bottom: 1px solid #eaecef;
-  margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
 }
