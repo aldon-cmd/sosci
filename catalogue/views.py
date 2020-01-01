@@ -193,7 +193,7 @@ class CourseUpdateView(UpdateView):
     def form_valid(self, form):
         product = form.instance
         price = form.cleaned_data['price']
-        stockrecord = catalogue_models.StockRecord.objects.filter(product_id=product.pk).first()
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=product.pk).first()
         stockrecord.price_excl_tax = price
         stockrecord.save()
         product.save()
