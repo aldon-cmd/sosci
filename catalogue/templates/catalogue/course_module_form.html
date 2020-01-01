@@ -122,7 +122,7 @@
 <script src="{% static 'js/tus.js' %}"></script>
 <script src="{% static 'js/video/videouploader.39cba13e5da5dc3aca6f.js' %}"></script>
 <script>
-var videouploader = new VideoUploader("{% url 'video:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
+var videouploader = new VideoUploader("{% url 'instructor:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
 </script>
 
 

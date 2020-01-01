@@ -129,12 +129,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'customer.middlewares.CourseExistsMiddleware',
-    'customer.middlewares.CoursePublishedMiddleware',
-    'customer.middlewares.CourseEnrolledMiddleware',
-    'customer.middlewares.OwnerRequiredMiddleware',
-    'customer.middlewares.AnonymousRequiredMiddleware',
-    'customer.middlewares.LoginRequiredMiddleware',
+    # 'customer.middlewares.CourseExistsMiddleware',
+    # 'customer.middlewares.CoursePublishedMiddleware',
+    # 'customer.middlewares.CourseEnrolledMiddleware',
+    # 'customer.middlewares.OwnerRequiredMiddleware',
+    # 'customer.middlewares.AnonymousRequiredMiddleware',
+    # 'customer.middlewares.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'sosci.urls'
@@ -296,6 +296,7 @@ COURSE_PUBLISHED_PUBLIC_URLS = (
 r'^/instructor/publish/course/(?P<course_id>\d+)/$',
 r'^/instructor/module/create/(?P<course_id>\d+)/$',
 r'^/instructor/live/module/create/(?P<course_id>\d+)/$',
+r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
 )
 
 
@@ -308,6 +309,7 @@ ENROLLMENT_PUBLIC_URLS = (
     r'^/checkout/payment-details/(?P<course_id>\d+)/$',
     r'^/checkout/thank-you/$',
     r'^/catalogue/course/details/(?P<course_id>\d+)/$',
+    r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
 )
 
 HAYSTACK_CONNECTIONS = {
