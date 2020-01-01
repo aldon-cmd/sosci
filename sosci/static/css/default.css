@@ -3019,6 +3019,13 @@ textarea:-ms-input-placeholder {
   margin-right: 5px;
 }
 
+#messages {
+  margin-top: 50px;
+  font-family: Helvetica;
+  color: red;
+  padding: 0px 15px;
+}
+
 /*   display none properties      */
 
 #sign-in-form .form-group-label {
