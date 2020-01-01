@@ -72,20 +72,21 @@ class LiveCourseUpdateView(UpdateView):
     template_name = "catalogue/course_update_form.html"
     model = catalogue_models.Product
     form_class = forms.LiveCourseForm
+    pk_url_kwarg = 'course_id'
 
     def get_form_kwargs(self):
         """This method is what injects forms with their keyword
             arguments."""
         # grab the current set of form #kwargs
         kwargs = super(LiveCourseUpdateView, self).get_form_kwargs()
-        course_id = self.kwargs.get('pk')
+        course_id = self.kwargs.get('course_id')
         stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
 
         kwargs['initial'] = {'price': stockrecord.price_excl_tax}
         return kwargs
 
     def get_success_url(self):
-        course_id = self.kwargs.get('pk')
+        course_id = self.kwargs.get('course_id')
         return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
 
     def form_valid(self, form):
@@ -168,20 +169,14 @@ class CourseUpdateView(UpdateView):
     template_name = "catalogue/course_update_form.html"
     model = catalogue_models.Product
     form_class = forms.CourseForm
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(LiveModuleCreateView, self).get_context_data(**kwargs)
-    #     course_id = self.kwargs.get('pk')
-    #     stockrecord = catalogue_models.StockRecord.objects.filter(product_id=course_id).first()
-    #     context["price"] = stockrecord.price
-    #     context["modules"] = catalogue_models.CourseModule.objects.filter(product_id=course_id)
+    pk_url_kwarg = 'course_id'
 
     def get_form_kwargs(self):
         """This method is what injects forms with their keyword
             arguments."""
         # grab the current set of form #kwargs
         kwargs = super(CourseUpdateView, self).get_form_kwargs()
-        course_id = self.kwargs.get('pk')
+        course_id = self.kwargs.get('course_id')
         stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
 
         kwargs['initial'] = {'price': stockrecord.price_excl_tax}
@@ -197,7 +192,7 @@ class CourseUpdateView(UpdateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        course_id = self.kwargs.get('pk')
+        course_id = self.kwargs.get('course_id')
         return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
 
 
