@@ -90,7 +90,7 @@
             <div class="col video-file">{% include 'partials/form_field.html' with field=form.video_file %}</div>
             <button type="button" class="btn btn-danger stop upload-btn" id="toggle-btn">
               <i class="fas fa-cloud-upload-alt"></i>
-              <span>Upload files</span>
+              <span>Upload Video</span>
             </button>
           </div>
 
@@ -107,9 +107,6 @@
         </p>
       </div>
       <div class="modal-footer modal-btn">
-        <div class="text-right">
-          <a href="{% url 'instructor:publish-course' view.kwargs.course_id %}" class="btn btn-primary" role="button" aria-pressed="true">Add course module</a>
-        </div>
       </div>
     </div>
   </div>
