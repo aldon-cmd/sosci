@@ -7,14 +7,44 @@
 {% purchase_info_for_product request course as session %}
 <div class="container">
     <div class="row course-detail">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
             <div class="p-3">
                 <div class="box-part text-left">
                     <div class="title title-details">
                         <h3>{{course.title}}</h3>
+                        <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>Cost: $10,200.00</p>
+                            </span>
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>Instructor: Rafer Johnson</p>
+                            </span>
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>London School of Economics</p>
+                            </span>
+                        </div>
                     </div>
-                    <div class="credit-hours-course">
-                        <span class="hide">3 Credit Hours</span>
+                    <div class="d-flex ">
+                        <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>Cost: $10,200.00</p>
+                            </span>
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>Instructor: Rafer Johnson</p>
+                            </span>
+                            <span class="d-flex">
+                                <i class="fas fa-asterisk"></i>
+                                <p>London School of Economics</p>
+                            </span>
+                        </div>
+                        <div>
+                            <button type="button" class="btn hide" data-toggle="#" data-target="#">Edit course</button>
+                        </div>
                     </div>
                 </div>
                 <div class="description description-detail">
@@ -24,7 +54,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding">
             <div class="p-3">
                 {% if request.user.is_authenticated == True %}
                 {% if request.user == course.user %}
@@ -86,7 +116,7 @@
             </div>
         </div>
 
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
             <div class="p-3">
                 <table class="course-list">
                     <tbody>
