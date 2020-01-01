@@ -58,7 +58,15 @@ class MyCoursesListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user))
+        return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user)).distinct()
+
+class OnDemandCourseListView(ListView):
+    template_name = "catalogue/catalogue_list.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return Course().get_courses().filter(product_class__name="Course")
 
 class LiveCourseListView(ListView):
     template_name = "catalogue/live_course_list.html"
@@ -322,16 +330,6 @@ class CourseEnrollmentView(TemplateView):
 
         return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
-
-
-class SmeCourseListView(ListView):
-    template_name = "catalogue/sme_course_list.html"
-    paginate_by = 10
-    model = catalogue_models.Product
-
-    def get_queryset(self):
-        return catalogue_models.Product.objects.filter(product_class__name="Course")
-
 
 class StudentListView(ListView):
     template_name = "catalogue/student_list.html"
