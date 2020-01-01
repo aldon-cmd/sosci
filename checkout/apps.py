@@ -19,7 +19,7 @@ class CheckoutConfig(apps.CheckoutConfig):
                 self.checkout_views.PaymentDetailsView.as_view(), name='payment-details'),
             re_path(r'payment-details/$',
                 self.checkout_views.PaymentDetailsView.as_view(), name='oscar-payment-details'),
-            re_path(r'thank-you/$', self.thankyou_view.as_view(),
+            re_path(r'thank-you/$', self.checkout_views.ThankYouView.as_view(),
                 name='thank-you'),            
         ]
 
