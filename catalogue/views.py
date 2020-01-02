@@ -11,7 +11,6 @@ from django.urls import reverse
 from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
-from django.views.generic.edit import FormView
 from catalogue.utils import CatalogueCreator,Course
 from catalogue import mixins
 from django.db.models import Q
@@ -330,8 +329,3 @@ class CourseEnrollmentView(TemplateView):
 
         return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
-
-class StudentListView(ListView):
-    template_name = "catalogue/student_list.html"
-    paginate_by = 10
-    model = catalogue_models.Product

@@ -13,7 +13,7 @@
           <p>List View</p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 px-0 ">
-          <button type="button" class="btn" data-toggle="#" data-target="#">
+          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'instructor:student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
             Add student
           </button>
         </div>
@@ -27,31 +27,30 @@
       	<table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">#</th>
+
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Course</th>
             </tr>
           </thead>
           <tbody>
+      {% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>IFRS 2 Share-based Payment</td>
+
+              <td>{{object.user.first_name}}</td>
+              <td>{{object.user.last_name}}</td>
+              <td>{{object.product.title}}</td>
             </tr>
+
+      </div>
+      {% empty %}
             <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>IFRS 2 Share-based Payment</td>
+
+              <td>No students yet</td>
             </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Rafer</td>
-              <td>Johnson</td>
-              <td>IFRS 2 Share-based Payment</td>
-            </tr>
+      {% endfor %}              
+
           </tbody>
         </table>
       </div>
@@ -74,5 +73,33 @@
       </div>
     {% endif %}
   </div>
-</main>  
+</main>
+
+<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>  
 {% endblock content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
+
+<script>
+    $(document).on('click', ".open-student-invite-modal", function(event) {
+        event.preventDefault();
+        open_student_invite_modal($(this).attr('data-url'));
+
+
+    });
+
+    function open_student_invite_modal(url) {
+
+        $('#authentication-modal').load(url, function() {
+
+            $('#authentication-modal').modal('show');
+
+
+        });
+
+
+    }
+</script>
+{% endblock extrascripts %}

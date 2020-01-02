@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
-from customer.forms import CustomAuthenticationForm,EmailUserCreationForm
+from customer.forms import CustomAuthenticationForm,EmailUserCreationForm, IndividualStudentInviteForm
 from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect,HttpResponse
@@ -25,6 +25,38 @@ from django.shortcuts import render
 from customer import mixins
 from django.urls import reverse_lazy
 from django.views import View
+from catalogue import models as catalogue_models
+from django.views.generic.list import ListView
+from custom_user import models as custom_user_models
+
+class StudentListView(ListView):
+    template_name = "customer/student_list.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return catalogue_models.Enrollment.objects.select_related("user","product").filter(product__user=self.request.user)
+
+class IndividualStudentInviteModalView(FormView,mixins.RegisterUserMixin):
+    form_class = IndividualStudentInviteForm
+    template_name = 'customer/student_invite_modal_form.html'
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(IndividualStudentInviteModalView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        self.register_inactive_user(form)
+        return HttpResponse(status=200)
+
+    def form_invalid(self, form):
+        response = super(IndividualStudentInviteModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response
 
 class LogoutView(auth_views.LogoutView):
 
