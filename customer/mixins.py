@@ -3,10 +3,9 @@ import hashlib, datetime, random
 from customer import models as customer_models
 from custom_user import models as custom_user_models
 from customer.utils import Dispatcher, create_email_activation_key
-
+from catalogue.utils import Course
 
 class RegisterUserMixin(object):
-    communication_type_code = 'REGISTRATION'
 
     def register_user(self, form):
         """
@@ -23,35 +22,37 @@ class RegisterUserMixin(object):
         user.key_expires = key_expires
         user.save()
 
-        # Raise signal robustly (we don't want exceptions to crash the request
-        # handling).
-        # user_registered.send_robust(
-        #     sender=self, request=self.request, user=user)
 
         self.send_confirmation_email(user,self.request)
         
-        # if getattr(settings, 'OSCAR_SEND_REGISTRATION_EMAIL', True):
-        #     self.send_registration_email(user)
+        return user
 
-        # We have to authenticate before login
-        # try:
-        #     user = authenticate(
-        #         username=user.email,
-        #         password=form.cleaned_data['password1'])
-        # except User.MultipleObjectsReturned:
-        #     # Handle race condition where the registration request is made
-        #     # multiple times in quick succession.  This leads to both requests
-        #     # passing the uniqueness check and creating users (as the first one
-        #     # hasn't committed when the second one runs the check).  We retain
-        #     # the first one and delete the dupes.
-        #     users = User.objects.filter(email=user.email)
-        #     user = users[0]
-        #     for u in users[1:]:
-        #         u.delete()
+    def get_or_create_student(self,form):
 
-        # auth_login(self.request, user)
+        email = form.cleaned_data.pop('email')
+        password = None
+        user = None
+
+        if not custom_user_models.User.objects.filter(email=email).exists():
+            password = custom_user_models.User.objects.make_random_password(length=6)
+            user = custom_user_models.User.objects.create_user(
+                            email,
+                            password,
+                            **form.cleaned_data
+                        )
+            self.send_registration_email(user,self.request)
+        else:
+            user = custom_user_models.User.objects.filter(email=email).first()
+            self.send_registration_email(user,self.request)
 
         return user
+
+    def register_inactive_user(self,form):
+
+        course_id = form.cleaned_data.pop('course')
+        student = self.get_or_create_student(form)
+
+        Course().enroll(student,course_id)
 
     def send_confirmation_email(self, user, request):
         code = "CONFIRMATION"
@@ -65,8 +66,8 @@ class RegisterUserMixin(object):
 
 
 
-    def send_registration_email(self, user):
-        code = self.communication_type_code
+    def send_registration_email(self, user,request):
+        code = 'REGISTRATION'
         ctx = {'user': user,
                'site': get_current_site(self.request)}
         messages = customer_models.CommunicationEventType.objects.get_and_render(

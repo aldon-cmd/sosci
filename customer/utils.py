@@ -6,9 +6,8 @@ from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from post_office import mail
 import six
-import hashlib, datetime, random
+import hashlib, random
 from unidecode import unidecode
-
 
 def create_email_activation_key(email):
     salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]            

@@ -9,6 +9,8 @@ from django.contrib.auth import password_validation
 from customer import models
 from custom_user import models as user_models
 from customer.utils import normalise_email
+from catalogue import models as catalogue_models
+
 
 def generate_username():
     # Python 3 uses ascii_letters. If not available, fallback to letters
@@ -90,4 +92,16 @@ class CustomAuthenticationForm(AuthenticationForm):
             self.fields[field].widget.attrs.update({'class': 'form-control'})
 
         self.fields['username'].widget.attrs.update({'placeholder':'Email'})
-        self.fields['password'].widget.attrs.update({'placeholder':'Password'})            
+        self.fields['password'].widget.attrs.update({'placeholder':'Password'})
+
+class IndividualStudentInviteForm(forms.Form):
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)    
+    
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user",None)
+        super(IndividualStudentInviteForm, self).__init__(*args, **kwargs)
+        course_queryset = catalogue_models.Product.objects.filter(user=user)
+        self.fields['course'] = forms.ModelChoiceField(queryset=course_queryset)             

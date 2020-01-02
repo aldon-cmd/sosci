@@ -1,0 +1,55 @@
+  {% load widget_tweaks %}
+
+  <div class="modal-dialog modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<form id="student-invite-form" action="{% url 'instructor:student-invite-modal' %}" method="post" novalidate>
+    {% csrf_token %}
+    <div ng-class="{'has-error':vm.form.email.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1 n2">
+        {% include 'partials/nolabel_form_field.html' with field=form.email %}    
+    </div>
+    <div ng-class="{'has-error':vm.form.first_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.first_name %}
+    </div>
+    <div ng-class="{'has-error':vm.form.last_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.last_name %}
+    </div>    
+    <div ng-class="{'has-error':vm.form.password.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
+        {% include 'partials/nolabel_form_field.html' with field=form.course %}
+    </div>
+    <div id="save-btn">
+        <button type="submit" ng-click="vm.submit(vm.form_data)" class="enroll-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
+    </div>
+</form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+
+    <script>
+
+  $('#student-invite-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_success_response,
+      error: get_error_response       
+    });
+
+    function get_success_response(responseText, statusText, xhr, $form){
+
+              window.location.replace("{% url 'instructor:student-list' %}");
+          }
+
+              function get_error_response(data){
+
+              $("#authentication-modal").html(data.responseText);
+          }
+        
+</script>
