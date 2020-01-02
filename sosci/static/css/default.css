@@ -360,7 +360,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .course-detail-info {
-  margin: 15px 0px 30px 0px;
+  margin: 15px 0px 15px 0px;
   font-size: 15px;
 }
 
@@ -475,6 +475,50 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   border-radius: 3px!important;
 }
 
+@media only screen and (max-width: 420px) {
+  .course-detail-title-info, .course-detail-info {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  .i-pad-width-r {
+    padding-right: 4px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  .i-pad-width-l {
+    padding-left: 4px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  #product-course-list .p-3 {
+    padding: 10px !important;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1024px) {
+  #course-list .text {
+    width: 245.98px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  #course-list .text {
+    width: 223.33px;
+  }
+}
+
+/*@media only screen and (min-width: 600px) and (max-width: 768px)*/  
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  .container {
+    max-width: 760px !important;
+    padding: 0px !important;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   #course-list .text {
     width: 419px;
@@ -576,6 +620,38 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 14px;
   font-weight: 500;
   font-family: Helvetica;
+}
+
+.enroll-btn-text > .price {
+  font-size: 15px !important;
+}
+
+.chechout-section {
+  padding: 16px 16px;
+}
+
+.price-right {
+  margin-right: 100px;
+  margin-left: 50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  .price-right {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .chechout-section {
+    padding: 16px 2px
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .description {
+    padding-top: 16px;
+  }
 }
 
 .start-class {
@@ -2819,12 +2895,25 @@ ol, ul {
 }
 
 .course-detail-info > span, .course-detail-title-info > span {
-  margin-right: 13px;
+  margin-right: 17px;
 }
 
 .course-detail-info p, .course-detail-title-info p {
   font-size: 14px;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.course-detail-info p, .course-detail-info .fas {
+  line-height: 28px !important;
+}
+
+.course-detail .enroll-btn-text-wrap {
+  line-height: 32px;
+  font-size: 18px;
+}
+
+.create-header {
+  margin-right: 5px;
 }
 
 .course-detail-info .fas, .course-detail-info .far, .course-detail-title-info .fas, .course-detail-title-info .far {

@@ -14,36 +14,26 @@
                         <h3>{{course.title}}</h3>
                         <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class="d-flex">
-                                <i class="fas fa-asterisk"></i>
+                                <i class="far fa-credit-card"></i>
                                 <p>Cost: $10,200.00</p>
                             </span>
                             <span class="d-flex">
                                 <i class="fas fa-asterisk"></i>
-                                <p>Instructor: Rafer Johnson</p>
+                                <p>Credit Hours: 3</p>
                             </span>
                             <span class="d-flex">
-                                <i class="fas fa-asterisk"></i>
+                                <i class="fas fa-school"></i>
                                 <p>London School of Economics</p>
                             </span>
                         </div>
                     </div>
                     <div class="d-flex ">
                         <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
-                            <span class="d-flex">
-                                <i class="fas fa-asterisk"></i>
-                                <p>Cost: $10,200.00</p>
+                            <span class=" d-flex">
+                                <p class="create-header">Created by:</i>
+                                <p>Rafer Johnson</p>
                             </span>
-                            <span class="d-flex">
-                                <i class="fas fa-asterisk"></i>
-                                <p>Instructor: Rafer Johnson</p>
-                            </span>
-                            <span class="d-flex">
-                                <i class="fas fa-asterisk"></i>
-                                <p>London School of Economics</p>
-                            </span>
-                        </div>
-                        <div>
-                            <button type="button" class="btn hide" data-toggle="#" data-target="#">Edit course</button>
+                            <button type="button" class="btn" data-toggle="#" data-target="#">Edit course</button>
                         </div>
                     </div>
                 </div>
@@ -55,7 +45,7 @@
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding">
-            <div class="p-3">
+            <div class="chechout-section">
                 {% if request.user.is_authenticated == True %}
                 {% if request.user == course.user %}
                 <a href="{% url 'instructor:start-session' view.kwargs.course_id %}">
@@ -105,8 +95,8 @@
                         <i class="fas fa-video"></i>
                     </div>
                     <div class="enroll-btn-text-wrap">
-                        <div class="enroll-btn-text">Enroll in this course for 
-                            <span class="price">{{session.price.incl_tax|currency:session.price.currency}}</span>
+                        <div class="enroll-btn-text price-right">
+                            <span class="price">Buy Now </span>
                         </div>
                     </div>
                 </div>

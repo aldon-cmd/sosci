@@ -4,41 +4,43 @@
 {% purchase_info_for_product request object as session %}
 
 {% if object.product_class.name == "Course" %}
-<a href="{% url 'catalogue:course-detail' object.pk %}">
-  <div class="border p-3">
-    <div class="box-part text-center">
-      <i class="far fa-play-circle"></i>
-      <div class="title">
-        <h3 class="title-clamp">{{object.title}}</h3>
+
+  <a id="product-course-list" href="{% url 'catalogue:course-detail' object.pk %}">
+    <div class="border p-3">
+      <div class="box-part text-center">
+        <i class="far fa-play-circle"></i>
+        <div class="title">
+          <h3 class="title-clamp">{{object.title}}</h3>
+        </div>
+      </div>
+      <div class="text">
+        <p class="line-clamp">{{object.description|safe}}</p>
+      </div>
+      <div>
+        <div class="price">
+          <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
+        </div>
       </div>
     </div>
-    <div class="text">
-      <p class="line-clamp">{{object.description|safe}}</p>
-    </div>
-    <div>
-      <div class="price">
-        <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
+  </a>
+  {% elif object.product_class.name == "Live" %}
+  <a id="product-course-list" href="{% url 'catalogue:course-detail' object.pk %}">
+    <div class="border p-3 rounded-1">
+      <div class="box-part text-center">
+        <i class="far fa-play-circle"></i>
+        <div class="title">
+          <h3 class="title-clamp">{{object.title}}</h3>
+        </div>
+      </div>
+      <div class="text">
+        <div class="line-clamp short-description">{{object.description|safe}}</div>
+      </div>
+      <div>
+        <div class="price">
+          <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
+        </div>
       </div>
     </div>
-  </div>
-</a>
-{% elif object.product_class.name == "Live" %}
-<a href="{% url 'catalogue:course-detail' object.pk %}">
-  <div class="border p-3 rounded-1">
-    <div class="box-part text-center">
-      <i class="far fa-play-circle"></i>
-      <div class="title">
-        <h3 class="title-clamp">{{object.title}}</h3>
-      </div>
-    </div>
-    <div class="text">
-      <div class="line-clamp short-description">{{object.description|safe}}</div>
-    </div>
-    <div>
-      <div class="price">
-        <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
-      </div>
-    </div>
-  </div>
-</a>
+  </a>
+
 {% endif %}
