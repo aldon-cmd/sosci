@@ -3279,6 +3279,22 @@ textarea:-ms-input-placeholder {
   left: -29px !important;
 }
 
+.browse .categories {
+  margin-top: 0px !important;
+} 
+
+.browse-heading {
+  padding-top: 3%;
+  padding-bottom: 1%;
+}
+
+.browse-heading > h1{
+  font-family: Helvetica;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
 /*   display none properties      */
 
 #sign-in-form .form-group-label {
