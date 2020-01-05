@@ -44,6 +44,12 @@ class EmailUserCreationForm(forms.ModelForm):
         self.host = host
         super(EmailUserCreationForm, self).__init__(*args, **kwargs)
 
+    def clean_first_name(self):
+        return self.cleaned_data['first_name'].title()
+
+    def clean_last_name(self):
+        return self.cleaned_data['last_name'].title()
+
     def clean_email(self):
         """
         Checks for existing users with the supplied email address.
@@ -104,4 +110,10 @@ class IndividualStudentInviteForm(forms.Form):
         user = kwargs.pop("user",None)
         super(IndividualStudentInviteForm, self).__init__(*args, **kwargs)
         course_queryset = catalogue_models.Product.objects.filter(user=user)
-        self.fields['course'] = forms.ModelChoiceField(queryset=course_queryset)             
+        self.fields['course'] = forms.ModelChoiceField(queryset=course_queryset)
+
+    def clean_first_name(self):
+        return self.cleaned_data['first_name'].title()
+
+    def clean_last_name(self):
+        return self.cleaned_data['last_name'].title()                     
