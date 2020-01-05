@@ -15,6 +15,9 @@ class CourseForm(forms.ModelForm):
         model = models.Product
         fields = ['title', 'description','product_class']
 
+    def clean_title(self):
+        return self.cleaned_data['title'].title()
+
 class LiveCourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
@@ -28,15 +31,23 @@ class LiveCourseForm(forms.ModelForm):
         model = models.Product
         fields = ['title', 'description','product_class']
 
+    def clean_title(self):
+        return self.cleaned_data['title'].title()
+
 class LiveCourseModuleForm(forms.ModelForm):
 
     class Meta:
         model = models.CourseModule
         fields = ['name', 'start_date']
 
+    def clean_name(self):
+        return self.cleaned_data['name'].title()
 
 class CourseModuleForm(forms.Form):
     name = forms.CharField(max_length=100)
     duration = forms.CharField(max_length=100)
     chunksize = forms.IntegerField()
     video_file = forms.FileField()
+
+    def clean_name(self):
+        return self.cleaned_data['name'].title()    
