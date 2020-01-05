@@ -129,12 +129,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'customer.middlewares.CourseExistsMiddleware',
-    # 'customer.middlewares.CoursePublishedMiddleware',
-    # 'customer.middlewares.CourseEnrolledMiddleware',
-    # 'customer.middlewares.OwnerRequiredMiddleware',
-    # 'customer.middlewares.AnonymousRequiredMiddleware',
-    # 'customer.middlewares.LoginRequiredMiddleware',
+    'customer.middlewares.CourseExistsMiddleware',
+    'customer.middlewares.CoursePublishedMiddleware',
+    'customer.middlewares.CourseEnrolledMiddleware',
+    'customer.middlewares.OwnerRequiredMiddleware',
+    'customer.middlewares.AnonymousRequiredMiddleware',
+    'customer.middlewares.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'sosci.urls'
