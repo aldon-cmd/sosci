@@ -598,7 +598,6 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 
 .enroll-btn, .login-btn {
   background: 0 0;
-  display: -webkit-box;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -3274,6 +3273,10 @@ textarea:-ms-input-placeholder {
     padding: 0px !important;
     margin-top: 15px;
   }
+}
+
+#sosci-nav .dropdown-menu {
+  left: -29px !important;
 }
 
 /*   display none properties      */
