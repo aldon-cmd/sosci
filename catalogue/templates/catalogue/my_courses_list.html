@@ -4,22 +4,12 @@
 
 {% block content %}
 <div id="my-course-list" class="container">
-  <div class="course-nav-header hide">
-
-    <a href="{% url 'catalogue:my-created-courses-list' %}" class="course-nav-link">
-      <span class="course-nav-title">
-        <i class="fas fa-chalkboard-teacher"></i>
-        <span>My created courses</span>
-      </span>
-    </a>
-
-    <a href="{% url 'catalogue:my-enrolled-courses-list' %}" class="course-nav-link">
-      <span class="course-nav-title">
-        <i class="fas fa-user-graduate"></i>
-        <span>My enrolled courses</span>
-      </span>
-    </a>
-
+  
+  <div class="container">
+    <div class="browse-heading">
+      <h2>My Courses</h2>
+      <p class="header-message">Below is a list of all the ocurses that you are currently enrolled in</p>
+    </div>
   </div>
 
   <div id="course-list" class="row">
@@ -28,7 +18,15 @@
         {% include 'catalogue/partials/product.html' with object=object %}
       </div>
   {% empty %}
-      <p>No courses yet.</p>
+      <div class="container adj-container">
+        <div>
+          <div class="border-top">
+            <div class="blank-space">
+              <h3>No course has been added to this section.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
   {% endfor %}    
   </div>
 

@@ -3288,12 +3288,37 @@ textarea:-ms-input-placeholder {
   padding-bottom: 1%;
 }
 
-.browse-heading > h1{
+.browse-heading > h1 {
   font-family: Helvetica;
   font-size: 30px;
   line-height: 1.2;
   font-weight: 600;
 }
+
+.browse-heading > h2 {
+  font-family: Helvetica;
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.blank-space {
+  padding: 40px 0px;
+}
+
+#course-list h3 {
+  font-family: Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.header-message {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-top: 5px;
+}
+
 
 /*   display none properties      */
 
