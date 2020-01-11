@@ -973,11 +973,6 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   }
 }
 
-#save-btn {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 #save-btn .btn{
   padding: 10px 22px 10px 22px;
   border-radius: 3px;
@@ -1007,10 +1002,6 @@ button {
   border-color: #f05c8d;
   outline: 0;
   box-shadow: none;
-}
-
-#sign-in-form .form-control {
-  height: 46px !important;
 }
 
 .input-select_select, #login-form .btn {
@@ -1803,7 +1794,7 @@ input:required {
   font-family: Helvetica;
 }
 
-#create-form .container {
+#create-form .container, #sign-in-form .container {
   max-width: 460px;
   margin: auto;
 }
@@ -1812,7 +1803,17 @@ input:required {
   margin: 0px;
 }
 
-#create-form .form-control {
+@media only screen and (min-width: 360px) and (max-width: 420px) {
+  #sign-in-form .row {
+    margin-top: 50px !important;
+  }
+}
+
+#sign-in-form .row {
+  margin-top: 80px;
+}
+
+#create-form .form-control, #sign-in-form .form-control {
   width: 100%;
 }
 
@@ -1820,7 +1821,7 @@ input:required {
   width: 460px;
 }
 
-#create-form .col {
+#create-form .col, #sign-in-form .col {
   padding: 0px;
 }
 
@@ -1845,7 +1846,7 @@ input:required {
   margin-bottom: 5px;
 }
 
-#create-form .btn, #payment-form .btn {
+#create-form .btn, #payment-form .btn, #sign-in-form .btn {
   font-family: Helvetica;
   font-size: 14px;
   font-weight: bold;
@@ -2029,7 +2030,7 @@ input:required {
   font-size: 14px !important;
 }
 
-#create-form .btn, #payment-form .btn {
+#create-form .btn, #payment-form .btn, #sign-in-form .btn {
   color: #24292e;
   background-color: #eff3f6;
   background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
@@ -2294,17 +2295,6 @@ div > .dropdown-item {
   margin-right: 8px;
 }
 
-
-#sign-in-form .box {
-  max-width: 470px;
-  margin: 3rem auto;
-}
-
-@media only screen and (max-width: 500px) {
-  #sign-in-form .box {
-    margin: 0px;
-  }
-}
 
 .form-group-label {
   padding: 0px 15px 0px 15px;
@@ -3319,6 +3309,17 @@ textarea:-ms-input-placeholder {
   margin-top: 5px;
 }
 
+@media only screen and (max-width: 420px) {
+  #sign-in-form form {
+    padding: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 768px) {
+  #sign-in-form .row {
+    padding: 15px !important;
+  }
+}
 
 /*   display none properties      */
 
