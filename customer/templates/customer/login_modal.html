@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+
   <div class="modal-dialog modal-box" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -44,46 +45,3 @@
   </div>
 
 
-  <script>
-
-  $('#login-form')
-    .ajaxForm({
-      target: '#authentication-modal',
-      success : get_success_response,
-      error: get_error_response       
-    });
-
-    function get_success_response(responseText, statusText, xhr, $form){
-
-              window.location.replace("{% url 'checkout:payment-details' view.kwargs.course_id %}");
-          }
-
-              function get_error_response(data){
-
-              $("#authentication-modal").html(data.responseText);
-          }
-
-           
-</script>
-
-<script>
-  $(document).on('click',".open-registration-modal", function (event) {
-    event.preventDefault();
-    open_registration_modal($(this).attr('href'));
-
-    
-  });
-
-function open_registration_modal(url){
-
-    $('#authentication-modal').load(url,function(){
-
-        $('#authentication-modal').modal('show');
-        
-        
-    });
-
-    
-}
-
-</script>

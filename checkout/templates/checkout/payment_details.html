@@ -1,9 +1,13 @@
-{% extends "base_plugnpay.html" %} 
+{% extends "base.html" %} 
 {% load static %} 
 {% load currency_filters %}
 {% load purchase_info_tags %}
 
-
+{% block extrahead %}
+{{ block.super }}
+<script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+<script src="https://pay1.plugnpay.com/api/iframe/P3Tm8BYjgA/client/"></script>
+{% endblock extrahead %}
 
 {% block content %}
 {% purchase_info_for_product request product as session %}
@@ -62,6 +66,10 @@
   </div>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+ <script src="{% static 'js/bootstrap.js' %}"></script>
+{% endblock %}
 
 {% block extrascripts %}
 {{ block.super }}

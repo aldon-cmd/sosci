@@ -17,6 +17,7 @@
                     <div class="course-detail-info">
                         <span>Created by:</span>
                         <span class="publisher">Rafer Johnson</span>
+                        <a class="btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
                     </div>
                 </div>
                 <div class="description description-detail">
@@ -88,7 +89,6 @@
                         <tr>
                             <td class="course-list-count">{{ forloop.counter }}</td>
                             <td class="course-list-title">{{module.name}}</td>
-                            <td class="course-list-duration">{{module.duration}}</td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -104,6 +104,7 @@
     </div>
 </div>
 
-<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>
-
+<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog">
+{% include "customer/login_modal.html" with form=login_form %}
+</div>
 {% endblock content %}

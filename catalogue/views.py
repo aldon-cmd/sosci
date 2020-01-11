@@ -60,7 +60,7 @@ class MyCoursesListView(ListView):
         return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user)).distinct()
 
 class OnDemandCourseListView(ListView):
-    template_name = "catalogue/catalogue_list.html"
+    template_name = "catalogue/on_demand_list.html"
     paginate_by = 10
     model = catalogue_models.Product
 
