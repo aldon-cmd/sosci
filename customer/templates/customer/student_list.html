@@ -75,12 +75,35 @@
   </div>
 </main>
 
-<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>  
+<div id="student-invite-modal" class="modal fade" tabindex="-1" role="dialog">
+{% include "customer/student_invite_modal_form.html" with form=student_invite_form %}
+</div>
+
 {% endblock content %}
 
 {% block extrascripts %}
 {{ block.super }}
 <script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
+    <script>
+
+  $('#student-invite-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_success_response,
+      error: get_error_response       
+    });
+
+    function get_success_response(responseText, statusText, xhr, $form){
+
+              window.location.replace("{% url 'instructor:student-list' %}");
+          }
+
+              function get_error_response(data){
+
+              $("#authentication-modal").html(data.responseText);
+          }
+        
+</script>
 
 <script>
     $(document).on('click', ".open-student-invite-modal", function(event) {
@@ -92,9 +115,9 @@
 
     function open_student_invite_modal(url) {
 
-        $('#authentication-modal').load(url, function() {
+        $('#student-invite-modal').load(url, function() {
 
-            $('#authentication-modal').modal('show');
+            $('#student-invite-modal').modal('show');
 
 
         });

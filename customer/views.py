@@ -37,6 +37,14 @@ class StudentListView(ListView):
     def get_queryset(self):
         return catalogue_models.Enrollment.objects.select_related("user","product").filter(product__user=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super(StudentListView, self).get_context_data(**kwargs)
+
+        context["student_invite_form"] = IndividualStudentInviteForm()
+
+
+        return context    
+
 class IndividualStudentInviteModalView(FormView,mixins.RegisterUserMixin):
     form_class = IndividualStudentInviteForm
     template_name = 'customer/student_invite_modal_form.html'

@@ -33,23 +33,3 @@
     </div>
   </div>
 
-    <script>
-
-  $('#student-invite-form')
-    .ajaxForm({
-      target: '#authentication-modal',
-      success : get_success_response,
-      error: get_error_response       
-    });
-
-    function get_success_response(responseText, statusText, xhr, $form){
-
-              window.location.replace("{% url 'instructor:student-list' %}");
-          }
-
-              function get_error_response(data){
-
-              $("#authentication-modal").html(data.responseText);
-          }
-        
-</script>

@@ -104,6 +104,7 @@
     </div>
 </div>
 
-<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>
-
+<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog">
+{% include "customer/login_modal.html" with form=login_form %}
+</div>
 {% endblock content %}
