@@ -715,6 +715,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   line-height: 18px;
 }
 
+.to {
+  font-size: 14px !important;
+  line-height: 18px !important;
+  margin-top: 5px !important;
+}
+
 .side-content > span {
   line-height: 18px;
   margin: 3px 5px 0px 5px;
@@ -3042,18 +3048,26 @@ ol, ul {
 
 textarea::placeholder {
   line-height: 16px;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 
 textarea:-moz-placeholder {
   line-height: 16px;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 
 textarea::-moz-placeholder {
   line-height: 16px;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 
 textarea:-ms-input-placeholder { 
   line-height: 16px;
+  font-family: Helvetica;
+  font-size: 14px;
 }
 
 .attachment {
