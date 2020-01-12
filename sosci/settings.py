@@ -273,7 +273,7 @@ LOGIN_REQUIRED_URLS = (
     r'^/catalogue/my-enrolled-courses/$',
     r'^/catalogue/my-created-courses/$',
     r'^/catalogue/course/create/$',
-    r'^/catalogue/live/create/$'
+    r'^/catalogue/live/course/create/$'
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')

@@ -1,5 +1,7 @@
+from datetime import datetime
 from django import forms
 from catalogue import models
+from django.forms.widgets import SelectDateWidget
 
 
 class CourseForm(forms.ModelForm):
@@ -22,6 +24,9 @@ class LiveCourseForm(forms.ModelForm):
     CHOICES = (
         ("Product Class", "Course"),
     )
+    start_date = forms.DateField(required=False,widget=SelectDateWidget(attrs=({'class': "input-dropdown"}),years=range(datetime.now().year - 20, datetime.now().year + 1),empty_label=("Year", "Month", "Day")))
+    start_time = forms.TimeField(widget=forms.TimeInput(format='%I:%M %p',attrs=({'type': "time"})))
+    end_time = forms.TimeField(widget=forms.TimeInput(format='%I:%M %p',attrs=({'type': "time"})))
     price = forms.DecimalField(max_digits=12,decimal_places=2)
     product_class = forms.ModelChoiceField(widget=forms.HiddenInput,queryset=models.ProductClass.objects.filter(name="Live"))
     description = forms.CharField(widget=forms.Textarea())
