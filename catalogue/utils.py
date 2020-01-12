@@ -20,7 +20,7 @@ class Course(object):
         return catalogue_models.Product.objects.select_related("product_class")
 
     def get_course(self,course_id):
-        return catalogue_models.Product.objects.prefetch_related("coursemodules").filter(pk=course_id).first()
+        return catalogue_models.Product.objects.select_related("product_class").prefetch_related("coursemodules").filter(pk=course_id).first()
 
     def enroll(self,user,course_id):
         catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=user)

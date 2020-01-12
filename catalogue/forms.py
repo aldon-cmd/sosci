@@ -13,7 +13,7 @@ class CourseForm(forms.ModelForm):
     class Meta:
 
         model = models.Product
-        fields = ['title', 'description','product_class']
+        fields = ['title', 'description','product_class','credit_hour','provider']
 
     def clean_title(self):
         return self.cleaned_data['title'].title()
@@ -29,7 +29,7 @@ class LiveCourseForm(forms.ModelForm):
     class Meta:
 
         model = models.Product
-        fields = ['title', 'description','product_class']
+        fields = ['title', 'description','product_class','start_date','start_time','end_time','credit_hour','provider']
 
     def clean_title(self):
         return self.cleaned_data['title'].title()
