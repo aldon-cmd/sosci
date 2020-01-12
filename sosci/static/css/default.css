@@ -2730,7 +2730,14 @@ ol, ul {
   margin-top: 10px;
 }
 
-.side-box-content > ul > li > i {
+.side-box-content > ul > li > .fa-hand-paper {
+  float: right;
+  font-size: 14px;
+  color: #dc3545;
+  padding: 9px 9px;
+}
+
+.side-box-content > ul > li > .fa-circle {
   float: right;
   font-size: 10px;
   color: rgb(66, 183, 42);
@@ -3120,7 +3127,6 @@ textarea:-ms-input-placeholder {
 }
 
 #sign-in-form .errorlist {
-  padding: 0px 15px;
   margin-bottom: 15px;
   font-family: Helvetica;
   font-weight: 600;
@@ -3319,6 +3325,18 @@ textarea:-ms-input-placeholder {
   #sign-in-form .row {
     padding: 15px !important;
   }
+}
+
+.welcome-note > i {
+  font-size: 16px;
+  line-height: 1;
+  color: #ec407a;
+  margin-right: 10px !important;
+} 
+
+#my-course-list .course-link {
+  text-decoration: underline !important;
+  color: #0366d6 !important;
 }
 
 /*   display none properties      */
