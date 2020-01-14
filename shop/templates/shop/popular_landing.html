@@ -24,11 +24,10 @@
       </div>
     {% empty %}
     <div>
-      <div>
-        <i class="fas fa-exclamation-circle"></i>
+      <div class="blank-space d-flex welcome-note">
+        <i class="fas fa-exclamation"></i>
+        <h3>Welcome to Sosci, the course list is currently empty. But you can start adding courses via the <a href="{% url 'catalogue:live-course-create-form' %}" class="course-link">Live stream link.</a><span> or </span><a href="{% url 'catalogue:course-create-form' %}" class="course-link">On demand stream link.</a></h3>
       </div>
-      <p>No courses in sight</p>
-      <p>After you enroll in a course, it’ll show up here, so it’s easier to get to.</p>
     </div>
     {% endfor %}    
     </div>
