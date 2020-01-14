@@ -26,18 +26,41 @@
             {{ form.description.errors }}
                      <div class="col">{% include 'partials/form_field.html' with field=form.description %}</div>
             </div>
+
+            <div class="form-group">
+            {{ form.description.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.start_date %}</div>
+            </div>            
+
+            <div class="form-group">
+            {{ form.description.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.start_time %}</div>
+            </div>
+
+            <div class="form-group">
+            {{ form.description.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.end_time %}</div>
+            </div>
+
+            <div class="form-group">
+            {{ form.description.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.credit_hour %}</div>
+            </div>                        
+
+            <div class="form-group">
+            {{ form.description.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.provider %}</div>
+            </div>   
+
             <div class="form-group">
             {{ form.price.errors }}
                      <div class="col">{% include 'partials/form_field.html' with field=form.price %}</div>
             </div>
 
-            <div class="form-group">
-            {{ form.product_class.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.product_class %}</div>
-            </div>
+
           <div class="form-group text-right">
             <button type="submit" class="btn">
-              Create Course
+              Update Course
             </button>
           </div>
 

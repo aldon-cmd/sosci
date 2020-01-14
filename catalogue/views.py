@@ -76,7 +76,7 @@ class LiveCourseListView(ListView):
         return Course().get_courses().filter(product_class__name="Live")
 
 class LiveCourseUpdateView(UpdateView):
-    template_name = "catalogue/course_update_form.html"
+    template_name = "catalogue/live_course_update_form.html"
     model = catalogue_models.Product
     form_class = forms.LiveCourseForm
     pk_url_kwarg = 'course_id'
@@ -106,7 +106,7 @@ class LiveCourseUpdateView(UpdateView):
         return HttpResponseRedirect(self.get_success_url())
 
 class LiveCourseCreateView(CreateView):
-    template_name = "catalogue/course_form.html"
+    template_name = "catalogue/live_course_form.html"
     model = catalogue_models.Product
     form_class = forms.LiveCourseForm
 
@@ -173,7 +173,7 @@ class LiveCourseDetailView(TemplateView):
 
 
 class CourseUpdateView(UpdateView):
-    template_name = "catalogue/course_update_form.html"
+    template_name = "catalogue/on_demand_course_update_form.html"
     model = catalogue_models.Product
     form_class = forms.CourseForm
     pk_url_kwarg = 'course_id'
@@ -204,7 +204,7 @@ class CourseUpdateView(UpdateView):
 
 
 class CourseCreateView(CreateView):
-    template_name = "catalogue/course_form.html"
+    template_name = "catalogue/on_demand_course_form.html"
     model = catalogue_models.Product
     form_class = forms.CourseForm
 

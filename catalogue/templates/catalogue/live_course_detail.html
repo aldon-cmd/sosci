@@ -22,7 +22,7 @@
                     <div class="d-flex ">
                         <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class=" d-flex">
-                                <p class="create-header">Created by:</i>
+                                <p class="create-header">Instructor:</i>
                                 <p>Rafer Johnson</p>
                             </span>
 
@@ -96,11 +96,27 @@
                       <article>
                         <div class="d-flex header-section">
                           <i class="far fa-calendar-alt"></i>
-                          <span>Start Date & Time</span>
+                          <span>Start Date</span>
                         </div>
                         <div class="d-flex side-content">
-                          <p>January 22, 2019</p><span>|</span>
-                          <p>5:00 pm</p>
+                          {% if course.product_class.name == "Live" %}  
+                          <p>{{course.start_date}}</p>
+                          {% else %}
+                          <p>Now</p>
+                          {% endif %}
+                        </div>
+                      </article>
+                      <article>
+                        <div class="d-flex header-section">
+                          <i class="fas fa-stopwatch"></i>
+                          <span>Class Time</span>
+                        </div>
+                        <div class="d-flex side-content">   
+                          {% if course.product_class.name == "Live" %}  
+                          <p>{{course.start_time}}</p><span class="to">to</span><p>{{course.end_time}}</p>
+                          {% else %}
+                          <p>Now</p>
+                          {% endif %}                          
                         </div>
                       </article>
                       <article>
@@ -109,7 +125,7 @@
                           <span>Credit Hours</span>
                         </div>
                         <div class="side-content">
-                          <p>3 CPD Hours</p>
+                          <p>{{credit_hour}}</p><span>CPD Hours</span>
                         </div>
                       </article>
                       <article>
@@ -118,7 +134,7 @@
                           <span>Provider</span>
                         </div>
                         <div class="side-content">
-                          <p>London School of Economics</p>
+                          <p>{{provider}}</p>
                         </div>
                       </article>
                     </div>

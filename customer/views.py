@@ -177,7 +177,7 @@ class ConfirmUser(View):
             return HttpResponseRedirect(reverse('catalogue:course-list'))
         except Http404:
 
-             return super(ConfirmUser, self).get(request, *args, **kwargs)
+             return HttpResponseRedirect(reverse('resend-email-confirmation'))
 
 
         return HttpResponseRedirect(reverse('resend-email-confirmation'))

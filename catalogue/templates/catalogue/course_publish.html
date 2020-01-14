@@ -15,57 +15,58 @@
     <form method="post" action="{% url 'instructor:publish-course' view.kwargs.course_id %}" novalidate>
       {% csrf_token %} 
       <input type="hidden" name="action" value="publish" />
-    <div class="box">
-      <div>
-        <h3 class="subheading">
-          <span>Course Title</span>
-          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
-            Edit
+
+      <div class="box">
+        <div>
+          <h3 class="subheading">
+            <span>Course Title</span>
+            <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+              Edit
+            </button>
+          </h3>
+          <div class="box-border">
+            <p class="settings-row">{{ course.title }}</p>
+          </div>
+        </div>
+        <div>     
+          <h3 class="subheading">
+            <span>Course Description</span>
+            <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+              Edit
+            </button>
+          </h3>
+          <div class="box-border settings-row-paragraph">
+            <div class="description-paragraph">{{ course.description|safe }}</div>
+          </div>
+        </div>
+        <div>     
+          <h3 class="subheading">
+            <span>Course Module</span>
+            <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
+              Edit
+            </button>
+          </h3>
+          <div class="box-border">
+            <table class="course-list">
+              <tbody>
+                <tr>
+                {% for module in modules %}
+                  <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
+                  <td class="settings-row-description">{{ module.name }}</td>
+                  <td class="settings-row-date">{{ module.start_date }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="cont-btn float-right">
+          <button type = "submit" class="publish-btn btn-primary" >
+            Publish Course
           </button>
-        </h3>
-        <div class="box-border">
-          <p class="settings-row">{{ course.title }}</p>
         </div>
       </div>
-      <div>     
-        <h3 class="subheading">
-          <span>Course Description</span>
-          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
-            Edit
-          </button>
-        </h3>
-        <div class="box-border settings-row-paragraph">
-          <div class="description-paragraph">{{ course.description|safe }}</div>
-        </div>
-      </div>
-      <div>     
-        <h3 class="subheading">
-          <span>Course Module</span>
-          <button type="button" class="btn btn-danger" data-toggle="#" data-target="#">
-            Edit
-          </button>
-        </h3>
-        <div class="box-border">
-          <table class="course-list">
-            <tbody>
-              <tr>
-              {% for module in modules %}
-                <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
-                <td class="settings-row-description">{{ module.name }}</td>
-                <td class="settings-row-date">{{ module.start_date }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="text-right cont-btn publish-btn">
-      <button type = "submit" class="btn btn-primary" >
-        Publish Course
-      </button>
-    </div>
-  </form>
+    </form>
   </div>
 </main>
 
