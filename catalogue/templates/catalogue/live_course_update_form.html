@@ -29,23 +29,26 @@
 
             <div class="form-group">
             {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.start_date %}</div>
+              <div class="col d-flex">{% include 'partials/form_field.html' with field=form.start_date %}</div>
             </div>            
 
-            <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.start_time %}</div>
+            <div class="form-group d-flex">
+              <div class="col-md-4 form-field form-padding-1">
+              {{ form.description.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.start_time %}</div>
+              </div>
+
+              <div class="col-md-4 form-field form-padding-2">
+              {{ form.description.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.end_time %}</div>
+              </div>
+
+              <div class="col-md-4 form-field form-padding-3">
+              {{ form.description.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.credit_hour %}</div>
+              </div>  
             </div>
 
-            <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.end_time %}</div>
-            </div>
-
-            <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.credit_hour %}</div>
-            </div>                        
 
             <div class="form-group">
             {{ form.description.errors }}
