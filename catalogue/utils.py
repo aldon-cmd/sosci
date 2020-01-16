@@ -31,37 +31,31 @@ class Course(object):
 class CatalogueCreator(object):
 
     @atomic
-    def create_product(self,user, product_class, category_str, title,
-                     description,price_excl_tax, num_in_stock):
+    def create_product(self,user, product_class, category_str, product,price_excl_tax, num_in_stock):
 
-        item = self._create_item(user,product_class, category_str, title,
-                     description)
+        item = self._create_item(user,product_class, category_str, product)
 
         self._create_stockrecord(item,
                             price_excl_tax, num_in_stock)
         return item
 
-    def _create_item(self,user, product_class, category_str, title,
-                     description):
+    def _create_item(self,user, product_class, category_str, product):
 
         # Create item class and item
         product_class, __ \
             = catalogue_models.ProductClass.objects.get_or_create(name=product_class,requires_shipping=False,track_stock=False)
 
-        item = catalogue_models.Product()
-        item.user = user
-        item.title = title
-        item.description = description
-        item.product_class = product_class
-        item.save()
+        product.user = user
+        product.product_class = product_class
+        product.save()
 
-        self._create_room(item)
+        self._create_room(product)
 
         # Category
         cat = create_from_breadcrumbs(category_str)
-        catalogue_models.ProductCategory.objects.update_or_create(product=item, category=cat)
+        catalogue_models.ProductCategory.objects.update_or_create(product=product, category=cat)
 
-        return item
+        return product
 
     def _create_stockrecord(self, item,
                             price_excl_tax, num_in_stock):

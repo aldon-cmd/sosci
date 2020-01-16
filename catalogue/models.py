@@ -11,10 +11,10 @@ class Provider(models.Model):
 
 class Product(AbstractProduct):
       name = models.CharField(max_length=200, null=True, blank=True)
-      start_date = models.DateField(null=True, blank=True)
-      start_time = models.TimeField(null=True, blank=True)
-      end_time = models.TimeField(null=True, blank=True)
-      credit_hour = models.IntegerField(null=True, blank=True)
+      start_date = models.DateField(null=True)
+      start_time = models.TimeField(null=True)
+      end_time = models.TimeField(null=True)
+      credit_hour = models.IntegerField(null=True)
       description = models.CharField(max_length=10000, null=True, blank=True)
       is_published = models.BooleanField(default=False)
       picture = models.CharField(max_length=250, null=True, blank=True,help_text="a url pointing directly to a preview image of the first video in a course")

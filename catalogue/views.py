@@ -105,6 +105,10 @@ class LiveCourseUpdateView(UpdateView):
         product.save()
         return HttpResponseRedirect(self.get_success_url())
 
+    def form_invalid(self, form):
+        return super(LiveCourseUpdateView, self).form_invalid(form)
+
+
 class LiveCourseCreateView(CreateView):
     template_name = "catalogue/live_course_form.html"
     model = catalogue_models.Product
@@ -114,7 +118,7 @@ class LiveCourseCreateView(CreateView):
         product = form.instance
         user = self.request.user
         price = form.cleaned_data['price']
-        created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product.title,product.description,price,1)
+        created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product,price,1)
         Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
@@ -212,7 +216,7 @@ class CourseCreateView(CreateView):
         product = form.instance
         user = self.request.user
         price = form.cleaned_data['price']
-        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,price,1)
+        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product,price,1)
         Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
