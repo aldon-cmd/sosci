@@ -2141,7 +2141,7 @@ input:required {
 
 @media only screen and (min-width: 320px) and (max-width: 320px) {
   .progressbar li:after {
-    width: 96px;
+    width: 96 px;
     right: 37%;
   }
 }
@@ -3437,6 +3437,10 @@ textarea, select {
 #id_start_date_day {
   margin-left: 1px;
   margin-right: 1px;
+}
+
+.side-content > .margin-right {
+  margin-right: 5px;
 }
 
 #id_start_date_year {
