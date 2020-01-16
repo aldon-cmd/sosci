@@ -15,7 +15,7 @@
                         <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class="d-flex">
                                 <i class="far fa-credit-card"></i>
-                                <p>Tuition: $10,200.00</p>
+                                <p class="margin-right">Tuition:</p><p>{{ session.price.incl_tax|currency:session.price.currency }}</p>
                             </span>
                         </div>
                     </div>

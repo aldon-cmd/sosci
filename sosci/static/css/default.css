@@ -3443,6 +3443,10 @@ textarea, select {
   margin-right: 5px;
 }
 
+span > .margin-right {
+  margin-right: 5px;
+}
+
 #id_start_date_year {
   margin-left: 2px;
   margin-right: 0px;
