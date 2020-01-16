@@ -23,7 +23,7 @@
                         <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class=" d-flex">
                                 <p class="create-header">Instructor:</i>
-                                <p>Rafer Johnson</p>
+                                <p>{{course.user.first_name}} {{course.user.last_name}}</p>
                             </span>
 
                             <a class="btn btn-secondary" href="{% url 'instructor:live-course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
