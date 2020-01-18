@@ -25,8 +25,11 @@
                                 <p class="create-header">Instructor:</i>
                                 <p>{{course.user.first_name}} {{course.user.last_name}}</p>
                             </span>
-
+                            {% if request.user.is_authenticated and request.user.userrole.name == "Instructor" %}
                             <a class="btn btn-secondary" href="{% url 'instructor:live-course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% else %}
+                            <a class="hide btn btn-secondary" href="{% url 'instructor:live-course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
