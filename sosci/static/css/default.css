@@ -467,7 +467,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 #course-list .text{
-  width: 316px;
+  width: 306px;
   height: 113.7px;
 }
 
@@ -3587,6 +3587,10 @@ span > .margin-right {
 
 .module-p {
   margin-bottom: 15px;
+}
+
+.hide-label > label {
+  display: none;
 }
 
 /*   display none properties      */

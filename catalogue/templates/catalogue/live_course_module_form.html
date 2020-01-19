@@ -70,12 +70,12 @@
         <form id="course-module-form" method="post" class="text-truncate">
           {% csrf_token %}
           <div class="form-group">
-            <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
+            <div class="col hide-label">{% include 'partials/form_field.html' with field=form.name %}</div>
           </div>
           <div class="form-group">
-            <div class="col">{% include 'partials/form_field.html' with field=form.start_date|attr:"placeholder:2006-10-25 14:30:59" %}</div>
+            <div class="col d-flex hide-label">{% include 'partials/form_field.html' with field=form.start_date %}</div>
           </div>
-        <div class="text-right modal-btn">
+        <div class="text-right modal-btn col">
           <button type="submit" class="btn btn-primary" role="button" aria-pressed="true">Add course module</button>
         </div>
         </form>

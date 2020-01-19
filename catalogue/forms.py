@@ -40,7 +40,8 @@ class LiveCourseForm(forms.ModelForm):
         return self.cleaned_data['title'].title()
 
 class LiveCourseModuleForm(forms.ModelForm):
-
+    start_date = forms.DateField(required=False,widget=SelectDateWidget(attrs=({'class': "input-dropdown"}),years=range(datetime.now().year - 20, datetime.now().year + 1),empty_label=("Year", "Month", "Day")))
+    
     class Meta:
         model = models.CourseModule
         fields = ['name', 'start_date']
