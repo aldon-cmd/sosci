@@ -467,7 +467,7 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 #course-list .text{
-  width: 316px;
+  width: 306px;
   height: 113.7px;
 }
 
@@ -795,12 +795,13 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 .course-list-count {
   min-width: 2.5rem;
   text-align: center;
-  padding: 1.4375rem 0;
+  /* padding: 1.4375rem 0;*/
 }
 
 .course-list-title {
   max-width: 200px;
   color: #f05c8d;
+  padding: 25px 15px 20px 0px;
 }
 
 .course-list {
@@ -1950,14 +1951,17 @@ input:required {
 #course-detail-module .box-border {
   border: 1px solid #dad8de!important;
   margin-bottom: 40px !important;
-}
+} 
 
  .settings-row-description {
   width: 75% !important;
+  padding: 25px 15px;
  }
 
  .settings-row-date {
   width: 25% !important;
+  text-align: right;
+  padding-right: 15px;
  }
 
  .settings-row {
@@ -2118,9 +2122,44 @@ input:required {
   z-index: -1;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) and (max-width: 600px) {
   .progressbar li:after {
     width: 200px;
+    right: 37%;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 414px) {
+  .progressbar li:after {
+    width: 174px;
+    right: 37%;
+  }
+}
+
+@media only screen and (min-width: 411px) and (max-width: 411px) {
+  .progressbar li:after {
+    width: 172px;
+    right: 37%;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) {
+  .progressbar li:after {
+    width: 126px;
+    right: 37%;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 360px) {
+  .progressbar li:after {
+    width: 147px;
+    right: 37%;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+  .progressbar li:after {
+    width: 96px;
     right: 37%;
   }
 }
@@ -2139,6 +2178,96 @@ input:required {
 
 .progressbar li.active + li:after {
   background-color: #55b776;
+}
+
+@media only screen and (min-width: 414px) and (max-width: 414px) {
+  #create-form .text {
+    width: 384px !important;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 414px) {
+  #create-form .form-control {
+    width: 384px !important;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 414px) {
+  #create-form .row {
+    padding: 15px !important;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) {
+  #create-form .text {
+    width: 345px !important;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) {
+  #create-form .form-control {
+    width: 345px !important;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 375px) {
+  #create-form .row {
+    padding: 15px !important;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+  #create-form .text {
+    width: 290px !important;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+  #create-form .form-control {
+    width: 290px !important;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+  #create-form .row {
+    padding: 15px !important;
+  }
+}
+
+@media only screen and (min-width: 411px) and (max-width: 411px) {
+  #create-form .text {
+    width: 381px !important;
+  }
+}
+
+@media only screen and (min-width: 411px) and (max-width: 411px) {
+  #create-form .form-control {
+    width: 381px !important;
+  }
+}
+
+@media only screen and (min-width: 411px) and (max-width: 411px) {
+  #create-form .row {
+    padding: 15px !important;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 360px) {
+  #create-form .text {
+    width: 330px !important;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 360px) {
+  #create-form .form-control {
+    width: 330px !important;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 360px) {
+  #create-form .row {
+    padding: 15px !important;
+  }
 }
 
 #create-form .row {
@@ -3199,6 +3328,7 @@ textarea, select {
   margin-right: 32px!important;
   color: #6a737d;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
 }
 
 .landing-nav {
@@ -3330,11 +3460,23 @@ textarea, select {
   padding-bottom: 1%;
 }
 
+#confirmation-email .browse-heading {
+  padding-top: 11%;
+  padding-bottom: 1%;
+}
+
 .browse-heading > h1 {
   font-family: Helvetica;
   font-size: 30px;
   line-height: 1.2;
   font-weight: 600;
+  text-align: center;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 375px) {
+  .browse-heading > h1 {
+  font-size: 18px;
+ }
 }
 
 .browse-heading > h2 {
@@ -3359,6 +3501,18 @@ textarea, select {
   font-size: 14px;
   line-height: 1.2;
   margin-top: 5px;
+  text-align: center;
+}
+
+#my-course-list .header-message {
+  text-align: left;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 375px) {
+  .header-message {
+    text-align: left;
+    margin-top: 15px;
+  }
 }
 
 @media only screen and (max-width: 420px) {
@@ -3407,6 +3561,38 @@ textarea, select {
   padding-left: 2px;
   padding-right: 0px;
 }
+
+#id_start_date_month {
+  margin-left: 0px;
+  margin-right: 2px;
+}
+
+#id_start_date_day {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.side-content > .margin-right {
+  margin-right: 5px;
+}
+
+span > .margin-right {
+  margin-right: 5px;
+}
+
+#id_start_date_year {
+  margin-left: 2px;
+  margin-right: 0px;
+}
+
+.module-p {
+  margin-bottom: 15px;
+}
+
+.hide-label > label {
+  display: none;
+}
+
 /*   display none properties      */
 
 #sign-in-form .form-group-label {

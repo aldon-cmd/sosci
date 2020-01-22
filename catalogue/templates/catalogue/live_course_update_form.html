@@ -28,27 +28,25 @@
             </div>
 
             <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.start_date %}</div>
+            {{ form.start_date.errors }}
+                <div class="col d-flex  ">{% include 'partials/form_field.html' with field=form.start_date %}</div>
             </div>            
-
-            <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.start_time %}</div>
+            <div class="form-group d-flex">
+              <div class="col-md-4 form-field form-padding-1">
+                {{ form.start_time.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.start_time %}</div>
+              </div>
+              <div class="col-md-4 form-field form-padding-2">
+                {{ form.end_time.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.end_time %}</div>
+              </div>
+              <div class="col-md-4 form-field form-padding-3">
+                {{ form.credit_hour.errors }}
+                <div class="item">{% include 'partials/form_field.html' with field=form.credit_hour %}</div>
+              </div>                      
             </div>
-
             <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.end_time %}</div>
-            </div>
-
-            <div class="form-group">
-            {{ form.description.errors }}
-                     <div class="col">{% include 'partials/form_field.html' with field=form.credit_hour %}</div>
-            </div>                        
-
-            <div class="form-group">
-            {{ form.description.errors }}
+            {{ form.provider.errors }}
                      <div class="col">{% include 'partials/form_field.html' with field=form.provider %}</div>
             </div>   
 
@@ -57,7 +55,10 @@
                      <div class="col">{% include 'partials/form_field.html' with field=form.price %}</div>
             </div>
 
-
+            <div class="form-group">
+            {{ form.product_class.errors }}
+                     <div class="col">{% include 'partials/form_field.html' with field=form.product_class %}</div>
+            </div>
           <div class="form-group text-right">
             <button type="submit" class="btn">
               Update Course

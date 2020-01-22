@@ -15,7 +15,7 @@
                     </div>
                     <div class="course-detail-info">
                         <span>Instructor:</span>
-                        <span class="publisher">Rafer Johnson</span>
+                        <span class="publisher">{{course.user.first_name}} {{course.user.last_name}}</span>
                         <a class="btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
                         <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class="d-flex">
                                 <i class="far fa-credit-card"></i>
-                                <p>Tuition: $10,200.00</p>
+                                <p class="margin-right">Tuition:</p><p>{{ session.price.incl_tax|currency:session.price.currency }}</p>
                             </span>
                         </div>
                     </div>
@@ -23,10 +23,13 @@
                         <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class=" d-flex">
                                 <p class="create-header">Instructor:</i>
-                                <p>Rafer Johnson</p>
+                                <p>{{course.user.first_name}} {{course.user.last_name}}</p>
                             </span>
-
+                            {% if request.user.is_authenticated and request.user.userrole.name == "Instructor" %}
                             <a class="btn btn-secondary" href="{% url 'instructor:live-course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% else %}
+                            <a class="hide btn btn-secondary" href="{% url 'instructor:live-course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -124,8 +127,8 @@
                           <i class="far fa-clock"></i>
                           <span>Credit Hours</span>
                         </div>
-                        <div class="side-content">
-                          <p>{{credit_hour}}</p><span>CPD Hours</span>
+                        <div class="side-content d-flex">
+                          <p class="margin-right">{{course.credit_hour}}</p></span><p>CPD Hours</p >
                         </div>
                       </article>
                       <article>
@@ -134,7 +137,7 @@
                           <span>Provider</span>
                         </div>
                         <div class="side-content">
-                          <p>{{provider}}</p>
+                          <p>{{course.provider}}</p>
                         </div>
                       </article>
                     </div>

@@ -21,17 +21,8 @@
   </div>
   <div class="container ss-relative">
     <div class="box">
-      <div class="hide">
-        <h3 class="subheading">Course Title</h3>
-        <div class="box-border">
-          <p class="settings-row">{{ course.title }}</p>
-        </div>
-      </div>
-      <div class="hide">     
-        <h3 class="subheading">Course Description</h3>
-        <div class="box-border">
-          <p class="settings-row">{{ course.description|safe }}</p>
-        </div>
+      <div class="module-p">
+        <p class="">Add course modules by selecting the <b>Add Modules<b> button below</p>
       </div>
       <div>     
         <h3 class="subheading">
@@ -79,12 +70,12 @@
         <form id="course-module-form" method="post" class="text-truncate">
           {% csrf_token %}
           <div class="form-group">
-            <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
+            <div class="col hide-label">{% include 'partials/form_field.html' with field=form.name %}</div>
           </div>
           <div class="form-group">
-            <div class="col">{% include 'partials/form_field.html' with field=form.start_date|attr:"placeholder:2006-10-25 14:30:59" %}</div>
+            <div class="col d-flex hide-label">{% include 'partials/form_field.html' with field=form.start_date %}</div>
           </div>
-        <div class="text-right modal-btn">
+        <div class="text-right modal-btn col">
           <button type="submit" class="btn btn-primary" role="button" aria-pressed="true">Add course module</button>
         </div>
         </form>
