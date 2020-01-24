@@ -111,30 +111,6 @@
           <li class="item dropdown">
             <div class="dropdown show">
               <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-create-course">Create Course</span>
-                <span class="">
-                  <i class="fas fa-angle-down"></i>
-                </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                
-                <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
-                  <i class="fas fa-video"></i>
-                  <span>Live stream</span>
-                </a>
-
-                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                  <i class="fas fa-play-circle"></i>
-                  <span>Video stream</span>
-                </a>
-
-              </div>
-            </div>
-          </li>
-          <li class="item"><a class="nav-link" href="{% url 'instructor:student-list' %}" role="button">My Students</a></li>
-          <li class="item dropdown">
-            <div class="dropdown show">
-              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="nav-create-course">
                   <span class="profile-name">{{request.user.first_name}}</span>
                   <span>{{request.user.last_name}}</span>
@@ -262,30 +238,7 @@
         </ul>
       </div>  
 
-      <div class="col-md-4">
-        <ul class="list">
-          <li class="item dropdown hide">
-            <div class="dropdown show">
-              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-create-course">Programs</span>
-                <span class="">
-                  <i class="fas fa-angle-down"></i>
-                </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="">
-                  <i class="fas fa-chalkboard-teacher"></i>
-                  <span>SME School</span>
-                </a>
-                <a class="dropdown-item" href="">
-                  <i class="fas fa-graduation-cap"></i>
-                  <span>Investor School</span>
-                </a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <div class="col-md-4"></div>
 
       <div class="col-md-4">
         <ul class="list float-right">
