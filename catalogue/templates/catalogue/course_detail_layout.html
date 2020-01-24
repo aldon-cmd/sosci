@@ -11,7 +11,6 @@
 
   $('#login-form')
     .ajaxForm({
-      target: '#authentication-modal',
       success : get_success_response,
       error: get_error_response       
     });
@@ -51,24 +50,4 @@ function open_registration_modal(url){
 
 </script>
 
-<script>
-    $(document).on('click', ".open-login-modal", function(event) {
-        event.preventDefault();
-        open_login_modal($(this).attr('data-url'));
-
-
-    });
-
-    function open_login_modal(url) {
-
-        $('#authentication-modal').load(url, function() {
-
-            $('#authentication-modal').modal('show');
-
-
-        });
-
-
-    }
-</script>
 {% endblock extrascripts %}
