@@ -7,7 +7,7 @@ import {ScreenShare} from './screen-share';
 
 class Sosci{
 
-    static init(participant_identity,host_identity,token){
+    static init(participant_identity,host_identity,token,course_id){
     const roomui = new RoomUI();
     const programmablevideo = new ProgrammableVideo(host_identity);
     var room;
@@ -21,7 +21,7 @@ class Sosci{
     room_sid_input.value = room.sid
 
     screenshare = new ScreenShare(room,programmablevideo);
-    programmablechat = new ProgrammableChat(participant_identity,token);
+    programmablechat = new ProgrammableChat(participant_identity,token,course_id);
 
     document.getElementById('btn-share-screen').onclick = () => screenshare.share_screen();
 

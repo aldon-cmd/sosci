@@ -31,13 +31,17 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
         <div class="side-box">
           <div class="side-box-header">
-            <span>Behavioural Economics and the Modern Economy</span> 
+            <span>{{course.title}}</span> 
           </div>
 
           <div id="participants-panel" class="side-box-content">
             <h4 class="">Participants</h4>
             <ul id="participants-list">
-            <li><div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div><i class="fas fa-circle"></i></li>
+              <li>
+                <div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div>
+                <i class="fas fa-circle"></i>
+                <i class="far fa-hand-paper"></i>
+              </li>
             </ul>
           </div>
 
@@ -182,7 +186,7 @@ $.ajaxSetup({
 
 {% autoescape off %}
 <script>
-Sosci.init("{{identity}}","{{host_identity}}","{{token}}");
+Sosci.init("{{identity}}","{{host_identity}}","{{token}}","{{view.kwargs.course_id}}");
 </script>
 {% endautoescape %}
 

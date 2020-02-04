@@ -4,7 +4,9 @@ import {Client} from 'twilio-chat';
 class ProgrammableChat{
 
 
-    constructor(identity,token){
+    constructor(identity,token,course_id){
+        this.course_id =  course_id;
+        this.channel_name = 'general' + this.course_id;
         this.identity_arr = identity.split("/");
         this.identity = this.get_name(this.identity_arr);
         
@@ -142,7 +144,7 @@ class ProgrammableChat{
       // If it doesn't exist, let's create it
       console.log('Creating general channel');
       this.chatClient.createChannel({
-        uniqueName: 'general',
+        uniqueName: this.channel_name,
         friendlyName: 'General Chat Channel'
       }).then((channel) => this.createChannel(channel)).catch((channel) => this.createChannelCatch(channel));
     }
@@ -151,7 +153,7 @@ class ProgrammableChat{
     // Get the general chat channel, which is where all the messages are
     // sent in this simple application
     this.print('Attempting to join "general" chat channel...');
-    this.chatClient.getChannelByUniqueName('general')
+    this.chatClient.getChannelByUniqueName(this.channel_name)
     .then((channel) => this.getChannelByUniqueNamelHandler(channel)).catch(
       () => this.getChannelByUniqueNamelHandlerCatch()
       );
