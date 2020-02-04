@@ -163,7 +163,7 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<script src="{% static 'js/video/sosci.843907d1b0de9509e67f.js' %}"></script>
+<script src="{% static 'js/video/sosci.eb0712951beaac0f843a.js' %}"></script>
 <script type="text/javascript">
 // using jQuery
 var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
@@ -186,7 +186,7 @@ $.ajaxSetup({
 
 {% autoescape off %}
 <script>
-Sosci.init("{{identity}}","{{host_identity}}","{{token}}");
+Sosci.init("{{identity}}","{{host_identity}}","{{token}}","{{view.kwargs.course_id}}");
 </script>
 {% endautoescape %}
 

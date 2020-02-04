@@ -36,7 +36,7 @@ python manage.py migrate
 
 cd sosci.git/livestream/twilio
 
-npm run build
+npm run dev-build
 
 # steps for creating a page
 

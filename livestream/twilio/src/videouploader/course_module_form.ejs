@@ -46,8 +46,8 @@
               <tr>
               {% for module in modules %}
                 <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
-                <td class="settings-row">{{ module.name }}</td>
-                <td class="settings-row">{{ module.duration }}</td>
+                <td class="settings-row-description">{{ module.name }}</td>
+                <td class="settings-row-date">{{ module.duration }}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -90,7 +90,7 @@
             <div class="col video-file">{% include 'partials/form_field.html' with field=form.video_file %}</div>
             <button type="button" class="btn btn-danger stop upload-btn" id="toggle-btn">
               <i class="fas fa-cloud-upload-alt"></i>
-              <span>Upload files</span>
+              <span>Upload Video</span>
             </button>
           </div>
 
@@ -107,9 +107,6 @@
         </p>
       </div>
       <div class="modal-footer modal-btn">
-        <div class="text-right">
-          <a href="{% url 'instructor:publish-course' view.kwargs.course_id %}" class="btn btn-primary" role="button" aria-pressed="true">Add course module</a>
-        </div>
       </div>
     </div>
   </div>
@@ -122,7 +119,7 @@
 <script src="{% static 'js/tus.js' %}"></script>
 <script src="{% static '<%= htmlWebpackPlugin.files.chunks.videouploader.entry %>' %}"></script>
 <script>
-var videouploader = new VideoUploader("{% url 'video:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
+var videouploader = new VideoUploader("{% url 'instructor:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
 </script>
 
 
