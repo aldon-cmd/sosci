@@ -167,7 +167,7 @@ class ConfirmUser(View):
                 user.save()
                 messages.error(request,"This link has expired. Please try sending the confirmation email again")
 
-                return HttpResponseRedirect(reverse('resend-email-confirmation'))
+                return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
             user.is_active = True
             user.save()
 
@@ -177,10 +177,10 @@ class ConfirmUser(View):
             return HttpResponseRedirect(reverse('catalogue:course-list'))
         except Http404:
 
-             return HttpResponseRedirect(reverse('resend-email-confirmation'))
+             return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
 
 
-        return HttpResponseRedirect(reverse('resend-email-confirmation'))
+        return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
 
 class ConfirmationSuccess(TemplateView):
     template_name = 'customer/confirmation_success.html'            

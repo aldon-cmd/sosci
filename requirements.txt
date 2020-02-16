@@ -16,5 +16,5 @@ twilio==6.30.0
 #pandas-0.22.0-cp27-cp27m-win32.whl
 psycopg2==2.8.2
 Unidecode==1.1.1
-django-model-utils>=3.1.1
+django-model-utils==4.0.0
 #django-debug-toolbar==1.9.1
