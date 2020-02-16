@@ -101,6 +101,10 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping',
 
     "post_office",
+    'quiz',
+    'multichoice',
+    'true_false',
+     'essay',
     
     # 3rd-party apps that oscar depends on
     'widget_tweaks',
