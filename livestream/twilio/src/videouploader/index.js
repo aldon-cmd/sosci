@@ -11,11 +11,9 @@ class VideoUploader{
         this.toggleBtn       = document.querySelector("#toggle-btn");
         this.resumeCheckbox  = document.querySelector("#resume");
         this.video_file_input = window.$("input[name=video_file]");
-        this.progress        = document.querySelector(".progress-bar");
-        this.progressBar     = this.progress.querySelector(".bar");
+        this.progressBar     = document.querySelector(".progress-bar");
         this.alertBox        = document.querySelector("#support-alert");
         this.uploadList      = document.querySelector("#upload-list");
-        this.chunkInput      = document.querySelector("#chunksize");
         this.endpointInput   = document.querySelector("#endpoint");
 
 
@@ -85,10 +83,7 @@ class VideoUploader{
     return;
   }
 
-  var chunkSize = parseInt(this.chunkInput.value, 10);
-  if (isNaN(chunkSize)) {
-    chunkSize = Infinity;
-  }
+  var chunkSize = 100 * 1024 * 1024;
 
   this.toggleBtn.textContent = "pause upload";
 

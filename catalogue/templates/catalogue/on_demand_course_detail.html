@@ -2,6 +2,7 @@
 {% load static widget_tweaks %}
 {% load currency_filters %}
 {% load purchase_info_tags %}
+{% load is_course_owner %}
 
 {% block content %}
 {% purchase_info_for_product request course as session %}
@@ -16,7 +17,9 @@
                     <div class="course-detail-info">
                         <span>Instructor:</span>
                         <span class="publisher">{{course.user.first_name}} {{course.user.last_name}}</span>
+                        {% if request.user|is_course_owner:course %}
                         <a class="btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="description description-detail">

@@ -60,7 +60,7 @@ class MyCoursesListView(ListView):
         return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user)).distinct()
 
 class OnDemandCourseListView(ListView):
-    template_name = "catalogue/on_demand_list.html"
+    template_name = "catalogue/on_demand_course_list.html"
     paginate_by = 10
     model = catalogue_models.Product
 
@@ -278,7 +278,7 @@ class PublishCourseView(TemplateView):
         return context
 
 class ModuleCreateView(TemplateView):
-    template_name = "catalogue/course_module_form.html"
+    template_name = "catalogue/on_demand_course_module_form.html"
 
     # def get_success_url(self):
 
@@ -306,7 +306,7 @@ class CourseDetailView(TemplateView):
         if course.product_class.name == "Live":
            return ["catalogue/live_course_detail.html"]
         elif course.product_class.name == "Course":
-            return ["catalogue/course_detail.html"]
+            return ["catalogue/on_demand_course_detail.html"]
         else:
             raise ImproperlyConfigured(
                 "this page requires a product class to be set")
