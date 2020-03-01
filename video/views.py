@@ -86,6 +86,8 @@ class VimeoVideoUploadAttemptView(View):
 
         data = {}
 
+        data['name'] = post_data.get("name","").title()
+
         data['upload'] = {
                 'approach': 'tus',
                 'size': post_data.get("file_size","")

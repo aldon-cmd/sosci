@@ -47,7 +47,6 @@
               {% for module in modules %}
                 <td class="course-list-count">{{ forloop.counter }}<span>.</span></td>
                 <td class="settings-row-description">{{ module.name }}</td>
-                <td class="settings-row-date">{{ module.duration }}</td>
               </tr>
               {% endfor %}
             </tbody>
@@ -80,12 +79,6 @@
           <div class="form-group">
             <div class="col">{% include 'partials/form_field.html' with field=form.name %}</div>
           </div>
-          <div class="form-group">
-            <div class="col">{% include 'partials/form_field.html' with field=form.duration %}</div>
-          </div>
-          <div class="form-group hide">
-            <div class="col">{% include 'partials/form_field.html' with field=form.chunksize|append_attr:"id:chunksize" %}</div>
-          </div>
           <div class="form-group d-flex video-upload">
             <div class="col video-file">{% include 'partials/form_field.html' with field=form.video_file %}</div>
             <button type="button" class="btn btn-danger stop upload-btn" id="toggle-btn">
@@ -94,9 +87,8 @@
             </button>
           </div>
 
-          <div class="progress hide">
-            <div class="progress-bar progress-bar-striped progress-bar-success">
-              <span class="bar" style="width: 0%;"></span>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-success" style="width: 0%">
             </div>
           </div>
         </form>
@@ -117,7 +109,7 @@
 {{ block.super }}
 
 <script src="{% static 'js/tus.js' %}"></script>
-<script src="{% static '<%= htmlWebpackPlugin.files.chunks.videouploader.entry %>' %}"></script>
+<script src="{% static 'js/video/videouploader.73f9bc59334c0a88f11f.js' %}"></script>
 <script>
 var videouploader = new VideoUploader("{% url 'instructor:video-upload-attempt' view.kwargs.course_id %}",'{{csrf_token}}');
 </script>

@@ -17,8 +17,8 @@ module.exports = {
     chunks: ['sosci']
   }),new HtmlWebpackPlugin({
     inject: false,
-    filename: '../../../catalogue/templates/catalogue/course_module_form.html',
-    template: 'src/videouploader/course_module_form.ejs',
+    filename: '../../../catalogue/templates/catalogue/on_demand_course_module_form.html',
+    template: 'src/videouploader/on_demand_course_module_form.ejs',
     chunks: ['videouploader']
   })],
   mode: 'development',
