@@ -15,7 +15,7 @@
                         <h3>{{course.title}}</h3>
                         <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                             <span class="d-flex">
-                                <i class="far fa-credit-card"></i>
+                                <i class="material-icons">payment</i>
                                 <p class="margin-right">Tuition:</p><p>{{ session.price.incl_tax|currency:session.price.currency }}</p>
                             </span>
                         </div>
@@ -89,7 +89,7 @@
                     <div class="purchase-btn open-login-modal" data-url="{% url 'customer:login-modal' view.kwargs.course_id %}" data-toggle="modal" data-target="#authentication-modal">
                         <div class="purchase-btn-icon">
                             <div class="text-center">
-                               <span>Buy Now</span>
+                               <span>Enroll in this course</span>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <div class="course-detail-section course-detail-title-info col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
                       <article>
                         <div class="d-flex header-section">
-                          <i class="far fa-calendar-alt"></i>
+                          <i class="material-icons">calendar_today</i>
                           <span>Start Date</span>
                         </div>
                         <div class="d-flex side-content">
@@ -112,7 +112,7 @@
                       </article>
                       <article>
                         <div class="d-flex header-section">
-                          <i class="fas fa-stopwatch"></i>
+                          <i class="material-icons">access_time</i>
                           <span>Class Time</span>
                         </div>
                         <div class="d-flex side-content">   
@@ -125,7 +125,7 @@
                       </article>
                       <article>
                         <div class="d-flex header-section">
-                          <i class="far fa-clock"></i>
+                          <i class="material-icons">timer</i>
                           <span>Credit Hours</span>
                         </div>
                         <div class="side-content d-flex">
@@ -134,7 +134,7 @@
                       </article>
                       <article>
                         <div class="d-flex header-section">
-                          <i class="fas fa-school"></i>
+                          <i class="material-icons">school</i>
                           <span>Provider</span>
                         </div>
                         <div class="side-content">

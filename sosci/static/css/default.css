@@ -295,12 +295,23 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   padding: 0px;
 }
 
-#sosci-nav .fas {
+#sosci-nav .fas, #sosci-nav .material-icons {
   color: #fff;;
 }
 
+.nav-dropdown {
+  position: relative
+}
+
+.nav-dropdown > .material-icons {
+  position: absolute;
+  top: -3px;
+  left: 0px;
+  font-size: 22px;
+}
+
 #sosci-nav .dropdown-item > .fas {
-  color: #757575;
+  color: #495057;
 }
 
 .navbar-toggler .fas {
@@ -343,6 +354,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 37px;
   color: #ec407a ;
   margin-bottom: 18px;
+}
+
+.box-part > .material-icons, .box-part > .material-icons {
+  font-size: 28px;
+  color: #ec407a;
+  margin-bottom: 2px;
 }
 
 .title {
@@ -460,6 +477,19 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
   font-size: 14px;
   font-weight: 600;
   color: #0366d6;
+  height: 16px;
+}
+
+.available {
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0366d6; 
+  height: 16px;
+}
+
+.price > span {
+  float: right;
 }
 
 .enroll-btn-text > .price {
@@ -737,12 +767,12 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 .header-section > i {
-  font-size: 13px !important;
+  font-size: 15px !important;
   color: #586069;
   line-height: 18px !important;
 }
 
-.course-detail-section .far, .course-detail-section .fas {
+.course-detail-section .far, .course-detail-section .fas, .course-detail-section .material-icons {
   margin-right: 8px !important;
 }
 
@@ -1333,9 +1363,12 @@ img, picture {
   font-family: Helvetica;
 }
 
+.modules {
+  padding: 10px;
+}
+
 .modules-list {
   margin-bottom: 15px;
-  border-top:;
   border-bottom: 1px dotted #b9c7d5;
 }
 
@@ -2416,7 +2449,34 @@ input[type=text], input[type=number] {
 }
 
 .dropdown .nav-create-course {
-  margin-right: 5px !important;
+  margin-right: 2px !important;
+  position: relative;
+}
+
+..dropdown-chevron > .material-icons {
+  top: -4px;
+  position: absolute;
+}
+
+.dropdown-chevron {
+  overflow: hidden;
+}
+
+.dropdown-item {
+  position: relative;
+}
+
+.dropdown-item > .material-icons {
+  color: #ec407a !important;
+  font-size: 16px;
+  display: inline-block;
+  position: absolute;
+  top: 12px;
+}
+
+.dropdown-item-option {
+   position: absolute;
+   left: 38px;
 }
 
 :focus {
@@ -3105,8 +3165,9 @@ ol, ul {
   margin-right: 5px;
 }
 
-.course-detail-info .fas, .course-detail-info .far, .course-detail-title-info .fas, .course-detail-title-info .far {
-  font-size: 10px;
+.course-detail-info .fas, .course-detail-info .far, .course-detail-title-info .fas, .course-detail-title-info .far,  
+.course-detail-title-info .material-icons {
+  font-size: 15px;
   margin-right: 5px;
   line-height: 16px;
 }

@@ -28,22 +28,25 @@
           <li class="item dropdown">
             <div class="dropdown show">
               <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-create-course">Create Course</span>
-                <span class="">
-                  <i class="fas fa-angle-down"></i>
-                </span>
+                <div class="nav-create-course">
+                  <span>Create Course</span>
+                  <span class="dropdown-chevron">
+                    <i class="material-icons">keyboard_arrow_down</i>
+                  </span>
+                </div>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                
+
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="material-icons">ondemand_video</i>
+                  <span>Video stream</span>
+                </a>
+
                 <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
-                  <i class="fas fa-video"></i>
+                  <i class="material-icons">videocam</i>
                   <span>Live stream</span>
                 </a>
 
-                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                  <i class="fas fa-play-circle"></i>
-                  <span>Video stream</span>
-                </a>
               </div>
             </div>
           </li>
@@ -54,9 +57,7 @@
                 <span class="nav-create-course">
                   <span class="profile-name">{{request.user.first_name}}</span>
                   <span>{{request.user.last_name}}</span>
-                </span>
-                <span class="">
-                  <i class="fas fa-angle-down"></i>
+                  <i class="material-icons">keyboard_arrow_down</i>
                 </span>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -115,7 +116,7 @@
                   <span class="profile-name">{{request.user.first_name}}</span>
                   <span>{{request.user.last_name}}</span>
                 </span>
-                <span class="">
+                <span class="nav-dropdown">
                   <i class="fas fa-angle-down"></i>
                 </span>
               </a>
@@ -158,23 +159,24 @@
           <div class="col-md-4">
             <ul class="list">
               <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
-              <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse</a></li>
+              <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">Video Stream Courses</a></li>
+              <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">Live Courses</a></li>
               <li class="item dropdown">
                 <div class="dropdown show">
                   <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="nav-create-course">Programs</span>
-                    <span class="">
-                      <i class="fas fa-angle-down"></i>
+                    <span class="nav-create-course">Courses</span>
+                    <span class="nav-dropdown">
+                      <i class="material-icons">keyboard_arrow_down</i>
                     </span>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="">
-                      <i class="fas fa-chalkboard-teacher"></i>
-                      <span>SME School</span>
+                    <a class="dropdown-item d-flex" href="">
+                      <i class="material-icons">ondemand_video</i>
+                      <span class="dropdown-item-option">On Demand</span>
                     </a>
-                    <a class="dropdown-item" href="">
-                      <i class="fas fa-graduation-cap"></i>
-                      <span>Investor School</span>
+                    <a class="dropdown-item d-flex" href="">
+                      <i class="material-icons">videocam</i>
+                      <span class="dropdown-item-option">Live</span>
                     </a>
                   </div>
                 </div>
@@ -214,23 +216,24 @@
       <div class="col-md-4">
         <ul class="list">
           <li class="item"><a class="nav-link" href="{% url 'home' %}">Sosci</a></li>
-          <li class="item"><a class="nav-link" href="{% url 'catalogue:course-list' %}">Browse</a></li>
-          <li class="item dropdown .hide">
+          <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">On Demand Courses</a></li>
+          <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">Live Courses</a></li>
+          <li class="item dropdown">
             <div class="dropdown show">
               <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-create-course">Programs</span>
+                <span class="nav-create-course">Courses</span>
                 <span class="">
                   <i class="fas fa-angle-down"></i>
                 </span>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="">
-                  <i class="fas fa-chalkboard-teacher"></i>
-                  <span>SME School</span>
+                  <i class="fas fa-certificate"></i>
+                  <span>On Demand Courses</span>
                 </a>
                 <a class="dropdown-item" href="">
-                  <i class="fas fa-graduation-cap"></i>
-                  <span>Investor School</span>
+                  <i class="fas fa-certificate"></i>
+                  <span>Live Courses</span>
                 </a>
               </div>
             </div>
