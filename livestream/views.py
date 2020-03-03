@@ -88,6 +88,7 @@ class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
         course_id = self.kwargs.get('course_id')
         course = catalogue_models.Product.objects.filter(pk=course_id).first()
         course_owner = self.get_owner(course)
+        context["course"] = course
         context["owner"] = course_owner
 
         # Create an Access Token
@@ -106,7 +107,7 @@ class TwilioRoomParticipantView(TemplateView,mixins.CourseRoomMixin):
         chat_grant = ChatGrant(service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
-        context["token"] = token.to_jwt()
+        context["token"] = str(token.to_jwt(),'utf-8')
         context["identity"] = token.identity
 
         return context
@@ -148,6 +149,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         course_id = self.kwargs.get('course_id')
         course = catalogue_models.Product.objects.filter(pk=course_id).first()
         course_owner = self.get_owner(course)
+        context["course"] = course
         context["owner"] = course_owner
 
         # Create an Access Token
@@ -164,7 +166,7 @@ class TwilioRoomView(TemplateView,mixins.CourseRoomMixin):
         chat_grant = ChatGrant(service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
-        auth_token = token.to_jwt()
+        auth_token = str(token.to_jwt(),'utf-8')
 
         """
         https://www.twilio.com/docs/video/api/rooms-resource?code-sample=code-create-a-group-room&code-language=Python&code-sdk-version=6.x
