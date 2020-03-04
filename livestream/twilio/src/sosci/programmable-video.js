@@ -231,7 +231,7 @@ class ProgrammableVideo {
 
 	// Leave Room.
 	leaveRoomIfJoined() {
-	  if (activeRoom) {
+	  if (this.room) {
 	    this.room.disconnect();
 	  }
 	}
