@@ -19,10 +19,10 @@ class ProgrammableVideo {
 		var i_elements_array = this.btn_toggle_audio.getElementsByTagName("i");
 
 		if (i_elements_array != undefined && i_elements_array.length != 0) {
-			if (i_elements_array.className === "fas fa-microphone"){
-				i_elements_array.className  = "fas fa-microphone-slash";
+			if (i_elements_array[0].className === "fas fa-microphone"){
+				i_elements_array[0].className  = "fas fa-microphone-slash";
 			}else{
-				i_elements_array.className  = "fas fa-microphone";
+				i_elements_array[0].className  = "fas fa-microphone";
 			}	
 		}		
 	}
@@ -31,10 +31,10 @@ class ProgrammableVideo {
 		var i_elements_array = this.btn_toggle_video.getElementsByTagName("i");
 
 		if (i_elements_array != undefined && i_elements_array.length != 0) {
-			if (i_elements_array.className === "fas fa-video"){
-				i_elements_array.className  = "fas fa-video-slash";
+			if (i_elements_array[0].className === "fas fa-video"){
+				i_elements_array[0].className  = "fas fa-video-slash";
 			}else{
-				i_elements_array.className  = "fas fa-video";
+				i_elements_array[0].className  = "fas fa-video";
 			}	
 		}		
 	}
@@ -219,10 +219,10 @@ class ProgrammableVideo {
 
 
 	  // Bind button to leave Room.
-	  document.getElementById('button-leave').onclick = () => {
-	    console.log('Leaving room...');
-	    this.room.disconnect();
-	  };
+	//   document.getElementById('button-leave').onclick = () => {
+	//     console.log('Leaving room...');
+	//     this.room.disconnect();
+	//   };
 	  return new Promise(function(resolve, reject) {
 		    /* missing implementation */
 		    resolve(room);

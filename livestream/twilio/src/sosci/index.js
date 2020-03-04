@@ -23,12 +23,6 @@ class Sosci{
     screenshare = new ScreenShare(room,programmablevideo);
     programmablechat = new ProgrammableChat(participant_identity,token,course_id);
 
-    document.getElementById('btn-share-screen').onclick = () => screenshare.share_screen();
-
-
-    document.getElementById('btn-unshare-screen').onclick = () => screenshare.unshare_screen();
-
-
     // When we are about to transition away from this page, disconnect
     // from the room, if joined.
     window.addEventListener('beforeunload', programmablevideo.leaveRoomIfJoined);
