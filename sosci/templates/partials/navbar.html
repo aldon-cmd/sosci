@@ -23,10 +23,17 @@
 
       <div class="col-md-4"></div>
 
-      <div class="col-md-4 no-padding">
+      <div class="col-md-4">
         <ul class="list float-right">
           <li class="item dropdown">
             <div class="dropdown show">
+              <a class="btn d-flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>Create Course</span>
+                <i class="dd-icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-reactid="195"><path style="fill:#ffffff;" fill-rule="evenodd" clip-rule="evenodd" d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z" data-reactid="196"/></svg>
+                </i>
+              </a>
+              <!--
               <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="nav-create-course">
                   <span>Create Course</span>
@@ -35,16 +42,17 @@
                   </span>
                 </div>
               </a>
+              -->  
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
                   <i class="material-icons">ondemand_video</i>
-                  <span>Video stream</span>
+                  <span class="dropdown-item-option">Video stream</span>
                 </a>
 
                 <a class="dropdown-item" href="{% url 'catalogue:live-course-create-form' %}">
                   <i class="material-icons">videocam</i>
-                  <span>Live stream</span>
+                  <span class="dropdown-item-option">Live stream</span>
                 </a>
 
               </div>
@@ -54,24 +62,25 @@
           <li class="item dropdown">
             <div class="dropdown show">
               <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="nav-create-course">
-                  <span class="profile-name">{{request.user.first_name}}</span>
-                  <span>{{request.user.last_name}}</span>
-                  <i class="material-icons">keyboard_arrow_down</i>
+                <span class="d-flex ">
+                  <span class="profile-name">{{request.user.first_name}}{{request.user.last_name}}</span>
+                  <i class="dd-icon">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-reactid="195"><path style="fill:#ffffff;" fill-rule="evenodd" clip-rule="evenodd" d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z" data-reactid="196"/></svg>
+                  </i>
                 </span>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                  <i class="fas fa-user-plus"></i>
-                  <span>Invite Friends</span>
+                  <i class="material-icons">person_add</i>
+                  <span class="dropdown-item-option">Invite Friends</span>
                 </a>
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
-                  <i class="fas fa-user-graduate"></i>
-                  <span>My Account</span>
+                  <i class="material-icons">person_outline</i>
+                  <span class="dropdown-item-option">My Account</span>
                 </a>
                 <a class="dropdown-item" href="{% url 'customer:logout' %}">
-                  <i class="fas fa-power-off"></i>
-                  <span>Logout</span>
+                  <i class="material-icons">power_settings_new</i>
+                  <span class="dropdown-item-option">Logout</span>
                 </a>
               </div>
             </div>
@@ -163,11 +172,11 @@
               <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">Live Courses</a></li>
               <li class="item dropdown">
                 <div class="dropdown show">
-                  <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="btn d-flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="nav-create-course">Courses</span>
-                    <span class="nav-dropdown">
-                      <i class="material-icons">keyboard_arrow_down</i>
-                    </span>
+                    <i class="dd-icon">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-reactid="195"><path style="fill:#ffffff;" fill-rule="evenodd" clip-rule="evenodd" d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z" data-reactid="196"/></svg>
+                  </i>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item d-flex" href="">
@@ -220,20 +229,20 @@
           <li class="item"><a class="nav-link hide" href="{% url 'catalogue:course-list' %}">Live Courses</a></li>
           <li class="item dropdown">
             <div class="dropdown show">
-              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="btn d-flex" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="nav-create-course">Courses</span>
-                <span class="">
-                  <i class="fas fa-angle-down"></i>
-                </span>
+                <i class="dd-icon">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-reactid="195"><path style="fill:#ffffff;" fill-rule="evenodd" clip-rule="evenodd" d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z" data-reactid="196"/></svg>
+                </i>
               </a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="">
                   <i class="fas fa-certificate"></i>
-                  <span>On Demand Courses</span>
+                  <span class="dropdown-item-option">On Demand Courses</span>
                 </a>
                 <a class="dropdown-item" href="">
                   <i class="fas fa-certificate"></i>
-                  <span>Live Courses</span>
+                  <span class="dropdown-item-option">Live Courses</span>
                 </a>
               </div>
             </div>

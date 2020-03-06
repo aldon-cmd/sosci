@@ -296,11 +296,28 @@ article, aside, footer, header, nav, main, section, summary, details, hgroup, fi
 }
 
 #sosci-nav .fas, #sosci-nav .material-icons {
-  color: #fff;;
+  color: #495057;;
 }
 
 .nav-dropdown {
   position: relative
+}
+
+.dd-icon {
+  background-size: contain;
+  display: block;
+  height: 24px;
+  left: 3px;
+  line-height: 0;
+  margin: 0 auto;
+  position: relative;
+  top: 12px;
+  width: 24px;
+}
+
+.dd-icon svg {
+  height: 24px;
+  width: 24px;
 }
 
 .nav-dropdown > .material-icons {
@@ -2448,18 +2465,8 @@ input[type=text], input[type=number] {
   border-color: #24292e;
 }
 
-.dropdown .nav-create-course {
-  margin-right: 2px !important;
-  position: relative;
-}
-
-..dropdown-chevron > .material-icons {
-  top: -4px;
+..material-icons {
   position: absolute;
-}
-
-.dropdown-chevron {
-  overflow: hidden;
 }
 
 .dropdown-item {
@@ -2467,7 +2474,6 @@ input[type=text], input[type=number] {
 }
 
 .dropdown-item > .material-icons {
-  color: #ec407a !important;
   font-size: 16px;
   display: inline-block;
   position: absolute;
@@ -2475,8 +2481,9 @@ input[type=text], input[type=number] {
 }
 
 .dropdown-item-option {
-   position: absolute;
-   left: 38px;
+  position: absolute;
+  left: 38px;
+  color: #495057 !important;
 }
 
 :focus {
