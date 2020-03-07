@@ -44,6 +44,14 @@
     </div>
   </div>
 
-  
+  <script>
 
 
+    $('#login-form')
+    .ajaxForm({
+      success : get_login_success_response,
+      error: get_login_error_response       
+    });
+
+       
+</script>

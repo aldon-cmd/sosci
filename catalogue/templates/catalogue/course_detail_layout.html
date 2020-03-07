@@ -7,34 +7,19 @@
 {% block extrascripts %}
 {{ block.super }}
 <script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
-<script>
 
-  $('#login-form')
-    .ajaxForm({
-      success : get_success_response,
-      error: get_error_response       
-    });
-
-    function get_success_response(responseText, statusText, xhr, $form){
+  <script>
+    function get_login_success_response(responseText, statusText, xhr, $form){
 
               window.location.replace("{% url 'checkout:payment-details' view.kwargs.course_id %}");
           }
 
-              function get_error_response(data){
+    function get_login_error_response(data){
 
               $("#authentication-modal").html(data.responseText);
+
           }
 
-           
-</script>
-
-<script>
-  $(document).on('click',".open-registration-modal", function (event) {
-    event.preventDefault();
-    open_registration_modal($(this).attr('href'));
-
-    
-  });
 
 function open_registration_modal(url){
 
@@ -48,6 +33,20 @@ function open_registration_modal(url){
     
 }
 
+    $('#login-form')
+    .ajaxForm({
+      success : get_login_success_response,
+      error: get_login_error_response       
+    });
+
+
+    $(document).on('click',".open-registration-modal", function (event) {
+    event.preventDefault();
+    open_registration_modal($(this).attr('href'));
+
+    
+  });  
+           
 </script>
 
 {% endblock extrascripts %}

@@ -44,23 +44,37 @@
 
     <script>
 
-  $('#registration-form')
-    .ajaxForm({
-      target: '#authentication-modal',
-      success : get_success_response,
-      error: get_error_response       
-    });
 
-    function get_success_response(responseText, statusText, xhr, $form){
+
+    function get_registration_success_response(responseText, statusText, xhr, $form){
 
               window.location.replace("{% url 'customer:email-confirmation-sent' %}");
           }
 
-              function get_error_response(data){
+    function get_registration_error_response(data){
 
               $("#authentication-modal").html(data.responseText);
           }
 
+  function open_login_modal(url){
+
+    $('#authentication-modal').load(url,function(){
+
+        $('#authentication-modal').modal('show');
+        
+        
+    });
+
+    
+}
+
+
+  $('#registration-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_registration_success_response,
+      error: get_registration_error_response       
+    });
 
   $(document).on('click',".open-user-login-modal", function (event) {
     event.preventDefault();
