@@ -3661,6 +3661,67 @@ span > .margin-right {
   display: none;
 }
 
+#checkout .pay-option {
+  padding-bottom: 40px;
+  font-family: Helvetica;
+  font-size: 14px;
+  color: #14171a !important;
+}
+
+#checkout .nav-link {
+  border-radius: 2px;
+  border: 1px solid #ced4da; 
+}
+
+#checkout .nav-link.active {
+  border: 2px solid #f05c8d !important;
+  background-color: #ffffff !important;
+}
+
+.payment-container > .nav {
+  padding-bottom: 40px;
+} 
+
+.instructions-header {
+  border-top: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  padding: 0.75rem;
+}
+
+.instructions-header b {
+  font-weight: 700;
+}
+
+.pay-option-card {
+  padding-right: 5px;
+}
+
+.pay-option-transfer {
+  padding-left: 5px;
+}
+
+.pay-option-card > a, .pay-option-transfer > a {
+  color: #14171a !important;
+}
+
+.bank-transfer-instructions {
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
+.icon-line-height {
+  line-height: 24px;
+}
+
+.nav-link .material-icons {
+  margin-right: 8px !important;
+}
+
+.button-content {
+  margin: 0 auto;
+}
+
 
 /*   display none properties      */
 

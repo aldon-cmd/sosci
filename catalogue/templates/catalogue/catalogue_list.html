@@ -7,35 +7,11 @@
 
   <div class="container">
     <div class="browse-heading">
-      <h1>Browse upcoming courses</h1>
+      <h1>Course Catalogue</h1>
     </div>
   </div>
 
-  <div class="container categories hide">
-    <nav class="browse-nav">
-      <ul class="d-flex browse-row">
-        <li class="browse-item course-nav-link course-nav-title">
-          <a href="{% url 'catalogue:live-course-list' %}">
-            <div>
-              <i class="material-icons">videocam</i>
-              <span>Live Classes</span>
-            </div>
-          </a>
-        </li>
-        <li class="browse-item course-nav-link course-nav-title">
-          <a href="{% url 'catalogue:on-demand-list' %}">
-            <div>
-              <i class="material-icons">ondemand_video</i>
-              <span>On Demand Classes</span>  
-            </div>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
   <div class="container no-padding adj-container">
-
     <div id="course-list" class="row">
       {% for object in object_list %}
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
