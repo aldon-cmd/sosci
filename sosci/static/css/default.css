@@ -3710,6 +3710,18 @@ span > .margin-right {
   font-size: 14px;
 }
 
+.icon-line-height {
+  line-height: 24px;
+}
+
+.nav-link .material-icons {
+  margin-right: 8px !important;
+}
+
+.button-content {
+  margin: 0 auto;
+}
+
 
 /*   display none properties      */
 
