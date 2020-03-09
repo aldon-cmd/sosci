@@ -28,10 +28,50 @@
             <p class="line-clamp overflow-visible">Fill in all the fields below, and when you're finshed, click the "Confirm & Pay" button to process your Debit or Credit card.</p>
           </div>
         </div>
-        <div class="payment-container pay-form-1">
-          <div>
-            
-            {% include "payment/partials/plugnpay_form.html" %}
+        <div class="payment-container pay-option">
+          <ul class="nav nav-pills nav-fill"  id="pills-tab" role="tablist">
+            <li class="nav-item pay-option-card">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Credit/Debit Card</a>
+            </li>
+            <li class="nav-item pay-option-transfer">
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Bank Transfer</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              {% include "payment/partials/plugnpay_form.html" %}
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div class="instructions-header">
+                <p><b>Transfer Instructions:  </b>Enter the information below as a beneficiary in your online banking account. Once completed, you can make direct payments for any of our courses.</p>
+              </div>  
+              <div class="bank-transfer-instructions">
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td>Account / Beneficiary Name</td>
+                      <td>Nesberry Technologies Limited</td>
+                    </tr>
+                    <tr>
+                      <td>Account Number</td>
+                      <td>1002270222</td>
+                    </tr>
+                    <tr>
+                      <td>Bank</td>
+                      <td>CIBC FirstCaribbean</td>
+                    </tr>
+                    <tr>
+                      <td>Branch</td>
+                      <td>1 King Street, Kingston</td>
+                    </tr>
+                     <tr>
+                      <td>Account Type</td>
+                      <td>Chequing</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div> 
