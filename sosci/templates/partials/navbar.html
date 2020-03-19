@@ -33,16 +33,6 @@
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-reactid="195"><path style="fill:#ffffff;" fill-rule="evenodd" clip-rule="evenodd" d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z" data-reactid="196"/></svg>
                 </i>
               </a>
-              <!--
-              <a class="btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="nav-create-course">
-                  <span>Create Course</span>
-                  <span class="dropdown-chevron">
-                    <i class="material-icons">keyboard_arrow_down</i>
-                  </span>
-                </div>
-              </a>
-              -->  
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
@@ -132,7 +122,11 @@
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
                   <i class="fas fa-user-plus"></i>
-                  <span>Invite Friends</span>
+                  <span>Create Group</span>
+                </a>
+                <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Manage Groups</span>
                 </a>
                 <a class="dropdown-item" href="{% url 'catalogue:course-create-form' %}">
                   <i class="fas fa-user-graduate"></i>
