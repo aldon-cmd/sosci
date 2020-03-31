@@ -99,7 +99,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.vouchers',
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
-
+    
     "post_office",
     'quiz',
     'multichoice',
@@ -277,7 +277,11 @@ LOGIN_REQUIRED_URLS = (
     r'^/catalogue/my-enrolled-courses/$',
     r'^/catalogue/my-created-courses/$',
     r'^/catalogue/course/create/$',
-    r'^/catalogue/live/course/create/$'
+    r'^/catalogue/live/course/create/$',
+    r'^/accounts/user-plan/list/$',
+    r'^/accounts/student/list/$'
+    r'^/accounts/student/invite/modal/$',
+    r'^/accounts/students/invite/modal/$'
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')

@@ -13,8 +13,8 @@
           <p>List View</p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 px-0 ">
-          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'instructor:individual-student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
-            Add student
+          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'customer:bulk-student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
+            Invite Students
           </button>
         </div>
       </div>
@@ -30,7 +30,6 @@
 
               <th scope="col">First</th>
               <th scope="col">Last</th>
-              <th scope="col">Course</th>
             </tr>
           </thead>
           <tbody>
@@ -38,9 +37,8 @@
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
             <tr>
 
-              <td>{{object.user.first_name}}</td>
-              <td>{{object.user.last_name}}</td>
-              <td>{{object.product.title}}</td>
+              <td>{{object.first_name}}</td>
+              <td>{{object.last_name}}</td>
             </tr>
 
       </div>
@@ -76,7 +74,7 @@
 </main>
 
 <div id="student-invite-modal" class="modal fade" tabindex="-1" role="dialog">
-{% include "customer/individual_student_invite_modal_form.html" with form=individual_student_invite_form %}
+{% include "customer/bulk_student_invite_modal_form.html" with form=bulk_student_invite_form %}
 </div>
 
 {% endblock content %}
@@ -95,7 +93,7 @@
 
     function get_success_response(responseText, statusText, xhr, $form){
 
-              window.location.replace("{% url 'instructor:student-list' %}");
+              window.location.replace("{% url 'customer:user-plan-list' %}");
           }
 
               function get_error_response(data){

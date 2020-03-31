@@ -4,7 +4,7 @@ from payment import forms
 from django.urls import reverse
 from urllib.parse import parse_qs
 from catalogue import models as catalogue_models
-from catalogue.utils import Course
+from catalogue.helpers import Course
 
 class SettlePlugnPayPaymentView(View):
     """

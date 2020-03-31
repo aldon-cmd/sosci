@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
-from customer.forms import CustomAuthenticationForm,EmailUserCreationForm, IndividualStudentInviteForm
+from customer.forms import CustomAuthenticationForm,EmailUserCreationForm, IndividualStudentInviteForm, BulkStudentInviteForm
 from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect,HttpResponse
@@ -20,14 +20,51 @@ from django.utils import timezone
 import hashlib, datetime, random
 from django.contrib.sites.shortcuts import get_current_site
 from customer.models import CommunicationEventType
+from customer.helpers import CSVUploader
 from customer.utils import create_email_activation_key
 from django.shortcuts import render
-from customer import mixins
 from django.urls import reverse_lazy
 from django.views import View
 from catalogue import models as catalogue_models
 from django.views.generic.list import ListView
 from custom_user import models as custom_user_models
+from customer.helpers import UserRegistration
+
+class UserPlanListView(ListView):
+    template_name = "customer/user_plan_list.html"
+    paginate_by = 10
+    model = custom_user_models.User
+
+    def get_context_data(self, **kwargs):
+        context = super(UserPlanListView, self).get_context_data(**kwargs)
+
+        context["bulk_student_invite_form"] = BulkStudentInviteForm()
+
+
+        return context  
+
+class BulkStudentInviteModalView(FormView):
+    form_class = BulkStudentInviteForm
+    template_name = 'customer/bulk_student_invite_modal_form.html'
+
+    def form_valid(self, form):
+        csv_file = self.request.FILES.get('csv_file')
+
+        try:
+          csvuploader = CSVUploader(csv_file) 
+        except ValueError as error:
+           messages.error(self.request, error.message)
+           form.add_error(None,error.message)
+           return self.form_invalid(form)
+
+        csvuploader.upload()
+        messages.success(self.request, 'Sucessfully added all users')        
+        return HttpResponse(status=200)        
+
+    def form_invalid(self, form):
+        response = super(BulkStudentInviteModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response    
 
 class StudentListView(ListView):
     template_name = "customer/student_list.html"
@@ -40,14 +77,14 @@ class StudentListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(StudentListView, self).get_context_data(**kwargs)
 
-        context["student_invite_form"] = IndividualStudentInviteForm()
+        context["individual_student_invite_form"] = IndividualStudentInviteForm()
 
 
         return context    
 
-class IndividualStudentInviteModalView(FormView,mixins.RegisterUserMixin):
+class IndividualStudentInviteModalView(FormView):
     form_class = IndividualStudentInviteForm
-    template_name = 'customer/student_invite_modal_form.html'
+    template_name = 'customer/individual_student_invite_modal_form.html'
 
     def get_form_kwargs(self):
         """This method is what injects forms with their keyword
@@ -58,7 +95,7 @@ class IndividualStudentInviteModalView(FormView,mixins.RegisterUserMixin):
         return kwargs
 
     def form_valid(self, form):
-        self.register_inactive_user(form)
+        UserRegistration().register_inactive_user(form)
         return HttpResponse(status=200)
 
     def form_invalid(self, form):
@@ -100,12 +137,12 @@ class LoginView(auth_views.LoginView):
         auth_login(self.request, form.get_user())
         return redirect('catalogue:my-course-list')
 
-class RegistrationModalView(mixins.RegisterUserMixin,FormView):
+class RegistrationModalView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/registration_modal.html'
 
     def form_valid(self, form):
-        self.register_user(form)
+        UserRegistration().register_user(form)
         return HttpResponse(status=200)
 
     def form_invalid(self, form):
@@ -113,12 +150,12 @@ class RegistrationModalView(mixins.RegisterUserMixin,FormView):
         response.status_code = 400
         return response
 
-class UserRegistrationView(mixins.RegisterUserMixin,FormView):
+class UserRegistrationView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/user_registration.html'
 
     def form_valid(self, form):
-        self.register_user(form)
+        UserRegistration().register_user(form)
         return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
 
 class ResendUserEmailConfirmationView(TemplateView):
@@ -139,7 +176,7 @@ class ResendUserEmailConfirmationView(TemplateView):
                  messages.error(request,"A user with that email does not exist")
                  return super(ConfirmUser, self).get(request, *args, **kwargs)              
             
-            mixins.RegisterUserMixin().send_confirmation_email(user, self.request)
+            UserRegistration().send_confirmation_email(user, self.request)
             return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
         return super(ConfirmUser, self).post(request, *args, **kwargs)
 

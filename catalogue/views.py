@@ -11,7 +11,7 @@ from django.urls import reverse
 from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
-from catalogue.utils import CatalogueCreator,Course
+from catalogue.helpers import CatalogueCreator,Course
 from catalogue import mixins
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured

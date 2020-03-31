@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views.generic.list import ListView
-from catalogue.utils import Course
+from catalogue.helpers import Course
 from catalogue import models as catalogue_models
 from django.views.generic import TemplateView
 from django.db.models import Count

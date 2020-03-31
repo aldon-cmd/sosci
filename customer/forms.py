@@ -10,7 +10,7 @@ from customer import models
 from custom_user import models as user_models
 from customer.utils import normalise_email
 from catalogue import models as catalogue_models
-
+from django.core.exceptions import ValidationError
 
 def generate_username():
     # Python 3 uses ascii_letters. If not available, fallback to letters
@@ -26,6 +26,10 @@ def generate_username():
     except user_models.User.DoesNotExist:
         return uname
 
+def file_size(value): # add this to some file where you can import it from
+    limit = 2 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('File too large. Size should not exceed 2 MiB.')
 
 class EmailUserCreationForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
@@ -99,6 +103,10 @@ class CustomAuthenticationForm(AuthenticationForm):
 
         self.fields['username'].widget.attrs.update({'placeholder':'Email'})
         self.fields['password'].widget.attrs.update({'placeholder':'Password'})
+
+
+class BulkStudentInviteForm(forms.Form):
+    csv_file = forms.FileField(required=True, validators=[file_size])
 
 class IndividualStudentInviteForm(forms.Form):
     email = forms.EmailField()

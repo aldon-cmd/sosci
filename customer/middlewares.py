@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse
-from catalogue.utils import Course
+from catalogue.helpers import Course
 from catalogue import models as catalogue_models
 
 class OwnerRequiredMiddleware(object):

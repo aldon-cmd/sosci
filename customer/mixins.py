@@ -2,8 +2,9 @@ from django.contrib.sites.shortcuts import get_current_site
 import hashlib, datetime, random
 from customer import models as customer_models
 from custom_user import models as custom_user_models
-from customer.utils import Dispatcher, create_email_activation_key
-from catalogue.utils import Course
+from customer.helpers import Dispatcher
+from customer.utils import create_email_activation_key
+from catalogue.helpers import Course
 
 class RegisterUserMixin(object):
 
