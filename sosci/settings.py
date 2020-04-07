@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from django.urls import reverse_lazy
-import dj_database_url
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -172,9 +168,26 @@ WSGI_APPLICATION = 'sosci.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
-
+if 'DB_NAME' in os.environ:
+    # Running the Docker image
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASS'],
+            'HOST': os.environ['DB_SERVICE'],
+            'PORT': os.environ['DB_PORT']
+        }
+    }
+else:
+    # Building the Docker image
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
