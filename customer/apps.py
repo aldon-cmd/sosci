@@ -1,5 +1,6 @@
 import oscar.apps.customer.apps as apps
 from django.conf.urls import url
+from django.urls import re_path
 
 class CustomerConfig(apps.CustomerConfig):
     name = 'customer'
@@ -13,6 +14,11 @@ class CustomerConfig(apps.CustomerConfig):
     def get_urls(self):        
 	    
 	    urls = [
+                   re_path(r'^user-plan/list/$', self.customer_views.UserPlanListView.as_view(), name='user-plan-list'),
+			       re_path(r'^students/invite/modal/$', self.customer_views.BulkStudentInviteModalView.as_view(), name='bulk-student-invite-modal'),				   
+			       re_path(r'^student/invite/modal/$', self.customer_views.IndividualStudentInviteModalView.as_view(), name='individual-student-invite-modal'),
+                   re_path(r'^student/list/$', self.customer_views.StudentListView.as_view(), name='student-list'),
+
 	                url(r'^login/$', self.customer_views.LoginView.as_view(),name='user-login'),
 	                url(r'^login/modal/(?P<course_id>\d+)/$', self.customer_views.LoginModalView.as_view(),name='login-modal'), 
 	                url(r'^logout/$', self.customer_views.LogoutView.as_view(),name='logout'),

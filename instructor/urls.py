@@ -7,7 +7,7 @@ from customer import views as customer_views
 app_name = 'instructor'
 
 urlpatterns = [
-       re_path(r'^student/invite/modal/$', customer_views.IndividualStudentInviteModalView.as_view(), name='student-invite-modal'),
+       re_path(r'^student/invite/modal/$', customer_views.IndividualStudentInviteModalView.as_view(), name='individual-student-invite-modal'),
         re_path(r'^course/update/(?P<course_id>\d+)/$', catalogue_views.CourseUpdateView.as_view(), name='course-update-form'),
         re_path(r'^live/course/update/(?P<course_id>\d+)/$', catalogue_views.LiveCourseUpdateView.as_view(), name='live-course-update-form'),
         re_path(r'^publish/course/(?P<course_id>\d+)/$', catalogue_views.PublishCourseView.as_view(), name='publish-course'),

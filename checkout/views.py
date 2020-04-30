@@ -16,7 +16,7 @@ from oscar.apps.checkout import exceptions
 from django.urls import reverse
 from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
-from catalogue.utils import Course
+from catalogue.helpers import Course
 
 class ThankYouView(views.ThankYouView):
     """

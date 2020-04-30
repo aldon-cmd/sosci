@@ -1,20 +1,34 @@
 # project setup
 
-install latest version of python  along with pip. add python to the path variable
+Before mounting the containers, you must create the postgres volume manually:
 
-install python 3.7.6. do not add python 3.7.6 to the path variable
+docker volume create --name=pgdata
 
-pip install virtualenvwrapper-win
+cd .
 
-mkvirtualenv vsosci --python C:\Python37\python.exe
+docker-compose up -d
 
-workon vsosci
+ssh into postgres container and run python manage.py migrate
 
-cd sosci.git
+navigate to localhost:80
 
-pip install -r requirements.txt
+cd docker-jitsi-meet
 
-python manage.py migrate
+docker-compose up -d
+
+navigate to https://localhost:8443
+
+# update docker image
+
+docker-compose build 
+
+docker-compose up -d 
+
+# reset database
+
+docker-compose down
+
+docker-compose up -d
 
 # custom migrations
 

@@ -3722,6 +3722,12 @@ span > .margin-right {
   margin: 0 auto;
 }
 
+#sosci-nav .dropdown-item.active, #sosci-nav .dropdown-item:active {
+  color: #404040;
+  text-decoration: none;
+  background-color: #f2f2f2;
+}
+
 
 /*   display none properties      */
 

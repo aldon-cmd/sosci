@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<main id="student-content">
+  <div class="top-header-container">
+    <div class="top-header">
+      <div class="top-header-content d-flex">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 px-0 d-flex title-student">
+          <span>Manage Students</span>
+          <span class="divider">|</span>
+          <p>List View</p>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 px-0 ">
+          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'customer:bulk-student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
+            Invite Students
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    
+    <div id="student-list" class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      	<table class="table table-bordered">
+          <thead>
+            <tr>
+
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+            </tr>
+          </thead>
+          <tbody>
+      {% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
+            <tr>
+
+              <td>{{object.first_name}}</td>
+              <td>{{object.last_name}}</td>
+            </tr>
+
+      </div>
+      {% empty %}
+            <tr>
+
+              <td>No students yet</td>
+            </tr>
+      {% endfor %}              
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  </div>
+</main>
+
+<div id="student-invite-modal" class="modal fade" tabindex="-1" role="dialog">
+{% include "customer/bulk_student_invite_modal_form.html" with form=bulk_student_invite_form %}
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
+    <script>
+
+  $('#student-invite-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_success_response,
+      error: get_error_response       
+    });
+
+    function get_success_response(responseText, statusText, xhr, $form){
+
+              window.location.replace("{% url 'customer:user-plan-list' %}");
+          }
+
+              function get_error_response(data){
+
+              $("#authentication-modal").html(data.responseText);
+          }
+        
+</script>
+
+<script>
+    $(document).on('click', ".open-student-invite-modal", function(event) {
+        event.preventDefault();
+        open_student_invite_modal($(this).attr('data-url'));
+
+
+    });
+
+    function open_student_invite_modal(url) {
+
+        $('#student-invite-modal').load(url, function() {
+
+            $('#student-invite-modal').modal('show');
+
+
+        });
+
+
+    }
+</script>
+{% endblock extrascripts %}

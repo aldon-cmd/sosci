@@ -13,7 +13,7 @@
           <p>List View</p>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 px-0 ">
-          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'instructor:student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
+          <button type="button" class="btn open-student-invite-modal" data-url="{% url 'instructor:individual-student-invite-modal' %}" data-toggle="modal" data-target="#authentication-modal">
             Add student
           </button>
         </div>
@@ -76,7 +76,7 @@
 </main>
 
 <div id="student-invite-modal" class="modal fade" tabindex="-1" role="dialog">
-{% include "customer/student_invite_modal_form.html" with form=student_invite_form %}
+{% include "customer/individual_student_invite_modal_form.html" with form=individual_student_invite_form %}
 </div>
 
 {% endblock content %}
