@@ -31,13 +31,17 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
         <div class="side-box">
           <div class="side-box-header">
-            <span>Behavioural Economics and the Modern Economy</span> 
+            <span>{{course.title}}</span> 
           </div>
 
           <div id="participants-panel" class="side-box-content">
             <h4 class="">Participants</h4>
             <ul id="participants-list">
-            <li><div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div><i class="fas fa-circle"></i></li>
+              <li>
+                <div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div>
+                <i class="fas fa-circle"></i>
+                <i class="far fa-hand-paper"></i>
+              </li>
             </ul>
           </div>
 
@@ -60,33 +64,22 @@
                 <div class="">
                   <div class="video-nav-list">
                     <div>
-                      <a class="dot-control .on icon-btn" href="#" id="btn-toggle-video" title='Camera On'>
+                      <a class="dot-control .on icon-btn" href="#" id="btn-toggle-video" title='Camera'>
                         <i class="fas fa-video"></i>
                       </a>
-                      <p>Camera On</p>
+                      <p>Camera</p>
                     </div>
-                    <div>
-                      <a class="dot-control .off icon-btn" href="#" id="button-leave" title='Leave Room'>
-                        <i class="fas fa-video-slash"></i>
-                      </a>
-                      <p>Camera Off</p>
-                    </div>  
+ 
                     <div>
                       <a class="dot-control icon-btn" href="#" id="btn-share-screen" title='Share Screen'>
-                        <i class="fas fa-desktop"></i>
+                        <i class="fas fa-eye"></i>
                       </a>
                       <p>Share Screen</p>
                     </div>
                   </div>
                   <div class="video-nav-list">
                     <div>
-                      <a class="dot-control icon-btn" href="#" id="btn-unshare-screen" title='UnShare Screen' style="display:none">
-                        <i class="fas fa-desktop"></i>
-                      </a>
-                      <p>Unshare Screen</p>
-                    </div>
-                    <div>
-                      <a class="dot-control icon-btn" href="#" id="btn-toggle-audio" title='Mute Mic'>
+                      <a class="dot-control icon-btn" href="#" id="btn-toggle-audio" title='Mic'>
                         <i class="fas fa-microphone"></i>
                       </a>
                       <p>Mic</p>
@@ -159,7 +152,7 @@
 
 {% block extrascripts %}
 {{ block.super }}
-<script src="{% static 'js/video/sosci.843907d1b0de9509e67f.js' %}"></script>
+<script src="{% static 'js/video/sosci.3674573f2659353cff51.js' %}"></script>
 <script type="text/javascript">
 // using jQuery
 var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
@@ -182,7 +175,7 @@ $.ajaxSetup({
 
 {% autoescape off %}
 <script>
-Sosci.init("{{identity}}","{{host_identity}}","{{token}}");
+Sosci.init("{{identity}}","{{host_identity}}","{{token}}","{{view.kwargs.course_id}}");
 </script>
 {% endautoescape %}
 

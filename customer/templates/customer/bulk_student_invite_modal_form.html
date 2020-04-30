@@ -1,0 +1,43 @@
+  {% load widget_tweaks %}
+
+  <div class="modal-dialog modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="add-employee-steps bl-7 col-md-12 padding-space">
+          <div class="col-md-8 padding-space">
+            <h1 class="type-heading-3 bl-6">Upload Employees</h1>
+            <span class="text-center">Select your clients from the list below.</span>
+          </div>
+          <div class="col-md-4 padding-space text-right">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <a href="#" class="text-center bl-9">Download csv template</a>
+          </div>
+      </div>
+
+  <form action="{% url 'customer:bulk-student-invite-modal' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+  {% csrf_token %}
+    <div class="csv_upload">
+        {% include 'partials/nolabel_form_field.html' with field=form.csv_file  %}                  
+    </div>
+    <div class="csv_btn">                    
+        <div class="col-md-12 padding-space text-right" style="margin-bottom:10px;">
+            <button type="submit class="btn btn-primary">
+              <i class="fa fa-upload" aria-hidden="true"></i>
+               <span>Upload</span>
+            </button>
+        </div> 
+
+    </div>
+  </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+

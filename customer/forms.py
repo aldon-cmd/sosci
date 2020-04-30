@@ -9,6 +9,8 @@ from django.contrib.auth import password_validation
 from customer import models
 from custom_user import models as user_models
 from customer.utils import normalise_email
+from catalogue import models as catalogue_models
+from django.core.exceptions import ValidationError
 
 def generate_username():
     # Python 3 uses ascii_letters. If not available, fallback to letters
@@ -24,6 +26,10 @@ def generate_username():
     except user_models.User.DoesNotExist:
         return uname
 
+def file_size(value): # add this to some file where you can import it from
+    limit = 2 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('File too large. Size should not exceed 2 MiB.')
 
 class EmailUserCreationForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
@@ -36,11 +42,17 @@ class EmailUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = user_models.User
-        fields = ('email','userrole','first_name','last_name',)
+        fields = ('email','first_name','last_name',)
 
     def __init__(self, host=None, *args, **kwargs):
         self.host = host
         super(EmailUserCreationForm, self).__init__(*args, **kwargs)
+
+    def clean_first_name(self):
+        return self.cleaned_data['first_name'].title()
+
+    def clean_last_name(self):
+        return self.cleaned_data['last_name'].title()
 
     def clean_email(self):
         """
@@ -73,7 +85,7 @@ class EmailUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(EmailUserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
-        user.is_active = False # not active until they open activation link
+        # user.is_active = False # not active until they open activation link
 
         if 'username' in [f.name for f in user_models.User._meta.fields]:
             user.username = generate_username()
@@ -90,4 +102,26 @@ class CustomAuthenticationForm(AuthenticationForm):
             self.fields[field].widget.attrs.update({'class': 'form-control'})
 
         self.fields['username'].widget.attrs.update({'placeholder':'Email'})
-        self.fields['password'].widget.attrs.update({'placeholder':'Password'})            
+        self.fields['password'].widget.attrs.update({'placeholder':'Password'})
+
+
+class BulkStudentInviteForm(forms.Form):
+    csv_file = forms.FileField(required=True, validators=[file_size])
+
+class IndividualStudentInviteForm(forms.Form):
+    email = forms.EmailField()
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)    
+    
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user",None)
+        super(IndividualStudentInviteForm, self).__init__(*args, **kwargs)
+        course_queryset = catalogue_models.Product.objects.filter(user=user)
+        self.fields['course'] = forms.ModelChoiceField(queryset=course_queryset)
+
+    def clean_first_name(self):
+        return self.cleaned_data['first_name'].title()
+
+    def clean_last_name(self):
+        return self.cleaned_data['last_name'].title()                     

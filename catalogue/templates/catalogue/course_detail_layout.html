@@ -8,24 +8,45 @@
 {{ block.super }}
 <script src="{% static 'js/jquery.form.min-4.2.2.js' %}"></script>
 
-<script>
-    $(document).on('click', ".open-login-modal", function(event) {
-        event.preventDefault();
-        open_login_modal($(this).attr('data-url'));
+  <script>
+    function get_login_success_response(responseText, statusText, xhr, $form){
+
+              window.location.replace("{% url 'checkout:payment-details' view.kwargs.course_id %}");
+          }
+
+    function get_login_error_response(data){
+
+              $("#authentication-modal").html(data.responseText);
+
+          }
 
 
+function open_registration_modal(url){
+
+    $('#authentication-modal').load(url,function(){
+
+        $('#authentication-modal').modal('show');
+        
+        
     });
 
-    function open_login_modal(url) {
+    
+}
 
-        $('#authentication-modal').load(url, function() {
+    $('#login-form')
+    .ajaxForm({
+      success : get_login_success_response,
+      error: get_login_error_response       
+    });
 
-            $('#authentication-modal').modal('show');
 
+    $(document).on('click',".open-registration-modal", function (event) {
+    event.preventDefault();
+    open_registration_modal($(this).attr('href'));
 
-        });
-
-
-    }
+    
+  });  
+           
 </script>
+
 {% endblock extrascripts %}

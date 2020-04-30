@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
-from customer.forms import CustomAuthenticationForm,EmailUserCreationForm
+from customer.forms import CustomAuthenticationForm,EmailUserCreationForm, IndividualStudentInviteForm, BulkStudentInviteForm
 from django.shortcuts import redirect
 from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect,HttpResponse
@@ -20,10 +20,88 @@ from django.utils import timezone
 import hashlib, datetime, random
 from django.contrib.sites.shortcuts import get_current_site
 from customer.models import CommunicationEventType
-from customer.utils import Dispatcher
+from customer.helpers import CSVUploader
+from customer.utils import create_email_activation_key
 from django.shortcuts import render
-from customer import mixins
 from django.urls import reverse_lazy
+from django.views import View
+from catalogue import models as catalogue_models
+from django.views.generic.list import ListView
+from custom_user import models as custom_user_models
+from customer.helpers import UserRegistration
+
+class UserPlanListView(ListView):
+    template_name = "customer/user_plan_list.html"
+    paginate_by = 10
+    model = custom_user_models.User
+
+    def get_context_data(self, **kwargs):
+        context = super(UserPlanListView, self).get_context_data(**kwargs)
+
+        context["bulk_student_invite_form"] = BulkStudentInviteForm()
+
+
+        return context  
+
+class BulkStudentInviteModalView(FormView):
+    form_class = BulkStudentInviteForm
+    template_name = 'customer/bulk_student_invite_modal_form.html'
+
+    def form_valid(self, form):
+        csv_file = self.request.FILES.get('csv_file')
+
+        try:
+          csvuploader = CSVUploader(csv_file) 
+        except ValueError as error:
+           messages.error(self.request, error.message)
+           form.add_error(None,error.message)
+           return self.form_invalid(form)
+
+        csvuploader.upload()
+        messages.success(self.request, 'Sucessfully added all users')        
+        return HttpResponse(status=200)        
+
+    def form_invalid(self, form):
+        response = super(BulkStudentInviteModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response    
+
+class StudentListView(ListView):
+    template_name = "customer/student_list.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return catalogue_models.Enrollment.objects.select_related("user","product").filter(product__user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(StudentListView, self).get_context_data(**kwargs)
+
+        context["individual_student_invite_form"] = IndividualStudentInviteForm()
+
+
+        return context    
+
+class IndividualStudentInviteModalView(FormView):
+    form_class = IndividualStudentInviteForm
+    template_name = 'customer/individual_student_invite_modal_form.html'
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(IndividualStudentInviteModalView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        UserRegistration().register_inactive_user(form)
+        return HttpResponse(status=200)
+
+    def form_invalid(self, form):
+        response = super(IndividualStudentInviteModalView, self).form_invalid(form)
+        response.status_code = 400
+        return response
 
 class LogoutView(auth_views.LogoutView):
 
@@ -59,12 +137,12 @@ class LoginView(auth_views.LoginView):
         auth_login(self.request, form.get_user())
         return redirect('catalogue:my-course-list')
 
-class RegistrationModalView(mixins.RegisterUserMixin,FormView):
+class RegistrationModalView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/registration_modal.html'
 
     def form_valid(self, form):
-        self.register_user(form)
+        UserRegistration().register_user(form)
         return HttpResponse(status=200)
 
     def form_invalid(self, form):
@@ -72,75 +150,22 @@ class RegistrationModalView(mixins.RegisterUserMixin,FormView):
         response.status_code = 400
         return response
 
-class UserRegistrationView(mixins.RegisterUserMixin,FormView):
+class UserRegistrationView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/user_registration.html'
 
     def form_valid(self, form):
-        self.register_user(form)
-        return HttpResponseRedirect(reverse('customer:email-confirm-user'))
+        UserRegistration().register_user(form)
+        return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
 
-
-class ConfirmUser(TemplateView):
-    template_name = 'customer/confirm_user.html'
-
-    def get(self, request, *args, **kwargs):
-        ctx = self.get_context_data()
-        #check if user is already logged in and if he is redirect him to some other url, e.g. home
-        # if request.user.is_authenticated:
-        #     return HttpResponseRedirect(reverse('index'))
-
-        # check if there is UserProfile which matches the activation key (if not then display 404)
-
-        if 'activation_key' in self.kwargs:
-            
-            try:
-                user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
-
-                if user.is_active == True:
-                   messages.success(request,"This user account has already been activated")
-                   return HttpResponseRedirect(reverse('catalogue:course-list'))
-
-                #check if the activation key has expired, if it hase then render confirm_expired.html
-                if user.key_expires < timezone.now():
-                    email = user.email
-                    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
-                    activation_key = hashlib.sha1(salt+email).hexdigest()            
-                    key_expires = datetime.datetime.today() + datetime.timedelta(2)
-
-                    user.activation_key = activation_key
-                    user.key_expires = key_expires
-                    user.save()
-                    messages.error(request,"This link has expired. Please try sending the confirmation email again")
-
-                    return super(ConfirmUser, self).get(request, *args, **kwargs)
-                user.is_active = True
-                user.save()
-
-                #have to set backend before login
-                user.backend = settings.AUTHENTICATION_BACKENDS[0]
-                login(self.request, user)
-                return HttpResponseRedirect(reverse('catalogue:course-list'))
-            except Http404:
-
-                 return super(ConfirmUser, self).get(request, *args, **kwargs)
-
-        if 'resend' in self.kwargs:
-            return super(ConfirmUser, self).get(request, *args, **kwargs)
-
-
-        
-        #a resend form is displayed when a response is returned before this check_email variable is set
-        ctx['check_email'] = True
-        return render(self.request, self.template_name,ctx)
-
+class ResendUserEmailConfirmationView(TemplateView):
+    template_name = 'customer/resend_user_confirmation_email.html'
 
     def post(self, request, *args, **kwargs):
         action = self.request.POST.get('action', None)
         if action == 'resend':
-            email = self.request.POST.get('email', None)
-            salt = hashlib.sha1(str(random.random())).hexdigest()[:5]            
-            activation_key = hashlib.sha1(salt+email).hexdigest()            
+            email = self.request.POST.get('email', None)          
+            activation_key = create_email_activation_key(email)            
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
             try:
                 user = get_object_or_404(get_user_model(), email=email)
@@ -151,9 +176,48 @@ class ConfirmUser(TemplateView):
                  messages.error(request,"A user with that email does not exist")
                  return super(ConfirmUser, self).get(request, *args, **kwargs)              
             
-            mixins.RegisterUserMixin().send_confirmation_email(user, self.request)
+            UserRegistration().send_confirmation_email(user, self.request)
             return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
         return super(ConfirmUser, self).post(request, *args, **kwargs)
+
+class UserEmailConfirmationSentView(TemplateView):
+    template_name = 'customer/user_confirmation_email_sent.html'    
+
+class ConfirmUser(View):
+
+    def get(self, request, *args, **kwargs):
+            
+        try:
+            user = get_object_or_404(get_user_model(), activation_key=self.kwargs.get('activation_key',''))
+
+            if user.is_active == True:
+               messages.success(request,"This user account has already been activated")
+               return HttpResponseRedirect(reverse('catalogue:course-list'))
+
+            #check if the activation key has expired, if it hase then render confirm_expired.html
+            if user.key_expires < timezone.now():          
+                activation_key = create_email_activation_key(user.email)            
+                key_expires = datetime.datetime.today() + datetime.timedelta(2)
+
+                user.activation_key = activation_key
+                user.key_expires = key_expires
+                user.save()
+                messages.error(request,"This link has expired. Please try sending the confirmation email again")
+
+                return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
+            user.is_active = True
+            user.save()
+
+            #have to set backend before login
+            user.backend = settings.AUTHENTICATION_BACKENDS[0]
+            login(self.request, user)
+            return HttpResponseRedirect(reverse('catalogue:course-list'))
+        except Http404:
+
+             return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
+
+
+        return HttpResponseRedirect(reverse('customer:resend-email-confirmation'))
 
 class ConfirmationSuccess(TemplateView):
     template_name = 'customer/confirmation_success.html'            

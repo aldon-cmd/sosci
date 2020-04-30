@@ -14,7 +14,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from catalogue.utils import Course
+from catalogue.helpers import Course
 from django import http
 
 class VideoPlayerView(TemplateView):
@@ -85,6 +85,8 @@ class VimeoVideoUploadAttemptView(View):
                   }
 
         data = {}
+
+        data['name'] = post_data.get("name","").title()
 
         data['upload'] = {
                 'approach': 'tus',

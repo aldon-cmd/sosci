@@ -12,7 +12,10 @@ class SosciShopConfig(config.Shop):
     def get_urls(self):
     	
         urls = [
-            url(r'^$', self.shop_views.LandingView.as_view(), name='home'),
+            url(r'^welcome1/$', self.shop_views.Welcome1View.as_view(), name='welcome1'),
+            url(r'^welcome2$', self.shop_views.Welcome2View.as_view(), name='welcome2'),
+            url(r'^recent/$', self.shop_views.RecentLandingView.as_view(), name='recent-courses'),
+            url(r'^$', self.shop_views.PopularLandingView.as_view(), name='home'),
         ]
 
         urls += super().get_urls()

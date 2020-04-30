@@ -1,7 +1,7 @@
 .env
 npm/
-public/static/
-public/media/cache/
+public/static/*
+public/media/*
 .vscode/
 
 node_modules/

@@ -13,47 +13,54 @@
                 <div class="box-part text-left">
                     <div class="title title-details">
                         <h3>{{course.title}}</h3>
+                        <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class="d-flex">
+                                <i class="material-icons">payment</i>
+                                <p class="margin-right">Tuition:</p><p>{{ session.price.incl_tax|currency:session.price.currency }}</p>
+                            </span>
+                        </div>
                     </div>
-                    <div class="course-detail-info">
-                        <span>Created by:</span>
-                        <span class="publisher">Rafer Johnson</span>
+                    <div class="d-flex ">
+                        <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class=" d-flex">
+                                <p class="create-header">Instructor:</i>
+                                <p>{{course.user.first_name}} {{course.user.last_name}}</p>
+                            </span>
+                            {% if request.user.is_authenticated and request.user.userrole.name == "Instructor" %}
+                            <a class="btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% else %}
+                            <a class="hide btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 <div class="description description-detail">
-                    <h3 class="subheading">Course Description</h3>
+                    <h3 class="subheading hide">Course Description</h3>
                     <p>{{course.description|safe}} </p>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding buy-btn-1">
-            <div class="p-3">
+            <div class="checkout-section">
                 {% if request.user.is_authenticated == True %}
 
                 {% if is_enrolled == True %}
                 <a href="{% url 'video:video-player' view.kwargs.course_id %}">
-                    <div class="enroll-btn">
-                        <div class="enroll-btn-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="enroll-btn-text-wrap">
-                            <div class="enroll-btn-text">Watch Now</div>
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Watch Now</span>
+                            </div>
                         </div>
                     </div>
                 </a>
                 {% else %}
                 <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
-                    <div class="enroll-btn">
-                        <div class="enroll-btn-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="enroll-btn-text-wrap">
-                            <div>
-                                <div class="cost">
-                                    <span>Buy for</span>
-                                    <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
-                                </div>
-                                <div class="enroll-btn-text">Enroll in this course</div>
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Enroll in this course</span>
                             </div>
                         </div>
                     </div>
@@ -61,34 +68,76 @@
                 {% endif %}
 
                 {% else %}
-                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' view.kwargs.course_id %}" data-toggle="modal" data-target="#login-modal">
-                    <div class="enroll-btn-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="enroll-btn-text-wrap">
-                        <div>
-                            <div class="cost">
-                                <span>Buy for</span>
-                                <span>{{ session.price.incl_tax|currency:session.price.currency }}</span>
+                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' view.kwargs.course_id %}" data-toggle="modal" data-target="#authentication-modal">
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Enroll in this course</span>
                             </div>
-                            <div class="enroll-btn-text">Enroll in this course</div>
                         </div>
                     </div>
                 </div>
                 {% endif %}
             </div>
+
+            <div class="checkout-section">
+                <div class="course-detail-section course-detail-title-info col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">calendar_today</i>
+                      <span>Start Date</span>
+                    </div>
+                    <div class="d-flex side-content">
+                      {% if course.product_class.name == "Live" %}  
+                      <p>{{course.start_date}}</p>
+                      {% else %}
+                      <p>Available Now</p>
+                      {% endif %}
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">access_time</i>
+                      <span>Class Time</span>
+                    </div>
+                    <div class="d-flex side-content">   
+                      {% if course.product_class.name == "Live" %}  
+                      <p>{{course.start_time}}</p><span class="to">to</span><p>{{course.end_time}}</p>
+                      {% else %}
+                      <p>Available Now</p>
+                      {% endif %}                          
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">timer</i>
+                      <span>Credit Hours</span>
+                    </div>
+                    <div class="side-content d-flex">
+                      <p class="margin-right">{{course.credit_hour}}</p></span><p>CPD Hours</p >
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">school</i>
+                      <span>Provider</span>
+                    </div>
+                    <div class="side-content">
+                      <p>{{course.provider}}</p>
+                    </div>
+                  </article>
+                </div>
+            </div> 
         </div>
 
         <div id="course-content" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
             <div class="p-3">
-                <h3 class="subheading">Course Content</h3>
                 <table class="course-list">
                     <tbody>
                         {% for module in course.coursemodules.all %}
                         <tr>
                             <td class="course-list-count">{{ forloop.counter }}</td>
                             <td class="course-list-title">{{module.name}}</td>
-                            <td class="course-list-duration">{{module.duration}}</td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -104,6 +153,7 @@
     </div>
 </div>
 
-<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog"></div>
-
+<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog">
+{% include "customer/login_modal.html" with form=login_form %}
+</div>
 {% endblock content %}

@@ -1,0 +1,201 @@
+{% extends "catalogue/course_detail_layout.html" %}
+{% load static widget_tweaks %}
+{% load currency_filters %}
+{% load purchase_info_tags %}
+{% load is_course_owner %}
+
+{% block content %}
+{% purchase_info_for_product request course as session %}
+<div class="container">
+    <div class="row course-detail">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+            <div class="p-3">
+                <div class="box-part text-left">
+                    <div class="title title-details">
+                        <h3>{{course.title}}</h3>
+                        <div class="course-detail-title-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class="d-flex">
+                                <i class="material-icons">payment</i>
+                                <p class="margin-right">Tuition:</p><p>{{ session.price.incl_tax|currency:session.price.currency }}</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex ">
+                        <div class="course-detail-info d-flex col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                            <span class=" d-flex">
+                                <p class="create-header">Instructor:</i>
+                                <p>{{course.user.first_name}} {{course.user.last_name}}</p>
+                            </span>
+                            {% if request.user.is_authenticated and request.user.userrole.name == "Instructor" %}
+                            <a class="btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% else %}
+                            <a class="hide btn btn-secondary" href="{% url 'instructor:course-update-form' view.kwargs.course_id %}" role="button">Edit Course</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="description description-detail">
+                    <h3 class="subheading hide">Course Description</h3>
+                    <p>{{course.description|safe}} </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding buy-btn-1">
+            <div class="checkout-section">
+                {% if request.user.is_authenticated == True %}
+
+                {% if is_enrolled == True %}
+                <a href="{% url 'video:video-player' view.kwargs.course_id %}">
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Watch Now</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                <a href="{% url 'checkout:payment-details' view.kwargs.course_id %}">
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Enroll in this course</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+
+                {% else %}
+                <div href="" class="enroll-btn open-login-modal" data-url="{% url 'customer:login-modal' view.kwargs.course_id %}" data-toggle="modal" data-target="#authentication-modal">
+                    <div class="purchase-btn">
+                        <div class="purchase-btn-icon">
+                            <div class="text-center">
+                                <span>Enroll in this course</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="checkout-section">
+                <div class="course-detail-section course-detail-title-info col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">calendar_today</i>
+                      <span>Start Date</span>
+                    </div>
+                    <div class="d-flex side-content">
+                      {% if course.product_class.name == "Live" %}  
+                      <p>{{course.start_date}}</p>
+                      {% else %}
+                      <p>Available Now</p>
+                      {% endif %}
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">access_time</i>
+                      <span>Class Time</span>
+                    </div>
+                    <div class="d-flex side-content">   
+                      {% if course.product_class.name == "Live" %}  
+                      <p>{{course.start_time}}</p><span class="to">to</span><p>{{course.end_time}}</p>
+                      {% else %}
+                      <p>Available Now</p>
+                      {% endif %}                          
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">timer</i>
+                      <span>Credit Hours</span>
+                    </div>
+                    <div class="side-content d-flex">
+                      <p class="margin-right">{{course.credit_hour}}</p></span><p>CPD Hours</p >
+                    </div>
+                  </article>
+                  <article>
+                    <div class="d-flex header-section">
+                      <i class="material-icons">school</i>
+                      <span>Provider</span>
+                    </div>
+                    <div class="side-content">
+                      <p>{{course.provider}}</p>
+                    </div>
+                  </article>
+                </div>
+            </div> 
+        </div>
+
+        <div id="course-content" class="col-lg-8 col-md-8 col-sm-8 col-xs-12 no-padding">
+            <div class="p-3">
+                <table class="course-list">
+                    <tbody>
+                        {% for module in course.coursemodules.all %}
+                        <tr>
+                            <td class="course-list-count">{{ forloop.counter }}</td>
+                            <td class="course-list-title">{{module.name}}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td></td>
+                            <td>No modules yet.</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="authentication-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-box" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="login-form" method="post" action="{% url 'customer:login-modal' view.kwargs.course_id %}" novalidate>
+          {% csrf_token %} {{ login_form.non_field_errors }}
+          <div class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width grid-col-top remove-padding n1">
+            <div class="input-select_select">
+              {{ login_form.username }} {{ login_form.username.errors }}
+            </div>
+          </div>
+          <div class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width">
+            <div class="input-select_select">
+              {{ login_form.password }} {{ login_form.password.errors }}
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 d-flex option-box">
+            <span class="signup-today">
+               <a href="{% url 'customer:password_reset' %}">Forgot Your Password?</a>
+            </span>
+          </div>
+          <div id="save-btn" class="col-lg-12 col-md-12 col-sm-12">
+            <button type="submit" class=" enroll-btn btn btn-color btn-xtra-large btn-block panel-btn text-center">Submit</button>
+            <div class="login-footer">
+              <span class="signup-today hide">
+                 <a href="{% url 'customer:resend-email-confirmation' %}">Resend Confirmation Email?</a>
+              </span>
+              <span class="signup-today">
+                <span>If you do not have an account</span>
+                 <a class="open-registration-modal" href="{% url 'customer:registration-modal' view.kwargs.course_id %}">Sign up here</a>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

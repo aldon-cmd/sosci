@@ -1,28 +1,44 @@
 # project setup
 
-install latest version of python  along with pip. add python to the path variable
+Before mounting the containers, you must create the postgres volume manually:
 
-install python 3.7.6. do not add python 3.7.6 to the path variable
+docker volume create --name=pgdata
 
-pip install virtualenvwrapper-win
+cd .
 
-mkvirtualenv vsosci --python C:\Python37\python.exe
+docker-compose up -d
 
-workon vsosci
+ssh into postgres container and run python manage.py migrate
 
-cd sosci.git
+navigate to localhost:80
 
-pip install -r requirements.txt
+cd docker-jitsi-meet
 
-python manage.py migrate
+docker-compose up -d
+
+navigate to https://localhost:8443
+
+# update docker image
+
+docker-compose build 
+
+docker-compose up -d 
+
+# reset database
+
+docker-compose down
+
+docker-compose up -d
 
 # custom migrations
 
-0020_auto_20191221_1832.py . creates default product classes
+catalogue/migrations/0020_auto_20191221_1832.py . creates default product classes
 
-0003_auto_20191117_1529.py .  creates user roles
+custom_user/migrations/0003_auto_20191117_1529.py .  creates user roles
 
-0006_auto_20191223_2042.py . creates the default partner
+partner/migrations/0006_auto_20191223_2042.py . creates the default partner
+
+core/migrations/0001_initial.py . sets the domain of the website
 
 # create and run empty migration
 
@@ -34,7 +50,7 @@ python manage.py migrate
 
 cd sosci.git/livestream/twilio
 
-npm run build
+npm run dev-build
 
 # steps for creating a page
 
@@ -49,3 +65,25 @@ Create the url that points to the class in the app.py file
 
 Copy the course_publish template, and make your modifications. 
 
+# Bank transfer process
+
+-Client transfer instructions
+Select email
+
+Account/Beneficiary Name: Nesberry Technologies Limited
+Account Number: 1002270222
+Bank: CIBC FirstCaribbean
+Branch: 1 King Street, Kingston
+Account Type: Chequing
+
+Note: When transferring funds within Jamaica, Bank/Branch code and Swift number are not required
+
+
+- Client input fields
+Name on account - Rafer Johnson
+Bank - FGB (dropdown)
+Transaction reference number - 12345678
+Transaction date/time - March 15, 2020, 12:05pm
+Transfer amount: $12,500
+
+Submit button

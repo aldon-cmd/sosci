@@ -1,82 +1,77 @@
 from django.contrib.sites.shortcuts import get_current_site
-# from oscar.core.loading import get_model
-from oscar.apps.customer.signals import user_registered
-# from oscar.core.loading import get_class
-# from oscar.core.compat import get_user_model
 import hashlib, datetime, random
-from customer.models import CommunicationEventType
-from customer.utils import Dispatcher
-
-# User = get_user_model()
-# CommunicationEventType = get_model('customer', 'CommunicationEventType')
-# Dispatcher = get_class('customer.utils', 'Dispatcher')
-
+from customer import models as customer_models
+from custom_user import models as custom_user_models
+from customer.helpers import Dispatcher
+from customer.utils import create_email_activation_key
+from catalogue.helpers import Course
 
 class RegisterUserMixin(object):
-    communication_type_code = 'REGISTRATION'
 
     def register_user(self, form):
         """
         Create a user instance and send a new registration email (if configured
         to).
         """
-        email = form.cleaned_data['email']
-        salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]            
-        activation_key = hashlib.sha1((salt+email).encode('utf-8')).hexdigest()            
+        email = form.cleaned_data['email']           
+        activation_key = create_email_activation_key(email)           
         key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
         user = form.save(commit=False)
+        user.userrole = custom_user_models.UserRole.objects.filter(name="Student").first()
         user.activation_key = activation_key
         user.key_expires = key_expires
         user.save()
 
-        # Raise signal robustly (we don't want exceptions to crash the request
-        # handling).
-        # user_registered.send_robust(
-        #     sender=self, request=self.request, user=user)
 
         self.send_confirmation_email(user,self.request)
         
-        # if getattr(settings, 'OSCAR_SEND_REGISTRATION_EMAIL', True):
-        #     self.send_registration_email(user)
+        return user
 
-        # We have to authenticate before login
-        # try:
-        #     user = authenticate(
-        #         username=user.email,
-        #         password=form.cleaned_data['password1'])
-        # except User.MultipleObjectsReturned:
-        #     # Handle race condition where the registration request is made
-        #     # multiple times in quick succession.  This leads to both requests
-        #     # passing the uniqueness check and creating users (as the first one
-        #     # hasn't committed when the second one runs the check).  We retain
-        #     # the first one and delete the dupes.
-        #     users = User.objects.filter(email=user.email)
-        #     user = users[0]
-        #     for u in users[1:]:
-        #         u.delete()
+    def get_or_create_student(self,form):
 
-        # auth_login(self.request, user)
+        email = form.cleaned_data.pop('email')
+        password = None
+        user = None
+
+        if not custom_user_models.User.objects.filter(email=email).exists():
+            password = custom_user_models.User.objects.make_random_password(length=6)
+            user = custom_user_models.User.objects.create_user(
+                            email,
+                            password,
+                            **form.cleaned_data
+                        )
+            self.send_registration_email(user,self.request)
+        else:
+            user = custom_user_models.User.objects.filter(email=email).first()
+            self.send_registration_email(user,self.request)
 
         return user
+
+    def register_inactive_user(self,form):
+
+        course_id = form.cleaned_data.pop('course')
+        student = self.get_or_create_student(form)
+
+        Course().enroll(student,course_id)
 
     def send_confirmation_email(self, user, request):
         code = "CONFIRMATION"
         ctx = {'user': user,
                'activation_key' : user.activation_key,
                'site': get_current_site(request)}
-        messages = CommunicationEventType.objects.get_and_render(
+        messages = customer_models.CommunicationEventType.objects.get_and_render(
             code, ctx)
         if messages and messages['body']:
             Dispatcher().dispatch_user_messages(user, messages)
 
 
 
-    def send_registration_email(self, user):
-        code = self.communication_type_code
+    def send_registration_email(self, user,request):
+        code = 'REGISTRATION'
         ctx = {'user': user,
                'site': get_current_site(self.request)}
-        messages = CommunicationEventType.objects.get_and_render(
+        messages = customer_models.CommunicationEventType.objects.get_and_render(
             code, ctx)
         if messages and messages['body']:
             Dispatcher().dispatch_user_messages(user, messages)

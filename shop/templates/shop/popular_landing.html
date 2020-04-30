@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block content %}
+<div id="landing">
+  <div class="landing-nav">
+    <nav class="container no-padding">
+      <ul class="d-flex landing-row">
+        <li class="item active" >Most popular</li>
+        <li class="item" onclick="location.href='{% url 'recent-courses' %}'">Recently added</li>
+        <li class="item">Sponsored</li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container no-padding">
+   
+   <div id="course-list" class="row">
+    {% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 i-pad-width-r i-pad-width-l">
+        {% include 'catalogue/partials/product.html' with object=object %}
+
+      </div>
+    {% empty %}
+    <div>
+      <div class="blank-space d-flex welcome-note">
+        <i class="fas fa-exclamation"></i>
+        <h3>Welcome to Sosci, the course list is currently empty. But you can start adding courses via the <a href="{% url 'catalogue:live-course-create-form' %}" class="course-link">Live stream link.</a><span> or </span><a href="{% url 'catalogue:course-create-form' %}" class="course-link">On demand stream link.</a></h3>
+      </div>
+    </div>
+    {% endfor %}    
+    </div>
+
+
+    {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+          <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+        
+  </div>
+</div>
+{% endblock content %}

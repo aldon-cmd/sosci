@@ -1,4 +1,4 @@
-from oscar.apps.checkout.views import PaymentDetailsView
+from oscar.apps.checkout import views 
 from django.utils import six
 from django import http
 from oscar.apps.checkout.views import logger
@@ -16,9 +16,15 @@ from oscar.apps.checkout import exceptions
 from django.urls import reverse
 from oscar.apps.checkout.utils import CheckoutSessionData
 from django.contrib import messages
-from catalogue.utils import Course
+from catalogue.helpers import Course
 
-class PaymentDetailsView(PaymentDetailsView,mixins.BasketMixin):
+class ThankYouView(views.ThankYouView):
+    """
+    Displays the 'thank you' page which summarises the order just submitted.
+    """
+    template_name = 'checkout/thank_you.html'
+
+class PaymentDetailsView(views.PaymentDetailsView,mixins.BasketMixin):
     """
     For taking the details of payment and creating the order.
 

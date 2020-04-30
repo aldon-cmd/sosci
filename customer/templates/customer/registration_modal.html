@@ -19,9 +19,6 @@
     </div>
     <div ng-class="{'has-error':vm.form.last_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
         {% include 'partials/nolabel_form_field.html' with field=form.last_name %}
-    </div>
-    <div ng-class="{'has-error':vm.form.last_name.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
-        {% include 'partials/nolabel_form_field.html' with field=form.userrole %}
     </div>    
     <div ng-class="{'has-error':vm.form.password.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width remove-padding n1">
         {% include 'partials/nolabel_form_field.html' with field=form.password1 %}
@@ -29,7 +26,7 @@
     <div ng-class="{'has-error':vm.form.confirm_password.$invalid}" class="col-md-12 payroll-setup-taxpayer-information-item extra-non-padding grid-col-form grid-col-width">
         {% include 'partials/nolabel_form_field.html' with field=form.password2 %}
     </div>
-    <div id="save-btn">
+    <div id="save-btn" class="col-lg-12 col-md-12 col-sm-12">
         <button type="submit" ng-click="vm.submit(vm.form_data)" class="enroll-btn btn btn-color btn-xtra-large btn-block panel-btn">Submit</button>
         <div class="login-footer">
             Already have an account?
@@ -47,23 +44,37 @@
 
     <script>
 
-  $('#registration-form')
-    .ajaxForm({
-      target: '#authentication-modal',
-      success : get_success_response,
-      error: get_error_response       
-    });
 
-    function get_success_response(responseText, statusText, xhr, $form){
 
-              window.location.replace("{% url 'customer:email-confirm-user' %}");
+    function get_registration_success_response(responseText, statusText, xhr, $form){
+
+              window.location.replace("{% url 'customer:email-confirmation-sent' %}");
           }
 
-              function get_error_response(data){
+    function get_registration_error_response(data){
 
               $("#authentication-modal").html(data.responseText);
           }
 
+  function open_login_modal(url){
+
+    $('#authentication-modal').load(url,function(){
+
+        $('#authentication-modal').modal('show');
+        
+        
+    });
+
+    
+}
+
+
+  $('#registration-form')
+    .ajaxForm({
+      target: '#authentication-modal',
+      success : get_registration_success_response,
+      error: get_registration_error_response       
+    });
 
   $(document).on('click',".open-user-login-modal", function (event) {
     event.preventDefault();

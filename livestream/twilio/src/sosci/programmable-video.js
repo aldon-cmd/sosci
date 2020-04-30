@@ -8,9 +8,37 @@ class ProgrammableVideo {
 		this.room = null;
 		this.previewTracks = null;
 
-		document.getElementById('btn-toggle-audio').onclick = () => this.toggle_audio();
-		document.getElementById('btn-toggle-video').onclick = () => this.toggle_video();
+		this.btn_toggle_audio = document.getElementById('btn-toggle-audio');
+		this.btn_toggle_video = document.getElementById('btn-toggle-video');
+
+		this.btn_toggle_audio.onclick = () => this.toggle_audio();
+		this.btn_toggle_video.onclick = () => this.toggle_video();
 	}
+
+	toggle_mic_btn(){
+		var i_elements_array = this.btn_toggle_audio.getElementsByTagName("i");
+
+		if (i_elements_array != undefined && i_elements_array.length != 0) {
+			if (i_elements_array[0].className === "fas fa-microphone"){
+				i_elements_array[0].className  = "fas fa-microphone-slash";
+			}else{
+				i_elements_array[0].className  = "fas fa-microphone";
+			}	
+		}		
+	}
+
+	toggle_video_btn(){
+		var i_elements_array = this.btn_toggle_video.getElementsByTagName("i");
+
+		if (i_elements_array != undefined && i_elements_array.length != 0) {
+			if (i_elements_array[0].className === "fas fa-video"){
+				i_elements_array[0].className  = "fas fa-video-slash";
+			}else{
+				i_elements_array[0].className  = "fas fa-video";
+			}	
+		}		
+	}
+
 
 	get_participant_name(participant){
 	    var participant_identity = participant.identity.split("/");
@@ -43,6 +71,8 @@ class ProgrammableVideo {
 	      }
 	  });
 
+	  this.toggle_mic_btn();
+
 	}
 
 	toggle_video(){
@@ -54,7 +84,9 @@ class ProgrammableVideo {
 	      } else {
 	        videoTrack.enable();
 	      }
-	    });
+		});
+		
+		this.toggle_video_btn();
 	}
 
 	create_local_tracks(){
@@ -187,10 +219,10 @@ class ProgrammableVideo {
 
 
 	  // Bind button to leave Room.
-	  document.getElementById('button-leave').onclick = () => {
-	    console.log('Leaving room...');
-	    this.room.disconnect();
-	  };
+	//   document.getElementById('button-leave').onclick = () => {
+	//     console.log('Leaving room...');
+	//     this.room.disconnect();
+	//   };
 	  return new Promise(function(resolve, reject) {
 		    /* missing implementation */
 		    resolve(room);
@@ -199,7 +231,7 @@ class ProgrammableVideo {
 
 	// Leave Room.
 	leaveRoomIfJoined() {
-	  if (activeRoom) {
+	  if (this.room) {
 	    this.room.disconnect();
 	  }
 	}

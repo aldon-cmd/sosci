@@ -1,18 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.views.generic.list import ListView
+from catalogue.helpers import Course
+from catalogue import models as catalogue_models
 from django.views.generic import TemplateView
-from django.shortcuts import render
-from django.contrib.auth import views as auth_views
-from customer.forms import CustomAuthenticationForm
-from django.contrib.auth import login as auth_login
-from django.shortcuts import redirect
+from django.db.models import Count
 
-class LandingView(auth_views.LoginView):
-    template_name = "shop/landing.html"
-    form_class = CustomAuthenticationForm
+class Welcome1View(TemplateView):
+    template_name = "shop/welcome1.html"
+   
+class Welcome2View(TemplateView):
+    template_name = "shop/welcome2.html"
 
-    def form_valid(self, form):
+class PopularLandingView(ListView):
+    template_name = "shop/popular_landing.html"
+    paginate_by = 10
+    model = catalogue_models.Product
 
-        """Security check complete. Log the user in."""
-        auth_login(self.request, form.get_user())
-        return redirect('course:course-list')    
+    def get_queryset(self):
+        return Course().get_courses().filter(is_published=True).annotate(enrolled_user_count=Count('enrollments__user') ).order_by('-enrolled_user_count')
+
+class RecentLandingView(ListView):
+    template_name = "shop/recent_landing.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return Course().get_courses().filter(is_published=True).order_by('-date_created')        

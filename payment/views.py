@@ -4,6 +4,7 @@ from payment import forms
 from django.urls import reverse
 from urllib.parse import parse_qs
 from catalogue import models as catalogue_models
+from catalogue.helpers import Course
 
 class SettlePlugnPayPaymentView(View):
     """
@@ -20,7 +21,7 @@ class SettlePlugnPayPaymentView(View):
            # pnp_response = form.instance
            # dict_pnp_response = parse_qs(pnp_response.response)
            #todo check if payment was successfully authorized by plugnpay
-           catalogue_models.Enrollment.objects.get_or_create(product_id=course_id, user=request.user) 
+           Course().enroll(request.user,course_id)
            #todo settle payment here
            return HttpResponseRedirect(reverse('checkout:thank-you'))
 

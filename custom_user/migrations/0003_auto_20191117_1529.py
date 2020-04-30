@@ -10,7 +10,7 @@ def forwards_func(apps, schema_editor):
     UserRole = apps.get_model("custom_user", "UserRole")
     db_alias = schema_editor.connection.alias
     UserRole.objects.using(db_alias).bulk_create([
-        UserRole(name="Teacher"),
+        UserRole(name="Instructor"),
         UserRole(name="Student"),
     ])
 
@@ -19,7 +19,7 @@ def reverse_func(apps, schema_editor):
     # so reverse_func() should delete them.
     UserRole = apps.get_model("custom_user", "UserRole")
     db_alias = schema_editor.connection.alias
-    UserRole.objects.using(db_alias).filter(name="Teacher").delete()
+    UserRole.objects.using(db_alias).filter(name="Instructor").delete()
     UserRole.objects.using(db_alias).filter(name="Student").delete()
 
 class Migration(migrations.Migration):

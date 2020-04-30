@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from django.urls import reverse_lazy
-import dj_database_url
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
+load_dotenv()
 
-load_dotenv(find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -99,9 +98,12 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.vouchers',
     'oscar.apps.dashboard.communications',
     'oscar.apps.dashboard.shipping',
-
-    'tinymce',
+    
     "post_office",
+    'quiz',
+    'multichoice',
+    'true_false',
+     'essay',
     
     # 3rd-party apps that oscar depends on
     'widget_tweaks',
@@ -169,9 +171,26 @@ WSGI_APPLICATION = 'sosci.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
-
+if 'DB_NAME' in os.environ:
+    # Running the Docker image
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
+            'PORT': os.environ['DB_PORT']
+        }
+    }
+else:
+    # Building the Docker image
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -274,7 +293,11 @@ LOGIN_REQUIRED_URLS = (
     r'^/catalogue/my-enrolled-courses/$',
     r'^/catalogue/my-created-courses/$',
     r'^/catalogue/course/create/$',
-    r'^/catalogue/live/create/$'
+    r'^/catalogue/live/course/create/$',
+    r'^/accounts/user-plan/list/$',
+    r'^/accounts/student/list/$'
+    r'^/accounts/student/invite/modal/$',
+    r'^/accounts/students/invite/modal/$'
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
@@ -297,6 +320,9 @@ COURSE_PUBLISHED_PUBLIC_URLS = (
 r'^/instructor/publish/course/(?P<course_id>\d+)/$',
 r'^/instructor/module/create/(?P<course_id>\d+)/$',
 r'^/instructor/live/module/create/(?P<course_id>\d+)/$',
+r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
+r'^/instructor/live/course/update/(?P<course_id>\d+)/$',
+r'^/instructor/course/update/(?P<course_id>\d+)/$',
 )
 
 
@@ -309,6 +335,9 @@ ENROLLMENT_PUBLIC_URLS = (
     r'^/checkout/payment-details/(?P<course_id>\d+)/$',
     r'^/checkout/thank-you/$',
     r'^/catalogue/course/details/(?P<course_id>\d+)/$',
+    r'^/instructor/upload/attempt/(?P<course_id>\d+)/$',
+    r'^/instructor/live/course/update/(?P<course_id>\d+)/$',
+    r'^/instructor/course/update/(?P<course_id>\d+)/$',    
 )
 
 HAYSTACK_CONNECTIONS = {

@@ -3,32 +3,33 @@
 
 
 {% block content %}
-<div class="container">
-  <div class="course-nav-header">
+<div class="browse">
 
-    <a href="{% url 'catalogue:my-created-courses-list' %}" class="course-nav-link">
-      <span class="course-nav-title">
-        <i class="fas fa-chalkboard-teacher"></i>
-        <span>My created courses</span>
-      </span>
-    </a>
-
-    <a href="{% url 'catalogue:my-enrolled-courses-list' %}" class="course-nav-link">
-      <span class="course-nav-title">
-        <i class="fas fa-user-graduate"></i>
-        <span>My enrolled courses</span>
-      </span>
-    </a>
-
+  <div class="container">
+    <div class="browse-heading">
+      <h1>My courses</h1>
+    </div>
   </div>
-  <div id="course-list" class="row">
-  	{% for object in object_list %}
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 px-1.5">
+
+  <div class="container no-padding adj-container">
+    <div id="course-list" class="row">
+  	  {% for object in object_list %}
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 i-pad-width-r i-pad-width-l">
         {% include 'catalogue/partials/product.html' with object=object %}
       </div>
-  {% empty %}
-      <p>No courses yet.</p>
-  {% endfor %}    
+      {% empty %}
+      <div class="container adj-container">
+        <div>
+          <div class="border-top">
+            <div class="blank-space d-flex welcome-note">
+              <i class="fas fa-exclamation"></i>
+              <h3>Welcome to Sosci, your personal course list is currently empty. But you can start adding courses by browsing the <a href="{% url 'catalogue:course-list' %}" class="course-link">course catalogue.</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}    
+    </div>
   </div>
 
 

@@ -3,20 +3,19 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views import View
 from catalogue import models as catalogue_models
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from catalogue import forms
 from django import http
 from customer.forms import CustomAuthenticationForm
-from django.views.generic.edit import FormView
-from catalogue.utils import CatalogueCreator,Course,Course
+from catalogue.helpers import CatalogueCreator,Course
 from catalogue import mixins
 from django.db.models import Q
 from django.core.exceptions import ImproperlyConfigured
+from partner import models as partner_models
 
 # Create your views here.
 class CourseListView(ListView):
@@ -58,7 +57,15 @@ class MyCoursesListView(ListView):
     model = catalogue_models.Product
 
     def get_queryset(self):
-        return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user))
+        return Course().get_courses().filter(Q(enrollments__user_id=self.request.user.pk) | Q(user=self.request.user)).distinct()
+
+class OnDemandCourseListView(ListView):
+    template_name = "catalogue/on_demand_course_list.html"
+    paginate_by = 10
+    model = catalogue_models.Product
+
+    def get_queryset(self):
+        return Course().get_courses().filter(product_class__name="Course")
 
 class LiveCourseListView(ListView):
     template_name = "catalogue/live_course_list.html"
@@ -68,8 +75,42 @@ class LiveCourseListView(ListView):
     def get_queryset(self):
         return Course().get_courses().filter(product_class__name="Live")
 
+class LiveCourseUpdateView(UpdateView):
+    template_name = "catalogue/live_course_update_form.html"
+    model = catalogue_models.Product
+    form_class = forms.LiveCourseForm
+    pk_url_kwarg = 'course_id'
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(LiveCourseUpdateView, self).get_form_kwargs()
+        course_id = self.kwargs.get('course_id')
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
+
+        kwargs['initial'] = {'price': stockrecord.price_excl_tax}
+        return kwargs
+
+    def get_success_url(self):
+        course_id = self.kwargs.get('course_id')
+        return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
+
+    def form_valid(self, form):
+        product = form.instance
+        price = form.cleaned_data['price']
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=product.pk).first()
+        stockrecord.price_excl_tax = price
+        stockrecord.save()
+        product.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        return super(LiveCourseUpdateView, self).form_invalid(form)
+
+
 class LiveCourseCreateView(CreateView):
-    template_name = "catalogue/course_form.html"
+    template_name = "catalogue/live_course_form.html"
     model = catalogue_models.Product
     form_class = forms.LiveCourseForm
 
@@ -77,7 +118,7 @@ class LiveCourseCreateView(CreateView):
         product = form.instance
         user = self.request.user
         price = form.cleaned_data['price']
-        created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product.title,product.description,price,1)
+        created_product = CatalogueCreator().create_product(user,"Live","Course > Live",product,price,1)
         Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
@@ -135,8 +176,39 @@ class LiveCourseDetailView(TemplateView):
         return context
 
 
+class CourseUpdateView(UpdateView):
+    template_name = "catalogue/on_demand_course_update_form.html"
+    model = catalogue_models.Product
+    form_class = forms.CourseForm
+    pk_url_kwarg = 'course_id'
+
+    def get_form_kwargs(self):
+        """This method is what injects forms with their keyword
+            arguments."""
+        # grab the current set of form #kwargs
+        kwargs = super(CourseUpdateView, self).get_form_kwargs()
+        course_id = self.kwargs.get('course_id')
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=course_id).first()
+
+        kwargs['initial'] = {'price': stockrecord.price_excl_tax}
+        return kwargs
+
+    def form_valid(self, form):
+        product = form.instance
+        price = form.cleaned_data['price']
+        stockrecord = partner_models.StockRecord.objects.filter(product_id=product.pk).first()
+        stockrecord.price_excl_tax = price
+        stockrecord.save()
+        product.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        course_id = self.kwargs.get('course_id')
+        return reverse('catalogue:course-detail', kwargs={'course_id': course_id})
+
+
 class CourseCreateView(CreateView):
-    template_name = "catalogue/course_form.html"
+    template_name = "catalogue/on_demand_course_form.html"
     model = catalogue_models.Product
     form_class = forms.CourseForm
 
@@ -144,7 +216,7 @@ class CourseCreateView(CreateView):
         product = form.instance
         user = self.request.user
         price = form.cleaned_data['price']
-        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product.title,product.description,price,1)
+        created_product = CatalogueCreator().create_product(user,"Course","Course > General",product,price,1)
         Course().enroll(self.request.user,created_product.pk)
         return HttpResponseRedirect(self.get_success_url(created_product))
 
@@ -206,7 +278,7 @@ class PublishCourseView(TemplateView):
         return context
 
 class ModuleCreateView(TemplateView):
-    template_name = "catalogue/course_module_form.html"
+    template_name = "catalogue/on_demand_course_module_form.html"
 
     # def get_success_url(self):
 
@@ -234,7 +306,7 @@ class CourseDetailView(TemplateView):
         if course.product_class.name == "Live":
            return ["catalogue/live_course_detail.html"]
         elif course.product_class.name == "Course":
-            return ["catalogue/course_detail.html"]
+            return ["catalogue/on_demand_course_detail.html"]
         else:
             raise ImproperlyConfigured(
                 "this page requires a product class to be set")
@@ -249,7 +321,7 @@ class CourseDetailView(TemplateView):
 
         return context        
 
-class CourseEnrollmentView(View):
+class CourseEnrollmentView(TemplateView):
     template_name = "catalogue/course_enrollment.html"
 
     def post(self, request, *args, **kwargs):
@@ -261,18 +333,3 @@ class CourseEnrollmentView(View):
 
         return http.HttpResponseRedirect(
                     reverse('catalogue:course-detail', kwargs={'course_id': course_id}))
-
-
-class SmeCourseListView(ListView):
-    template_name = "catalogue/sme_course_list.html"
-    paginate_by = 10
-    model = catalogue_models.Product
-
-    def get_queryset(self):
-        return catalogue_models.Product.objects.filter(product_class__name="Course")
-
-
-class StudentListView(ListView):
-    template_name = "catalogue/student_list.html"
-    paginate_by = 10
-    model = catalogue_models.Product
