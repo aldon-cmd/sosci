@@ -95,7 +95,7 @@ class IndividualStudentInviteModalView(FormView):
         return kwargs
 
     def form_valid(self, form):
-        UserRegistration().register_inactive_user(form)
+        UserRegistration().register_inactive_user(form,self.request)
         return HttpResponse(status=200)
 
     def form_invalid(self, form):
@@ -154,8 +154,8 @@ class UserRegistrationView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/user_registration.html'
 
-    def form_valid(self, form):
-        UserRegistration().register_user(form)
+    def form_valid(self, form,request):
+        UserRegistration().register_user(form,request)
         return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
 
 class ResendUserEmailConfirmationView(TemplateView):
