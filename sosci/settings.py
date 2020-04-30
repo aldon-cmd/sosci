@@ -352,12 +352,6 @@ VIMEO_CREATE_VIDEO_URL = 'https://api.vimeo.com/me/videos'
 
 VIMEO_GET_ALL_THUMBNAILS_URL = 'https://api.vimeo.com/videos/{0}/pictures'
 
-TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
-TWILIO_API_KEY_SID = os.environ['TWILIO_API_KEY_SID']
-TWILIO_API_SECRET = os.environ['TWILIO_API_SECRET']
-TWILIO_REST_API_AUTH_TOKEN = os.environ['TWILIO_REST_API_AUTH_TOKEN']
-TWILIO_CHAT_SERVICE_SID = os.environ['TWILIO_CHAT_SERVICE_SID']
-
 from oscar.defaults import *
 # Currency
 OSCAR_DEFAULT_CURRENCY = 'USD'
