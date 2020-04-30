@@ -20,6 +20,13 @@ from twilio.base.exceptions import TwilioRestException
 from custom_user import models as user_models
 from livestream import mixins
 
+class JitsiMeetRoomView(TemplateView):
+    """
+    creates a room, token , identity for a host
+    """
+    template_name = "livestream/jitsi_meet_room.html"
+
+
 class EndSessionView(View):
 
     def post(self, request, **kwargs):

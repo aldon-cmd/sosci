@@ -18,6 +18,17 @@ docker-compose up -d
 
 navigate to https://localhost:8443
 
+# update docker image
+
+docker-compose build 
+
+docker-compose up -d 
+
+# reset database
+
+docker-compose down
+
+docker-compose up -d
 
 # custom migrations
 
