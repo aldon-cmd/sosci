@@ -12,7 +12,7 @@ from catalogue.helpers import Course
 
 class UserRegistration(object):
 
-    def register_user(self, form):
+    def register_user(self, form,request):
         """
         Create a user instance and send a new registration email (if configured
         to).
@@ -28,11 +28,11 @@ class UserRegistration(object):
         user.save()
 
 
-        self.send_confirmation_email(user,self.request)
+        self.send_confirmation_email(user,request)
         
         return user
 
-    def get_or_create_student(self,form):
+    def get_or_create_student(self,form,request):
 
         email = form.cleaned_data.pop('email')
         password = None
@@ -45,17 +45,17 @@ class UserRegistration(object):
                             password,
                             **form.cleaned_data
                         )
-            self.send_registration_email(user,self.request)
+            self.send_registration_email(user,request)
         else:
             user = custom_user_models.User.objects.filter(email=email).first()
-            self.send_registration_email(user,self.request)
+            self.send_registration_email(user,request)
 
         return user
 
-    def register_inactive_user(self,form):
+    def register_inactive_user(self,form,request):
 
         course_id = form.cleaned_data.pop('course')
-        student = self.get_or_create_student(form)
+        student = self.get_or_create_student(form,request)
 
         Course().enroll(student,course_id)
 
@@ -71,10 +71,10 @@ class UserRegistration(object):
 
 
 
-    def send_registration_email(self, user,request):
+    def send_registration_email(self, user, request):
         code = 'REGISTRATION'
         ctx = {'user': user,
-               'site': get_current_site(self.request)}
+               'site': get_current_site(request)}
         messages = customer_models.CommunicationEventType.objects.get_and_render(
             code, ctx)
         if messages and messages['body']:
