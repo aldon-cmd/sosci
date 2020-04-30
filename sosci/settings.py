@@ -31,7 +31,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #any string is True and empty strings are False
 DEBUG = (os.environ.get('DEBUG', False) == 'True')
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["3.20.127.135","sosci.tv","localhost"]
 
 DEFAULT_FROM_EMAIL = 'sosci2020@gmail.com'
 EMAIL_USE_TLS = True
