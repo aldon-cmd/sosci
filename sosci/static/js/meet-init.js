@@ -3,7 +3,7 @@
 const options = {
     hosts: {
         domain: 'sosci.tv',
-        muc: 'conference.jitsi-meet.example.com' // FIXME: use XEP-0030
+        muc: 'conference.sosci.tv' // FIXME: use XEP-0030
     },
     bosh: 'https://sosci.tv/http-bind', // FIXME: use xep-0156 for that
 
