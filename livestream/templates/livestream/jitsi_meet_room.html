@@ -11,15 +11,120 @@
 <main id="class-room">
     <div class="full-width">
         <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 primary">
+        <div class="aspect-container">
+          <div class="aspect-spacer"></div>
 
-            <a href="#" onclick="unload()">Unload</a>
-            <a href="#" onclick="switchVideo()">switchVideo</a>
+          <div class="video-player">
+            <div class="video-player-container player">
+                <a href="#" onclick="unload()">Unload</a>
+                <a href="#" onclick="switchVideo()">switchVideo</a>
             <div id="audioOutputSelectWrapper" style="display: none;">
                 Change audio output device
                 <select id="audioOutputSelect" onchange="changeAudioOutput(this)"></select>
             </div>
             <!-- <video id="localVideo" autoplay="true"></video> -->
             <!--<audio id="localAudio" autoplay="true" muted="true"></audio>-->
+              <div class="streamstatus hide">
+                <i class="fas fa-circle"></i>
+                <span>LIVE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 secondary">
+        <div class="side-box">
+          <div class="side-box-header">
+            <span>Course Title</span> 
+          </div>
+
+          <div id="participants-panel" class="side-box-content">
+            <h4 class="">Participants</h4>
+            <ul id="participants-list">
+              <li>
+                <div class="participant">First-Name Last-Name</div>
+                <i class="fas fa-circle"></i>
+                <i class="far fa-hand-paper"></i>
+              </li>
+            </ul>
+          </div>
+
+          <div id="chat-panel" class="side-box-content hide">
+
+
+            <div class="chat-box">
+              <div class="chat-container">
+                <textarea id="chat-input" placeholder="Send message..."></textarea>
+                <span class="attachment">
+                  <i class="fas fa-paperclip"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div id="video-controls-panel" class="side-box-content hide">
+            <div class="video-nav">
+              <div style="text-align:center">
+                <div class="">
+                  <div class="video-nav-list">
+                    <div>
+                      <a class="dot-control .on icon-btn" href="#" id="btn-toggle-video" title='Camera'>
+                        <i class="fas fa-video"></i>
+                      </a>
+                      <p>Camera</p>
+                    </div>
+ 
+                    <div>
+                      <a class="dot-control icon-btn" href="#" id="btn-share-screen" title='Share Screen'>
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <p>Share Screen</p>
+                    </div>
+                  </div>
+                  <div class="video-nav-list">
+                    <div>
+                      <a class="dot-control icon-btn" href="#" id="btn-toggle-audio" title='Mic'>
+                        <i class="fas fa-microphone"></i>
+                      </a>
+                      <p>Mic</p>
+                    </div>
+                    <div>
+                      <a class="dot-control icon-btn" href="#" data-toggle="modal" data-target="#end-session-modal" id="end-session" title='End Session'>
+                        <i class="fas fa-sign-out-alt"></i>
+                      </a>
+                      <p>Leave Course</p>
+                    </div>
+                  </div>
+                  <div class="video-nav-list">
+                    <div>
+                      <a class="dot-control icon-btn" href="#" data-toggle="modal" data-target="" id="" title='Raise Hand'>
+                        <i class="fas fa-child"></i>
+                      </a>
+                      <p>Raise Hand</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-box-footer">
+            <div id="btn-toggle-participants-panel" class="side-box-functions" title='Participants List'>
+              <i class="fas fa-user-friends"></i> 
+            </div>
+            <div id="btn-toggle-chat-panel" class="side-box-functions">
+              <i class="fas fa-comment"></i>  
+            </div>
+            <div id="btn-toggle-video-controls-panel" class="side-box-functions">
+              <i class="fas fa-video"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
         </div>
     </div>
