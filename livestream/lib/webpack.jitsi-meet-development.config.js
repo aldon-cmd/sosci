@@ -5,29 +5,25 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: { 
-        sosci:'./src/sosci/index.js',
-        videouploader: './src/videouploader/index.js'
+        conference:'./src/jitsimeet/index.js'
       },
+  externals: {
+    jquery: 'jQuery'
+  },      
   plugins: [
-   new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['video']}),
+   new CleanWebpackPlugin({cleanOnceBeforeBuildPatterns: ['live']}),
    new HtmlWebpackPlugin({
     inject: false,
-    filename: '../../../livestream/templates/livestream/room.html',
-    template: 'src/sosci/room.ejs',
-    chunks: ['sosci']
-  }),new HtmlWebpackPlugin({
-    inject: false,
-    filename: '../../../catalogue/templates/catalogue/on_demand_course_module_form.html',
-    template: 'src/videouploader/on_demand_course_module_form.ejs',
-    chunks: ['videouploader']
+    filename: '../../../livestream/templates/livestream/jitsi_meet_room.html',
+    template: 'src/jitsimeet/jitsi_meet_room.ejs'
   })],
-  mode: 'production',
+  mode: 'development',
   output: {
-    filename: 'video/[name].[contenthash].js',
+    filename: 'live/[name].[contenthash].js',
     libraryTarget: 'umd',
     path: path.resolve('../../sosci/static/js'),
     publicPath: "js"
-  }, 
+  },  
 module: {
   rules: [
     {
