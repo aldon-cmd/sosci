@@ -5,3 +5,6 @@ GIT_WORK_TREE=~/www/sosci git checkout -f
 # update static files and database
 ~/vsosci/bin/python3 ~/www/sosci/manage.py collectstatic --noinput
 ~/vsosci/bin/python3 ~/www/sosci/manage.py migrate --noinput
+
+#restart app
+touch ~/www/sosci/sosci/wsgi.py
