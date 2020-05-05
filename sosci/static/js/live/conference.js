@@ -72,7 +72,7 @@ class VideoConference {
 			this.connection.connect();
 
 			JitsiMeetJS.createLocalTracks({ devices: [ 'audio', 'video' ] })
-			    .then(() => this.onLocalTracks())
+			    .then((tracks) => this.onLocalTracks(tracks))
 			    .catch(error => {
 			        throw error;
 			    });
@@ -203,7 +203,7 @@ class VideoConference {
 	 */
 	onConnectionSuccess() {
 	    this.room = this.connection.initJitsiConference('conference', this.confOptions);
-	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, () => this.onRemoteTrack());
+	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, (track) => this.onRemoteTrack(track));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
 	        console.log(`track removed!!!${track}`);
 	    });
@@ -214,7 +214,7 @@ class VideoConference {
 	        console.log('user join');
 	        this.remoteTracks[id] = [];
 	    });
-	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, () => this.onUserLeft());
+	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, (id) => this.onUserLeft(id));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_MUTE_CHANGED, track => {
 	        console.log(`${track.getType()} - ${track.isMuted()}`);
 	    });
