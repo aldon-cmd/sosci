@@ -136,8 +136,11 @@
 
 {% block extrascripts %}
 {{ block.super }}
+<script src="{% static 'js/strophe/strophe.js' %}"></script>
+<script src="{% static 'js/strophe/strophe.disco.min.js' %}"></script>
+<script src="{% static 'js/lib-jitsi-meet.min.js' %}"></script>
 <script src="{% static 'js/live/conference.js' %}"></script>
 <script>
-video = new Video();
+video = new VideoConference();
 </script>
 {% endblock extrascripts %}
