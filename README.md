@@ -64,26 +64,3 @@ Create the template.
 Create the url that points to the class in the app.py file 
 
 Copy the course_publish template, and make your modifications. 
-
-# Bank transfer process
-
--Client transfer instructions
-Select email
-
-Account/Beneficiary Name: Nesberry Technologies Limited
-Account Number: 1002270222
-Bank: CIBC FirstCaribbean
-Branch: 1 King Street, Kingston
-Account Type: Chequing
-
-Note: When transferring funds within Jamaica, Bank/Branch code and Swift number are not required
-
-
-- Client input fields
-Name on account - Rafer Johnson
-Bank - FGB (dropdown)
-Transaction reference number - 12345678
-Transaction date/time - March 15, 2020, 12:05pm
-Transfer amount: $12,500
-
-Submit button

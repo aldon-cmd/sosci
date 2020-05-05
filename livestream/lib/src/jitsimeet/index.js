@@ -1,12 +1,12 @@
 'use strict';
 
-import {Video} from './video';
+import {VideoConference} from './video';
 
 
 class Sosci{
 
     static init(){
-        let video = new Video();
+        let videoconference = new VideoConference();
   }
 }
 
