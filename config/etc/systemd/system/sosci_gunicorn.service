@@ -1,0 +1,18 @@
+[Unit]
+Description=sosci gunicorn daemon
+Requires=sosci_gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/www/sosci
+ExecStart=/home/ubuntu/vsosci/bin/gunicorn \
+          --access-logfile - \
+          --workers 1 \
+          --reload \
+          --bind unix:/run/gunicorn.sock \
+          sosci.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
