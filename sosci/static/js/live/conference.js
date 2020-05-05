@@ -57,22 +57,22 @@ class VideoConference {
 
 			this.connection.addEventListener(
 			    JitsiMeetJS.events.connection.CONNECTION_ESTABLISHED,
-			    onConnectionSuccess);
+			    this.onConnectionSuccess);
 			this.connection.addEventListener(
 			    JitsiMeetJS.events.connection.CONNECTION_FAILED,
-			    onConnectionFailed);
+			    this.onConnectionFailed);
 			this.connection.addEventListener(
 			    JitsiMeetJS.events.connection.CONNECTION_DISCONNECTED,
-			    disconnect);
+			    this.disconnect);
 
 			JitsiMeetJS.mediaDevices.addEventListener(
 			    JitsiMeetJS.events.mediaDevices.DEVICE_LIST_CHANGED,
-			    onDeviceListChanged);
+			    this.onDeviceListChanged);
 
 			this.connection.connect();
 
 			JitsiMeetJS.createLocalTracks({ devices: [ 'audio', 'video' ] })
-			    .then(onLocalTracks)
+			    .then(this.onLocalTracks)
 			    .catch(error => {
 			        throw error;
 			    });
