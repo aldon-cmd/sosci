@@ -203,18 +203,18 @@ class VideoConference {
 	 */
 	onConnectionSuccess() {
 	    this.room = this.connection.initJitsiConference('conference', this.confOptions);
-	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, () => onRemoteTrack());
+	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, () => this.onRemoteTrack());
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
 	        console.log(`track removed!!!${track}`);
 	    });
 	    this.room.on(
 	        JitsiMeetJS.events.conference.CONFERENCE_JOINED,
-	        () => onConferenceJoined());
+	        () => this.onConferenceJoined());
 	    this.room.on(JitsiMeetJS.events.conference.USER_JOINED, id => {
 	        console.log('user join');
 	        this.remoteTracks[id] = [];
 	    });
-	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, () => onUserLeft());
+	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, () => this.onUserLeft());
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_MUTE_CHANGED, track => {
 	        console.log(`${track.getType()} - ${track.isMuted()}`);
 	    });
@@ -251,13 +251,13 @@ class VideoConference {
 	    console.log('disconnect!');
 	    this.connection.removeEventListener(
 	        JitsiMeetJS.events.connection.CONNECTION_ESTABLISHED,
-	        () => onConnectionSuccess());
+	        () => this.onConnectionSuccess());
 	    this.connection.removeEventListener(
 	        JitsiMeetJS.events.connection.CONNECTION_FAILED,
-	        () => onConnectionFailed());
+	        () => this.onConnectionFailed());
 	    this.connection.removeEventListener(
 	        JitsiMeetJS.events.connection.CONNECTION_DISCONNECTED,
-	        () => disconnect());
+	        () => this.disconnect());
 	}
 
 	/**
