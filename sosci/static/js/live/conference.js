@@ -1,8 +1,3 @@
-'use strict';
-
-import $ from 'jquery';
-import { JitsiMeetJS } from 'lib-jitsi-meet.min'
-
 class VideoConference {
 
 	constructor(){
@@ -313,5 +308,3 @@ class VideoConference {
 	}
 
 }
-
-export { VideoConference }
