@@ -1,21 +1,19 @@
 {
-  "name": "sosci-twilio-programmable-video",
+  "name": "sosci-jitsi-meet-video",
   "version": "1.0.0",
-  "description": "a twilio programmable video api for sosci",
+  "description": "a jitsi meet video api for sosci",
   "private": true,
   "scripts": {
     "clean": "rimraf ..\\..\\sosci/static/js/sosci-live.js",
-    "prod-build": "webpack --config webpack.production.config.js",
-    "dev-build": "webpack --config webpack.development.config.js"
+    "prod-build": "webpack --config webpack.jitsi-meet-production.config.js",
+    "dev-build": "webpack --config webpack.jitsi-meet-development.config.js"
   },
   "author": "aldon palmer",
   "license": "ISC",
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "dotenv": "^8.2.0",
-    "twilio-chat": "^3.3.2",
-    "twilio-common": "^0.1.7",
-    "twilio-video": "^1.19.2"
+    "lib-jitsi-meet": "^1.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
