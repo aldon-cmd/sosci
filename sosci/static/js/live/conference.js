@@ -21,11 +21,22 @@ class VideoConference {
             this.connection = null;
             this.isJoined = false;
             this.room = null;
+            this.policy = {audio: false, video:false}
 
             this.localTracks = [];
             this.remoteTracks = {};
 
 			this.isVideo = true;
+
+			this.btn_toggle_audio = document.getElementById('btn-toggle-audio');
+			this.btn_toggle_video = document.getElementById('btn-toggle-video');
+
+			this.btn_toggle_audio.onclick = () => this.toggle_audio();
+			this.btn_toggle_video.onclick = () => this.toggle_video();
+
+			this.btn_share_screen = document.getElementById('btn-share-screen');
+
+		    this.btn_share_screen.onclick = () => this.toggle_share_screen();
 
 			$(window).bind('beforeunload', this.unload);
 			$(window).bind('unload', this.unload);
@@ -95,6 +106,64 @@ class VideoConference {
 			    });
 			}			
 	}
+
+	get_audio_track(){
+		return this.room.getLocalTracks().find((track) => track.getType() === "audio");
+	}
+
+	get_video_track(){
+		return this.room.getLocalTracks().find((track) => track.getType() === "video");
+	}	
+
+	toggle_mic_btn(){
+		let i_elements_array = this.btn_toggle_audio.getElementsByTagName("i");
+
+		if (i_elements_array != undefined && i_elements_array.length != 0) {
+			if (i_elements_array[0].className === "fas fa-microphone"){
+				i_elements_array[0].className  = "fas fa-microphone-slash";
+			}else{
+				i_elements_array[0].className  = "fas fa-microphone";
+			}	
+		}		
+	}
+
+	toggle_video_btn(){
+		let i_elements_array = this.btn_toggle_video.getElementsByTagName("i");
+
+		if (i_elements_array != undefined && i_elements_array.length != 0) {
+			if (i_elements_array[0].className === "fas fa-video"){
+				i_elements_array[0].className  = "fas fa-video-slash";
+			}else{
+				i_elements_array[0].className  = "fas fa-video";
+			}	
+		}		
+	}
+
+	toggle_audio(){
+	   let audio_track = this.get_audio_track();
+
+      if (audio_track.isMuted()) {
+        audio_track.unmute();
+      } else {
+        audio_track.mute();
+      }
+
+	  this.toggle_mic_btn();
+
+	}
+
+	toggle_video(){
+	   let video_track = this.get_video_track();
+
+      if (video_track.isMuted()) {
+        video_track.unmute();
+      } else {
+        video_track.mute();
+      }
+
+		
+		this.toggle_video_btn();
+	}		
 
 	/**
 	 * Handles local tracks.
@@ -228,6 +297,7 @@ class VideoConference {
 	        JitsiMeetJS.events.conference.PHONE_NUMBER_CHANGED,
 	        () => console.log(`${this.room.getPhoneNumber()} - ${this.room.getPhonePin()}`));
 	    this.room.join();
+	    this.room.setStartMutedPolicy(this.policy);
 	}
 
 	/**
@@ -276,8 +346,10 @@ class VideoConference {
 	/**
 	 *
 	 */
-	switchVideo() { // eslint-disable-line no-unused-vars
+	toggle_share_screen() { // eslint-disable-line no-unused-vars
 	    this.isVideo = !this.isVideo;
+	    let i_elements_array = this.btn_share_screen.getElementsByTagName("i");
+
 	    if (this.localTracks[1]) {
 	        this.localTracks[1].dispose();
 	        this.localTracks.pop();
@@ -292,11 +364,36 @@ class VideoConference {
 	                () => console.log('local track muted'));
 	            this.localTracks[1].addEventListener(
 	                JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
-	                () => console.log('local track stoped'));
+	                () => this.unshare_screen());
 	            this.localTracks[1].attach($('#localVideo1')[0]);
 	            this.room.addTrack(this.localTracks[1]);
+	            this.toggle_screen_share_btn();
 	        })
 	        .catch(error => console.log(error));
+	}
+
+	toggle_screen_share_btn(){
+		let i_elements_array = this.btn_share_screen.getElementsByTagName("i");
+		if (i_elements_array != undefined && i_elements_array.length != 0) {
+
+			if(this.isVideo){
+				i_elements_array[0].className = "fas fa-eye";
+
+			}else{
+
+				i_elements_array[0].className = "fas fa-eye-slash";
+			}
+			
+
+		}
+	}
+
+	unshare_screen(){
+
+		this.toggle_share_screen();
+		this.toggle_screen_share_btn();
+
+
 	}
 
 	/**
@@ -307,4 +404,36 @@ class VideoConference {
 	    JitsiMeetJS.mediaDevices.setAudioOutputDevice(selected.value);
 	}
 
+}
+
+class ConferenceUI {
+
+	constructor(){
+		this.participants_panel = document.getElementById('participants-panel');
+		this.video_controls_panel = document.getElementById('video-controls-panel');
+		this.chat_panel = document.getElementById('chat-panel');
+
+		document.getElementById('btn-toggle-participants-panel').onclick = () => this.toggle_participants_panel();
+		document.getElementById('btn-toggle-chat-panel').onclick = () => this.toggle_chat_panel();
+		document.getElementById('btn-toggle-video-controls-panel').onclick = () => this.toggle_video_controls_panel();
+	}
+
+	toggle_participants_panel(){
+		this.participants_panel.style.cssText = 'display:block !important';
+		this.video_controls_panel.style.cssText = 'display:none !important';
+		this.chat_panel.style.cssText = 'display:none !important';
+	}
+
+	toggle_chat_panel(){
+		this.participants_panel.style.cssText = 'display:none !important';
+		this.video_controls_panel.style.cssText = 'display:none !important';
+		this.chat_panel.style.cssText = 'display:block !important';
+	}
+
+	toggle_video_controls_panel(){
+		this.participants_panel.style.cssText = 'display:none !important';
+		this.video_controls_panel.style.cssText = 'display:block !important';
+		this.chat_panel.style.cssText = 'display:none !important';
+	}
+			
 }
