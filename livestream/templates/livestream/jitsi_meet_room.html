@@ -17,7 +17,6 @@
 
           <div class="video-player">
             <div class="video-player-container player">
-                <a href="#" onclick="videoconference.unload()">Leave</a>
             <!-- <video id="localVideo" autoplay="true"></video> -->
             <!--<audio id="localAudio" autoplay="true" muted="true"></audio>-->
               <div class="streamstatus hide">
@@ -87,10 +86,10 @@
                       <p>Mic</p>
                     </div>
                     <div>
-                      <a class="dot-control icon-btn" href="#" data-toggle="modal" data-target="#end-session-modal" id="end-session" title='End Session'>
+                      <a class="dot-control icon-btn" href="#" onclick="videoconference.unload()" id="end-session" title='End Session'>
                         <i class="fas fa-sign-out-alt"></i>
                       </a>
-                      <p>End Course</p>
+                      <p>Leave</p>
                     </div>
                   </div>
                   <div class="video-nav-list">
