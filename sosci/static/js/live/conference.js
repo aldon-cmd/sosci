@@ -119,7 +119,8 @@ class VideoConference {
 			}			
 	}
 
-	create_participants_list_item(participant){
+	create_participants_list_item(id){
+		let participant = this.room.getParticipantById(id);
 	    let participants_list = document.getElementById('participants-list');
 	    let participants_list_item = document.createElement("LI"); 
 	    let participants_list_item_content;
@@ -144,7 +145,7 @@ class VideoConference {
 	populate_participant_list(room){
 
 
-	   this.room.getParticipants().forEach((participant) => {this.create_participants_list_item(participant);});
+	   this.room.getParticipants().forEach((participant) => {this.create_participants_list_item(participant.getId());});
 	}	
 
 	get_audio_track(){
@@ -327,6 +328,7 @@ class VideoConference {
 	        () => this.onConferenceJoined());
 	    this.room.on(JitsiMeetJS.events.conference.USER_JOINED, id => {
 	        console.log('user join');
+	        this.create_participants_list_item(id);
 	        this.remoteTracks[id] = [];
 	    });
 	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, (id) => this.onUserLeft(id));
