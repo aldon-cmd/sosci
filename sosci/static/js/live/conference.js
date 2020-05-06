@@ -119,6 +119,34 @@ class VideoConference {
 			}			
 	}
 
+	create_participants_list_item(participant){
+	    let participants_list = document.getElementById('participants-list');
+	    let participants_list_item = document.createElement("LI"); 
+	    let participants_list_item_content;
+	    let paricipant_full_name;
+
+	    participants_list_item.setAttribute("id",participant.getId());
+
+	    paricipant_full_name = participant.getDisplayName();
+
+	    participants_list_item_content = '<div class="participant">'+ paricipant_full_name +'</div><i class="fas fa-circle"></i>';
+
+	    participants_list_item.innerHTML = participants_list_item_content;
+
+	    participants_list.appendChild(participants_list_item);     
+	}
+
+	delete_participants_list_item(participant){
+	  var participants_list_item = document.getElementById(participant.getId());
+	  participants_list_item.parentNode.removeChild(participants_list_item);
+	}
+
+	populate_participant_list(room){
+
+
+	   this.room.getParticipants().forEach((participant) => {this.create_participants_list_item(participant);});
+	}	
+
 	get_audio_track(){
 		return this.room.getLocalTracks().find((track) => track.getType() === "audio");
 	}
@@ -261,6 +289,7 @@ class VideoConference {
 	    for (let i = 0; i < this.localTracks.length; i++) {
 	        this.room.addTrack(this.localTracks[i]);
 	    }
+	    this.populate_participant_list();
 	}
 
 	/**
@@ -277,6 +306,9 @@ class VideoConference {
 	    for (let i = 0; i < tracks.length; i++) {
 	        tracks[i].detach($(`#${id}${tracks[i].getType()}`));
 	    }
+
+	    let participant = this.room.getParticipantId(id);
+	    this.delete_participants_list_item(participant);
 	}
 
 	/**
