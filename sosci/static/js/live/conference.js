@@ -307,7 +307,7 @@ class VideoConference {
 	        tracks[i].detach($(`#${id}${tracks[i].getType()}`));
 	    }
 
-	    let participant = this.room.getParticipantId(id);
+	    let participant = this.room.getParticipantById(id);
 	    this.delete_participants_list_item(participant);
 	}
 
