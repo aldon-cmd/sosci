@@ -18,10 +18,6 @@
           <div class="video-player">
             <div class="video-player-container player">
                 <a href="#" onclick="videoconference.unload()">Leave</a>
-            <div id="audioOutputSelectWrapper" style="display: none;">
-                Change audio output device
-                <select id="audioOutputSelect" onchange="changeAudioOutput(this)"></select>
-            </div>
             <!-- <video id="localVideo" autoplay="true"></video> -->
             <!--<audio id="localAudio" autoplay="true" muted="true"></audio>-->
               <div class="streamstatus hide">
@@ -44,7 +40,7 @@
             <h4 class="">Participants</h4>
             <ul id="participants-list">
               <li>
-                <div class="participant">First-Name Last-Name</div>
+                <div class="participant">{{request.user.first_name}} {{request.user.last_name}}</div>
                 <i class="fas fa-circle"></i>
                 <i class="far fa-hand-paper"></i>
               </li>

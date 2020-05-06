@@ -297,7 +297,8 @@ LOGIN_REQUIRED_URLS = (
     r'^/accounts/user-plan/list/$',
     r'^/accounts/student/list/$'
     r'^/accounts/student/invite/modal/$',
-    r'^/accounts/students/invite/modal/$'
+    r'^/accounts/students/invite/modal/$',
+    r'^/live/room/meet/$'
 )
 
 LOGIN_REDIRECT_URL = reverse_lazy('catalogue:course-list')
