@@ -154,8 +154,8 @@ class UserRegistrationView(FormView):
     form_class = EmailUserCreationForm
     template_name = 'customer/user_registration.html'
 
-    def form_valid(self, form,request):
-        UserRegistration().register_user(form,request)
+    def form_valid(self, form):
+        UserRegistration().register_user(form,self.request)
         return HttpResponseRedirect(reverse('customer:email-confirmation-sent'))
 
 class ResendUserEmailConfirmationView(TemplateView):
