@@ -1,6 +1,6 @@
 class VideoConference {
 
-	constructor(){
+	constructor(local_participant_name){
             /* global $, JitsiMeetJS */
 
             this.options = {
@@ -18,6 +18,8 @@ class VideoConference {
                 openBridgeChannel: true
             };
 
+            this.local_participant_name = local_participant_name;
+
             this.connection = null;
             this.isJoined = false;
             this.room = null;
@@ -27,6 +29,7 @@ class VideoConference {
             this.remoteTracks = {};
 
 			this.isVideo = true;
+
 
 			this.btn_toggle_audio = document.getElementById('btn-toggle-audio');
 			this.btn_toggle_video = document.getElementById('btn-toggle-video');
@@ -40,6 +43,15 @@ class VideoConference {
 
 			$(window).bind('beforeunload', this.unload);
 			$(window).bind('unload', this.unload);
+
+	        // Get handle to the chat div
+	        this.chat_panel = document.getElementById('chat-panel');
+
+	        this.input = document.getElementById('chat-input');
+
+
+
+	        this.input.addEventListener('keydown', (e) => this.key_logger(e));			
 
 			// JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
 			this.initOptions = {
@@ -272,6 +284,8 @@ class VideoConference {
 	 */
 	onConnectionSuccess() {
 	    this.room = this.connection.initJitsiConference('conference', this.confOptions);
+	    this.room.setDisplayName(this.local_participant_name);
+	    this.room.on(JitsiMeetJS.events.conference.MESSAGE_RECEIVED, (id, text, ts) => this.onMessageReceived(id, text, ts));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, (track) => this.onRemoteTrack(track));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
 	        console.log(`track removed!!!${track}`);
@@ -298,6 +312,43 @@ class VideoConference {
 	        () => console.log(`${this.room.getPhoneNumber()} - ${this.room.getPhonePin()}`));
 	    this.room.join();
 	    this.room.setStartMutedPolicy(this.policy);
+	}
+
+	onMessageReceived(id, text, ts){
+	    let message_container = document.createElement("DIV"); 
+	    message_container.setAttribute("class","live-chat");
+
+	    //avoid xss with textContent
+	    let message_txt = document.createTextNode(text);
+	    let message_span = document.createElement("SPAN");
+	    message_span.appendChild(message_txt);
+
+
+
+	    let chat_list_item = '<div class="">'+
+	                '<span class="chat-badge">'+
+	                  '<i class="fas fa-user-circle"></i>'+
+	                '</span>'+
+	                '<span class="chat-line-username">'+
+	                  '<span>'+this.local_participant_name+'<span>:</span></span>'+
+	                '</span>'+
+	                '<span>'+
+	                  '<span>'+message_span.textContent+'</span>'+
+	                '</span>'+
+	             '</div>';
+	    message_container.innerHTML = chat_list_item;
+
+
+	    this.chat_panel.appendChild(message_container);
+	}
+
+    // Send a new message to the general channel
+	key_logger(e) {
+
+	    if (e.keyCode == 13) {
+	      this.room.sendTextMessage(this.input.value);
+	      this.input.value = '';
+	    }
 	}
 
 	/**

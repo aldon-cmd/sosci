@@ -141,6 +141,6 @@
 <script src="{% static 'js/live/conference.js' %}"></script>
 <script>
 var conferenceui = new ConferenceUI();
-var videoconference = new VideoConference();
+var videoconference = new VideoConference("{{request.user.first_name}} {{request.user.last_name}}");
 </script>
 {% endblock extrascripts %}
