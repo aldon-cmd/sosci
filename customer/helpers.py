@@ -1,5 +1,5 @@
 import pandas
-import django
+import logging
 from django.urls import reverse
 from customer.utils import create_email_activation_key
 from custom_user import models as custom_user_models
@@ -9,6 +9,8 @@ from customer import models as customer_models
 from custom_user import models as custom_user_models
 from customer.utils import create_email_activation_key
 from catalogue.helpers import Course
+from django.conf import settings
+from post_office import mail
 
 class UserRegistration(object):
 
@@ -132,7 +134,7 @@ class Dispatcher(object):
                                 " no email address", user.id)
             return
 
-        email = self.send_email_messages(user.email, messages)
+        self.send_email_messages(user.email, messages)
 
 
     def send_email_messages(self, recipient, messages):
@@ -188,54 +190,54 @@ class CSVUploader(object):
 
         self.column_names = self.dataframe.columns.values.tolist()
 
-    def upload(self):
-        # row.Vacation_Days_Oustanding
+#     def upload(self):
+#         # row.Vacation_Days_Oustanding
 
 
-        with transaction.atomic():
+#         with transaction.atomic():
 
-              self.create_employees()
+#               self.create_employees()
 
-              for row in self.dataframe.itertuples():
+#               for row in self.dataframe.itertuples():
                   
-                annual_salary_sum = 0.00
-                previous_payperiod = self.select_previous_payperiod(row.Pay_Frequency_Type.title())
-                current_payperiod = self.get_current_payperiod(row.Pay_Frequency_Type.title())
-                #loop over salary adjustments by column(going across in a horizontal direction)
-                for i in range(len(self.column_names)-31):
-                    current_column = self.column_names[i+31]
-                    amount = float(self.dataframe.at[row.Index,current_column])
-                    #skip annual salary adjustments that are not greater than zero
-                    if amount > 0.00:
-                      annual_salary_sum += amount
-                      annual_salary = self.create_annual_salary_adjustment(current_column,amount,self.employees[row.Index])
-                      self.create_annual_salaries_list(current_column,row,annual_salary,current_payperiod)
+#                 annual_salary_sum = 0.00
+#                 previous_payperiod = self.select_previous_payperiod(row.Pay_Frequency_Type.title())
+#                 current_payperiod = self.get_current_payperiod(row.Pay_Frequency_Type.title())
+#                 #loop over salary adjustments by column(going across in a horizontal direction)
+#                 for i in range(len(self.column_names)-31):
+#                     current_column = self.column_names[i+31]
+#                     amount = float(self.dataframe.at[row.Index,current_column])
+#                     #skip annual salary adjustments that are not greater than zero
+#                     if amount > 0.00:
+#                       annual_salary_sum += amount
+#                       annual_salary = self.create_annual_salary_adjustment(current_column,amount,self.employees[row.Index])
+#                       self.create_annual_salaries_list(current_column,row,annual_salary,current_payperiod)
 
 
-                self.create_employee_employment_details_list(row,annual_salary_sum)
+#                 self.create_employee_employment_details_list(row,annual_salary_sum)
 
-                self.create_paidtimeoff(row)
+#                 self.create_paidtimeoff(row)
 
-                #a payroll record should not be created at the beginning of the year
-                if previous_payperiod is not None:
-                   self.create_payroll(row,previous_payperiod)
+#                 #a payroll record should not be created at the beginning of the year
+#                 if previous_payperiod is not None:
+#                    self.create_payroll(row,previous_payperiod)
               
-              models.EmployeeEmploymentDetail.objects.bulk_create(self.employeeemploymentdetails)
+#               models.EmployeeEmploymentDetail.objects.bulk_create(self.employeeemploymentdetails)
 
-              models.AnnualSalary.objects.bulk_create(self.annual_salaries)
+#               models.AnnualSalary.objects.bulk_create(self.annual_salaries)
 
-              models.AnnualSalary.objects.bulk_create(self.annual_allowance_salaries)
+#               models.AnnualSalary.objects.bulk_create(self.annual_allowance_salaries)
 
-              self.create_salaries_list(self.annual_salaries,self.salaries,current_payperiod)
+#               self.create_salaries_list(self.annual_salaries,self.salaries,current_payperiod)
 
-              self.create_salaries_list(self.annual_allowance_salaries,self.allowance_salaries,current_payperiod)
+#               self.create_salaries_list(self.annual_allowance_salaries,self.allowance_salaries,current_payperiod)
 
               
-              models.Salary.objects.bulk_create(self.salaries)
+#               models.Salary.objects.bulk_create(self.salaries)
 
-              models.Salary.objects.bulk_create(self.allowance_salaries)
+#               models.Salary.objects.bulk_create(self.allowance_salaries)
 
-              self.create_taxexemptions()
+#               self.create_taxexemptions()
 
-              #n/b Payroll records should be optional 
-              models.Payroll.objects.bulk_create(self.payrolls)
+#               #n/b Payroll records should be optional 
+#               models.Payroll.objects.bulk_create(self.payrolls)
