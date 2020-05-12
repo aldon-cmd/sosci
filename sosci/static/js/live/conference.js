@@ -188,9 +188,6 @@ class VideoConference {
       } else {
         audio_track.mute();
       }
-
-	  this.toggle_mic_btn();
-
 	}
 
 	toggle_video(){
@@ -200,10 +197,19 @@ class VideoConference {
         video_track.unmute();
       } else {
         video_track.mute();
-      }
+      }	
+	}
 
-		
-		this.toggle_video_btn();
+	toggle_device_btn(track){
+		let mediatype = track.getType();
+		console.log('local track mute toggled');
+
+		if (mediatype === "audio"){
+			 this.toggle_mic_btn();
+		}
+		else if(mediatype === "video"){
+			this.toggle_video_btn();
+		}
 	}		
 
 	/**
@@ -218,7 +224,7 @@ class VideoConference {
 	            audioLevel => console.log(`Audio Level local: ${audioLevel}`));
 	        this.localTracks[i].addEventListener(
 	            JitsiMeetJS.events.track.TRACK_MUTE_CHANGED,
-	            () => console.log('local track muted'));
+	            (track) => this.toggle_device_btn(track));
 	        this.localTracks[i].addEventListener(
 	            JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
 	            () => console.log('local track stoped'));
@@ -446,18 +452,18 @@ class VideoConference {
 	            this.localTracks.push(tracks[0]);
 	            this.localTracks[1].addEventListener(
 	                JitsiMeetJS.events.track.TRACK_MUTE_CHANGED,
-	                () => console.log('local track muted'));
+	                () => this.toggle_screen_share_btn());
 	            this.localTracks[1].addEventListener(
 	                JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
 	                () => this.unshare_screen());
 	            this.localTracks[1].attach($('#localVideo1')[0]);
 	            this.room.addTrack(this.localTracks[1]);
-	            this.toggle_screen_share_btn();
 	        })
 	        .catch(error => console.log(error));
 	}
 
 	toggle_screen_share_btn(){
+		console.log('local track mute toggled');
 		let i_elements_array = this.btn_share_screen.getElementsByTagName("i");
 		if (i_elements_array != undefined && i_elements_array.length != 0) {
 
