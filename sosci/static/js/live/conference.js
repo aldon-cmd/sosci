@@ -116,7 +116,11 @@ class VideoConference {
 			            $('#audioOutputSelectWrapper').show();
 			        }
 			    });
-			}			
+			}
+
+    // When we are about to transition away from this page, disconnect
+    // from the room, if joined.
+    window.addEventListener('beforeunload', () => this.unload());						
 	}
 
 	create_participants_list_item(id){
