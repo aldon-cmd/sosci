@@ -41,8 +41,10 @@ class VideoConference {
 
 		    this.btn_share_screen.onclick = () => this.toggle_share_screen();
 
-			$(window).bind('beforeunload', this.unload);
-			$(window).bind('unload', this.unload);
+		    // When we are about to transition away from this page, disconnect
+		    // from the room, if joined.
+		    window.addEventListener('beforeunload', () => this.unload());
+		    window.addEventListener('unload', () => this.unload());
 
 	        // Get handle to the chat div
 	        this.chat_panel = document.getElementById('chat-panel');
@@ -116,11 +118,7 @@ class VideoConference {
 			            $('#audioOutputSelectWrapper').show();
 			        }
 			    });
-			}
-
-    // When we are about to transition away from this page, disconnect
-    // from the room, if joined.
-    window.addEventListener('beforeunload', () => this.unload());						
+			}						
 	}
 
 	create_participants_list_item(id){
