@@ -311,7 +311,7 @@ class VideoConference {
 	    const tracks = this.remoteTracks[id];
 
 	    for (let i = 0; i < tracks.length; i++) {
-	        tracks[i].detach($(`#${id}${tracks[i].getType()}`));
+	        tracks[i].detach($(`#${id}${tracks[i].getType()}${i+1}`));
 	    }
 
 	    let participant = this.room.getParticipantById(id);
