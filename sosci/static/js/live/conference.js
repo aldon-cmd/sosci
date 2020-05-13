@@ -326,6 +326,12 @@ class VideoConference {
 	    if (!this.remoteTracks[id]) {
 	        return;
 	    }
+	    const tracks = this.remoteTracks[id];
+
+	    for (let i = 0; i < tracks.length; i++) {
+	        tracks[i].detach($(`#${id}${tracks[i].getType()}${i+1}`)[0]);
+	        $(`#${id}${tracks[i].getType()}${i+1}`).remove();
+	    }
 
 	    let participant = this.room.getParticipantById(id);
 	    this.delete_participants_list_item(participant);
@@ -339,7 +345,9 @@ class VideoConference {
 	    this.room.setDisplayName(this.local_participant_name);
 	    this.room.on(JitsiMeetJS.events.conference.MESSAGE_RECEIVED, (id, text, ts) => this.onMessageReceived(id, text, ts));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, (track) => this.onRemoteTrack(track));
-	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, (track) => this.onDetachRemoteTrack(track));
+	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
+	        console.log(`track removed!!!${track}`);
+	    });
 	    this.room.on(
 	        JitsiMeetJS.events.conference.CONFERENCE_JOINED,
 	        () => this.onConferenceJoined());
