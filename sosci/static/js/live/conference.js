@@ -321,7 +321,7 @@ class VideoConference {
 	 *
 	 * @param id
 	 */
-	onUserLeft(id) {
+	onUserLeft(id,participant) {
 	    console.log('user left');
 	    if (!this.remoteTracks[id]) {
 	        return;
@@ -333,7 +333,6 @@ class VideoConference {
 	        $(`#${id}${tracks[i].getType()}${i+1}`).remove();
 	    }
 
-	    let participant = this.room.getParticipantById(id);
 	    this.delete_participants_list_item(participant);
 	}
 
@@ -356,7 +355,7 @@ class VideoConference {
 	        this.create_participants_list_item(id);
 	        this.remoteTracks[id] = [];
 	    });
-	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, (id) => this.onUserLeft(id));
+	    this.room.on(JitsiMeetJS.events.conference.USER_LEFT, (id,participant) => this.onUserLeft(id,participant));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_MUTE_CHANGED, track => {
 	        console.log(`${track.getType()} - ${track.isMuted()}`);
 	    });
