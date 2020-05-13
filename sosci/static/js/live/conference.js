@@ -43,8 +43,8 @@ class VideoConference {
 
 		    // When we are about to transition away from this page, disconnect
 		    // from the room, if joined.
-		    window.addEventListener('beforeunload', () => this.unload());
-		    window.addEventListener('unload', () => this.unload());
+		    $(window).bind('beforeunload', () => this.unload());
+			$(window).bind('unload', () => this.unload());
 
 	        // Get handle to the chat div
 	        this.chat_panel = document.getElementById('chat-panel');
