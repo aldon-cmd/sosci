@@ -289,6 +289,22 @@ class VideoConference {
 	    track.attach($(`#${id}`)[0]);
 	}
 
+	onDetachRemoteTrack(track) {
+	    if (track.isLocal()) {
+	        return;
+	    }
+	    const participant = track.getParticipantId();
+
+	    if (!this.remoteTracks[participant]) {
+	        this.remoteTracks[participant] = [];
+	    }
+	    const idx = this.remoteTracks[participant].push(track);
+
+	    const id = participant + track.getType() + idx;
+
+	    track.detach($(`#${id}`)[0]);
+	    $(`#${id}`).remove();
+	}
 	/**
 	 * That function is executed when the conference is joined
 	 */
@@ -310,11 +326,6 @@ class VideoConference {
 	    if (!this.remoteTracks[id]) {
 	        return;
 	    }
-	    const tracks = this.remoteTracks[id];
-
-	    for (let i = 0; i < tracks.length; i++) {
-	        tracks[i].detach($(`#${id}${tracks[i].getType()}${i+1}`)[0]);
-	    }
 
 	    let participant = this.room.getParticipantById(id);
 	    this.delete_participants_list_item(participant);
@@ -328,9 +339,7 @@ class VideoConference {
 	    this.room.setDisplayName(this.local_participant_name);
 	    this.room.on(JitsiMeetJS.events.conference.MESSAGE_RECEIVED, (id, text, ts) => this.onMessageReceived(id, text, ts));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, (track) => this.onRemoteTrack(track));
-	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
-	        console.log(`track removed!!!${track}`);
-	    });
+	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, (track) => this.onDetachRemoteTrack(track));
 	    this.room.on(
 	        JitsiMeetJS.events.conference.CONFERENCE_JOINED,
 	        () => this.onConferenceJoined());
