@@ -287,6 +287,7 @@ class VideoConference {
 	            `<audio autoplay='1' id='${participant}audio${idx}' />`);
 	    }
 	    track.attach($(`#${id}`)[0]);
+	    console.log(`track added!!!${track}`);
 	}
 
 	onDetachRemoteTrack(track) {
