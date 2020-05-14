@@ -452,9 +452,12 @@ class VideoConference {
 	 */
 	toggle_share_screen() { // eslint-disable-line no-unused-vars
 	    this.isVideo = !this.isVideo;
-	    let i_elements_array = this.btn_share_screen.getElementsByTagName("i");
 
 	    if (this.localTracks[1]) {
+	    	//prevents toggle_share_screen() from being called twice
+	    	this.localTracks[1].removeEventListener(
+	                JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
+	                () => this.unshare_screen());
 	        this.localTracks[1].dispose();
 	        this.localTracks.pop();
 	    }
