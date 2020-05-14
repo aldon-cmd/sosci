@@ -294,18 +294,10 @@ class VideoConference {
 	    if (track.isLocal()) {
 	        return;
 	    }
-	    const participant = track.getParticipantId();
 
-	    if (!this.remoteTracks[participant]) {
-	        return;
-	    }
+	    const container = track.containers.find((container) => container !== undefined);
 
-
-	    const idx = this.remoteTracks[participant].findIndex((remote_track) => remote_track.getType() === track.getType());
-
-	    const id = participant + track.getType() + idx;
-
-	    $(`#${id}`).remove();
+	    $(container).remove();
 	}
 	/**
 	 * That function is executed when the conference is joined
