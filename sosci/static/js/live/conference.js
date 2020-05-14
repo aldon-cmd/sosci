@@ -465,18 +465,18 @@ class VideoConference {
 	            this.localTracks.push(tracks[0]);
 	            this.localTracks[1].addEventListener(
 	                JitsiMeetJS.events.track.TRACK_MUTE_CHANGED,
-	                () => this.toggle_screen_share_btn());
+	                () => console.log('TRACK_MUTE_CHANGED fired!!!'));
 	            this.localTracks[1].addEventListener(
 	                JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
 	                () => this.unshare_screen());
 	            this.localTracks[1].attach($('#localVideo1')[0]);
 	            this.room.addTrack(this.localTracks[1]);
+	            this.toggle_screen_share_btn();
 	        })
 	        .catch(error => console.log(error));
 	}
 
 	toggle_screen_share_btn(){
-		console.log('local track mute toggled');
 		let i_elements_array = this.btn_share_screen.getElementsByTagName("i");
 		if (i_elements_array != undefined && i_elements_array.length != 0) {
 
