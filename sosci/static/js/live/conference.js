@@ -290,26 +290,22 @@ class VideoConference {
 	    console.log(`track added!!!${track}`);
 	}
 
-	onRemoveRemoteTrack(track) {
-		const participant_id = track.getParticipantId();
-
+	onRemoveRemoteTrackContainer(track) {
 	    if (track.isLocal()) {
 	        return;
 	    }
+	    const participant = track.getParticipantId();
 
-	    if (!this.remoteTracks[participant_id]) {
+	    if (!this.remoteTracks[participant]) {
 	        return;
 	    }
 
 
-	    if (track.getType() === "audio"){
-		    track.detach($(`#${participant_id}${track.getType()}${0}`)[0]);
-		    $(`#${participant_id}${track.getType()}${1}`).remove();
-	    }else if(track.getType() === "video"){
-		    track.detach($(`#${participant_id}${track.getType()}${0}`)[0]);
-		    $(`#${participant_id}${track.getType()}${1}`).remove();
-	    }
+	    const idx = this.remoteTracks[participant].findIndex((remote_track) => remote_track.getType() === track.getType());
 
+	    const id = participant + track.getType() + idx;
+
+	    $(`#${id}`).remove();
 	}
 	/**
 	 * That function is executed when the conference is joined
@@ -332,12 +328,12 @@ class VideoConference {
 	    if (!this.remoteTracks[id]) {
 	        return;
 	    }
-	    // const tracks = this.remoteTracks[id];
+	    const tracks = this.remoteTracks[id];
 
-	    // for (let i = 0; i < tracks.length; i++) {
-	    //     tracks[i].detach($(`#${id}${tracks[i].getType()}${i+1}`)[0]);
-	    //     $(`#${id}${tracks[i].getType()}${i+1}`).remove();
-	    // }
+	    for (let i = 0; i < tracks.length; i++) {
+	        tracks[i].detach($(`#${id}${tracks[i].getType()}${i+1}`)[0]);
+	        $(`#${id}${tracks[i].getType()}${i+1}`).remove();
+	    }
 
 	    this.delete_participants_list_item(participant);
 	}
@@ -352,7 +348,7 @@ class VideoConference {
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_ADDED, (track) => this.onRemoteTrack(track));
 	    this.room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
 	        console.log(`track removed!!!${track}`);
-	        this.onRemoveRemoteTrack(track);
+	        this.onRemoveRemoteTrackContainer(track);
 	    });
 	    this.room.on(
 	        JitsiMeetJS.events.conference.CONFERENCE_JOINED,
